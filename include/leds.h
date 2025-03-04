@@ -5,16 +5,30 @@
 
 class Leds{
     private:
-        byte brightness;
-
         CRGB leds[NUM_OF_LEDS];        
         CRGB color;
 
         CFastLED fastLED = FastLED;
         
     public:
-        Leds(CRGB color, byte brightness);
+        /**
+         * @brief Initialize entire led strip
+         * 
+         * @param brightness desired brightness of the entrire strip
+         */
+        Leds(byte brightness);
 
+        /**
+         * @brief Get the leds strip
+         * 
+         * @return the entire led strip 
+         */
         CRGB* getLeds();
+        
+        /**
+         * @brief Get the initialized FastLED object
+         * 
+         * @return FastLED object 
+         */
         CFastLED getFastLED();
 };

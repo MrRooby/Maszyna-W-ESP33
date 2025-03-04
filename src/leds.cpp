@@ -1,6 +1,6 @@
 #include "leds.h"
 
-Leds::Leds(CRGB color, byte brightness)
+Leds::Leds(byte brightness)
 {
     fastLED.addLeds<WS2812B, LED_PORT, GRB>(leds, NUM_OF_LEDS);
 

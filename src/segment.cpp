@@ -90,3 +90,8 @@ void Segment::displayNumber(int number)
         break;
     }
 }
+
+void Segment::changeColor(CRGB color)
+{
+    this->segmentColor = color;
+}
