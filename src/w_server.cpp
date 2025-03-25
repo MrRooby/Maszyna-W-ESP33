@@ -34,7 +34,6 @@ void W_Server::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, Aws
         break;
       case WS_EVT_DATA:
         this->handleWebSocketMessage(arg, data, len);
-        // Serial.println("Received payload");
         break;
       case WS_EVT_PONG:
       case WS_EVT_ERROR:
@@ -60,12 +59,18 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             int aValue = doc["a"];
             Serial.print("Received A value: ");
             Serial.println(aValue);
+            
+            this->dispMan.a->displayValue(aValue);
+            dispMan.updateDisplay();
         }
 
         if (doc.containsKey("acc")) {
             int accValue = doc["acc"];
             Serial.print("Received ACC value: ");
             Serial.println(accValue);
+
+            this->dispMan.acc->displayValue(accValue);
+            dispMan.updateDisplay();
         }
 
         if (doc.containsKey("c")) {
@@ -199,6 +204,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wyc value: ");
             Serial.println(wycValue);
         }
+
     }
 }
 

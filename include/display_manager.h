@@ -1,22 +1,35 @@
 #pragma once
 
-#include "leds.h"
-#include "segment.h"
+// #include "leds.h"
+#include "three_segment_display.h"
+
+#define LED_PORT_R 5
+#define LED_PORT_L 12
 
 class DisplayManager {
 private:
-    Leds leds;
-    CFastLED fastLED;
-    
-    Segment acc[3];
-    Segment a[3];
+    CRGB *ledsR;
+    CRGB *ledsL;
 
-    void initAcc(int index_start);
+    CFastLED strip_R;
+    CFastLED strip_L;
+
+    int numLedsR;
+    int numLedsL;
+
+    int brightness = 60;
+
+    void initStripR();
+    void initStripL();
+
     
 public:
-    DisplayManager(int numOfLEDs, int brightness);
+    ThreeSegmentDisplay *acc = nullptr;    
+    ThreeSegmentDisplay *a = nullptr;
+    
+    DisplayManager(int numLedsR, int numLedsL, int brightness);
 
-    void updateAccDisplay(int value);
-
+    void updateDisplay();
+    
     void clearDisplay();
 };

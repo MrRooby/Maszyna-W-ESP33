@@ -11,85 +11,25 @@ Segment::Segment(CRGB *leds, int startIndex, CRGB color)
 
 void Segment::displayNumber(int number)
 {
-    switch (number)
+    static const bool segmentMap[10][7] = {
+        {false, true,  true,  true,  true,  true,  true},  // 0
+        {false, true,  false, false, false, false, true},  // 1
+        {true,  true,  true,  false, true,  true,  false}, // 2
+        {true,  true,  true,  false, false, true,  true},  // 3
+        {false, true,  false, true,  false, false, true},  // 4
+        {true,  false, true,  true,  false, true,  true},  // 5
+        {true,  false, true,  true,  true,  true,  true},  // 6
+        {false, true,  true,  false, false, false, true},  // 7
+        {true,  true,  true,  true,  true,  true,  true},  // 8
+        {true,  true,  true,  true,  false, true,  true}   // 9
+    };
+
+    if (number < 0 || number > 9)
+        return;
+
+    for (int i = 0; i < 7; ++i)
     {
-    case 0:
-        this->leds[startIndex + 1] = segmentColor;
-        this->leds[startIndex + 2] = segmentColor;
-        this->leds[startIndex + 3] = segmentColor;
-        this->leds[startIndex + 4] = segmentColor;
-        this->leds[startIndex + 5] = segmentColor;
-        this->leds[startIndex + 6] = segmentColor;
-        break;
-
-    case 1:
-        this->leds[startIndex + 1] = segmentColor;
-        this->leds[startIndex + 6] = segmentColor;
-        break;
-
-    case 2:
-        this->leds[startIndex + 0] = segmentColor;
-        this->leds[startIndex + 1] = segmentColor;
-        this->leds[startIndex + 2] = segmentColor;
-        this->leds[startIndex + 4] = segmentColor;
-        this->leds[startIndex + 5] = segmentColor;
-        break;
-
-    case 3:
-        this->leds[startIndex + 0] = segmentColor;
-        this->leds[startIndex + 1] = segmentColor;
-        this->leds[startIndex + 2] = segmentColor;
-        this->leds[startIndex + 5] = segmentColor;
-        this->leds[startIndex + 6] = segmentColor;
-        break;
-
-    case 4:
-        this->leds[startIndex + 0] = segmentColor;
-        this->leds[startIndex + 1] = segmentColor;
-        this->leds[startIndex + 3] = segmentColor;
-        this->leds[startIndex + 6] = segmentColor;
-        break;
-
-    case 5:
-        this->leds[startIndex + 0] = segmentColor;
-        this->leds[startIndex + 2] = segmentColor;
-        this->leds[startIndex + 3] = segmentColor;
-        this->leds[startIndex + 5] = segmentColor;
-        this->leds[startIndex + 6] = segmentColor;
-        break;
-
-    case 6:
-        this->leds[startIndex + 0] = segmentColor;
-        this->leds[startIndex + 2] = segmentColor;
-        this->leds[startIndex + 3] = segmentColor;
-        this->leds[startIndex + 4] = segmentColor;
-        this->leds[startIndex + 5] = segmentColor;
-        this->leds[startIndex + 6] = segmentColor;
-        break;
-
-    case 7:
-        this->leds[startIndex + 1] = segmentColor;
-        this->leds[startIndex + 2] = segmentColor;
-        this->leds[startIndex + 6] = segmentColor;
-        break;
-    
-    case 8:
-        for(int i = 0; i < 7; i++){
-            this->leds[startIndex + i] = segmentColor;
-        }
-        break;
-
-    case 9:
-        this->leds[startIndex + 0] = segmentColor;
-        this->leds[startIndex + 1] = segmentColor;
-        this->leds[startIndex + 2] = segmentColor;
-        this->leds[startIndex + 3] = segmentColor;
-        this->leds[startIndex + 5] = segmentColor;
-        this->leds[startIndex + 6] = segmentColor;
-        break;
-
-    default:
-        break;
+        this->leds[startIndex + i] = segmentMap[number][i] ? segmentColor : off;
     }
 }
 

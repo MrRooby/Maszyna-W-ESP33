@@ -5,6 +5,7 @@ class Segment{
         int startIndex;
         CRGB* leds;
         CRGB segmentColor = CRGB::Red;
+        CRGB off = CRGB::Black;
 
     public:
 

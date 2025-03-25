@@ -1,46 +1,47 @@
 #include "display_manager.h"
 
-DisplayManager::DisplayManager(int numOfLEDs, int brightness)
+void DisplayManager::initStripR()
 {
-    leds = Leds(brightness, numOfLEDs);
+    this->ledsR = new CRGB[this->numLedsR];
+    this->strip_R.addLeds<WS2812B, LED_PORT_R, GRB>(this->ledsR, this->numLedsR);
+    this->strip_R.setBrightness(this->brightness);
 
-    this->initAcc(0);
-
-    fastLED = leds.getFastLED();
+    // Initialize strips displays and signal lines
+    this->acc = new ThreeSegmentDisplay(this->strip_R, this->ledsR, 0, CRGB::Red);
+    this->a = new ThreeSegmentDisplay(this->strip_R, this->ledsR, 21, CRGB::Blue);
 }
 
 
-void DisplayManager::initAcc(int index_start)
+void DisplayManager::initStripL()
 {
-    for(int i = 0; i < 3; i++){
-        acc[i] = Segment(leds.getLeds(), (index_start + (i * 7)), CRGB::Red);
-    }
+    this->ledsL = new CRGB[numLedsL];
+    this->strip_L.addLeds<WS2812B, LED_PORT_L, GRB>(ledsL, numLedsL);
+    this->strip_L.setBrightness(brightness);
+
+    // Initialize strips displays and signal lines
 }
 
 
-void DisplayManager::updateAccDisplay(int value)
+DisplayManager::DisplayManager(int numLedsR, int numLedsL, int brightness)
 {
+    this->numLedsR = numLedsR;
+    this->numLedsL = numLedsL;
+    this->brightness = brightness;
 
-    if(value < 0){
-        value = 0;
-    }
-    else if(value > 999){
-        value = 999;
-    }
+    this->initStripL();
+    this->initStripR();
 
-    int huns = ( value / 100 ) % 10;
-    int tens = ( value / 10 ) % 10;
-    int ones = value % 10;
-    
-    clearDisplay();
-    
-    acc[0].displayNumber(huns);
-    acc[1].displayNumber(tens);
-    acc[2].displayNumber(ones);
-    
-    fastLED.show();
+    this->clearDisplay();
+}
+
+void DisplayManager::updateDisplay()
+{
+    // this->clearDisplay();
+    this->strip_L.show();
+    this->strip_R.show();
 }
 
 void DisplayManager::clearDisplay() {
-    fastLED.clear();
+    this->strip_L.clear();
+    this->strip_R.clear();
 }
