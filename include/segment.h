@@ -2,21 +2,24 @@
 
 class Segment{
     private:
-        int numOfFirstLED;
+        int startIndex;
         CRGB* leds;
         CRGB segmentColor = CRGB::Red;
 
     public:
+
+        Segment();
+        
         /**
          * @brief Construct and initialize a new 7 segment display
          * 
          * @param leds main led strip
-         * @param numOfFirstLED index of the starting 
+         * @param startIndex index of the starting 
          *                      segment of the
          *                      display (middle segment) 
          * @param color display segment color
          */
-        Segment(CRGB* leds, int numOfFirstLED, CRGB color);
+        Segment(CRGB* leds, int startIndex, CRGB color);
         
         /**
          * @brief Display selected number
