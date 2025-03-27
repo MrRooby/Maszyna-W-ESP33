@@ -1,8 +1,9 @@
 #pragma once
 
-#include "three_segment_display.h"
+#include "three_digit_display.h"
 #include "signal_line.h"
 #include "bus_line.h"
+#include "pao_display_line.h"
 
 /**
  * @brief Pin definitions for LED strips
@@ -14,7 +15,8 @@
  * @brief Manages multiple LED displays and signal lines
  * 
  * This class handles the initialization and control of two LED strips
- * and manages multiple ThreeSegmentDisplay instances for showing values.
+ * and manages multiple ThreeDigitDisplay and SignalLine instances for 
+ * showing values.
  * 
  * @author Bartosz Faruga / MrRooby
  * @date 2025
@@ -23,8 +25,8 @@ class DisplayManager {
 private:
     CRGB *ledsR;           ///< Array for right LED strip
     CRGB *ledsL;           ///< Array for left LED strip
-    CFastLED strip_R;      ///< FastLED controller for right strip
-    CFastLED strip_L;      ///< FastLED controller for left strip
+    CFastLED stripR;       ///< FastLED controller for right strip
+    CFastLED stripL;       ///< FastLED controller for left strip
     int numLedsR;          ///< Number of LEDs in right strip
     int numLedsL;          ///< Number of LEDs in left strip
     int brightness = 60;   ///< LED brightness level (0-255)
@@ -45,33 +47,36 @@ private:
 
 public:
     
-    // Small three part displays
-    ThreeSegmentDisplay *c = nullptr;
-    ThreeSegmentDisplay *i = nullptr;
-    ThreeSegmentDisplay *acc = nullptr;
-    ThreeSegmentDisplay *a = nullptr;
-    ThreeSegmentDisplay *s = nullptr;
-    
+    // Small three-part displays
+    ThreeDigitDisplay *c    = nullptr;
+    ThreeDigitDisplay *i    = nullptr;
+    ThreeDigitDisplay *acc  = nullptr;
+    ThreeDigitDisplay *a    = nullptr;
+    ThreeDigitDisplay *s    = nullptr;
+
     // Signal Lines
-    SignalLine *wec = nullptr;
-    SignalLine *wyc = nullptr;
-    SignalLine *wyad = nullptr;
-    SignalLine *wei = nullptr;
-    SignalLine *weak = nullptr;
-    SignalLine *dod= nullptr;
-    SignalLine *ode = nullptr;
-    SignalLine *przep= nullptr;
-    SignalLine *wyak = nullptr;
-    SignalLine *weja = nullptr;
-    SignalLine *wea = nullptr;
-    SignalLine *czyt = nullptr;
-    SignalLine *pisz = nullptr;
-    SignalLine *wes = nullptr;
-    SignalLine *wys = nullptr;
+    SignalLine *wec   = nullptr;
+    SignalLine *wyc   = nullptr;
+    SignalLine *wyad  = nullptr;
+    SignalLine *wei   = nullptr;
+    SignalLine *weak  = nullptr;
+    SignalLine *dod   = nullptr;
+    SignalLine *ode   = nullptr;
+    SignalLine *przep = nullptr;
+    SignalLine *wyak  = nullptr;
+    SignalLine *weja  = nullptr;
+    SignalLine *wea   = nullptr;
+    SignalLine *czyt  = nullptr;
+    SignalLine *pisz  = nullptr;
+    SignalLine *wes   = nullptr;
+    SignalLine *wys   = nullptr;
 
     // Bus lines
     BusLine *busA = nullptr;
     BusLine *busS = nullptr;
+
+    // PaO Display Lines
+    PaODisplayLine *pao[4];
 
 
     /**

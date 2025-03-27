@@ -2,9 +2,9 @@
 
 PaODisplayLine::PaODisplayLine(CFastLED strip, CRGB *leds, int startIndex, CRGB color)
     : LedElement(strip, leds, startIndex, color){
-        this->addr = new TwoSegmentDisplay(this->strip, this->leds, this->startIndex, this->color);
-        this->val  = new ThreeSegmentDisplay(this->strip, this->leds, this->startIndex + 14, this->color);
-        this->arg  = new TwoSegmentDisplay(this->strip, this->leds, this->startIndex + 35, this->color);
+        this->addr = new TwoDigitDisplay(this->strip, this->leds, this->startIndex, this->color);
+        this->val  = new ThreeDigitDisplay(this->strip, this->leds, this->startIndex + 14, this->color);
+        this->arg  = new TwoDigitDisplay(this->strip, this->leds, this->startIndex + 35, this->color);
 }
 
 

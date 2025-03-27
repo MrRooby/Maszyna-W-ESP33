@@ -1,26 +1,31 @@
 #include "w_server.h"
 
+W_Server::W_Server() : 
+    server(80), 
+    ws("/ws"),
+    dispMan(50, 50, 60),
+    local_IP(192, 168, 4, 1),
+    gateway(192, 168, 4, 1),
+    subnet(255, 255, 255, 0)
+{}
+
 
 void W_Server::initServer()
 {
     this->mountWebFiles();
-    Serial.println("Web files mounted");
 
-    // this->connectToWifi();
     this->createAccessPoint();
-    Serial.println("Acess Point created");
-
+    
     this->server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+    
+    this->createDNSServer();
 
     this->server.begin();
-    Serial.println("Server Started");
     
-    this->ws.onEvent([this](AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len) {
-        this->onEvent(server, client, type, arg, data, len);
-    });
-    
-    this->server.addHandler(&ws);
-    Serial.println("WS started");
+    this->createWebSocketServer();
+
+    // Pinmode for status LED
+    pinMode(2, OUTPUT);
 }
 
 
@@ -61,7 +66,6 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.println(aValue);
             
             // this->dispMan.a->displayValue(aValue);
-            // dispMan.updateDisplay();
         }
 
         if (doc.containsKey("acc")) {
@@ -69,15 +73,17 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received ACC value: ");
             Serial.println(accValue);
 
-            // this->dispMan.acc->displayValue(accValue);
-            // dispMan.updateDisplay();
+            this->dispMan.acc->displayValue(accValue);
         }
 
         if (doc.containsKey("c")) {
             int cValue = doc["c"];
             Serial.print("Received C value: ");
             Serial.println(cValue);
+            
+            this->dispMan.c->displayValue(cValue);
         }
+        
 
         if (doc.containsKey("i")) {
             int iValue = doc["i"];
@@ -90,7 +96,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received S value: ");
             Serial.println(sValue);
 
-            this->dispMan.s->displayValue(sValue);
+            // this->dispMan.s->displayValue(sValue);
         }
 
         if (doc.containsKey("addrs")) {
@@ -200,7 +206,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wyak value: ");
             Serial.println(wyakValue);
 
-            this->dispMan.busA->turnOnLine(wyakValue);
+            // this->dispMan.busA->turnOnLine(wyakValue);
         }
 
         if (doc.containsKey("wyc")) {
@@ -253,15 +259,41 @@ void W_Server::createAccessPoint()
 
     Serial.print("AP IP address: ");
     Serial.println(WiFi.softAPIP());
+
+    Serial.println("Acess Point created");
+}
+
+
+void W_Server::createDNSServer()
+{
+    dnsServer.start(53, "*", local_IP);
+    Serial.println("DNS Server started");
+    
+    // Catch-all handler for captive portal
+    this->server.onNotFound([this](AsyncWebServerRequest *request){
+        String url = "http://" + this->local_IP.toString();
+        request->redirect(url);
+    });
+}
+
+
+void W_Server::createWebSocketServer()
+{
+    this->ws.onEvent([this](AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len)
+                     { this->onEvent(server, client, type, arg, data, len); });
+
+    this->server.addHandler(&ws);
+
+    Serial.println("Web Socket Server Started");
 }
 
 
 void W_Server::runServer()
 {
-    // this->webSocket.loop();
+    dnsServer.processNextRequest();
 
-    if(WiFi.isConnected())
-    {
+    // blink inbuilt led when server is running
+    if(WiFi.softAPgetStationNum() > 0){
         digitalWrite(2, HIGH);
         delay(500);
         digitalWrite(2, LOW);   

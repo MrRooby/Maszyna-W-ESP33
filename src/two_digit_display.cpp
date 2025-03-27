@@ -1,13 +1,13 @@
-#include "two_segment_display.h"
+#include "two_digit_display.h"
 
-TwoSegmentDisplay::TwoSegmentDisplay(CFastLED strip, CRGB *leds, int startIndex, CRGB color)
+TwoDigitDisplay::TwoDigitDisplay(CFastLED strip, CRGB *leds, int startIndex, CRGB color)
     : LedElement(strip, leds, startIndex, color)
 {
     this->display[0] = Segment(this->strip, this->leds, this->startIndex, this->color);
     this->display[1] = Segment(this->strip, this->leds, this->startIndex + 7, this->color);
 }
 
-void TwoSegmentDisplay::displayValue(int value)
+void TwoDigitDisplay::displayValue(int value)
 {
     if(value < 0){
         value = 0;
@@ -24,7 +24,7 @@ void TwoSegmentDisplay::displayValue(int value)
 }
 
 
-void TwoSegmentDisplay::changeColor(CRGB color)
+void TwoDigitDisplay::changeColor(CRGB color)
 {
     this->display[0].changeColor(color);
     this->display[1].changeColor(color);
