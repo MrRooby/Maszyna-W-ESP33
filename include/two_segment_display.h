@@ -1,14 +1,15 @@
+
 #include <FastLED.h>
 #include "segment.h"
 #include "led_element.h"
 
-class ThreeSegmentDisplay : protected LedElement{
+class TwoSegmentDisplay : protected LedElement{
     private:
-        Segment display[3];
+        Segment display[];
 
     public:
 
-        ThreeSegmentDisplay(CFastLED fastLED, CRGB *leds, int startIndex, CRGB color);    
+        TwoSegmentDisplay(CFastLED fastLED, CRGB *leds, int startIndex, CRGB color);    
 
         void displayValue(int value);
 

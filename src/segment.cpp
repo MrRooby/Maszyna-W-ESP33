@@ -1,13 +1,12 @@
 #include "segment.h"
 
-Segment::Segment() : leds(nullptr), startIndex(0), segmentColor(CRGB::Black){}
+Segment::Segment()
+    : LedElement() {}
 
-Segment::Segment(CRGB *leds, int startIndex, CRGB color)
-{
-    this->leds = leds;
-    this->segmentColor = color;
-    this->startIndex = startIndex;
-}
+
+Segment::Segment(CFastLED strip, CRGB *leds, int startIndex, CRGB color)
+    : LedElement(strip, leds, startIndex, color) {}
+
 
 void Segment::displayNumber(int number)
 {
@@ -29,11 +28,8 @@ void Segment::displayNumber(int number)
 
     for (int i = 0; i < 7; ++i)
     {
-        this->leds[startIndex + i] = segmentMap[number][i] ? segmentColor : off;
+        this->leds[this->startIndex + i] = segmentMap[number][i] ? color : off;
     }
-}
 
-void Segment::changeColor(CRGB color)
-{
-    this->segmentColor = color;
+    this->strip.show();
 }

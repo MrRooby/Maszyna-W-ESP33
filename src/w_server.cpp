@@ -60,8 +60,8 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received A value: ");
             Serial.println(aValue);
             
-            this->dispMan.a->displayValue(aValue);
-            dispMan.updateDisplay();
+            // this->dispMan.a->displayValue(aValue);
+            // dispMan.updateDisplay();
         }
 
         if (doc.containsKey("acc")) {
@@ -69,8 +69,8 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received ACC value: ");
             Serial.println(accValue);
 
-            this->dispMan.acc->displayValue(accValue);
-            dispMan.updateDisplay();
+            // this->dispMan.acc->displayValue(accValue);
+            // dispMan.updateDisplay();
         }
 
         if (doc.containsKey("c")) {
@@ -89,6 +89,8 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             int sValue = doc["s"];
             Serial.print("Received S value: ");
             Serial.println(sValue);
+
+            this->dispMan.s->displayValue(sValue);
         }
 
         if (doc.containsKey("addrs")) {
@@ -197,6 +199,8 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             bool wyakValue = doc["wyak"];
             Serial.print("Received wyak value: ");
             Serial.println(wyakValue);
+
+            this->dispMan.busA->turnOnLine(wyakValue);
         }
 
         if (doc.containsKey("wyc")) {
