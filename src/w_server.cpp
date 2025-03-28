@@ -59,21 +59,30 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.println("Failed to deserialize JSON!");
             return;
         }
-
-        if (doc.containsKey("a")) {
-            int aValue = doc["a"];
-            Serial.print("Received A value: ");
-            Serial.println(aValue);
-            
-            // this->dispMan.a->displayValue(aValue);
-        }
-
+        
+        // Value Displays
         if (doc.containsKey("acc")) {
             int accValue = doc["acc"];
             Serial.print("Received ACC value: ");
             Serial.println(accValue);
 
             this->dispMan.acc->displayValue(accValue);
+        }
+        
+        if (doc.containsKey("a")) {
+            int aValue = doc["a"];
+            Serial.print("Received A value: ");
+            Serial.println(aValue);
+            
+            this->dispMan.a->displayValue(aValue);
+        }
+
+        if (doc.containsKey("s")) {
+            int sValue = doc["s"];
+            Serial.print("Received S value: ");
+            Serial.println(sValue);
+
+            this->dispMan.s->displayValue(sValue);
         }
 
         if (doc.containsKey("c")) {
@@ -84,121 +93,94 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             this->dispMan.c->displayValue(cValue);
         }
         
-
         if (doc.containsKey("i")) {
             int iValue = doc["i"];
             Serial.print("Received I value: ");
             Serial.println(iValue);
+
+            this->dispMan.i->displayValue(iValue);
         }
 
-        if (doc.containsKey("s")) {
-            int sValue = doc["s"];
-            Serial.print("Received S value: ");
-            Serial.println(sValue);
 
-            // this->dispMan.s->displayValue(sValue);
+        // Signal Displays
+        if (doc.containsKey("il")) {
+            bool ilValue = doc["il"];
+            Serial.print("Received il value: ");
+            Serial.println(ilValue);
+
+            this->dispMan.il->turnOnLine(ilValue);
         }
 
-        if (doc.containsKey("addrs")) {
-            JsonArray addrsArray = doc["addrs"];
-            Serial.print("Received addrs values: ");
-            for (int addr : addrsArray) {
-                Serial.print(addr);
-                Serial.print(" ");
-            }
-            Serial.println();
+        if (doc.containsKey("wel")) {
+            bool welValue = doc["wel"];
+            Serial.print("Received wel value: ");
+            Serial.println(welValue);
+
+            this->dispMan.wel->turnOnLine(welValue);
         }
 
-        if (doc.containsKey("args")) {
-            JsonArray argsArray = doc["args"];
-            Serial.print("Received args values: ");
-            for (int arg : argsArray) {
-                Serial.print(arg);
-                Serial.print(" ");
-            }
-            Serial.println();
-        }
+        if (doc.containsKey("wyl")) {
+            bool wylValue = doc["wyl"];
+            Serial.print("Received wyl value: ");
+            Serial.println(wylValue);
 
-        if (doc.containsKey("busA")) {
-            bool busAValue = doc["busA"];
-            Serial.print("Received busA value: ");
-            Serial.println(busAValue);
-        }
-
-        if (doc.containsKey("busS")) {
-            bool busSValue = doc["busS"];
-            Serial.print("Received busS value: ");
-            Serial.println(busSValue);
-        }
-
-        if (doc.containsKey("czyt")) {
-            bool czytValue = doc["czyt"];
-            Serial.print("Received czyt value: ");
-            Serial.println(czytValue);
-        }
-
-        if (doc.containsKey("dak")) {
-            bool dakValue = doc["dak"];
-            Serial.print("Received dak value: ");
-            Serial.println(dakValue);
-        }
-
-        if (doc.containsKey("iak")) {
-            bool iakValue = doc["iak"];
-            Serial.print("Received iak value: ");
-            Serial.println(iakValue);
-        }
-
-        if (doc.containsKey("icc")) {
-            bool iccValue = doc["icc"];
-            Serial.print("Received icc value: ");
-            Serial.println(iccValue);
-        }
-
-        if (doc.containsKey("pisz")) {
-            bool piszValue = doc["pisz"];
-            Serial.print("Received pisz value: ");
-            Serial.println(piszValue);
-        }
-
-        if (doc.containsKey("vals")) {
-            JsonArray valsArray = doc["vals"];
-            Serial.print("Received vals values: ");
-            for (int val : valsArray) {
-                Serial.print(val);
-                Serial.print(" ");
-            }
-            Serial.println();
-        }
-
-        if (doc.containsKey("weak")) {
-            bool weakValue = doc["weak"];
-            Serial.print("Received weak value: ");
-            Serial.println(weakValue);
-        }
-
-        if (doc.containsKey("wec")) {
-            bool wecValue = doc["wec"];
-            Serial.print("Received wec value: ");
-            Serial.println(wecValue);
-        }
-
-        if (doc.containsKey("wei")) {
-            bool weiValue = doc["wei"];
-            Serial.print("Received wei value: ");
-            Serial.println(weiValue);
-        }
-
-        if (doc.containsKey("weja")) {
-            bool wejaValue = doc["weja"];
-            Serial.print("Received weja value: ");
-            Serial.println(wejaValue);
+            this->dispMan.wyl->turnOnLine(wylValue);
         }
 
         if (doc.containsKey("wyad")) {
             bool wyadValue = doc["wyad"];
             Serial.print("Received wyad value: ");
             Serial.println(wyadValue);
+
+            this->dispMan.wyad->turnOnLine(wyadValue);
+        }
+
+        if (doc.containsKey("wei")) {
+            bool weiValue = doc["wei"];
+            Serial.print("Received wei value: ");
+            Serial.println(weiValue);
+
+            this->dispMan.wei->turnOnLine(weiValue);
+        }
+
+        if (doc.containsKey("weak")) {
+            bool weakValue = doc["weak"];
+            Serial.print("Received weak value: ");
+            Serial.println(weakValue);
+
+            this->dispMan.weak->turnOnLine(weakValue);
+        }
+
+        if (doc.containsKey("dod")) {
+            bool dodValue = doc["dod"];
+            Serial.print("Received dod value: ");
+            Serial.println(dodValue);
+
+            this->dispMan.dod->turnOnLine(dodValue);
+        }
+
+        if (doc.containsKey("ode")) {
+            bool odeValue = doc["ode"];
+            Serial.print("Received ode value: ");
+            Serial.println(odeValue);
+
+            this->dispMan.ode->turnOnLine(odeValue);
+        }
+
+        if (doc.containsKey("przep")) {
+            bool przepValue = doc["przep"];
+            Serial.print("Received przep value: ");
+            Serial.println(przepValue);
+
+            this->dispMan.przep->turnOnLine(przepValue);
+        }
+
+        if (doc.containsKey("weja")) {
+            bool wejaValue = doc["weja"];
+            Serial.print("Received weja value: ");
+            Serial.println(wejaValue);
+
+            this->dispMan.weja->turnOnLine(wejaValue);
         }
 
         if (doc.containsKey("wyak")) {
@@ -206,15 +188,113 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wyak value: ");
             Serial.println(wyakValue);
 
-            // this->dispMan.busA->turnOnLine(wyakValue);
+            this->dispMan.wyak->turnOnLine(wyakValue);
         }
 
-        if (doc.containsKey("wyc")) {
-            bool wycValue = doc["wyc"];
-            Serial.print("Received wyc value: ");
-            Serial.println(wycValue);
+        if (doc.containsKey("wea")) {
+            bool weaValue = doc["wea"];
+            Serial.print("Received wea value: ");
+            Serial.println(weaValue);
+
+            this->dispMan.wea->turnOnLine(weaValue);
         }
 
+        if (doc.containsKey("czyt")) {
+            bool czytValue = doc["czyt"];
+            Serial.print("Received czyt value: ");
+            Serial.println(czytValue);
+
+            this->dispMan.czyt->turnOnLine(czytValue);
+        }
+
+        if (doc.containsKey("pisz")) {
+            bool piszValue = doc["pisz"];
+            Serial.print("Received pisz value: ");
+            Serial.println(piszValue);
+
+            this->dispMan.pisz->turnOnLine(piszValue);
+        }
+
+        if (doc.containsKey("wes")) {
+            bool wesValue = doc["wes"];
+            Serial.print("Received wes value: ");
+            Serial.println(wesValue);
+
+            this->dispMan.wes->turnOnLine(wesValue);
+        }
+
+        if (doc.containsKey("wys")) {
+            bool wysValue = doc["wys"];
+            Serial.print("Received wys value: ");
+            Serial.println(wysValue);
+
+            this->dispMan.wys->turnOnLine(wysValue);
+        }
+        
+        
+        // PaO Displays
+        if (doc.containsKey("addrs")) {
+            JsonArray addrsArray = doc["addrs"];
+            Serial.print("Received addrs values: ");
+
+            int i = 0;
+            for (int addr : addrsArray) {
+                Serial.print(addr);
+                Serial.print(" ");
+
+                this->dispMan.pao[i]->addr->displayValue(addr);
+                i++;
+            }
+            Serial.println();
+        }
+        
+        if (doc.containsKey("args")) {
+            JsonArray argsArray = doc["args"];
+            Serial.print("Received args values: ");
+            
+            int i = 0;
+            for (int arg : argsArray) {
+                Serial.print(arg);
+                Serial.print(" ");
+                
+                this->dispMan.pao[i]->arg->displayValue(arg);
+                i++;
+            }
+            Serial.println();
+        }
+        
+        if (doc.containsKey("vals")) {
+            JsonArray valsArray = doc["vals"];
+            Serial.print("Received vals values: ");
+            
+            int i = 0;
+            for (int val : valsArray) {
+                Serial.print(val);
+                Serial.print(" ");
+                
+                this->dispMan.pao[i]->val->displayValue(val);
+                i++;
+            }
+            Serial.println();
+        }
+
+        
+        // Bus Displays
+        if (doc.containsKey("busA")) {
+            bool busAValue = doc["busA"];
+            Serial.print("Received busA value: ");
+            Serial.println(busAValue);
+        
+            this->dispMan.busA->turnOnLine(busAValue);
+        }
+
+        if (doc.containsKey("busS")) {
+            bool busSValue = doc["busS"];
+            Serial.print("Received busS value: ");
+            Serial.println(busSValue);
+            
+            this->dispMan.busS->turnOnLine(busSValue);
+        }
     }
 }
 

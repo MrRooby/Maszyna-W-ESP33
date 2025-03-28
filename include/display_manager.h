@@ -48,23 +48,24 @@ private:
 public:
     
     // Small three-part displays
-    ThreeDigitDisplay *c    = nullptr;
-    ThreeDigitDisplay *i    = nullptr;
-    ThreeDigitDisplay *acc  = nullptr;
-    ThreeDigitDisplay *a    = nullptr;
-    ThreeDigitDisplay *s    = nullptr;
+    ThreeDigitDisplay *acc = nullptr;
+    ThreeDigitDisplay *a   = nullptr;
+    ThreeDigitDisplay *s   = nullptr;
+    ThreeDigitDisplay *c   = nullptr;
+    ThreeDigitDisplay *i   = nullptr;
 
     // Signal Lines
-    SignalLine *wec   = nullptr;
-    SignalLine *wyc   = nullptr;
+    SignalLine *il    = nullptr;
+    SignalLine *wel   = nullptr;
+    SignalLine *wyl   = nullptr;
     SignalLine *wyad  = nullptr;
     SignalLine *wei   = nullptr;
     SignalLine *weak  = nullptr;
     SignalLine *dod   = nullptr;
     SignalLine *ode   = nullptr;
     SignalLine *przep = nullptr;
-    SignalLine *wyak  = nullptr;
     SignalLine *weja  = nullptr;
+    SignalLine *wyak  = nullptr;
     SignalLine *wea   = nullptr;
     SignalLine *czyt  = nullptr;
     SignalLine *pisz  = nullptr;

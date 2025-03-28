@@ -17,12 +17,12 @@
  * @date 2025
  */
 class PaODisplayLine: protected LedElement {
-    private:
+    public:
+        
         TwoDigitDisplay *addr = nullptr;    ///< Address display (2 digits)
         ThreeDigitDisplay *val = nullptr;   ///< Value display (3 digits)
         TwoDigitDisplay *arg = nullptr;     ///< Argument display (2 digits)
 
-    public:
         /**
          * @brief Construct a new PaO Display Line
          * 
