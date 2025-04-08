@@ -29,7 +29,7 @@ private:
     CFastLED stripL;       ///< FastLED controller for left strip
     int numLedsR;          ///< Number of LEDs in right strip
     int numLedsL;          ///< Number of LEDs in left strip
-    int brightness = 60;   ///< LED brightness level (0-255)
+    int brightness = 60;   ///< Initial LED brightness level (0-255)
 
     /**
      * @brief Initialize the right LED strip
@@ -89,9 +89,18 @@ public:
      */
     DisplayManager(int numLedsR, int numLedsL, int brightness);
 
-
+    
     /**
-     * @brief Clear all LED displays
+     * @brief Changes the brightness of the display.
+     * 
+     * This function adjusts the brightness level of the display to the specified value.
+     * 
+     * @param brightness The desired brightness level. The value should be within the
+     *        acceptable range supported by the display hardware.
+     */
+    void changeBrightness(int brightness);
+
+    /*
      * 
      * Turns off all LEDs in both strips
      */
