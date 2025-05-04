@@ -3,7 +3,7 @@
 W_Server::W_Server() : 
     server(80), 
     ws("/ws"),
-    dispMan(50, 50, 60),
+    dispMan(500, 500, 60),
     local_IP(192, 168, 4, 1),
     gateway(192, 168, 4, 1),
     subnet(255, 255, 255, 0)
@@ -108,7 +108,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received il value: ");
             Serial.println(ilValue);
 
-            this->dispMan.il->turnOnLine(ilValue);
+            // this->dispMan.il->turnOnLine(ilValue);
         }
 
         if (doc.containsKey("wel")) {
@@ -116,7 +116,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wel value: ");
             Serial.println(welValue);
 
-            this->dispMan.wel->turnOnLine(welValue);
+            // this->dispMan.wel->turnOnLine(welValue);
         }
 
         if (doc.containsKey("wyl")) {
@@ -124,7 +124,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wyl value: ");
             Serial.println(wylValue);
 
-            this->dispMan.wyl->turnOnLine(wylValue);
+            // this->dispMan.wyl->turnOnLine(wylValue);
         }
 
         if (doc.containsKey("wyad")) {
@@ -132,7 +132,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wyad value: ");
             Serial.println(wyadValue);
 
-            this->dispMan.wyad->turnOnLine(wyadValue);
+            // this->dispMan.wyad->turnOnLine(wyadValue);
         }
 
         if (doc.containsKey("wei")) {
@@ -140,7 +140,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wei value: ");
             Serial.println(weiValue);
 
-            this->dispMan.wei->turnOnLine(weiValue);
+            // this->dispMan.wei->turnOnLine(weiValue);
         }
 
         if (doc.containsKey("weak")) {
@@ -148,7 +148,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received weak value: ");
             Serial.println(weakValue);
 
-            this->dispMan.weak->turnOnLine(weakValue);
+            // this->dispMan.weak->turnOnLine(weakValue);
         }
 
         if (doc.containsKey("dod")) {
@@ -156,7 +156,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received dod value: ");
             Serial.println(dodValue);
 
-            this->dispMan.dod->turnOnLine(dodValue);
+            // this->dispMan.dod->turnOnLine(dodValue);
         }
 
         if (doc.containsKey("ode")) {
@@ -164,7 +164,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received ode value: ");
             Serial.println(odeValue);
 
-            this->dispMan.ode->turnOnLine(odeValue);
+            // this->dispMan.ode->turnOnLine(odeValue);
         }
 
         if (doc.containsKey("przep")) {
@@ -172,7 +172,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received przep value: ");
             Serial.println(przepValue);
 
-            this->dispMan.przep->turnOnLine(przepValue);
+            // this->dispMan.przep->turnOnLine(przepValue);
         }
 
         if (doc.containsKey("weja")) {
@@ -180,7 +180,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received weja value: ");
             Serial.println(wejaValue);
 
-            this->dispMan.weja->turnOnLine(wejaValue);
+            // this->dispMan.weja->turnOnLine(wejaValue);
         }
 
         if (doc.containsKey("wyak")) {
@@ -188,7 +188,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wyak value: ");
             Serial.println(wyakValue);
 
-            this->dispMan.wyak->turnOnLine(wyakValue);
+            // this->dispMan.wyak->turnOnLine(wyakValue);
         }
 
         if (doc.containsKey("wea")) {
@@ -196,7 +196,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wea value: ");
             Serial.println(weaValue);
 
-            this->dispMan.wea->turnOnLine(weaValue);
+            // this->dispMan.wea->turnOnLine(weaValue);
         }
 
         if (doc.containsKey("czyt")) {
@@ -204,7 +204,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received czyt value: ");
             Serial.println(czytValue);
 
-            this->dispMan.czyt->turnOnLine(czytValue);
+            // this->dispMan.czyt->turnOnLine(czytValue);
         }
 
         if (doc.containsKey("pisz")) {
@@ -212,7 +212,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received pisz value: ");
             Serial.println(piszValue);
 
-            this->dispMan.pisz->turnOnLine(piszValue);
+            // this->dispMan.pisz->turnOnLine(piszValue);
         }
 
         if (doc.containsKey("wes")) {
@@ -220,7 +220,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wes value: ");
             Serial.println(wesValue);
 
-            this->dispMan.wes->turnOnLine(wesValue);
+            // this->dispMan.wes->turnOnLine(wesValue);
         }
 
         if (doc.containsKey("wys")) {
@@ -228,52 +228,25 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received wys value: ");
             Serial.println(wysValue);
 
-            this->dispMan.wys->turnOnLine(wysValue);
+            // this->dispMan.wys->turnOnLine(wysValue);
         }
         
         
         // PaO Displays
-        if (doc.containsKey("addrs")) {
-            JsonArray addrsArray = doc["addrs"];
-            Serial.print("Received addrs values: ");
+        if (doc["addrs"].is<JsonArray>() && doc["args"].is<JsonArray>() && doc["vals"].is<JsonArray>()) {
+            JsonArray addrsArray = doc["addrs"].as<JsonArray>();
+            JsonArray argsArray = doc["args"].as<JsonArray>();
+            JsonArray valsArray = doc["vals"].as<JsonArray>();
 
-            int i = 0;
-            for (int addr : addrsArray) {
-                Serial.print(addr);
-                Serial.print(" ");
+            Serial.print("Received addrs, args, and vals values: ");
 
-                this->dispMan.pao[i]->addr->displayValue(addr);
-                i++;
-            }
-            Serial.println();
-        }
-        
-        if (doc.containsKey("args")) {
-            JsonArray argsArray = doc["args"];
-            Serial.print("Received args values: ");
-            
-            int i = 0;
-            for (int arg : argsArray) {
-                Serial.print(arg);
-                Serial.print(" ");
+            for (size_t i = 0; i < 4; i++) {
+                int addr = addrsArray[i];
+                int arg = argsArray[i];
+                int val = valsArray[i];
+                Serial.printf("(%d, %d, %d) ", addr, val, arg);
                 
-                this->dispMan.pao[i]->arg->displayValue(arg);
-                i++;
-            }
-            Serial.println();
-        }
-        
-        if (doc.containsKey("vals")) {
-            JsonArray valsArray = doc["vals"];
-            Serial.print("Received vals values: ");
-            
-            int i = 0;
-            for (int val : valsArray) {
-                Serial.print(val);
-                Serial.print(" ");
-                
-                this->dispMan.pao[i]->val->displayValue(val);
-                i++;
+                this->dispMan.pao[i]->displayLine(addr, val, arg);
             }
             Serial.println();
         }
@@ -285,7 +258,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received busA value: ");
             Serial.println(busAValue);
         
-            this->dispMan.busA->turnOnLine(busAValue);
+            // this->dispMan.busA->turnOnLine(busAValue);
         }
 
         if (doc.containsKey("busS")) {
@@ -293,7 +266,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             Serial.print("Received busS value: ");
             Serial.println(busSValue);
             
-            this->dispMan.busS->turnOnLine(busSValue);
+            // this->dispMan.busS->turnOnLine(busSValue);
         }
     }
 }
