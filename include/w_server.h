@@ -71,7 +71,7 @@ class W_Server {
         void handleWebSocketMessage(void *arg, uint8_t *data, size_t len);
         
 
-        void sendDataToClient(char *buttonNum);
+        void sendDataToClient(char *buttonName);
 
 
         /**
@@ -90,6 +90,8 @@ class W_Server {
          * @brief Mount web files from LittleFS
          */
         void mountWebFiles();
+
+        void blinkInbuiltLED();
     
     public:
         /**

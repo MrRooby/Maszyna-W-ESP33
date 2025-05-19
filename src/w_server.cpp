@@ -273,18 +273,26 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 }
 
 
-void W_Server::sendDataToClient(char *buttonNum)
+void W_Server::sendDataToClient(char *buttonName)
 {
     StaticJsonDocument<256> doc;
     doc["type"] = "button_press";
-    doc["buttonName"] = buttonNum;
-
+    doc["buttonName"] = buttonName;
     char jsonBuffer[256];
     size_t len = serializeJson(doc, jsonBuffer);
 
+    Serial.printf("Sending WebSocket message: %s\n", jsonBuffer); // Debug log
     this->ws.textAll(jsonBuffer, len);
 }
 
+// StaticJsonDocument<256> doc;
+// doc["type"] = "button_press";
+// doc["buttonName"] = buttonNum;
+
+// char jsonBuffer[256];
+// size_t len = serializeJson(doc, jsonBuffer);
+
+// this->ws.textAll(jsonBuffer, len);
 
 void W_Server::mountWebFiles()
 {
@@ -297,6 +305,19 @@ void W_Server::mountWebFiles()
     server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 }
 
+void W_Server::blinkInbuiltLED()
+{
+    // Blink inbuilt LED without using delay
+    static unsigned long lastBlinkTime = 0;
+    static bool ledState = LOW;
+    unsigned long currentTime = millis();
+
+    if (WiFi.softAPgetStationNum() > 0 && currentTime - lastBlinkTime >= 500) {
+        ledState = !ledState;
+        digitalWrite(2, ledState);
+        lastBlinkTime = currentTime;
+    }
+}
 
 void W_Server::connectToWifi(){
     WiFi.begin(this->ssid, this->password);
@@ -368,12 +389,6 @@ void W_Server::runServer()
             Serial.printf("Button %d pressed\n", i);
         }
     }
-    
-    // blink inbuilt led when server is running
-    if(WiFi.softAPgetStationNum() > 0){
-        digitalWrite(2, HIGH);
-        delay(500);
-        digitalWrite(2, LOW);   
-        delay(500);
-    }
+
+    this->blinkInbuiltLED();
 }
