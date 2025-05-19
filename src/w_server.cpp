@@ -3,7 +3,8 @@
 W_Server::W_Server() : 
     server(80), 
     ws("/ws"),
-    dispMan(50, 50, 60),
+    dispMan(500, 500, 60),
+    inMan(this->buttonPins, this->buttonCount),
     local_IP(192, 168, 4, 1),
     gateway(192, 168, 4, 1),
     subnet(255, 255, 255, 0)
@@ -233,15 +234,14 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
         
         
         // PaO Displays
-        if (doc.containsKey("addrs")) {
-            JsonArray addrsArray = doc["addrs"];
-            Serial.print("Received addrs values: ");
+        if (doc["addrs"].is<JsonArray>() && doc["args"].is<JsonArray>() && doc["vals"].is<JsonArray>()) {
+            JsonArray addrsArray = doc["addrs"].as<JsonArray>();
+            JsonArray argsArray = doc["args"].as<JsonArray>();
+            JsonArray valsArray = doc["vals"].as<JsonArray>();
 
-            int i = 0;
-            for (int addr : addrsArray) {
-                Serial.print(addr);
-                Serial.print(" ");
+            Serial.print("Received addrs, args, and vals values: ");
 
+<<<<<<< HEAD
                 // this->dispMan.pao[i]->addr->displayValue(addr);
                 i++;
             }
@@ -274,6 +274,15 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
                 
                 // this->dispMan.pao[i]->val->displayValue(val);
                 i++;
+=======
+            for (size_t i = 0; i < 4; i++) {
+                int addr = addrsArray[i];
+                int arg = argsArray[i];
+                int val = valsArray[i];
+                Serial.printf("(%d, %d, %d) ", addr, val, arg);
+                
+                this->dispMan.pao[i]->displayLine(addr, val, arg);
+>>>>>>> button-implementation
             }
             Serial.println();
         }
@@ -299,6 +308,27 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 }
 
 
+void W_Server::sendDataToClient(char *buttonName)
+{
+    StaticJsonDocument<256> doc;
+    doc["type"] = "button_press";
+    doc["buttonName"] = buttonName;
+    char jsonBuffer[256];
+    size_t len = serializeJson(doc, jsonBuffer);
+
+    Serial.printf("Sending WebSocket message: %s\n", jsonBuffer); // Debug log
+    this->ws.textAll(jsonBuffer, len);
+}
+
+// StaticJsonDocument<256> doc;
+// doc["type"] = "button_press";
+// doc["buttonName"] = buttonNum;
+
+// char jsonBuffer[256];
+// size_t len = serializeJson(doc, jsonBuffer);
+
+// this->ws.textAll(jsonBuffer, len);
+
 void W_Server::mountWebFiles()
 {
     if(!LittleFS.begin(true)){
@@ -310,6 +340,19 @@ void W_Server::mountWebFiles()
     server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 }
 
+void W_Server::blinkInbuiltLED()
+{
+    // Blink inbuilt LED without using delay
+    static unsigned long lastBlinkTime = 0;
+    static bool ledState = LOW;
+    unsigned long currentTime = millis();
+
+    if (WiFi.softAPgetStationNum() > 0 && currentTime - lastBlinkTime >= 500) {
+        ledState = !ledState;
+        digitalWrite(2, ledState);
+        lastBlinkTime = currentTime;
+    }
+}
 
 void W_Server::connectToWifi(){
     WiFi.begin(this->ssid, this->password);
@@ -372,11 +415,15 @@ void W_Server::runServer()
 {
     dnsServer.processNextRequest();
 
-    // blink inbuilt led when server is running
-    if(WiFi.softAPgetStationNum() > 0){
-        digitalWrite(2, HIGH);
-        delay(500);
-        digitalWrite(2, LOW);   
-        delay(500);
+    this->inMan.update();
+    
+    // Check if any button was pressed and send "pressed" to the client
+    for (int i = 0; i < this->buttonCount; i++) {
+        if (this->inMan.wasButtonPressed(i)) { // Detect button press event
+            this->sendDataToClient("czyt");
+            Serial.printf("Button %d pressed\n", i);
+        }
     }
+
+    this->blinkInbuiltLED();
 }
