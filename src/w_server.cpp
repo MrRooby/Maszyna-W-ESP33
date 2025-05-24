@@ -4,11 +4,13 @@ W_Server::W_Server() :
     server(80), 
     ws("/ws"),
     dispMan(500, 500, 60),
-    inMan(this->buttonPins, this->buttonCount),
+    
     local_IP(192, 168, 4, 1),
     gateway(192, 168, 4, 1),
     subnet(255, 255, 255, 0)
-{}
+{
+    this->buttons = new Buttons();
+}
 
 
 void W_Server::initServer()
@@ -359,16 +361,15 @@ void W_Server::runServer()
 {
     dnsServer.processNextRequest();
 
-    this->inMan.update();
-    
-    // Check if any button was pressed and send "pressed" to the client
-    for (int i = 0; i < this->buttonCount; i++) {
-        if (this->inMan.wasButtonPressed(i)) { // Detect button press event
-            this->sendDataToClient("czyt");
-            Serial.printf("Button %d pressed\n", i);
+    char* signal = buttons->activeSignal();
+    if(this->lastSignal != signal){
+        if(signal != nullptr){
+            this->sendDataToClient(signal);
+            Serial.println("Data sent to websocket");
         }
+        this->lastSignal = signal;
     }
-    
+
     // blink inbuilt led when server is running
     if(WiFi.softAPgetStationNum() > 0){
         digitalWrite(2, HIGH);

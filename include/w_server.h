@@ -9,7 +9,7 @@
 
 #include "credentials.h"
 #include "display_manager.h"
-#include "input.h"
+#include "buttons.h"
 
 /**
  * @brief Web server class managing WiFi, DNS and WebSocket connections
@@ -40,7 +40,9 @@ class W_Server {
         IPAddress subnet;                  ///< Subnet mask
         
         DisplayManager dispMan;            ///< Display manager instance
-        InputManager inMan;                 
+        
+        Buttons *buttons = nullptr;
+        char* lastSignal = nullptr;        
 
         /**
          * @brief Connect to existing WiFi network
