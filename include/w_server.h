@@ -9,7 +9,7 @@
 
 #include "credentials.h"
 #include "display_manager.h"
-#include "input.h"
+// #include "buttons.h"
 
 /**
  * @brief Web server class managing WiFi, DNS and WebSocket connections
@@ -27,9 +27,6 @@ class W_Server {
     private:
         const char* ssid = WIFI_SSID;      ///< WiFi SSID from credentials.h
         const char* password = WIFI_PASS;  ///< WiFi password from credentials.h
-        
-        const int buttonCount = 1;
-        int buttonPins[1] = {4};
 
         AsyncWebServer server;             ///< Main web server instance
         AsyncWebSocket ws;                 ///< WebSocket server instance
@@ -40,7 +37,8 @@ class W_Server {
         IPAddress subnet;                  ///< Subnet mask
         
         DisplayManager dispMan;            ///< Display manager instance
-        InputManager inMan;                 
+        // Buttons buttons;                 
+        // char* lastSignal = nullptr;
 
         /**
          * @brief Connect to existing WiFi network
