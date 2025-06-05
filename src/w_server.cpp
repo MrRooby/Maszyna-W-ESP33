@@ -63,220 +63,194 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             return;
         }
         
-        // Value Displays
-        if (doc.containsKey("acc")) {
-            int accValue = doc["acc"];
-            Serial.print("Received ACC value: ");
-            Serial.println(accValue);
+        // Check for message type
+        String type = doc["type"] | "";
 
-            this->dispMan.acc->displayValue(accValue);
+        if (type == "reg-update"){
+            this->processPartialWebSocketData(doc);
         }
-        
-        if (doc.containsKey("a")) {
-            int aValue = doc["a"];
-            Serial.print("Received A value: ");
-            Serial.println(aValue);
-            
-            this->dispMan.a->displayValue(aValue);
+        else if (type == "mem-update"){
+            this->processFullWebSocketData(doc);
         }
-
-        if (doc.containsKey("s")) {
-            int sValue = doc["s"];
-            Serial.print("Received S value: ");
-            Serial.println(sValue);
-
-            this->dispMan.s->displayValue(sValue);
-        }
-
-        if (doc.containsKey("c")) {
-            int cValue = doc["c"];
-            Serial.print("Received C value: ");
-            Serial.println(cValue);
-            
-            this->dispMan.c->displayValue(cValue);
-        }
-        
-        if (doc.containsKey("i")) {
-            int iValue = doc["i"];
-            Serial.print("Received I value: ");
-            Serial.println(iValue);
-
-            this->dispMan.i->displayValue(iValue);
-        }
-
-
-        // Signal Displays
-        if (doc.containsKey("il")) {
-            bool ilValue = doc["il"];
-            Serial.print("Received il value: ");
-            Serial.println(ilValue);
-
-            // this->dispMan.il->turnOnLine(ilValue);
-        }
-
-        if (doc.containsKey("wel")) {
-            bool welValue = doc["wel"];
-            Serial.print("Received wel value: ");
-            Serial.println(welValue);
-
-            // this->dispMan.wel->turnOnLine(welValue);
-        }
-
-        if (doc.containsKey("wyl")) {
-            bool wylValue = doc["wyl"];
-            Serial.print("Received wyl value: ");
-            Serial.println(wylValue);
-
-            // this->dispMan.wyl->turnOnLine(wylValue);
-        }
-
-        if (doc.containsKey("wyad")) {
-            bool wyadValue = doc["wyad"];
-            Serial.print("Received wyad value: ");
-            Serial.println(wyadValue);
-
-            // this->dispMan.wyad->turnOnLine(wyadValue);
-        }
-
-        if (doc.containsKey("wei")) {
-            bool weiValue = doc["wei"];
-            Serial.print("Received wei value: ");
-            Serial.println(weiValue);
-
-            // this->dispMan.wei->turnOnLine(weiValue);
-        }
-
-        if (doc.containsKey("weak")) {
-            bool weakValue = doc["weak"];
-            Serial.print("Received weak value: ");
-            Serial.println(weakValue);
-
-            // this->dispMan.weak->turnOnLine(weakValue);
-        }
-
-        if (doc.containsKey("dod")) {
-            bool dodValue = doc["dod"];
-            Serial.print("Received dod value: ");
-            Serial.println(dodValue);
-
-            // this->dispMan.dod->turnOnLine(dodValue);
-        }
-
-        if (doc.containsKey("ode")) {
-            bool odeValue = doc["ode"];
-            Serial.print("Received ode value: ");
-            Serial.println(odeValue);
-
-            // this->dispMan.ode->turnOnLine(odeValue);
-        }
-
-        if (doc.containsKey("przep")) {
-            bool przepValue = doc["przep"];
-            Serial.print("Received przep value: ");
-            Serial.println(przepValue);
-
-            // this->dispMan.przep->turnOnLine(przepValue);
-        }
-
-        if (doc.containsKey("weja")) {
-            bool wejaValue = doc["weja"];
-            Serial.print("Received weja value: ");
-            Serial.println(wejaValue);
-
-            // this->dispMan.weja->turnOnLine(wejaValue);
-        }
-
-        if (doc.containsKey("wyak")) {
-            bool wyakValue = doc["wyak"];
-            Serial.print("Received wyak value: ");
-            Serial.println(wyakValue);
-
-            // this->dispMan.wyak->turnOnLine(wyakValue);
-        }
-
-        if (doc.containsKey("wea")) {
-            bool weaValue = doc["wea"];
-            Serial.print("Received wea value: ");
-            Serial.println(weaValue);
-
-            // this->dispMan.wea->turnOnLine(weaValue);
-        }
-
-        if (doc.containsKey("czyt")) {
-            bool czytValue = doc["czyt"];
-            Serial.print("Received czyt value: ");
-            Serial.println(czytValue);
-
-            // this->dispMan.czyt->turnOnLine(czytValue);
-        }
-
-        if (doc.containsKey("pisz")) {
-            bool piszValue = doc["pisz"];
-            Serial.print("Received pisz value: ");
-            Serial.println(piszValue);
-
-            // this->dispMan.pisz->turnOnLine(piszValue);
-        }
-
-        if (doc.containsKey("wes")) {
-            bool wesValue = doc["wes"];
-            Serial.print("Received wes value: ");
-            Serial.println(wesValue);
-
-            // this->dispMan.wes->turnOnLine(wesValue);
-        }
-
-        if (doc.containsKey("wys")) {
-            bool wysValue = doc["wys"];
-            Serial.print("Received wys value: ");
-            Serial.println(wysValue);
-
-            // this->dispMan.wys->turnOnLine(wysValue);
-        }
-        
-        
-        // PaO Displays
-        if (doc["addrs"].is<JsonArray>() && doc["args"].is<JsonArray>() && doc["vals"].is<JsonArray>()) {
-            JsonArray addrsArray = doc["addrs"].as<JsonArray>();
-            JsonArray argsArray = doc["args"].as<JsonArray>();
-            JsonArray valsArray = doc["vals"].as<JsonArray>();
-
-            Serial.print("Received addrs, args, and vals values: ");
-
-            for (size_t i = 0; i < 4; i++) {
-                int addr = addrsArray[i];
-                int arg = argsArray[i];
-                int val = valsArray[i];
-                Serial.printf("(%d, %d, %d) ", addr, val, arg);
-                
-                this->dispMan.pao[i]->displayLine(addr, val, arg);
-            }
-            Serial.println();
-        }
-
-        
-        // Bus Displays
-        if (doc.containsKey("busA")) {
-            bool busAValue = doc["busA"];
-            Serial.print("Received busA value: ");
-            Serial.println(busAValue);
-        
-            // this->dispMan.busA->turnOnLine(busAValue);
-        }
-
-        if (doc.containsKey("busS")) {
-            bool busSValue = doc["busS"];
-            Serial.print("Received busS value: ");
-            Serial.println(busSValue);
-            
-            // this->dispMan.busS->turnOnLine(busSValue);
+        else {
+            Serial.println("Invalid message type");
         }
     }
 }
 
 
-void W_Server::sendDataToClient(char *buttonNum)
+void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc){
+    String field = doc["field"] | "";
+
+    // Determine if value is int - display values or bool - signal lines
+    bool isBool = doc["value"].is<bool>();
+    bool boolValue = false;
+    int intValue = 0;
+    if (isBool) {
+        boolValue = doc["value"].as<bool>();
+        intValue = boolValue ? 1 : 0;
+    } else {
+        intValue = doc["value"].as<int>();
+        boolValue = (intValue != 0);
+    }
+
+
+    // Display values
+    if (field == "acc" && this->dispMan.acc){
+        Serial.printf("Partial update: acc = %d\n", intValue);
+        this->dispMan.acc->displayValue(intValue);
+    }
+    else if (field == "a" && this->dispMan.a){
+        Serial.printf("Partial update: a = %d\n", intValue);
+        this->dispMan.a->displayValue(intValue);
+    }
+    else if (field == "s" && this->dispMan.s){
+        Serial.printf("Partial update: s = %d\n", intValue);
+        this->dispMan.s->displayValue(intValue);
+    }
+    else if (field == "c" && this->dispMan.c){
+        Serial.printf("Partial update: c = %d\n", intValue);
+        this->dispMan.c->displayValue(intValue);
+    }
+    else if (field == "i" && this->dispMan.i){
+        Serial.printf("Partial update: i = %d\n", intValue);
+        this->dispMan.i->displayValue(intValue);
+    }
+
+    // PaO values
+    else if (field == "addrs" && doc["addrs"].is<JsonArray>() && doc["args"].is<JsonArray>() && doc["vals"].is<JsonArray>() && this->dispMan.pao) {
+        JsonArray addrsArray = doc["addrs"].as<JsonArray>();
+        JsonArray argsArray = doc["args"].as<JsonArray>();
+        JsonArray valsArray = doc["vals"].as<JsonArray>();
+        for (size_t i = 0; i < 4; i++) {
+            int addr = addrsArray[i];
+            int arg = argsArray[i];
+            int val = valsArray[i];
+            Serial.printf("Partial update: pao[%d] addr: %d, arg: %d, val: %d\n", (int)i, addr, arg, val);
+            this->dispMan.pao[i]->displayLine(addr, val, arg);
+        }
+    }
+
+    // Signal values
+    else if (field == "il" && this->dispMan.il){
+        Serial.printf("Partial update: il = %d\n", boolValue);
+        this->dispMan.il->turnOnLine(boolValue);
+    }
+    else if (field == "wel" && this->dispMan.wel){
+        Serial.printf("Partial update: wel = %d\n", boolValue);
+        this->dispMan.wel->turnOnLine(boolValue);
+    }
+    else if (field == "wyl" && this->dispMan.wyl){
+        Serial.printf("Partial update: wyl = %d\n", boolValue);
+        this->dispMan.wyl->turnOnLine(boolValue);
+    }
+    else if (field == "wyad" && this->dispMan.wyad){
+        Serial.printf("Partial update: wyad = %d\n", boolValue);
+        this->dispMan.wyad->turnOnLine(boolValue);
+    }
+    else if (field == "wei" && this->dispMan.wei){
+        Serial.printf("Partial update: wei = %d\n", boolValue);
+        this->dispMan.wei->turnOnLine(boolValue);
+    }
+    else if (field == "weak" && this->dispMan.weak){
+        Serial.printf("Partial update: weak = %d\n", boolValue);
+        this->dispMan.weak->turnOnLine(boolValue);
+    }
+    else if (field == "dod" && this->dispMan.dod){
+        Serial.printf("Partial update: dod = %d\n", boolValue);
+        this->dispMan.dod->turnOnLine(boolValue);
+    }
+    else if (field == "ode" && this->dispMan.ode){
+        Serial.printf("Partial update: ode = %d\n", boolValue);
+        this->dispMan.ode->turnOnLine(boolValue);
+    }
+    else if (field == "przep" && this->dispMan.przep){
+        Serial.printf("Partial update: przep = %d\n", boolValue);
+        this->dispMan.przep->turnOnLine(boolValue);
+    }
+    else if (field == "weja" && this->dispMan.weja){
+        Serial.printf("Partial update: weja = %d\n", boolValue);
+        this->dispMan.weja->turnOnLine(boolValue);
+    }
+    else if (field == "wyak" && this->dispMan.wyak){
+        Serial.printf("Partial update: wyak = %d\n", boolValue);
+        this->dispMan.wyak->turnOnLine(boolValue);
+    }
+    else if (field == "wea" && this->dispMan.wea){
+        Serial.printf("Partial update: wea = %d\n", boolValue);
+        this->dispMan.wea->turnOnLine(boolValue);
+    }
+    else if (field == "czyt" && this->dispMan.czyt){
+        Serial.printf("Partial update: czyt = %d\n", boolValue);
+        this->dispMan.czyt->turnOnLine(boolValue);
+    }
+    else if (field == "pisz" && this->dispMan.pisz){
+        Serial.printf("Partial update: pisz = %d\n", boolValue);
+        this->dispMan.pisz->turnOnLine(boolValue);
+    }
+    else if (field == "wes" && this->dispMan.wes){
+        Serial.printf("Partial update: wes = %d\n", boolValue);
+        this->dispMan.wes->turnOnLine(boolValue);
+    }
+    else if (field == "wys" && this->dispMan.wys){
+        Serial.printf("Partial update: wys = %d\n", boolValue);
+        this->dispMan.wys->turnOnLine(boolValue);
+    }
+}
+
+
+void W_Server::processFullWebSocketData(StaticJsonDocument<512> doc)
 {
+    // Full data update
+    JsonObject dataObj = doc["data"];
+
+    if (dataObj.containsKey("acc") && this->dispMan.acc){
+        int accValue = dataObj["acc"];
+        Serial.print("Received ACC value: ");
+        Serial.println(accValue);
+        this->dispMan.acc->displayValue(accValue);
+    }
+    if (dataObj.containsKey("a") && this->dispMan.a){
+        int aValue = dataObj["a"];
+        Serial.print("Received A value: ");
+        Serial.println(aValue);
+        this->dispMan.a->displayValue(aValue);
+    }
+    if (dataObj.containsKey("s") && this->dispMan.s){
+        int sValue = dataObj["s"];
+        Serial.print("Received S value: ");
+        Serial.println(sValue);
+        this->dispMan.s->displayValue(sValue);
+    }
+    if (dataObj.containsKey("c") && this->dispMan.c){
+        int cValue = dataObj["c"];
+        Serial.print("Received C value: ");
+        Serial.println(cValue);
+        this->dispMan.c->displayValue(cValue);
+    }
+    if (dataObj.containsKey("i") && this->dispMan.i){
+        int iValue = dataObj["i"];
+        Serial.print("Received I value: ");
+        Serial.println(iValue);
+        this->dispMan.i->displayValue(iValue);
+    }
+    if (dataObj["addrs"].is<JsonArray>() && dataObj["args"].is<JsonArray>() && dataObj["vals"].is<JsonArray>() && this->dispMan.pao){
+        JsonArray addrsArray = dataObj["addrs"].as<JsonArray>();
+        JsonArray argsArray = dataObj["args"].as<JsonArray>();
+        JsonArray valsArray = dataObj["vals"].as<JsonArray>();
+        for (size_t i = 0; i < 4; i++){
+            int addr = addrsArray[i];
+            int arg = argsArray[i];
+            int val = valsArray[i];
+            Serial.printf("addr: %d, arg: %d, val: %d\n", addr, arg, val);
+
+            this->dispMan.pao[i]->displayLine(addr, val, arg);
+        }
+    }
+}
+
+
+void W_Server::sendDataToClient(char *buttonNum){
     StaticJsonDocument<256> doc;
     doc["type"] = "button_press";
     doc["buttonName"] = buttonNum;
@@ -297,6 +271,39 @@ void W_Server::mountWebFiles()
     Serial.println("Web Files Mounted Succesfully");
 
     server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+}
+
+void W_Server::runningServerLED(){
+    // Blink inbuilt LED when server is running
+    static unsigned long lastToggleTime = 0;
+    static bool ledState = false;
+
+    if (WiFi.softAPgetStationNum() > 0){
+        unsigned long currentMillis = millis();
+        if (currentMillis - lastToggleTime >= 500){
+            ledState = !ledState;
+            digitalWrite(2, ledState ? HIGH : LOW);
+            lastToggleTime = currentMillis;
+        }
+    }
+    else{
+        // Optionally, turn off LED if no stations are connected
+        digitalWrite(2, LOW);
+        ledState = false;
+    }
+}
+
+
+void W_Server::sendSignalValue()
+{
+    char* signal = buttons->activeSignal();
+    if(this->lastSignal != signal){
+        if(signal != nullptr){
+            this->sendDataToClient(signal);
+            Serial.println("Data sent to websocket");
+        }
+        this->lastSignal = signal;
+    }
 }
 
 
@@ -361,20 +368,8 @@ void W_Server::runServer()
 {
     dnsServer.processNextRequest();
 
-    char* signal = buttons->activeSignal();
-    if(this->lastSignal != signal){
-        if(signal != nullptr){
-            this->sendDataToClient(signal);
-            Serial.println("Data sent to websocket");
-        }
-        this->lastSignal = signal;
-    }
-
-    // blink inbuilt led when server is running
-    if(WiFi.softAPgetStationNum() > 0){
-        digitalWrite(2, HIGH);
-        delay(500);
-        digitalWrite(2, LOW);   
-        delay(500);
-    }
+    this->sendSignalValue();
+    
+    // Blink inbuilt LED when server is running
+    this->runningServerLED();
 }

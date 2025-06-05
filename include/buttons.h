@@ -10,7 +10,7 @@
 class Buttons {
 private:
     Adafruit_MPR121 muxL = Adafruit_MPR121();
-    Adafruit_MPR121 muxR = Adafruit_MPR121();
+    // Adafruit_MPR121 muxR = Adafruit_MPR121();
     
     std::pair<int, char*> signalsL[8] = {
         {0, "il"},

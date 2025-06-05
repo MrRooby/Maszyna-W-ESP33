@@ -71,6 +71,12 @@ class W_Server {
          * @param len Data length
          */
         void handleWebSocketMessage(void *arg, uint8_t *data, size_t len);
+
+
+        void processPartialWebSocketData(StaticJsonDocument<512> doc);
+        
+
+        void processFullWebSocketData(StaticJsonDocument<512> doc);
         
 
         void sendDataToClient(char *buttonNum);
@@ -92,6 +98,12 @@ class W_Server {
          * @brief Mount web files from LittleFS
          */
         void mountWebFiles();
+
+
+        void runningServerLED();
+
+
+        void sendSignalValue();
     
     public:
         /**
