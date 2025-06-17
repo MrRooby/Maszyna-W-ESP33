@@ -23,10 +23,8 @@
  */
 class DisplayManager {
 private:
-    CRGB *ledsR;           ///< Array for right LED strip
-    CRGB *ledsL;           ///< Array for left LED strip
-    CFastLED stripR;       ///< FastLED controller for right strip
-    CFastLED stripL;       ///< FastLED controller for left strip
+    NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> *stripR; ///< NeoPixelBus for right strip
+    NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> *stripL; ///< NeoPixelBus for left strip
     int numLedsR;          ///< Number of LEDs in right strip
     int numLedsL;          ///< Number of LEDs in left strip
     int brightness = 60;   ///< LED brightness level (0-255)

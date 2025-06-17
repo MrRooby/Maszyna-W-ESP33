@@ -1,6 +1,5 @@
 #pragma once
 
-#include <FastLED.h>
 #include "segment.h"
 #include "led_element.h"
 
@@ -26,7 +25,7 @@ class TwoDigitDisplay : protected LedElement {
          * @param startIndex Starting index in LED strip
          * @param color Initial color for both digits
          */
-        TwoDigitDisplay(CFastLED fastLED, CRGB *leds, int startIndex, CRGB color);    
+        TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, RgbColor color);    
 
         /**
          * @brief Display a two-digit number
@@ -40,5 +39,5 @@ class TwoDigitDisplay : protected LedElement {
          * 
          * @param color New color to set
          */
-        virtual void changeColor(CRGB color) override;
+        virtual void changeColor(RgbColor color) override;
 };

@@ -4,22 +4,17 @@ SignalLine::SignalLine()
  : LedElement() {}
 
 
-SignalLine::SignalLine(CFastLED strip, CRGB *leds, int startIndex, int length, CRGB color)
-    : LedElement(strip, leds, startIndex, color) {
+SignalLine::SignalLine(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, int length, RgbColor color)
+    : LedElement(strip, startIndex, color) {
     this->length = length;
 }
 
 void SignalLine::turnOnLine(bool choice) {
-    if(choice){
-        for(int i = 0; i < this->length; i++){
-            this->leds[i + this->startIndex] = color;
-        }
-    }
-    else{
-        for(int i = 0; i < this->length; i++){
-            this->leds[i + this->startIndex] = off;
-        }
-    }
+    RgbColor off(0, 0, 0);
 
-    this->strip.show();
+        for(int i = 0; i < this->length; i++){
+            this->strip->SetPixelColor(this->startIndex + i, choice ? this->color : off);
+        }
+
+    this->strip->Show();
 }

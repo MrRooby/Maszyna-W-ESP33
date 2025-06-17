@@ -1,6 +1,7 @@
 #pragma once
 
-#include <FastLED.h>
+#include <NeoPixelBus.h>
+// #include <FastLED.h>
 #include "led_element.h"
 
 /**
@@ -27,7 +28,7 @@ public:
      * @param startIndex The starting index of the segment in the LED strip
      * @param color The default color of the segment
      */
-    Segment(CFastLED strip, CRGB *leds, int startIndex, CRGB color);
+    Segment(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, RgbColor color);
 
     /**
      * @brief Display selected number

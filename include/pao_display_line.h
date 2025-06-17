@@ -1,6 +1,5 @@
 #pragma once
 
-#include <FastLED.h>
 #include "three_digit_display.h"
 #include "two_digit_display.h"
 #include "led_element.h"
@@ -31,7 +30,7 @@ class PaODisplayLine: protected LedElement {
          * @param startIndex Starting index in LED strip
          * @param color Initial color for all displays
          */
-        PaODisplayLine(CFastLED strip, CRGB *leds, int startIndex, CRGB color);    
+        PaODisplayLine(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, RgbColor color);    
 
         /**
          * @brief Display values on all three displays
@@ -47,5 +46,5 @@ class PaODisplayLine: protected LedElement {
          * 
          * @param color New color to set
          */
-        void changeColor(CRGB color);
+        void changeColor(RgbColor color);
 };

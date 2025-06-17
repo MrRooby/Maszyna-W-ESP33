@@ -32,7 +32,7 @@ class BusLine : public LedElement {
          * @param length Number of LEDs in the bus
          * @param color Initial color for the bus
          */
-        BusLine(CFastLED strip, CRGB *leds, int startIndex, int length, CRGB color);
+        BusLine(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, int length, RgbColor color);
 
         /**
          * @brief Turn the bus line on or off

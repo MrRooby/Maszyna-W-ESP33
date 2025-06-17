@@ -4,8 +4,8 @@ Segment::Segment()
     : LedElement() {}
 
 
-Segment::Segment(CFastLED strip, CRGB *leds, int startIndex, CRGB color)
-    : LedElement(strip, leds, startIndex, color) {}
+Segment::Segment(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> *strip, int startIndex, RgbColor color)
+    : LedElement(strip, startIndex, color) {}
 
 
 void Segment::displayNumber(int number)
@@ -26,10 +26,12 @@ void Segment::displayNumber(int number)
     if (number < 0 || number > 9)
         return;
 
+    RgbColor off(0, 0, 0);
+
     for (int i = 0; i < 7; ++i)
     {
-        this->leds[this->startIndex + i] = segmentMap[number][i] ? color : off;
+        this->strip->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
     }
 
-    this->strip.show();
+    this->strip->Show();
 }

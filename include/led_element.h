@@ -1,6 +1,7 @@
 #pragma once
 
-#include <FastLED.h>
+// #include <FastLED.h>
+#include <NeoPixelBus.h>
 
 /**
  * @brief Base class for LED elements that can be controlled using FastLED
@@ -10,11 +11,9 @@
  */
 class LedElement {
     protected:
-        int startIndex;         ///< Starting index in the LED strip
-        CRGB *leds;             ///< Pointer to the LED strip array
-        CRGB color = CRGB::Red; ///< Current color of the LED element
-        CRGB off = CRGB::Black; ///< Color used when LED is turned off
-        CFastLED strip;         ///< FastLED controller instance
+        NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip;
+        int startIndex;
+        RgbColor color;
 
     public:
         /**
@@ -30,12 +29,12 @@ class LedElement {
          * @param startIndex Starting index in the LED strip
          * @param color Initial color of the LED element
          */
-        LedElement(CFastLED strip, CRGB *leds, int startIndex, CRGB color);
-
+        LedElement(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, RgbColor color);
+        
         /**
          * @brief Change the color of the LED element
          * 
          * @param color New color to set
          */
-        virtual void changeColor(CRGB color);
+        virtual void changeColor(RgbColor color);
 };

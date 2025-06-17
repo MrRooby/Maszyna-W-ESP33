@@ -1,13 +1,14 @@
 #include "led_element.h"
 
-LedElement::LedElement(CFastLED strip, CRGB *leds, int startIndex, CRGB color) {
+LedElement::LedElement(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> *strip, int startIndex, RgbColor color) {
     this->strip = strip;
-    this->leds = leds;
     this->color = color;
     this->startIndex = startIndex;
 }
 
 
-void LedElement::changeColor(CRGB color) {
+void LedElement::changeColor(RgbColor color) {
     this->color = color;
+    this->strip->SetPixelColor(this->startIndex, this->color);
+    this->strip->Show();
 }

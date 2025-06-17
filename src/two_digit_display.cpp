@@ -1,10 +1,10 @@
 #include "two_digit_display.h"
 
-TwoDigitDisplay::TwoDigitDisplay(CFastLED strip, CRGB *leds, int startIndex, CRGB color)
-    : LedElement(strip, leds, startIndex, color)
+TwoDigitDisplay::TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, RgbColor color)
+    : LedElement(strip, startIndex, color)
 {
-    this->display[0] = Segment(this->strip, this->leds, this->startIndex, this->color);
-    this->display[1] = Segment(this->strip, this->leds, this->startIndex + 7, this->color);
+    this->display[0] = Segment(this->strip, this->startIndex, this->color);
+    this->display[1] = Segment(this->strip, this->startIndex + 7, this->color);
 }
 
 void TwoDigitDisplay::displayValue(int value)
@@ -24,8 +24,10 @@ void TwoDigitDisplay::displayValue(int value)
 }
 
 
-void TwoDigitDisplay::changeColor(CRGB color)
+void TwoDigitDisplay::changeColor(RgbColor color)
 {
+    this->color = color;
+    
     this->display[0].changeColor(color);
     this->display[1].changeColor(color);
 }

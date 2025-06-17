@@ -1,6 +1,5 @@
 #pragma once
 
-#include <FastLED.h>
 #include "led_element.h"
 
 /**
@@ -31,7 +30,7 @@ class SignalLine : protected LedElement {
          * @param length Number of LEDs in the signal line
          * @param color Initial color of the signal line
          */
-        SignalLine(CFastLED strip, CRGB *leds, int startIndex, int length, CRGB color);
+        SignalLine(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, int length, RgbColor color);
 
         /**
          * @brief Turn the signal line on or off
