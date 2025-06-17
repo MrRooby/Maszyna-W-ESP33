@@ -143,9 +143,10 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc){
         Serial.printf("Partial update: wyl = %d\n", boolValue);
         this->dispMan.wyl->turnOnLine(boolValue);
     }
-    else if (field == "wyad" && this->dispMan.wyad){
+    else if (field == "wyad" && this->dispMan.wyad1 && this->dispMan.wyad2){
         Serial.printf("Partial update: wyad = %d\n", boolValue);
-        this->dispMan.wyad->turnOnLine(boolValue);
+        this->dispMan.wyad1->turnOnLine(boolValue);
+        this->dispMan.wyad2->turnOnLine(boolValue);
     }
     else if (field == "wei" && this->dispMan.wei){
         Serial.printf("Partial update: wei = %d\n", boolValue);

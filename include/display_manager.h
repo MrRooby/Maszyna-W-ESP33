@@ -58,8 +58,9 @@ public:
     SignalLine *il    = nullptr;
     SignalLine *wel   = nullptr;
     SignalLine *wyl   = nullptr;
-    SignalLine *wyad  = nullptr;
+    SignalLine *wyad1 = nullptr;
     SignalLine *stop  = nullptr;
+    SignalLine *wyad2 = nullptr;
     SignalLine *wei   = nullptr;
 
     SignalLine *przep1 = nullptr;

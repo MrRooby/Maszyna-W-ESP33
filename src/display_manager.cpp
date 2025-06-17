@@ -57,8 +57,9 @@ void DisplayManager::initStripL()
     this->wel    = new SignalLine(       this->stripL, this->ledsL, 21, 3,   CRGB::Orange);
     this->wyl    = new SignalLine(       this->stripL, this->ledsL, 24, 3,   CRGB::Orange);
     this->il     = new SignalLine(       this->stripL, this->ledsL, 27, 3,   CRGB::Orange);
-    this->wyad   = new SignalLine(       this->stripL, this->ledsL, 30, 43,  CRGB::Orange);
-    this->stop   = new SignalLine(       this->stripL, this->ledsL, 73, 8,   CRGB::Orange);
+    this->wyad1   = new SignalLine(      this->stripL, this->ledsL, 30, 35,  CRGB::Orange);
+    this->stop   = new SignalLine(       this->stripL, this->ledsL, 65, 8,   CRGB::Orange);
+    this->wyad2   = new SignalLine(      this->stripL, this->ledsL, 73, 8,  CRGB::Orange);
     this->i      = new ThreeDigitDisplay(this->stripL, this->ledsL, 81,      CRGB::Orange);
     this->wei    = new SignalLine(       this->stripL, this->ledsL, 102, 3,  CRGB::Orange);
     this->weja   = new SignalLine(       this->stripL, this->ledsL, 105, 4,  CRGB::Orange);
