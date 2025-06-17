@@ -43,7 +43,6 @@ void DisplayManager::initStripR()
             Serial.printf("Error: Failed to initialize pao[%d]!\n", i);
         }
     }
-    
 }
 
 
@@ -76,7 +75,7 @@ void DisplayManager::initStripL()
     this->przep2 = new SignalLine(       this->stripL, this->ledsL, 116, 1,  CRGB::Orange);
 
     this->acc    = new ThreeDigitDisplay(this->stripL, this->ledsL, 117,     CRGB::Orange);
-    this->wyak   = new SignalLine(       this->stripR, this->ledsR, 138, 33, CRGB::Orange);
+    this->wyak   = new SignalLine(       this->stripL, this->ledsL, 138, 33, CRGB::Orange);
     this->busA   = new BusLine(          this->stripL, this->ledsL, 171, 76, CRGB::Orange);
 }
 
