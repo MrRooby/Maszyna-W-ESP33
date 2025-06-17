@@ -9,7 +9,7 @@
  * @brief Pin definitions for LED strips
  */
 #define LED_PORT_R 19    ///< Right LED strip data pin
-#define LED_PORT_L 5    ///< Left  LED strip data pin
+#define LED_PORT_L 5     ///< Left  LED strip data pin
 
 /**
  * @brief Manages multiple LED displays and signal lines
@@ -55,13 +55,13 @@ public:
     ThreeDigitDisplay *i   = nullptr;
 
     // Signal Lines
-    SignalLine *il    = nullptr;
-    SignalLine *wel   = nullptr;
-    SignalLine *wyl   = nullptr;
-    SignalLine *wyad1 = nullptr;
-    SignalLine *stop  = nullptr;
-    SignalLine *wyad2 = nullptr;
-    SignalLine *wei   = nullptr;
+    SignalLine *il     = nullptr;
+    SignalLine *wel    = nullptr;
+    SignalLine *wyl    = nullptr;
+    SignalLine *wyad1  = nullptr;
+    SignalLine *stop   = nullptr;
+    SignalLine *wyad2  = nullptr;
+    SignalLine *wei    = nullptr;
 
     SignalLine *przep1 = nullptr;
     SignalLine *ode1   = nullptr;
@@ -72,16 +72,16 @@ public:
     SignalLine *ode2   = nullptr;
     SignalLine *dod2   = nullptr;
     
-    SignalLine *weja  = nullptr;
-    SignalLine *wyak  = nullptr;
-    SignalLine *wea   = nullptr;
+    SignalLine *weja   = nullptr;
+    SignalLine *wyak   = nullptr;
+    SignalLine *wea    = nullptr;
 
     SignalLine *czyt1  = nullptr;
     SignalLine *czyt2  = nullptr;
-    SignalLine *pisz  = nullptr;
+    SignalLine *pisz   = nullptr;
     
-    SignalLine *wes   = nullptr;
-    SignalLine *wys   = nullptr;
+    SignalLine *wes    = nullptr;
+    SignalLine *wys    = nullptr;
 
     // Bus lines
     BusLine *busA = nullptr;

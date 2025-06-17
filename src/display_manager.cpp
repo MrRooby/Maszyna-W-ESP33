@@ -35,10 +35,9 @@ void DisplayManager::initStripR()
     this->s      = new ThreeDigitDisplay(this->stripR, this->ledsR, 224,     CRGB::Orange);
     this->wes    = new SignalLine(       this->stripR, this->ledsR, 245, 9,  CRGB::Orange);
     this->wys    = new SignalLine(       this->stripR, this->ledsR, 254, 9,  CRGB::Orange);
-    this->busS   = new BusLine(          this->stripR, this->ledsR, 263, 76, CRGB::Orange);
+    this->busA   = new BusLine(          this->stripR, this->ledsR, 263, 76, CRGB::Orange);
     
-    for (size_t i = 0; i < 4; i++)
-    {
+    for (size_t i = 0; i < 4; i++){
         if(this->pao[i] == nullptr){
             Serial.printf("Error: Failed to initialize pao[%d]!\n", i);
         }
@@ -57,9 +56,9 @@ void DisplayManager::initStripL()
     this->wel    = new SignalLine(       this->stripL, this->ledsL, 21, 3,   CRGB::Orange);
     this->wyl    = new SignalLine(       this->stripL, this->ledsL, 24, 3,   CRGB::Orange);
     this->il     = new SignalLine(       this->stripL, this->ledsL, 27, 3,   CRGB::Orange);
-    this->wyad1   = new SignalLine(      this->stripL, this->ledsL, 30, 35,  CRGB::Orange);
+    this->wyad1  = new SignalLine(       this->stripL, this->ledsL, 30, 35,  CRGB::Orange);
     this->stop   = new SignalLine(       this->stripL, this->ledsL, 65, 8,   CRGB::Orange);
-    this->wyad2   = new SignalLine(      this->stripL, this->ledsL, 73, 8,  CRGB::Orange);
+    this->wyad2  = new SignalLine(       this->stripL, this->ledsL, 73, 8,   CRGB::Orange);
     this->i      = new ThreeDigitDisplay(this->stripL, this->ledsL, 81,      CRGB::Orange);
     this->wei    = new SignalLine(       this->stripL, this->ledsL, 102, 3,  CRGB::Orange);
     this->weja   = new SignalLine(       this->stripL, this->ledsL, 105, 4,  CRGB::Orange);
@@ -75,7 +74,7 @@ void DisplayManager::initStripL()
 
     this->acc    = new ThreeDigitDisplay(this->stripL, this->ledsL, 117,     CRGB::Orange);
     this->wyak   = new SignalLine(       this->stripL, this->ledsL, 138, 33, CRGB::Orange);
-    this->busA   = new BusLine(          this->stripL, this->ledsL, 171, 76, CRGB::Orange);
+    this->busS   = new BusLine(          this->stripL, this->ledsL, 171, 76, CRGB::Orange);
 }
 
 

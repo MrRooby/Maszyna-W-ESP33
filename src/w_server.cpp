@@ -3,7 +3,7 @@
 W_Server::W_Server() : 
     server(80), 
     ws("/ws"),
-    dispMan(500, 500, 60),
+    dispMan(339, 247, 60),
     local_IP(192, 168, 4, 1),
     gateway(192, 168, 4, 1),
     subnet(255, 255, 255, 0)
