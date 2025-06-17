@@ -4,7 +4,6 @@ W_Server::W_Server() :
     server(80), 
     ws("/ws"),
     dispMan(500, 500, 60),
-    
     local_IP(192, 168, 4, 1),
     gateway(192, 168, 4, 1),
     subnet(255, 255, 255, 0)
@@ -152,10 +151,9 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc){
         Serial.printf("Partial update: wei = %d\n", boolValue);
         this->dispMan.wei->turnOnLine(boolValue);
     }
-    else if (field == "weak" && this->dispMan.weak1 && this->dispMan.weak2){
+    else if (field == "weak" && this->dispMan.weak){
         Serial.printf("Partial update: weak = %d\n", boolValue);
-        this->dispMan.weak1->turnOnLine(boolValue);
-        this->dispMan.weak2->turnOnLine(boolValue);
+        this->dispMan.weak->turnOnLine(boolValue);
     }
     else if (field == "dod" && this->dispMan.dod1 && this->dispMan.dod2){
         Serial.printf("Partial update: dod = %d\n", boolValue);

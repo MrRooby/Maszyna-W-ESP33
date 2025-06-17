@@ -65,12 +65,11 @@ public:
     SignalLine *przep1 = nullptr;
     SignalLine *ode1   = nullptr;
     SignalLine *dod1   = nullptr;
-    SignalLine *weak1  = nullptr;
+    SignalLine *weak   = nullptr;
     
     SignalLine *przep2 = nullptr;
     SignalLine *ode2   = nullptr;
     SignalLine *dod2   = nullptr;
-    SignalLine *weak2  = nullptr;
     
     SignalLine *weja  = nullptr;
     SignalLine *wyak  = nullptr;

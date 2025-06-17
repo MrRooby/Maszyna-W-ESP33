@@ -67,9 +67,7 @@ void DisplayManager::initStripL()
     this->przep1 = new SignalLine(       this->stripL, this->ledsL, 109, 1,  CRGB::Orange);
     this->ode1   = new SignalLine(       this->stripL, this->ledsL, 110, 1,  CRGB::Orange);
     this->dod1   = new SignalLine(       this->stripL, this->ledsL, 111, 1,  CRGB::Orange);
-    this->weak1  = new SignalLine(       this->stripL, this->ledsL, 112, 1,  CRGB::Orange);
-    
-    this->weak2  = new SignalLine(       this->stripL, this->ledsL, 113, 1,  CRGB::Orange);
+    this->weak   = new SignalLine(       this->stripL, this->ledsL, 112, 2,  CRGB::Orange);
     this->dod2   = new SignalLine(       this->stripL, this->ledsL, 114, 1,  CRGB::Orange);
     this->ode2   = new SignalLine(       this->stripL, this->ledsL, 115, 1,  CRGB::Orange);
     this->przep2 = new SignalLine(       this->stripL, this->ledsL, 116, 1,  CRGB::Orange);
