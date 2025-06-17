@@ -10,7 +10,7 @@
  */
 class LedElement {
     protected:
-        int startIndex;          ///< Starting index in the LED strip
+        int startIndex;         ///< Starting index in the LED strip
         CRGB *leds;             ///< Pointer to the LED strip array
         CRGB color = CRGB::Red; ///< Current color of the LED element
         CRGB off = CRGB::Black; ///< Color used when LED is turned off

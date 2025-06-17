@@ -152,21 +152,25 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc){
         Serial.printf("Partial update: wei = %d\n", boolValue);
         this->dispMan.wei->turnOnLine(boolValue);
     }
-    else if (field == "weak" && this->dispMan.weak){
+    else if (field == "weak" && this->dispMan.weak1 && this->dispMan.weak2){
         Serial.printf("Partial update: weak = %d\n", boolValue);
-        this->dispMan.weak->turnOnLine(boolValue);
+        this->dispMan.weak1->turnOnLine(boolValue);
+        this->dispMan.weak2->turnOnLine(boolValue);
     }
-    else if (field == "dod" && this->dispMan.dod){
+    else if (field == "dod" && this->dispMan.dod1 && this->dispMan.dod2){
         Serial.printf("Partial update: dod = %d\n", boolValue);
-        this->dispMan.dod->turnOnLine(boolValue);
+        this->dispMan.dod1->turnOnLine(boolValue);
+        this->dispMan.dod2->turnOnLine(boolValue);
     }
-    else if (field == "ode" && this->dispMan.ode){
+    else if (field == "ode" && this->dispMan.ode1 && this->dispMan.ode2){
         Serial.printf("Partial update: ode = %d\n", boolValue);
-        this->dispMan.ode->turnOnLine(boolValue);
+        this->dispMan.ode1->turnOnLine(boolValue);
+        this->dispMan.ode2->turnOnLine(boolValue);
     }
-    else if (field == "przep" && this->dispMan.przep){
+    else if (field == "przep" && this->dispMan.przep1 && this->dispMan.przep2){
         Serial.printf("Partial update: przep = %d\n", boolValue);
-        this->dispMan.przep->turnOnLine(boolValue);
+        this->dispMan.przep1->turnOnLine(boolValue);
+        this->dispMan.przep2->turnOnLine(boolValue);
     }
     else if (field == "weja" && this->dispMan.weja){
         Serial.printf("Partial update: weja = %d\n", boolValue);
@@ -180,9 +184,10 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc){
         Serial.printf("Partial update: wea = %d\n", boolValue);
         this->dispMan.wea->turnOnLine(boolValue);
     }
-    else if (field == "czyt" && this->dispMan.czyt){
+    else if (field == "czyt" && this->dispMan.czyt1 && this->dispMan.czyt2){
         Serial.printf("Partial update: czyt = %d\n", boolValue);
-        this->dispMan.czyt->turnOnLine(boolValue);
+        this->dispMan.czyt1->turnOnLine(boolValue);
+        this->dispMan.czyt2->turnOnLine(boolValue);
     }
     else if (field == "pisz" && this->dispMan.pisz){
         Serial.printf("Partial update: pisz = %d\n", boolValue);
@@ -195,6 +200,14 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc){
     else if (field == "wys" && this->dispMan.wys){
         Serial.printf("Partial update: wys = %d\n", boolValue);
         this->dispMan.wys->turnOnLine(boolValue);
+    }
+    else if (field == "busA" && this->dispMan.busA){
+        Serial.printf("Partial update: busA= %d\n", boolValue);
+        this->dispMan.busA->turnOnLine(boolValue);
+    }
+    else if (field == "busS" && this->dispMan.busS){
+        Serial.printf("Partial update: busS= %d\n", boolValue);
+        this->dispMan.busS->turnOnLine(boolValue);
     }
 }
 
@@ -273,6 +286,7 @@ void W_Server::mountWebFiles()
     server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 }
 
+
 void W_Server::runningServerLED(){
     // Blink inbuilt LED when server is running
     static unsigned long lastToggleTime = 0;
@@ -300,7 +314,8 @@ void W_Server::sendSignalValue()
     if(this->lastSignal != signal){
         if(signal != nullptr){
             this->sendDataToClient(signal);
-            Serial.println("Data sent to websocket");
+            Serial.printf("Signal value sent: %s", String(signal).c_str());
+            Serial.println();
         }
         this->lastSignal = signal;
     }
@@ -368,8 +383,8 @@ void W_Server::runServer()
 {
     dnsServer.processNextRequest();
 
-    this->sendSignalValue();
-    
+    // this->sendSignalValue();
+
     // Blink inbuilt LED when server is running
     this->runningServerLED();
 }
