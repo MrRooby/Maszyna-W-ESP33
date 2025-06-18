@@ -208,6 +208,10 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc){
         Serial.printf("Partial update: busS= %d\n", boolValue);
         this->dispMan.busS->turnOnLine(boolValue);
     }
+    else if (field == "stop" && this->dispMan.stop){
+        Serial.printf("Partial update: stop= %d\n", boolValue);
+        this->dispMan.stop->turnOnLine(boolValue);
+    }
 }
 
 
