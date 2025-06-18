@@ -1,6 +1,5 @@
 #pragma once
 
-#include <FastLED.h>
 #include "segment.h"
 #include "led_element.h"
 
@@ -26,8 +25,10 @@ class ThreeDigitDisplay : protected LedElement {
          * @param startIndex Starting index in LED strip
          * @param color Initial color for all digits
          */
-        ThreeDigitDisplay(CFastLED fastLED, CRGB *leds, int startIndex, CRGB color);    
-
+        ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip1, int startIndex, RgbColor color);    
+        
+        ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color);    
+        
         /**
          * @brief Display a three-digit number
          * 
@@ -40,5 +41,5 @@ class ThreeDigitDisplay : protected LedElement {
          * 
          * @param color New color to set
          */
-        virtual void changeColor(CRGB color) override;
+        virtual void changeColor(RgbColor color) override;
 };

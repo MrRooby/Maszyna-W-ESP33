@@ -1,11 +1,19 @@
 #include "three_digit_display.h"
 
-ThreeDigitDisplay::ThreeDigitDisplay(CFastLED strip, CRGB *leds, int startIndex, CRGB color)
-    : LedElement(strip, leds, startIndex, color)
+ThreeDigitDisplay::ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod> *strip0, int startIndex, RgbColor color)
+    : LedElement(strip0, startIndex, color)
 {
-    this->display[0] = Segment(this->strip, this->leds, this->startIndex, this->color);
-    this->display[1] = Segment(this->strip, this->leds, this->startIndex + 7, this->color);
-    this->display[2] = Segment(this->strip, this->leds, this->startIndex + 14, this->color);
+    this->display[0] = Segment(this->strip0, this->startIndex, this->color);
+    this->display[1] = Segment(this->strip0, this->startIndex + 7, this->color);
+    this->display[2] = Segment(this->strip0, this->startIndex + 14, this->color);
+}
+
+ThreeDigitDisplay::ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod> *strip1, int startIndex, RgbColor color)
+    : LedElement(strip1, startIndex, color)
+{
+    this->display[0] = Segment(this->strip1, this->startIndex, this->color);
+    this->display[1] = Segment(this->strip1, this->startIndex + 7, this->color);
+    this->display[2] = Segment(this->strip1, this->startIndex + 14, this->color);
 }
 
 void ThreeDigitDisplay::displayValue(int value)
@@ -27,8 +35,10 @@ void ThreeDigitDisplay::displayValue(int value)
 }
 
 
-void ThreeDigitDisplay::changeColor(CRGB color)
+void ThreeDigitDisplay::changeColor(RgbColor color)
 {
+    this->color = color;
+
     this->display[0].changeColor(color);
     this->display[1].changeColor(color);
     this->display[2].changeColor(color);

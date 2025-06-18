@@ -4,22 +4,33 @@ SignalLine::SignalLine()
  : LedElement() {}
 
 
-SignalLine::SignalLine(CFastLED strip, CRGB *leds, int startIndex, int length, CRGB color)
-    : LedElement(strip, leds, startIndex, color) {
+SignalLine::SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, int length, RgbColor color)
+    : LedElement(strip0, startIndex, color) {
     this->length = length;
+    this->channel = 0;
+}
+
+SignalLine::SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, int length, RgbColor color)
+    : LedElement(strip1, startIndex, color) {
+    this->length = length;
+    this->channel = 1;
 }
 
 void SignalLine::turnOnLine(bool choice) {
-    if(choice){
-        for(int i = 0; i < this->length; i++){
-            this->leds[i + this->startIndex] = color;
-        }
-    }
-    else{
-        for(int i = 0; i < this->length; i++){
-            this->leds[i + this->startIndex] = off;
-        }
-    }
+    RgbColor off(0, 0, 0);
 
-    this->strip.show();
+    if(this->channel == 0){
+        for (int i = 0; i < this->length; i++){
+            this->strip0->SetPixelColor(this->startIndex + i, choice ? this->color : off);
+        }
+
+        this->strip0->Show();
+    }
+    else if(this->channel == 1){
+        for (int i = 0; i < this->length; i++){
+            this->strip1->SetPixelColor(this->startIndex + i, choice ? this->color : off);
+        }
+
+        this->strip1->Show();
+    }
 }

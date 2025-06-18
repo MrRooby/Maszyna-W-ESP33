@@ -1,10 +1,17 @@
 #include "pao_display_line.h"
 
-PaODisplayLine::PaODisplayLine(CFastLED strip, CRGB *leds, int startIndex, CRGB color)
-    : LedElement(strip, leds, startIndex, color){
-        this->addr = new TwoDigitDisplay(this->strip, this->leds, this->startIndex, this->color);
-        this->val  = new ThreeDigitDisplay(this->strip, this->leds, this->startIndex + 14, this->color);
-        this->arg  = new TwoDigitDisplay(this->strip, this->leds, this->startIndex + 35, this->color);
+PaODisplayLine::PaODisplayLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, RgbColor color)
+    : LedElement(strip0, startIndex, color){
+        this->addr = new TwoDigitDisplay(this->strip0, this->startIndex, this->color);
+        this->val  = new ThreeDigitDisplay(this->strip0, this->startIndex + 14, this->color);
+        this->arg  = new TwoDigitDisplay(this->strip0, this->startIndex + 35, this->color);
+}
+
+PaODisplayLine::PaODisplayLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color)
+    : LedElement(strip1, startIndex, color){
+        this->addr = new TwoDigitDisplay(this->strip1, this->startIndex, this->color);
+        this->val  = new ThreeDigitDisplay(this->strip1, this->startIndex + 14, this->color);
+        this->arg  = new TwoDigitDisplay(this->strip1, this->startIndex + 35, this->color);
 }
 
 
@@ -16,7 +23,7 @@ void PaODisplayLine::displayLine(int addr, int val, int arg)
 }
 
 
-void PaODisplayLine::changeColor(CRGB color)
+void PaODisplayLine::changeColor(RgbColor color)
 {
     this->color = color;
     this->addr->changeColor(color);
