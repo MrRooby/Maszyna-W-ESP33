@@ -30,7 +30,9 @@ class PaODisplayLine: protected LedElement {
          * @param startIndex Starting index in LED strip
          * @param color Initial color for all displays
          */
-        PaODisplayLine(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, RgbColor color);    
+        PaODisplayLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, RgbColor color);    
+        
+        PaODisplayLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color);    
 
         /**
          * @brief Display values on all three displays

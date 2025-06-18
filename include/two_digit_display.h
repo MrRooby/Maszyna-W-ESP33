@@ -25,7 +25,9 @@ class TwoDigitDisplay : protected LedElement {
          * @param startIndex Starting index in LED strip
          * @param color Initial color for both digits
          */
-        TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, RgbColor color);    
+        TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, RgbColor color);    
+
+        TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color);    
 
         /**
          * @brief Display a two-digit number

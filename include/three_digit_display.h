@@ -25,7 +25,10 @@ class ThreeDigitDisplay : protected LedElement {
          * @param startIndex Starting index in LED strip
          * @param color Initial color for all digits
          */
-        ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, RgbColor color);    
+        ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip1, int startIndex, RgbColor color);    
+        
+        ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color);    
+        
         /**
          * @brief Display a three-digit number
          * 

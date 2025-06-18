@@ -14,7 +14,7 @@
 class SignalLine : protected LedElement {
     private:
         int length = 0;     ///< Number of LEDs in the signal line
-
+        int channel;
     public:
         /**
          * @brief Default constructor
@@ -30,7 +30,9 @@ class SignalLine : protected LedElement {
          * @param length Number of LEDs in the signal line
          * @param color Initial color of the signal line
          */
-        SignalLine(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, int length, RgbColor color);
+        SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, int length, RgbColor color);
+        
+        SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, int length, RgbColor color);
 
         /**
          * @brief Turn the signal line on or off

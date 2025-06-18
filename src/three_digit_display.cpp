@@ -1,11 +1,19 @@
 #include "three_digit_display.h"
 
-ThreeDigitDisplay::ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> *strip, int startIndex, RgbColor color)
-    : LedElement(strip, startIndex, color)
+ThreeDigitDisplay::ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod> *strip0, int startIndex, RgbColor color)
+    : LedElement(strip0, startIndex, color)
 {
-    this->display[0] = Segment(this->strip, this->startIndex, this->color);
-    this->display[1] = Segment(this->strip, this->startIndex + 7, this->color);
-    this->display[2] = Segment(this->strip, this->startIndex + 14, this->color);
+    this->display[0] = Segment(this->strip0, this->startIndex, this->color);
+    this->display[1] = Segment(this->strip0, this->startIndex + 7, this->color);
+    this->display[2] = Segment(this->strip0, this->startIndex + 14, this->color);
+}
+
+ThreeDigitDisplay::ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod> *strip1, int startIndex, RgbColor color)
+    : LedElement(strip1, startIndex, color)
+{
+    this->display[0] = Segment(this->strip1, this->startIndex, this->color);
+    this->display[1] = Segment(this->strip1, this->startIndex + 7, this->color);
+    this->display[2] = Segment(this->strip1, this->startIndex + 14, this->color);
 }
 
 void ThreeDigitDisplay::displayValue(int value)

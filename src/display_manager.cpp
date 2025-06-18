@@ -6,9 +6,15 @@ DisplayManager::DisplayManager(int numLedsR, int numLedsL, int brightness)
     this->numLedsR = numLedsR;
     this->numLedsL = numLedsL;
     this->brightness = brightness;
-
-    this->initStripL();
+    
+    this->stripR = new NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>(numLedsR, LED_PORT_R);
+    this->stripL = new NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>(numLedsL, LED_PORT_L);
+    
+    this->stripR->Begin();
+    this->stripL->Begin();
+    
     this->initStripR();
+    this->initStripL();
 
     this->clearDisplay();
 }
@@ -16,11 +22,9 @@ DisplayManager::DisplayManager(int numLedsR, int numLedsL, int brightness)
 
 void DisplayManager::initStripR()
 {
-    this->stripR = new NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>(numLedsR, LED_PORT_R);
-    this->stripR->Begin();
 
     // Initialize strips displays and signal lines
-    this->a      = new ThreeDigitDisplay(this->stripR, 0, RgbColor(255, 128, 0));
+    this->a      = new ThreeDigitDisplay(this->stripR, 0,       RgbColor(255, 128, 0));
     this->wea    = new SignalLine(       this->stripR, 21, 3,   RgbColor(255, 128, 0));
     this->pao[0] = new PaODisplayLine(   this->stripR, 24,      RgbColor(255, 128, 0));
     this->czyt1  = new SignalLine(       this->stripR, 73, 1,   RgbColor(255, 128, 0));
@@ -44,8 +48,6 @@ void DisplayManager::initStripR()
 
 void DisplayManager::initStripL()
 {
-    this->stripL = new NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>(numLedsL, LED_PORT_L);
-    this->stripL->Begin();
     
     // Initialize strips displays and signal lines
     this->c      = new ThreeDigitDisplay(this->stripL, 0,       RgbColor(255, 128, 0));

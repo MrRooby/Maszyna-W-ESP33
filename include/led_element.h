@@ -11,7 +11,9 @@
  */
 class LedElement {
     protected:
-        NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip;
+        NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0;
+        NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1;
+
         int startIndex;
         RgbColor color;
 
@@ -29,7 +31,9 @@ class LedElement {
          * @param startIndex Starting index in the LED strip
          * @param color Initial color of the LED element
          */
-        LedElement(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, RgbColor color);
+        LedElement(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, RgbColor color);
+        
+        LedElement(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color);
         
         /**
          * @brief Change the color of the LED element

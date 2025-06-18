@@ -14,7 +14,7 @@
 class BusLine : public LedElement {
     private:
         int length = 0;    ///< Number of LEDs in the bus line
-
+        int channel;
     public:
         /**
          * @brief Default constructor
@@ -32,7 +32,9 @@ class BusLine : public LedElement {
          * @param length Number of LEDs in the bus
          * @param color Initial color for the bus
          */
-        BusLine(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, int length, RgbColor color);
+        BusLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, int length, RgbColor color);
+        
+        BusLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, int length, RgbColor color);
 
         /**
          * @brief Turn the bus line on or off

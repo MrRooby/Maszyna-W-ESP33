@@ -4,18 +4,36 @@ Segment::Segment()
     : LedElement() {}
 
 
-Segment::Segment(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> *strip, int startIndex, RgbColor color)
-    : LedElement(strip, startIndex, color) {}
+Segment::Segment(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod> *strip0, int startIndex, RgbColor color)
+    : LedElement(strip0, startIndex, color) {
+        this->channel = 0;
+    }
 
+Segment::Segment(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod> *strip1, int startIndex, RgbColor color)
+    : LedElement(strip1, startIndex, color) {
+        this->channel = 1;
+    }
 
 void Segment::displayNumber(int number)
 {
+    /*
+     --3--
+    |     |
+    4     2
+    |     |
+     --1--
+    |     |
+    5     7
+    |     |
+    --6--
+    */
+
     static const bool segmentMap[10][7] = {
         {false, true,  true,  true,  true,  true,  true},  // 0
         {false, true,  false, false, false, false, true},  // 1
         {true,  true,  true,  false, true,  true,  false}, // 2
         {true,  true,  true,  false, false, true,  true},  // 3
-        {false, true,  false, true,  false, false, true},  // 4
+        {true, true,  false, true,  false, false, true},   // 4
         {true,  false, true,  true,  false, true,  true},  // 5
         {true,  false, true,  true,  true,  true,  true},  // 6
         {false, true,  true,  false, false, false, true},  // 7
@@ -30,8 +48,17 @@ void Segment::displayNumber(int number)
 
     for (int i = 0; i < 7; ++i)
     {
-        this->strip->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
+        if(this->channel == 0){
+            for (int i = 0; i < 7; ++i){
+                this->strip0->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
+            }
+            this->strip0->Show();
+        }
+        else if(this->channel == 1){
+            for (int i = 0; i < 7; ++i){
+                this->strip1->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
+            }
+            this->strip1->Show();
+        }
     }
-
-    this->strip->Show();
 }

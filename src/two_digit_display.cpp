@@ -1,10 +1,17 @@
 #include "two_digit_display.h"
 
-TwoDigitDisplay::TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod>* strip, int startIndex, RgbColor color)
-    : LedElement(strip, startIndex, color)
+TwoDigitDisplay::TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, RgbColor color)
+    : LedElement(strip0, startIndex, color)
 {
-    this->display[0] = Segment(this->strip, this->startIndex, this->color);
-    this->display[1] = Segment(this->strip, this->startIndex + 7, this->color);
+    this->display[0] = Segment(this->strip0, this->startIndex, this->color);
+    this->display[1] = Segment(this->strip0, this->startIndex + 7, this->color);
+}
+
+TwoDigitDisplay::TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color)
+    : LedElement(strip1, startIndex, color)
+{
+    this->display[0] = Segment(this->strip1, this->startIndex, this->color);
+    this->display[1] = Segment(this->strip1, this->startIndex + 7, this->color);
 }
 
 void TwoDigitDisplay::displayValue(int value)
