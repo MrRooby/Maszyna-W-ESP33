@@ -3,7 +3,7 @@
 W_Server::W_Server() : 
     server(80), 
     ws("/ws"),
-    dispMan(339, 247, 60),
+    dispMan(350, 250, 60),
     local_IP(192, 168, 4, 1),
     gateway(192, 168, 4, 1),
     subnet(255, 255, 255, 0)
@@ -78,7 +78,7 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
 }
 
 
-void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc){
+void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
     String field = doc["field"] | "";
 
     // Determine if value is int - display values or bool - signal lines

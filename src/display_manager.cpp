@@ -1,8 +1,7 @@
 #include "display_manager.h"
 
 
-DisplayManager::DisplayManager(int numLedsR, int numLedsL, int brightness)
-{
+DisplayManager::DisplayManager(int numLedsR, int numLedsL, int brightness) {
     this->numLedsR = numLedsR;
     this->numLedsL = numLedsL;
     this->brightness = brightness;
@@ -20,9 +19,7 @@ DisplayManager::DisplayManager(int numLedsR, int numLedsL, int brightness)
 }
 
 
-void DisplayManager::initStripR()
-{
-
+void DisplayManager::initStripR() {
     // Initialize strips displays and signal lines
     this->a      = new ThreeDigitDisplay(this->stripR, 0,       RgbColor(255, 128, 0));
     this->wea    = new SignalLine(       this->stripR, 21, 3,   RgbColor(255, 128, 0));
@@ -36,19 +33,10 @@ void DisplayManager::initStripR()
     this->s      = new ThreeDigitDisplay(this->stripR, 224,     RgbColor(255, 128, 0));
     this->wes    = new SignalLine(       this->stripR, 245, 9,  RgbColor(255, 128, 0));
     this->wys    = new SignalLine(       this->stripR, 254, 9,  RgbColor(255, 128, 0));
-    this->busA   = new BusLine(          this->stripR, 263, 76, RgbColor(255, 128, 0));
-    
-    for (size_t i = 0; i < 4; i++){
-        if(this->pao[i] == nullptr){
-            Serial.printf("Error: Failed to initialize pao[%d]!\n", i);
-        }
-    }
+    this->busA   = new BusLine(          this->stripR, 263, 78, RgbColor(255, 128, 0));
 }
 
-
-void DisplayManager::initStripL()
-{
-    
+void DisplayManager::initStripL() {
     // Initialize strips displays and signal lines
     this->c      = new ThreeDigitDisplay(this->stripL, 0,       RgbColor(255, 128, 0));
     this->wel    = new SignalLine(       this->stripL, 21, 3,   RgbColor(255, 128, 0));
@@ -71,7 +59,7 @@ void DisplayManager::initStripL()
 
     this->acc    = new ThreeDigitDisplay(this->stripL, 117,     RgbColor(255, 128, 0));
     this->wyak   = new SignalLine(       this->stripL, 138, 33, RgbColor(255, 128, 0));
-    this->busS   = new BusLine(          this->stripL, 171, 76, RgbColor(255, 128, 0));
+    this->busS   = new BusLine(          this->stripL, 171, 78, RgbColor(255, 128, 0));
 }
 
 
