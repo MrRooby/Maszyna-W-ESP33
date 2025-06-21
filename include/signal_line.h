@@ -22,16 +22,29 @@ class SignalLine : protected LedElement {
         SignalLine();
 
         /**
-         * @brief Construct a new Signal Line
+         * @brief Constructs a SignalLine object for a specific NeoPixelBus strip using RMT channel 0.
          * 
-         * @param strip FastLED controller instance
-         * @param leds Pointer to the LED strip array
-         * @param startIndex Starting index in the LED strip
-         * @param length Number of LEDs in the signal line
-         * @param color Initial color of the signal line
+         * This constructor initializes a SignalLine that controls a segment of LEDs on the specified strip,
+         * starting at the given index and spanning the specified length, with the provided color.
+         * 
+         * @param strip0 Pointer to the NeoPixelBus object using NeoEsp32Rmt0Ws2812xMethod (RMT channel 0).
+         * @param startIndex The starting index of the LED segment on the strip.
+         * @param length The number of LEDs in the signal line.
+         * @param color The color to set for the signal line (as an RgbColor object).
          */
         SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, int length, RgbColor color);
         
+        /**
+         * @brief Constructs a SignalLine object for a specific NeoPixelBus strip using RMT channel 1.
+         * 
+         * This constructor initializes a SignalLine that controls a segment of LEDs on the specified strip,
+         * starting at the given index and spanning the specified length, with the provided color.
+         * 
+         * @param strip1 Pointer to the NeoPixelBus object using NeoEsp32Rmt0Ws2812xMethod (RMT channel 1).
+         * @param startIndex The starting index of the LED segment on the strip.
+         * @param length The number of LEDs in the signal line.
+         * @param color The color to set for the signal line (as an RgbColor object).
+         */
         SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, int length, RgbColor color);
 
         /**

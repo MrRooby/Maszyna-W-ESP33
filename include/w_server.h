@@ -12,7 +12,7 @@
 #include "buttons.h"
 
 /**
- * @brief Web server class managing WiFi, DNS and WebSocket connections
+ * @brief Web server class managing WiFi, DNS and WebSocket connections, main logic controller
  * 
  * This class handles the setup and management of:
  * - WiFi Access Point
@@ -73,12 +73,43 @@ class W_Server {
         void handleWebSocketMessage(void *arg, uint8_t *data, size_t len);
 
 
+        /**
+         * @brief Processes partial updates received via WebSocket as JSON data.
+         *
+         * This function handles incoming WebSocket messages of type "reg-update" containing
+         * partial updates for display values or signal lines. It parses the provided JSON document,
+         * determines the field and value to update, and updates the corresponding display or signal
+         * line accordingly.
+         *
+         * @param doc The JSON document containing the partial update data. Expected to include
+         *            a "field" key specifying the target and a "value" key with the new value.
+         *            For some fields, arrays such as "addrs", "args", and "vals" may also be present.
+         */
         void processPartialWebSocketData(StaticJsonDocument<512> doc);
         
 
+        /**
+         * @brief Processes a full WebSocket data update received from the client.
+         *
+         * This function handles incoming JSON documents containing a complete set of data updates,
+         * typically sent with the "mem-update" message type. It extracts register values and display
+         * information from the provided JSON document and updates the corresponding display elements.
+         *
+         * @param doc The JSON document containing the full data update, expected to have fields such as
+         *            "acc", "a", "s", "c", "i", and arrays "addrs", "args", "vals" for updating display lines.
+         */
         void processFullWebSocketData(StaticJsonDocument<512> doc);
         
 
+        /**
+         * @brief Sends a button press event to all connected WebSocket clients.
+         *
+         * This function constructs a JSON message containing the type of event ("button_press")
+         * and the name or identifier of the button that was pressed. The message is then sent
+         * to all clients currently connected via WebSocket.
+         *
+         * @param buttonNum Pointer to a character array representing the name or identifier of the button pressed.
+         */
         void sendDataToClient(char *buttonNum);
 
 
@@ -100,9 +131,20 @@ class W_Server {
         void mountWebFiles();
 
 
+        /**
+         * @brief Controls the inbuilt LED indicator to show the server's running status.
+         */
         void runningServerLED();
 
 
+        /**
+         * @brief Sends the currently active signal value to all connected WebSocket clients.
+         *
+         * This function checks if the active signal from the Buttons instance has changed
+         * since the last call. If it has, it sends the signal value to all connected clients
+         * via WebSocket and updates the last sent signal. This is typically used to notify
+         * clients about button press events or signal changes.
+         */
         void sendSignalValue();
     
     public:

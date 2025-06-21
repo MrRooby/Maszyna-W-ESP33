@@ -24,15 +24,27 @@ public:
     Segment();
 
     /**
-     * @brief Construct a new Segment object
+     * @brief Constructs a Segment object for a 7-segment display using the specified NeoPixelBus strip (channel 0).
      *
-     * @param strip Reference to a CFastLED object representing the LED strip
-     * @param leds Pointer to the CRGB array representing the LED colors
-     * @param startIndex The starting index of the segment in the LED strip
-     * @param color The default color of the segment
+     * This constructor initializes the Segment to use the provided NeoPixelBus strip (configured for channel 0),
+     * sets the starting index for the segment's LEDs, and assigns the color to be used for illumination.
+     *
+     * @param strip0 Pointer to the NeoPixelBus object configured with NeoEsp32Rmt1Ws2812xMethod (channel 0).
+     * @param startIndex The index of the first LED in the segment on the strip.
+     * @param color The RgbColor to use for the segment when illuminated.
      */
     Segment(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, RgbColor color);
     
+    /**
+     * @brief Constructs a Segment object for a 7-segment display using the specified NeoPixelBus strip (channel 1).
+     *
+     * This constructor initializes the Segment to use the provided NeoPixelBus strip (configured for channel 1),
+     * sets the starting index for the segment's LEDs, and assigns the color to be used for illumination.
+     *
+     * @param strip1 Pointer to the NeoPixelBus object configured with NeoEsp32Rmt1Ws2812xMethod (channel 1).
+     * @param startIndex The index of the first LED in the segment on the strip.
+     * @param color The RgbColor to use for the segment when illuminated.
+     */
     Segment(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color);
 
     /**

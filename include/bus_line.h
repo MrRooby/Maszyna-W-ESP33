@@ -23,17 +23,29 @@ class BusLine : public LedElement {
          */
         BusLine();
 
+  
         /**
-         * @brief Construct a new Bus Line
-         * 
-         * @param strip FastLED controller instance
-         * @param leds Pointer to LED array
-         * @param startIndex Starting index in LED strip
-         * @param length Number of LEDs in the bus
-         * @param color Initial color for the bus
+         * @brief Constructs a BusLine object for channel 0 using the specified NeoPixelBus strip.
+         *
+         * Initializes a BusLine instance that controls a segment of an LED strip using the NeoEsp32Rmt0Ws2812xMethod.
+         *
+         * @param strip0 Pointer to the NeoPixelBus object representing the LED strip (channel 0).
+         * @param startIndex The starting index of the LED segment controlled by this BusLine.
+         * @param length The number of LEDs in the segment.
+         * @param color The color to be used for the LEDs in this BusLine.
          */
         BusLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, int length, RgbColor color);
         
+        /**
+         * @brief Constructs a BusLine object for channel 1 using the specified NeoPixelBus strip.
+         *
+         * Initializes a BusLine instance that controls a segment of an LED strip using the NeoEsp32Rmt0Ws2812xMethod.
+         *
+         * @param strip1 Pointer to the NeoPixelBus object representing the LED strip (channel 1).
+         * @param startIndex The starting index of the LED segment controlled by this BusLine.
+         * @param length The number of LEDs in the segment.
+         * @param color The color to be used for the LEDs in this BusLine.
+         */
         BusLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, int length, RgbColor color);
 
         /**

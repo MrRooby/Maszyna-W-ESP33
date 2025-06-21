@@ -15,7 +15,7 @@
  * @brief Manages multiple LED displays and signal lines
  * 
  * This class handles the initialization and control of two LED strips
- * and manages multiple ThreeDigitDisplay and SignalLine instances for 
+ * and manages multiple ThreeDigitDisplay, PaODisplayLine, BusLine and SignalLine instances for 
  * showing values.
  * 
  * @author Bartosz Faruga / MrRooby
@@ -89,12 +89,16 @@ public:
     PaODisplayLine *pao[4];
 
 
+
     /**
-     * @brief Construct a new Display Manager
-     * 
-     * @param numLedsR Number of LEDs in right strip
-     * @param numLedsL Number of LEDs in left strip
-     * @param brightness Initial brightness level (0-255)
+     * @brief Constructs a DisplayManager object to control two LED strips.
+     *
+     * Initializes the right and left LED strips with the specified number of LEDs and brightness.
+     * Also sets up all display elements and signal lines for both strips.
+     *
+     * @param numLedsR Number of LEDs on the right LED strip.
+     * @param numLedsL Number of LEDs on the left LED strip.
+     * @param brightness Brightness level for the LED strips.
      */
     DisplayManager(int numLedsR, int numLedsL, int brightness);
 

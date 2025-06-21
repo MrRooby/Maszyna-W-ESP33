@@ -18,15 +18,29 @@ class ThreeDigitDisplay : protected LedElement {
 
     public:
         /**
-         * @brief Construct a new Three Digit Display
+         * @brief Constructs a ThreeDigitDisplay object using channel 0 (NeoEsp32Rmt0Ws2812xMethod).
          * 
-         * @param fastLED FastLED controller instance
-         * @param leds Pointer to LED array
-         * @param startIndex Starting index in LED strip
-         * @param color Initial color for all digits
+         * This constructor initializes a three-digit 7-segment display using the specified NeoPixelBus strip,
+         * starting LED index, and color. Each digit is represented by a Segment object, and the display will
+         * use the provided color for all segments.
+         * 
+         * @param strip0 Pointer to the NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod> controlling the LEDs (channel 0).
+         * @param startIndex The starting index of the first LED for the display on the strip.
+         * @param color The color to use for the digits (as an RgbColor).
          */
         ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip1, int startIndex, RgbColor color);    
         
+        /**
+         * @brief Constructs a ThreeDigitDisplay object using channel 1 (NeoEsp32Rmt0Ws2812xMethod).
+         * 
+         * This constructor initializes a three-digit 7-segment display using the specified NeoPixelBus strip,
+         * starting LED index, and color. Each digit is represented by a Segment object, and the display will
+         * use the provided color for all segments.
+         * 
+         * @param strip1 Pointer to the NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod> controlling the LEDs (channel 1).
+         * @param startIndex The starting index of the first LED for the display on the strip.
+         * @param color The color to use for the digits (as an RgbColor).
+         */
         ThreeDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color);    
         
         /**

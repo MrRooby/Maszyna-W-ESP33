@@ -25,13 +25,19 @@ class PaODisplayLine: protected LedElement {
         /**
          * @brief Construct a new PaO Display Line
          * 
-         * @param strip FastLED controller instance
-         * @param leds Pointer to LED array
+         * @param strip0 NeoPixelBus controller instance for Channel 0
          * @param startIndex Starting index in LED strip
          * @param color Initial color for all displays
          */
         PaODisplayLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, RgbColor color);    
         
+        /**
+         * @brief Construct a new PaO Display Line
+         * 
+         * @param strip1 NeoPixelBus controller instance for Channel 1
+         * @param startIndex Starting index in LED strip
+         * @param color Initial color for all displays
+         */
         PaODisplayLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color);    
 
         /**
