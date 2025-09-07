@@ -22,6 +22,12 @@ void PaODisplayLine::displayLine(int addr, int val, int arg)
     this->arg->displayValue(arg);
 }
 
+void PaODisplayLine::loadingAnimation(){
+    this->addr->loadingAnimation();
+    this->val->loadingAnimation();
+    this->arg->loadingAnimation();
+}
+
 
 void PaODisplayLine::changeColor(RgbColor color)
 {

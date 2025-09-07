@@ -22,7 +22,6 @@ class BusLine : public LedElement {
          * Initializes an empty bus line with zero length
          */
         BusLine();
-
   
         /**
          * @brief Constructs a BusLine object for channel 0 using the specified NeoPixelBus strip.

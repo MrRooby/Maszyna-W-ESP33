@@ -1,33 +1,31 @@
 #include "w_server.h"
 
-W_Server::W_Server() : 
+W_Server::W_Server(DisplayManager *dispMan, HumanInterface *humInter) : 
     server(80), 
     ws("/ws"),
-    dispMan(350, 250, 60),
     local_IP(192, 168, 4, 1),
     gateway(192, 168, 4, 1),
-    subnet(255, 255, 255, 0)
+    subnet(255, 255, 255, 0) 
 {
-    this->buttons = new Buttons();
+    this->dispMan = dispMan;
+    this->humInter = humInter; 
+
+    this->initServer();
+    this->loading = true;
 }
 
 
 void W_Server::initServer()
 {
+    this->humInter->controlOnboardLED(TOP, true);
+    
     this->mountWebFiles();
-
     this->createAccessPoint();
     
     this->server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
-    
     this->createDNSServer();
-
     this->server.begin();
-    
     this->createWebSocketServer();
-
-    // Pinmode for status LED
-    pinMode(2, OUTPUT);
 }
 
 
@@ -93,31 +91,30 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
         boolValue = (intValue != 0);
     }
 
-
     // Display values
-    if (field == "acc" && this->dispMan.acc){
+    if (field == "acc" && this->dispMan->acc){
         Serial.printf("Partial update: acc = %d\n", intValue);
-        this->dispMan.acc->displayValue(intValue);
+        this->dispMan->acc->displayValue(intValue);
     }
-    else if (field == "a" && this->dispMan.a){
+    else if (field == "a" && this->dispMan->a){
         Serial.printf("Partial update: a = %d\n", intValue);
-        this->dispMan.a->displayValue(intValue);
+        this->dispMan->a->displayValue(intValue);
     }
-    else if (field == "s" && this->dispMan.s){
+    else if (field == "s" && this->dispMan->s){
         Serial.printf("Partial update: s = %d\n", intValue);
-        this->dispMan.s->displayValue(intValue);
+        this->dispMan->s->displayValue(intValue);
     }
-    else if (field == "c" && this->dispMan.c){
+    else if (field == "c" && this->dispMan->c){
         Serial.printf("Partial update: c = %d\n", intValue);
-        this->dispMan.c->displayValue(intValue);
+        this->dispMan->c->displayValue(intValue);
     }
-    else if (field == "i" && this->dispMan.i){
+    else if (field == "i" && this->dispMan->i){
         Serial.printf("Partial update: i = %d\n", intValue);
-        this->dispMan.i->displayValue(intValue);
+        this->dispMan->i->displayValue(intValue);
     }
 
     // PaO values
-    else if (field == "addrs" && doc["addrs"].is<JsonArray>() && doc["args"].is<JsonArray>() && doc["vals"].is<JsonArray>() && this->dispMan.pao) {
+    else if (field == "addrs" && doc["addrs"].is<JsonArray>() && doc["args"].is<JsonArray>() && doc["vals"].is<JsonArray>() && this->dispMan->pao) {
         JsonArray addrsArray = doc["addrs"].as<JsonArray>();
         JsonArray argsArray = doc["args"].as<JsonArray>();
         JsonArray valsArray = doc["vals"].as<JsonArray>();
@@ -126,91 +123,91 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
             int arg = argsArray[i];
             int val = valsArray[i];
             Serial.printf("Partial update: pao[%d] addr: %d, arg: %d, val: %d\n", (int)i, addr, arg, val);
-            this->dispMan.pao[i]->displayLine(addr, val, arg);
+            this->dispMan->pao[i]->displayLine(addr, val, arg);
         }
     }
 
     // Signal values
-    else if (field == "il" && this->dispMan.il){
+    else if (field == "il" && this->dispMan->il){
         Serial.printf("Partial update: il = %d\n", boolValue);
-        this->dispMan.il->turnOnLine(boolValue);
+        this->dispMan->il->turnOnLine(boolValue);
     }
-    else if (field == "wel" && this->dispMan.wel){
+    else if (field == "wel" && this->dispMan->wel){
         Serial.printf("Partial update: wel = %d\n", boolValue);
-        this->dispMan.wel->turnOnLine(boolValue);
+        this->dispMan->wel->turnOnLine(boolValue);
     }
-    else if (field == "wyl" && this->dispMan.wyl){
+    else if (field == "wyl" && this->dispMan->wyl){
         Serial.printf("Partial update: wyl = %d\n", boolValue);
-        this->dispMan.wyl->turnOnLine(boolValue);
+        this->dispMan->wyl->turnOnLine(boolValue);
     }
-    else if (field == "wyad" && this->dispMan.wyad1 && this->dispMan.wyad2){
+    else if (field == "wyad" && this->dispMan->wyad1 && this->dispMan->wyad2){
         Serial.printf("Partial update: wyad = %d\n", boolValue);
-        this->dispMan.wyad1->turnOnLine(boolValue);
-        this->dispMan.wyad2->turnOnLine(boolValue);
+        this->dispMan->wyad1->turnOnLine(boolValue);
+        this->dispMan->wyad2->turnOnLine(boolValue);
     }
-    else if (field == "wei" && this->dispMan.wei){
+    else if (field == "wei" && this->dispMan->wei){
         Serial.printf("Partial update: wei = %d\n", boolValue);
-        this->dispMan.wei->turnOnLine(boolValue);
+        this->dispMan->wei->turnOnLine(boolValue);
     }
-    else if (field == "weak" && this->dispMan.weak){
+    else if (field == "weak" && this->dispMan->weak){
         Serial.printf("Partial update: weak = %d\n", boolValue);
-        this->dispMan.weak->turnOnLine(boolValue);
+        this->dispMan->weak->turnOnLine(boolValue);
     }
-    else if (field == "dod" && this->dispMan.dod1 && this->dispMan.dod2){
+    else if (field == "dod" && this->dispMan->dod1 && this->dispMan->dod2){
         Serial.printf("Partial update: dod = %d\n", boolValue);
-        this->dispMan.dod1->turnOnLine(boolValue);
-        this->dispMan.dod2->turnOnLine(boolValue);
+        this->dispMan->dod1->turnOnLine(boolValue);
+        this->dispMan->dod2->turnOnLine(boolValue);
     }
-    else if (field == "ode" && this->dispMan.ode1 && this->dispMan.ode2){
+    else if (field == "ode" && this->dispMan->ode1 && this->dispMan->ode2){
         Serial.printf("Partial update: ode = %d\n", boolValue);
-        this->dispMan.ode1->turnOnLine(boolValue);
-        this->dispMan.ode2->turnOnLine(boolValue);
+        this->dispMan->ode1->turnOnLine(boolValue);
+        this->dispMan->ode2->turnOnLine(boolValue);
     }
-    else if (field == "przep" && this->dispMan.przep1 && this->dispMan.przep2){
+    else if (field == "przep" && this->dispMan->przep1 && this->dispMan->przep2){
         Serial.printf("Partial update: przep = %d\n", boolValue);
-        this->dispMan.przep1->turnOnLine(boolValue);
-        this->dispMan.przep2->turnOnLine(boolValue);
+        this->dispMan->przep1->turnOnLine(boolValue);
+        this->dispMan->przep2->turnOnLine(boolValue);
     }
-    else if (field == "weja" && this->dispMan.weja){
+    else if (field == "weja" && this->dispMan->weja){
         Serial.printf("Partial update: weja = %d\n", boolValue);
-        this->dispMan.weja->turnOnLine(boolValue);
+        this->dispMan->weja->turnOnLine(boolValue);
     }
-    else if (field == "wyak" && this->dispMan.wyak){
+    else if (field == "wyak" && this->dispMan->wyak){
         Serial.printf("Partial update: wyak = %d\n", boolValue);
-        this->dispMan.wyak->turnOnLine(boolValue);
+        this->dispMan->wyak->turnOnLine(boolValue);
     }
-    else if (field == "wea" && this->dispMan.wea){
+    else if (field == "wea" && this->dispMan->wea){
         Serial.printf("Partial update: wea = %d\n", boolValue);
-        this->dispMan.wea->turnOnLine(boolValue);
+        this->dispMan->wea->turnOnLine(boolValue);
     }
-    else if (field == "czyt" && this->dispMan.czyt1 && this->dispMan.czyt2){
+    else if (field == "czyt" && this->dispMan->czyt1 && this->dispMan->czyt2){
         Serial.printf("Partial update: czyt = %d\n", boolValue);
-        this->dispMan.czyt1->turnOnLine(boolValue);
-        this->dispMan.czyt2->turnOnLine(boolValue);
+        this->dispMan->czyt1->turnOnLine(boolValue);
+        this->dispMan->czyt2->turnOnLine(boolValue);
     }
-    else if (field == "pisz" && this->dispMan.pisz){
+    else if (field == "pisz" && this->dispMan->pisz){
         Serial.printf("Partial update: pisz = %d\n", boolValue);
-        this->dispMan.pisz->turnOnLine(boolValue);
+        this->dispMan->pisz->turnOnLine(boolValue);
     }
-    else if (field == "wes" && this->dispMan.wes){
+    else if (field == "wes" && this->dispMan->wes){
         Serial.printf("Partial update: wes = %d\n", boolValue);
-        this->dispMan.wes->turnOnLine(boolValue);
+        this->dispMan->wes->turnOnLine(boolValue);
     }
-    else if (field == "wys" && this->dispMan.wys){
+    else if (field == "wys" && this->dispMan->wys){
         Serial.printf("Partial update: wys = %d\n", boolValue);
-        this->dispMan.wys->turnOnLine(boolValue);
+        this->dispMan->wys->turnOnLine(boolValue);
     }
-    else if (field == "busA" && this->dispMan.busA){
+    else if (field == "busA" && this->dispMan->busA){
         Serial.printf("Partial update: busA= %d\n", boolValue);
-        this->dispMan.busA->turnOnLine(boolValue);
+        this->dispMan->busA->turnOnLine(boolValue);
     }
-    else if (field == "busS" && this->dispMan.busS){
+    else if (field == "busS" && this->dispMan->busS){
         Serial.printf("Partial update: busS= %d\n", boolValue);
-        this->dispMan.busS->turnOnLine(boolValue);
+        this->dispMan->busS->turnOnLine(boolValue);
     }
-    else if (field == "stop" && this->dispMan.stop){
+    else if (field == "stop" && this->dispMan->stop){
         Serial.printf("Partial update: stop= %d\n", boolValue);
-        this->dispMan.stop->turnOnLine(boolValue);
+        this->dispMan->stop->turnOnLine(boolValue);
     }
 }
 
@@ -220,37 +217,37 @@ void W_Server::processFullWebSocketData(StaticJsonDocument<512> doc)
     // Full data update
     JsonObject dataObj = doc["data"];
 
-    if (dataObj.containsKey("acc") && this->dispMan.acc){
+    if (dataObj.containsKey("acc") && this->dispMan->acc){
         int accValue = dataObj["acc"];
         Serial.print("Received ACC value: ");
         Serial.println(accValue);
-        this->dispMan.acc->displayValue(accValue);
+        this->dispMan->acc->displayValue(accValue);
     }
-    if (dataObj.containsKey("a") && this->dispMan.a){
+    if (dataObj.containsKey("a") && this->dispMan->a){
         int aValue = dataObj["a"];
         Serial.print("Received A value: ");
         Serial.println(aValue);
-        this->dispMan.a->displayValue(aValue);
+        this->dispMan->a->displayValue(aValue);
     }
-    if (dataObj.containsKey("s") && this->dispMan.s){
+    if (dataObj.containsKey("s") && this->dispMan->s){
         int sValue = dataObj["s"];
         Serial.print("Received S value: ");
         Serial.println(sValue);
-        this->dispMan.s->displayValue(sValue);
+        this->dispMan->s->displayValue(sValue);
     }
-    if (dataObj.containsKey("c") && this->dispMan.c){
+    if (dataObj.containsKey("c") && this->dispMan->c){
         int cValue = dataObj["c"];
         Serial.print("Received C value: ");
         Serial.println(cValue);
-        this->dispMan.c->displayValue(cValue);
+        this->dispMan->c->displayValue(cValue);
     }
-    if (dataObj.containsKey("i") && this->dispMan.i){
+    if (dataObj.containsKey("i") && this->dispMan->i){
         int iValue = dataObj["i"];
         Serial.print("Received I value: ");
         Serial.println(iValue);
-        this->dispMan.i->displayValue(iValue);
+        this->dispMan->i->displayValue(iValue);
     }
-    if (dataObj["addrs"].is<JsonArray>() && dataObj["args"].is<JsonArray>() && dataObj["vals"].is<JsonArray>() && this->dispMan.pao){
+    if (dataObj["addrs"].is<JsonArray>() && dataObj["args"].is<JsonArray>() && dataObj["vals"].is<JsonArray>() && this->dispMan->pao){
         JsonArray addrsArray = dataObj["addrs"].as<JsonArray>();
         JsonArray argsArray = dataObj["args"].as<JsonArray>();
         JsonArray valsArray = dataObj["vals"].as<JsonArray>();
@@ -260,7 +257,7 @@ void W_Server::processFullWebSocketData(StaticJsonDocument<512> doc)
             int val = valsArray[i];
             Serial.printf("addr: %d, arg: %d, val: %d\n", addr, arg, val);
 
-            this->dispMan.pao[i]->displayLine(addr, val, arg);
+            this->dispMan->pao[i]->displayLine(addr, val, arg);
         }
     }
 }
@@ -291,7 +288,6 @@ void W_Server::mountWebFiles()
 
 
 void W_Server::runningServerLED(){
-    // Blink inbuilt LED when server is running
     static unsigned long lastToggleTime = 0;
     static bool ledState = false;
 
@@ -299,13 +295,13 @@ void W_Server::runningServerLED(){
         unsigned long currentMillis = millis();
         if (currentMillis - lastToggleTime >= 500){
             ledState = !ledState;
-            digitalWrite(2, ledState ? HIGH : LOW);
+            humInter->controlOnboardLED(BOTTOM, ledState ? true : false);
             lastToggleTime = currentMillis;
         }
     }
     else{
         // Optionally, turn off LED if no stations are connected
-        digitalWrite(2, LOW);
+        humInter->controlOnboardLED(BOTTOM, false);
         ledState = false;
     }
 }
@@ -313,7 +309,7 @@ void W_Server::runningServerLED(){
 
 void W_Server::sendSignalValue()
 {
-    char* signal = buttons->activeSignal();
+    char* signal = humInter->getPressedButton();
     if(this->lastSignal != signal){
         if(signal != nullptr){
             this->sendDataToClient(signal);
@@ -363,11 +359,11 @@ void W_Server::createDNSServer()
     dnsServer.start(53, "*", local_IP);
     Serial.println("DNS Server started");
     
-    // Catch-all handler for captive portal
-    this->server.onNotFound([this](AsyncWebServerRequest *request){
-        String url = "http://" + this->local_IP.toString();
-        request->redirect(url);
-    });
+    // // Catch-all handler for captive portal
+    // this->server.onNotFound([this](AsyncWebServerRequest *request){
+    //     String url = "http://" + this->local_IP.toString();
+    //     request->redirect(url);
+    // });
 }
 
 
@@ -386,7 +382,33 @@ void W_Server::runServer()
 {
     dnsServer.processNextRequest();
 
-    // this->sendSignalValue();
+    static int lastClientCount = 0;
+    int currentClientCount = WiFi.softAPgetStationNum();
+    
+    // Check for client connection changes
+    if (currentClientCount > 0) {
+        // Someone connected - stop loading animation if still running
+        if (this->loading) {
+            this->dispMan->clearDisplay();
+            this->loading = false;
+            Serial.println("Client connected - stopping loading animation");
+        }
+        
+        this->sendSignalValue();
+    } else {
+        // No one connected
+        if (!this->loading && lastClientCount > 0) {
+            // All clients just disconnected - restart animation
+            this->loading = true;
+            Serial.println("All clients disconnected - restarting loading animation");
+        }
+        
+        if (this->loading) {
+            this->dispMan->loadingAnimation();
+        }
+    }
+    
+    lastClientCount = currentClientCount;
 
     // Blink inbuilt LED when server is running
     this->runningServerLED();

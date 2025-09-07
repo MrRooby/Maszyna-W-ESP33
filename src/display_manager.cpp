@@ -1,13 +1,11 @@
 #include "display_manager.h"
 
 
-DisplayManager::DisplayManager(int numLedsR, int numLedsL, int brightness) {
-    this->numLedsR = numLedsR;
-    this->numLedsL = numLedsL;
+DisplayManager::DisplayManager(int brightness) {
     this->brightness = brightness;
     
-    this->stripR = new NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>(numLedsR, LED_PORT_R);
-    this->stripL = new NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>(numLedsL, LED_PORT_L);
+    this->stripR = new NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>(LED_COUNT_R, LED_PORT_R);
+    this->stripL = new NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>(LED_COUNT_L, LED_PORT_L);
     
     this->stripR->Begin();
     this->stripL->Begin();
@@ -18,6 +16,46 @@ DisplayManager::DisplayManager(int numLedsR, int numLedsL, int brightness) {
     this->clearDisplay();
 }
 
+DisplayManager::~DisplayManager()
+{
+    delete this->a;
+    delete this->wea;
+    delete this->pao[0];
+    delete this->czyt1;
+    delete this->pisz;
+    delete this->czyt2;
+    delete this->pao[1];
+    delete this->pao[2];
+    delete this->pao[3];
+    delete this->s;
+    delete this->wes;
+    delete this->wys;
+    delete this->busA;
+
+    delete this->c;
+    delete this->wel;
+    delete this->wyl;
+    delete this->il;
+    delete this->wyad1;
+    delete this->stop;
+    delete this->wyad2;
+    delete this->i;
+    delete this->wei;
+    delete this->weja;
+    delete this->przep1;
+    delete this->ode1;
+    delete this->dod1;
+    delete this->weak;
+    delete this->dod2;
+    delete this->ode2;
+    delete this->przep2;
+    delete this->acc;
+    delete this->wyak;
+    delete this->busS;
+
+    delete this->stripR;
+    delete this->stripL;
+}
 
 void DisplayManager::initStripR() {
     // Initialize strips displays and signal lines
@@ -62,6 +100,17 @@ void DisplayManager::initStripL() {
     this->busS   = new BusLine(          this->stripL, 171, 78, RgbColor(255, 128, 0));
 }
 
+void DisplayManager::loadingAnimation(){
+    if (this->a) this->a->loadingAnimation();
+    if (this->s) this->s->loadingAnimation();
+    if (this->c) this->c->loadingAnimation();
+    if (this->i) this->i->loadingAnimation();
+    if (this->acc) this->acc->loadingAnimation();
+
+    for (int i = 0; i < 4; ++i) {
+        if (this->pao[i]) this->pao[i]->loadingAnimation();
+    }
+}
 
 void DisplayManager::clearDisplay() {
     for (int i = 0; i < this->numLedsL; i++) {

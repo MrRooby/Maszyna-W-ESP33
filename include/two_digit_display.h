@@ -48,6 +48,8 @@ class TwoDigitDisplay : protected LedElement {
          */
         void displayValue(int value);
 
+        void loadingAnimation();
+
         /**
          * @brief Change color of both digits
          * 

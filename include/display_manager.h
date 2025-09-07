@@ -4,12 +4,11 @@
 #include "signal_line.h"
 #include "bus_line.h"
 #include "pao_display_line.h"
+#include "pins.h"
 
-/**
- * @brief Pin definitions for LED strips
- */
-#define LED_PORT_R 19    ///< Right LED strip data pin
-#define LED_PORT_L 5     ///< Left  LED strip data pin
+
+#define LED_COUNT_R 341
+#define LED_COUNT_L 249
 
 /**
  * @brief Manages multiple LED displays and signal lines
@@ -100,8 +99,13 @@ public:
      * @param numLedsL Number of LEDs on the left LED strip.
      * @param brightness Brightness level for the LED strips.
      */
-    DisplayManager(int numLedsR, int numLedsL, int brightness);
+    DisplayManager(int brightness);
 
+
+    ~DisplayManager();
+
+
+    void loadingAnimation();
 
     /**
      * @brief Clear all LED displays

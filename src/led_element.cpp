@@ -13,9 +13,11 @@ LedElement::LedElement(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod> *st
 }
 
 void LedElement::changeColor(RgbColor color) {
-    this->color = color;
-    this->strip0->SetPixelColor(this->startIndex, this->color);
-    this->strip0->Show();
-    this->strip1->SetPixelColor(this->startIndex, this->color);
-    this->strip1->Show();
+    if(this->strip0 != nullptr && this->strip1 != nullptr){
+        this->color = color;
+        this->strip0->SetPixelColor(this->startIndex, this->color);
+        this->strip0->Show();
+        this->strip1->SetPixelColor(this->startIndex, this->color);
+        this->strip1->Show();
+    }
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <NeoPixelBus.h>
-// #include <FastLED.h>
 #include "led_element.h"
 
 /**
@@ -19,6 +18,10 @@ class Segment : public LedElement
 {
 private:
     int channel;
+    int timeBetweenAnimationFramesMilliseconds = 50;
+    
+    int currentFrame = 0;
+    unsigned long lastUpdate = 0;
 
 public:
     Segment();
@@ -53,4 +56,7 @@ public:
      * @param number number from 0 -> 9
      */
     void displayNumber(int number);
+
+    
+    void loadingAnimation();
 };

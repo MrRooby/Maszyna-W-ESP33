@@ -2,7 +2,7 @@
 #define BUTTONS_H
 
 #include <Arduino.h>
-#include <Adafruit_MPR121.h>
+// #include <Adafruit_MPR121.h>
 #include <utility>
 #include <string>
 #include <unordered_map>
@@ -21,7 +21,7 @@
  */
 class Buttons {
 private:
-    Adafruit_MPR121 muxL = Adafruit_MPR121();
+    // Adafruit_MPR121 muxL = Adafruit_MPR121();
     // Adafruit_MPR121 muxR = Adafruit_MPR121();
     
     std::pair<int, char*> signalsL[8] = {

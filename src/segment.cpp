@@ -46,19 +46,63 @@ void Segment::displayNumber(int number)
 
     RgbColor off(0, 0, 0);
 
-    for (int i = 0; i < 7; ++i)
-    {
-        if(this->channel == 0){
-            for (int i = 0; i < 7; ++i){
-                this->strip0->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
-            }
-            this->strip0->Show();
+    if (this->channel == 0){
+        for (int i = 0; i < 7; ++i){
+            this->strip0->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
         }
-        else if(this->channel == 1){
-            for (int i = 0; i < 7; ++i){
-                this->strip1->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
+        this->strip0->Show();
+    }
+    else if (this->channel == 1){
+        for (int i = 0; i < 7; ++i){
+            this->strip1->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
+        }
+        this->strip1->Show();
+    }
+}
+
+void Segment::loadingAnimation(){
+    static const bool loadingMap[6][7] = {
+        {false, true, false, false, false, false, false},        
+        {false, false, true, false, false, false, false},        
+        {false, false, false, true, false, false, false},        
+        {false, false, false, false, true, false, false},        
+        {false, false, false, false, false, true, false},        
+        {false, false, false, false, false, false, true},        
+    };
+    
+    RgbColor off(0, 0, 0);
+    unsigned long now = millis();
+
+    // Use instance variables instead of static
+    if (now - this->lastUpdate >= this->timeBetweenAnimationFramesMilliseconds) {
+        // Clear all segments first
+        for (int n = 0; n < 7; n++) {
+            if (this->channel == 0) {
+                this->strip0->SetPixelColor(this->startIndex + n, off);
+            } else if (this->channel == 1) {
+                this->strip1->SetPixelColor(this->startIndex + n, off);
             }
+        }
+
+        // Light up current frame segments
+        for (int n = 0; n < 7; n++) {
+            if (loadingMap[this->currentFrame][n]) {
+                if (this->channel == 0) {
+                    this->strip0->SetPixelColor(this->startIndex + n, this->color);
+                } else if (this->channel == 1) {
+                    this->strip1->SetPixelColor(this->startIndex + n, this->color);
+                }
+            }
+        }
+
+        // Show the changes
+        if (this->channel == 0) {
+            this->strip0->Show();
+        } else if (this->channel == 1) {
             this->strip1->Show();
         }
+
+        this->currentFrame = (this->currentFrame + 1) % 6;
+        this->lastUpdate = now;
     }
 }

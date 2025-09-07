@@ -49,6 +49,8 @@ class PaODisplayLine: protected LedElement {
          */
         void displayLine(int addr, int val, int arg);
 
+        void loadingAnimation();
+        
         /**
          * @brief Change color of all displays
          * 

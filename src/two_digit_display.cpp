@@ -30,6 +30,11 @@ void TwoDigitDisplay::displayValue(int value)
     this->display[1].displayNumber(ones);
 }
 
+void TwoDigitDisplay::loadingAnimation()
+{
+    this->display[0].loadingAnimation();
+    this->display[1].loadingAnimation();
+}
 
 void TwoDigitDisplay::changeColor(RgbColor color)
 {
