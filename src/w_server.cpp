@@ -357,13 +357,6 @@ void W_Server::createAccessPoint()
 void W_Server::createDNSServer()
 {
     dnsServer.start(53, "*", local_IP);
-    Serial.println("DNS Server started");
-    
-    // // Catch-all handler for captive portal
-    // this->server.onNotFound([this](AsyncWebServerRequest *request){
-    //     String url = "http://" + this->local_IP.toString();
-    //     request->redirect(url);
-    // });
 }
 
 
@@ -385,22 +378,16 @@ void W_Server::runServer()
     static int lastClientCount = 0;
     int currentClientCount = WiFi.softAPgetStationNum();
     
-    // Check for client connection changes
     if (currentClientCount > 0) {
-        // Someone connected - stop loading animation if still running
         if (this->loading) {
             this->dispMan->clearDisplay();
             this->loading = false;
-            Serial.println("Client connected - stopping loading animation");
         }
         
         this->sendSignalValue();
     } else {
-        // No one connected
         if (!this->loading && lastClientCount > 0) {
-            // All clients just disconnected - restart animation
             this->loading = true;
-            Serial.println("All clients disconnected - restarting loading animation");
         }
         
         if (this->loading) {
@@ -410,6 +397,5 @@ void W_Server::runServer()
     
     lastClientCount = currentClientCount;
 
-    // Blink inbuilt LED when server is running
     this->runningServerLED();
 }

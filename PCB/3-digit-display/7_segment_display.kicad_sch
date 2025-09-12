@@ -1,0 +1,9810 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "da2752f5-cfe5-4d6e-806a-fde82ded8bb6")
+	(paper "A4")
+	(lib_symbols
+		(symbol "Connector:Conn_01x03_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x03_Pin"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x03, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x03_Pin_1_1"
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 2.54) (xy 0.8636 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:C"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 0.762) (xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "LEDS:WS2815"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Value" "WS2815"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Footprint" "WS2815:LED-TRICOLOR-5050"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MF" "Normand"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Description_1" "Intelligent control LED integrated light source"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Package" "Package"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Price" "None"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MP" "WS2815"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Availability" "Not in stock"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(symbol "WS2815_0_0"
+				(rectangle
+					(start -7.62 -5.08)
+					(end 7.62 10.16)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin bidirectional line
+					(at -12.7 5.08 0)
+					(length 5.08)
+					(name "DIN"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -12.7 2.54 0)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -12.7 0 0)
+					(length 5.08)
+					(name "BIN"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 12.7 5.08 180)
+					(length 5.08)
+					(name "DO"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 12.7 2.54 180)
+					(length 5.08)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 12.7 0 180)
+					(length 5.08)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:+12V"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "+12V"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"+12V\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "+12V_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "+12V_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:GND"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(junction
+		(at 163.83 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "01184445-c770-43ae-a79e-27b72ebe2391")
+	)
+	(junction
+		(at 170.18 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "02baa170-f655-43c6-8d71-74faa0b6d661")
+	)
+	(junction
+		(at 133.35 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0519a711-ede3-4fa2-9a3f-6af138903717")
+	)
+	(junction
+		(at 125.73 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "05d29f4c-613d-45b4-a9db-7639b1d1777a")
+	)
+	(junction
+		(at 168.91 20.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "060d1e21-10f8-46e0-9586-05e3d85c1765")
+	)
+	(junction
+		(at 60.96 140.97)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0871e740-9b09-46f9-a6ca-34ad0ea48879")
+	)
+	(junction
+		(at 93.98 20.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "12524c9c-62b7-4279-8d22-493e24988e8a")
+	)
+	(junction
+		(at 62.23 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "12e58612-cc4e-4cdb-9171-0336f0d7f8e6")
+	)
+	(junction
+		(at 236.22 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "137a6ac4-1e1b-44ae-b72d-384d46163432")
+	)
+	(junction
+		(at 163.83 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "155956cc-3b85-4d2f-9be0-c2e6dc7853db")
+	)
+	(junction
+		(at 204.47 127)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1675f269-f611-484d-a625-ff5a95b63f53")
+	)
+	(junction
+		(at 21.59 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "167bd4be-b901-4c79-9016-93355a18e111")
+	)
+	(junction
+		(at 24.13 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1c775736-56d7-4829-8fdf-2c3964438909")
+	)
+	(junction
+		(at 58.42 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "20fc4a6e-17fc-43c9-a49c-5ad0d967a201")
+	)
+	(junction
+		(at 243.84 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "221e1097-6db1-4acb-b719-076d95465834")
+	)
+	(junction
+		(at 276.86 127)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2597d4c3-854b-4a9a-8770-9ef1c3993e4c")
+	)
+	(junction
+		(at 21.59 143.51)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2e12b6bf-afe8-4b6b-9add-34704178e066")
+	)
+	(junction
+		(at 97.79 140.97)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "338d86f2-fd13-4166-b0d5-25a1c032dee7")
+	)
+	(junction
+		(at 88.9 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3954ff29-3e53-4240-8539-4098b9699e89")
+	)
+	(junction
+		(at 52.07 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3a3d50c8-1fb3-43df-8359-f6127b9399f4")
+	)
+	(junction
+		(at 241.3 127)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3e35252a-efac-447d-8ad9-7b73acefbe2b")
+	)
+	(junction
+		(at 58.42 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "40ad310c-39ba-4292-b11c-afacfe6d3a38")
+	)
+	(junction
+		(at 276.86 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4be20d62-b91c-47ed-a505-c831ecf2bfcf")
+	)
+	(junction
+		(at 243.84 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4c3aee72-9118-486d-93fa-ecd600bb8eb6")
+	)
+	(junction
+		(at 21.59 40.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4e3bdba5-2aa9-456d-90fc-5e0a199f508e")
+	)
+	(junction
+		(at 209.55 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4ec38318-61d6-45d1-84e5-ee062d28eeb6")
+	)
+	(junction
+		(at 55.88 20.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "50c59d34-94e2-4501-8d41-eedda868b05f")
+	)
+	(junction
+		(at 170.18 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "50d8f710-7802-46f7-9ce4-b24f3d8bbcac")
+	)
+	(junction
+		(at 172.72 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "52b99ab0-c68f-4127-9f2a-02a3108024e5")
+	)
+	(junction
+		(at 135.89 140.97)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5594d3ef-ab01-4055-b079-7d936cbf9b38")
+	)
+	(junction
+		(at 209.55 140.97)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "576cc724-3e81-4562-9730-c8357bacee8e")
+	)
+	(junction
+		(at 207.01 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5873a4d9-0626-4397-b568-3e5902f492e4")
+	)
+	(junction
+		(at 21.59 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5b079f63-6204-4135-b410-8ccf46c40773")
+	)
+	(junction
+		(at 243.84 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5b2a0837-b076-470a-972e-631f2fd3e638")
+	)
+	(junction
+		(at 92.71 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5b9bb85b-fdaf-4b4c-8147-67b564626c82")
+	)
+	(junction
+		(at 125.73 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "612ca789-67be-4527-bfcd-2ccfcdefad58")
+	)
+	(junction
+		(at 133.35 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6bef6d8f-3b70-432f-9d35-aa5b68d08eac")
+	)
+	(junction
+		(at 88.9 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6da75c23-2ff4-483f-bfc6-a2a80a55ce56")
+	)
+	(junction
+		(at 132.08 20.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "72b846b5-3e24-4309-ac20-3ff77ac3342d")
+	)
+	(junction
+		(at 130.81 127)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7c39d554-6974-4df1-b662-6b9a76069a14")
+	)
+	(junction
+		(at 172.72 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7c6ea953-8d55-44f8-acb2-14f312cb5f7d")
+	)
+	(junction
+		(at 60.96 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7d48987a-4385-40f6-a3c2-4b9eba9fc5ff")
+	)
+	(junction
+		(at 88.9 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "806a8a87-ce51-4029-9dd0-26a956632c8e")
+	)
+	(junction
+		(at 93.98 127)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8123130f-397b-4d11-92ed-b9b0403ff76b")
+	)
+	(junction
+		(at 236.22 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "84f6a1a0-59b6-49e9-a997-98bac4572bea")
+	)
+	(junction
+		(at 58.42 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8562f46f-0d4d-4cb8-9375-687725220882")
+	)
+	(junction
+		(at 207.01 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "862da88f-c508-4bf1-9635-09126575a3a9")
+	)
+	(junction
+		(at 172.72 140.97)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "870988cd-7eb1-4e3f-a808-dc3bee7fde47")
+	)
+	(junction
+		(at 204.47 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8b594501-5029-4d4c-b43d-d712ab63812f")
+	)
+	(junction
+		(at 246.38 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8e8acbb7-bbc4-4a29-99a0-957505e7535d")
+	)
+	(junction
+		(at 236.22 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8f6437bb-b20a-4494-b6b2-1f84e4e8c9ab")
+	)
+	(junction
+		(at 130.81 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "91329cc5-8902-40a6-830c-27f773c15769")
+	)
+	(junction
+		(at 25.4 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9269ef38-ab5a-46be-a816-87c49cb04fe3")
+	)
+	(junction
+		(at 125.73 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "95362f2a-b84d-4f47-af47-71c8bbf332fc")
+	)
+	(junction
+		(at 276.86 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "977d18dd-20f5-4828-9fdf-ed456e7a53f4")
+	)
+	(junction
+		(at 21.59 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9af56e43-289c-44cb-8c28-86316bbbbba3")
+	)
+	(junction
+		(at 24.13 140.97)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9cf8228e-9e3e-463b-adf9-262e19256583")
+	)
+	(junction
+		(at 97.79 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9ed3c498-6b5a-47d1-a380-b8de48b6076c")
+	)
+	(junction
+		(at 170.18 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9f2a901a-1c2d-4575-b29e-c3865cd84a60")
+	)
+	(junction
+		(at 21.59 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a8c30c5f-3907-403f-a445-605005382bec")
+	)
+	(junction
+		(at 52.07 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ac8cf45c-b83a-43f0-851a-50013eb34001")
+	)
+	(junction
+		(at 95.25 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "acd1c553-e351-4f80-a443-af04cd0b476d")
+	)
+	(junction
+		(at 135.89 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ae0fefed-df86-4d44-9fcb-9c1a96305f3a")
+	)
+	(junction
+		(at 199.39 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b184facc-9d1e-4865-b87c-dd92d82d3384")
+	)
+	(junction
+		(at 52.07 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b386084a-bd07-4c3d-b977-af19a4f0cd70")
+	)
+	(junction
+		(at 205.74 20.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b43577db-60f2-4557-a0b9-f02270365557")
+	)
+	(junction
+		(at 163.83 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bb989b55-38c3-4080-85d3-3adb1da9ca04")
+	)
+	(junction
+		(at 135.89 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bc2413d4-dd24-4c1a-ad1f-9ebdd6cccab9")
+	)
+	(junction
+		(at 97.79 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c0132bf4-2c90-4fef-9d30-39c9d0bb833e")
+	)
+	(junction
+		(at 246.38 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c98b7cb3-5e0d-4d20-9bc0-991f6358e561")
+	)
+	(junction
+		(at 199.39 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ce62f8e5-efc4-473f-b259-523538d12ca3")
+	)
+	(junction
+		(at 167.64 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cec2d250-d781-4868-992d-af0d763f4255")
+	)
+	(junction
+		(at 209.55 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d2d9a4c8-6a37-479e-9130-29e947c90581")
+	)
+	(junction
+		(at 242.57 20.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e9311e91-e9ec-4028-a0fe-699689d61acf")
+	)
+	(junction
+		(at 242.57 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ee1dd857-702a-4a2f-b42e-3b32a8479044")
+	)
+	(junction
+		(at 207.01 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f04944f7-9a6e-4d83-8b9e-0ef63b8ecfed")
+	)
+	(junction
+		(at 95.25 57.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f6d9102b-f425-4d5e-9fa4-889abbb4dd6d")
+	)
+	(junction
+		(at 133.35 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fa000dd4-1df7-4f3d-bf89-e4c028fab0cd")
+	)
+	(junction
+		(at 95.25 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fa3cf1fb-7a33-4529-a9bf-93adeff92f34")
+	)
+	(junction
+		(at 199.39 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fcee544f-1e99-46f9-92f7-29d87a2c4ffb")
+	)
+	(junction
+		(at 276.86 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fe8955ab-e47b-46d3-8bd0-a7db3655eebc")
+	)
+	(junction
+		(at 167.64 127)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ffed4ad4-6ded-466d-a883-11f0d78b71b9")
+	)
+	(wire
+		(pts
+			(xy 88.9 104.14) (xy 88.9 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "036941a0-1e90-4e64-afe0-861a1b8a3ae5")
+	)
+	(wire
+		(pts
+			(xy 24.13 140.97) (xy 24.13 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "051bac55-f23c-41ea-9afd-884728045fd6")
+	)
+	(wire
+		(pts
+			(xy 135.89 140.97) (xy 138.43 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "05544f4b-2391-48b5-b327-49369e572d40")
+	)
+	(wire
+		(pts
+			(xy 209.55 49.53) (xy 209.55 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "05ce5f8e-9814-465e-a17f-d09300eea71d")
+	)
+	(wire
+		(pts
+			(xy 236.22 48.26) (xy 236.22 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "062e452d-c334-4f04-a374-2811924dbbfa")
+	)
+	(wire
+		(pts
+			(xy 138.43 96.52) (xy 134.62 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "063b3d5f-0398-4e16-98d3-3b73d89734ad")
+	)
+	(wire
+		(pts
+			(xy 205.74 20.32) (xy 242.57 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07244fdc-af42-4d51-946f-577717dd9378")
+	)
+	(wire
+		(pts
+			(xy 208.28 156.21) (xy 172.72 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07fe07a6-0879-47d5-92ea-a6cb8b3d24bc")
+	)
+	(wire
+		(pts
+			(xy 100.33 40.64) (xy 96.52 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08c0183f-82cc-476f-8c7c-183357bd926f")
+	)
+	(wire
+		(pts
+			(xy 275.59 35.56) (xy 273.05 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0946f0b0-21f4-483f-a461-dc7812824471")
+	)
+	(wire
+		(pts
+			(xy 209.55 91.44) (xy 210.82 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0982259b-2e0f-4f94-810b-1a2de0a3dd00")
+	)
+	(wire
+		(pts
+			(xy 25.4 22.86) (xy 25.4 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "09a51ae8-9e9a-4df3-8bca-3c04a1c75cff")
+	)
+	(wire
+		(pts
+			(xy 276.86 154.94) (xy 278.13 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0af45a71-f9d3-40e4-ad01-d24db650a3e3")
+	)
+	(wire
+		(pts
+			(xy 21.59 113.03) (xy 21.59 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0c843d78-1fae-4a70-add7-5e79f2eeca59")
+	)
+	(wire
+		(pts
+			(xy 236.22 91.44) (xy 246.38 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0d5c169e-01ab-4ae6-a674-0a39d188f895")
+	)
+	(wire
+		(pts
+			(xy 173.99 93.98) (xy 170.18 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0d8569fd-a490-48ee-9a0f-919f6df5e726")
+	)
+	(wire
+		(pts
+			(xy 245.11 156.21) (xy 209.55 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f1424ef-e736-4c42-a17a-73bbba224b79")
+	)
+	(wire
+		(pts
+			(xy 210.82 40.64) (xy 208.28 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f5b7062-d45b-4716-beee-4b1c92685658")
+	)
+	(wire
+		(pts
+			(xy 172.72 106.68) (xy 172.72 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0fa34e18-cb5b-4fd2-851d-252c1ee78cf4")
+	)
+	(wire
+		(pts
+			(xy 171.45 146.05) (xy 171.45 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1137ed38-9d1f-49aa-a051-56dd51988397")
+	)
+	(wire
+		(pts
+			(xy 92.71 74.93) (xy 57.15 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "116a097e-02f2-4947-8969-66942d6885b6")
+	)
+	(wire
+		(pts
+			(xy 88.9 93.98) (xy 92.71 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "117704e1-07bd-45ab-9aec-d91c6ffa0853")
+	)
+	(wire
+		(pts
+			(xy 96.52 156.21) (xy 60.96 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "13002ee7-cef2-4305-9aec-02f63fda09bd")
+	)
+	(wire
+		(pts
+			(xy 132.08 20.32) (xy 168.91 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1543a141-bf64-4d94-bc89-f8b081cf6313")
+	)
+	(wire
+		(pts
+			(xy 236.22 35.56) (xy 246.38 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "15a24e07-e897-4a71-8e4a-6b0eab09fe90")
+	)
+	(wire
+		(pts
+			(xy 171.45 49.53) (xy 135.89 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "160f02e0-cd31-4586-addf-383fe34dfd63")
+	)
+	(wire
+		(pts
+			(xy 173.99 143.51) (xy 170.18 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "172800bf-bff6-4f6e-81fb-c1c84a001edc")
+	)
+	(wire
+		(pts
+			(xy 58.42 38.1) (xy 58.42 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1a306cd3-6df1-4f04-9004-b66f4f509270")
+	)
+	(wire
+		(pts
+			(xy 26.67 93.98) (xy 21.59 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1aaeb4c3-d34c-42b6-bb06-adced4fea663")
+	)
+	(wire
+		(pts
+			(xy 273.05 143.51) (xy 276.86 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ac09003-dbb1-4189-9a60-dc55696f7f70")
+	)
+	(wire
+		(pts
+			(xy 207.01 113.03) (xy 236.22 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b40b7de-c403-4656-a8e8-1908faff836c")
+	)
+	(wire
+		(pts
+			(xy 241.3 127) (xy 276.86 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c09a2f8-6edc-4025-a853-1fcc49707f4c")
+	)
+	(wire
+		(pts
+			(xy 96.52 146.05) (xy 96.52 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1d83898e-553d-4844-8b7e-ffd9edf33d34")
+	)
+	(wire
+		(pts
+			(xy 59.69 96.52) (xy 59.69 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1d903438-10d4-495d-8dcb-a10a850695a1")
+	)
+	(wire
+		(pts
+			(xy 24.13 59.69) (xy 275.59 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1eab66d1-115d-45f3-a02b-d7537ffab265")
+	)
+	(wire
+		(pts
+			(xy 236.22 153.67) (xy 236.22 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1eca69c4-c1a0-4456-8cc3-ee5dd18d9dd7")
+	)
+	(wire
+		(pts
+			(xy 21.59 40.64) (xy 26.67 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f054f2d-6730-453f-9f37-720a9cbb83a8")
+	)
+	(wire
+		(pts
+			(xy 243.84 93.98) (xy 247.65 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f2c8a81-abbe-4cdc-b748-0bc5c71b3a1c")
+	)
+	(wire
+		(pts
+			(xy 171.45 106.68) (xy 135.89 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f7379d3-be93-41d2-aa8d-86046ebb8e42")
+	)
+	(wire
+		(pts
+			(xy 246.38 58.42) (xy 246.38 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "21cbb884-f926-4a42-b3dc-77d129996ed2")
+	)
+	(wire
+		(pts
+			(xy 24.13 156.21) (xy 24.13 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "221478b0-c5ba-470f-8b24-b53e1f1f79d9")
+	)
+	(wire
+		(pts
+			(xy 207.01 162.56) (xy 236.22 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "238cf2a9-9e0d-44cd-a5d9-d7fb68bbc8c5")
+	)
+	(wire
+		(pts
+			(xy 209.55 156.21) (xy 209.55 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2461e215-f7d8-4997-be2a-87c6d554c057")
+	)
+	(wire
+		(pts
+			(xy 134.62 40.64) (xy 134.62 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "250612c5-57d5-4bf8-a622-2001d529c7c3")
+	)
+	(wire
+		(pts
+			(xy 243.84 113.03) (xy 243.84 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "266b728b-d978-437e-98c9-235d0b69dbf2")
+	)
+	(wire
+		(pts
+			(xy 236.22 93.98) (xy 242.57 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "275dcd06-4bde-4001-8b29-ed865510a61a")
+	)
+	(wire
+		(pts
+			(xy 138.43 93.98) (xy 133.35 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2787a753-e26b-4748-ae6c-60151d9ec831")
+	)
+	(wire
+		(pts
+			(xy 134.62 49.53) (xy 97.79 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "27bba3ed-5a9e-4896-bda0-4807dcb78990")
+	)
+	(wire
+		(pts
+			(xy 199.39 38.1) (xy 205.74 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2842523e-7b14-4418-9fd6-34409a34a7ab")
+	)
+	(wire
+		(pts
+			(xy 59.69 40.64) (xy 59.69 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2879b0c4-7f66-44f9-bd29-7b2d5a047413")
+	)
+	(wire
+		(pts
+			(xy 95.25 57.15) (xy 125.73 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29410b86-2ac4-4c12-823a-98a49c992cd4")
+	)
+	(wire
+		(pts
+			(xy 21.59 162.56) (xy 52.07 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a34043a-f629-4ade-81ec-60982a106b52")
+	)
+	(wire
+		(pts
+			(xy 173.99 96.52) (xy 171.45 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a350fba-9221-4664-a75f-f7b954c2140f")
+	)
+	(wire
+		(pts
+			(xy 245.11 96.52) (xy 245.11 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2aed14d9-0e99-4fba-8f4e-4374f38eb834")
+	)
+	(wire
+		(pts
+			(xy 204.47 143.51) (xy 204.47 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2b96a53a-78ff-4085-9407-3ed781e71c32")
+	)
+	(wire
+		(pts
+			(xy 21.59 93.98) (xy 21.59 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2bfd3d5a-9257-4390-ad9f-cfdccba3f1e8")
+	)
+	(wire
+		(pts
+			(xy 63.5 38.1) (xy 58.42 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2cc2f667-88ac-40ef-9ee9-31ed5ec3dfac")
+	)
+	(wire
+		(pts
+			(xy 170.18 143.51) (xy 170.18 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2cf18636-49ef-4a86-9fee-4fd0904afca0")
+	)
+	(wire
+		(pts
+			(xy 245.11 146.05) (xy 245.11 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2d7c1249-0854-4596-b4f1-9ae5cd1fe36b")
+	)
+	(wire
+		(pts
+			(xy 245.11 106.68) (xy 209.55 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2daf23e6-c907-43cc-826d-d5cf93f5bd87")
+	)
+	(wire
+		(pts
+			(xy 24.13 115.57) (xy 275.59 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e6d3bfa-1092-4b8d-8721-da4feef9457d")
+	)
+	(wire
+		(pts
+			(xy 273.05 48.26) (xy 273.05 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ee56911-b03f-4844-a1c9-68cd1379cbbb")
+	)
+	(wire
+		(pts
+			(xy 167.64 143.51) (xy 167.64 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f542b54-4c5e-44af-9a6c-b1d16a647e42")
+	)
+	(wire
+		(pts
+			(xy 21.59 143.51) (xy 21.59 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f81faf9-f7c9-4620-a350-89aa97b6c8dd")
+	)
+	(wire
+		(pts
+			(xy 210.82 93.98) (xy 207.01 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30251f52-d027-4e57-bfc3-05d0735186db")
+	)
+	(wire
+		(pts
+			(xy 88.9 38.1) (xy 93.98 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30306845-0b06-4a3e-aa99-820fde031d50")
+	)
+	(wire
+		(pts
+			(xy 209.55 35.56) (xy 210.82 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30e5b932-ef67-4afd-a477-8223e7631cc8")
+	)
+	(wire
+		(pts
+			(xy 63.5 146.05) (xy 59.69 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "312cb311-536e-4ea0-a94f-c7ace06a91d3")
+	)
+	(wire
+		(pts
+			(xy 167.64 127) (xy 204.47 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "312d8603-a8a5-4420-9fa3-77a328e14dd8")
+	)
+	(wire
+		(pts
+			(xy 88.9 35.56) (xy 97.79 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3257365b-f5a7-4aac-99d7-9a26914de8ea")
+	)
+	(wire
+		(pts
+			(xy 88.9 153.67) (xy 88.9 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "33268b87-1437-47d4-8a78-62339dadbbfa")
+	)
+	(wire
+		(pts
+			(xy 96.52 96.52) (xy 96.52 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3449675f-bf78-48a2-bea5-d16847fd8b7f")
+	)
+	(wire
+		(pts
+			(xy 63.5 93.98) (xy 58.42 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "347a21e1-d2dd-4cc5-9524-657698d9362e")
+	)
+	(wire
+		(pts
+			(xy 25.4 35.56) (xy 26.67 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "35e6996c-1459-4fa8-a7fe-55a1875ebabd")
+	)
+	(wire
+		(pts
+			(xy 274.32 157.48) (xy 278.13 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "35ec06cc-33fe-4cd0-bbea-418b3fa7d2c2")
+	)
+	(wire
+		(pts
+			(xy 57.15 127) (xy 57.15 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "35f073c4-0cd1-457a-a24d-0ce0900628b6")
+	)
+	(wire
+		(pts
+			(xy 135.89 91.44) (xy 138.43 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "395877d2-254f-4717-b753-13a35dee8219")
+	)
+	(wire
+		(pts
+			(xy 134.62 96.52) (xy 134.62 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "395cbd89-d930-491c-adaa-d77ed9a06659")
+	)
+	(wire
+		(pts
+			(xy 24.13 91.44) (xy 24.13 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39b77fec-8c30-4504-92a6-6920bddf570a")
+	)
+	(wire
+		(pts
+			(xy 88.9 48.26) (xy 88.9 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39fe81f3-3e36-46f7-9803-b66059064464")
+	)
+	(wire
+		(pts
+			(xy 276.86 38.1) (xy 276.86 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a3f5c29-64b2-48ca-93e9-b955195471a0")
+	)
+	(wire
+		(pts
+			(xy 88.9 91.44) (xy 97.79 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3af97747-d9e4-4e31-9510-6ca6553a9725")
+	)
+	(wire
+		(pts
+			(xy 95.25 93.98) (xy 95.25 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c205784-607f-49b2-a80b-fe03fc4635bc")
+	)
+	(wire
+		(pts
+			(xy 58.42 93.98) (xy 58.42 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c58fa31-ff96-4f68-a706-905e9347efc8")
+	)
+	(wire
+		(pts
+			(xy 22.86 58.42) (xy 246.38 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c7fa4f5-f004-4073-b214-48328c36ebef")
+	)
+	(wire
+		(pts
+			(xy 63.5 96.52) (xy 59.69 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d068ad2-e089-4187-bbe7-d32c2ce53664")
+	)
+	(wire
+		(pts
+			(xy 100.33 93.98) (xy 95.25 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d93cdee-aa56-498d-9e8a-7243f83d99be")
+	)
+	(wire
+		(pts
+			(xy 125.73 57.15) (xy 133.35 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3debc810-c04d-4627-8a98-5b408e9a1e2c")
+	)
+	(wire
+		(pts
+			(xy 26.67 143.51) (xy 21.59 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3ebad9e4-48e9-48da-bf3f-048332f01308")
+	)
+	(wire
+		(pts
+			(xy 208.28 146.05) (xy 208.28 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3fab25d4-1c71-4472-a809-19ab19f729cb")
+	)
+	(wire
+		(pts
+			(xy 210.82 96.52) (xy 208.28 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4038fb0f-825a-441f-bf31-f53322d8ce85")
+	)
+	(wire
+		(pts
+			(xy 199.39 140.97) (xy 209.55 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "404517d7-88ca-4c17-a344-b855b5f2fdd8")
+	)
+	(wire
+		(pts
+			(xy 55.88 20.32) (xy 93.98 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40df87d1-24be-49b4-8cba-f461ec8f66c3")
+	)
+	(wire
+		(pts
+			(xy 273.05 113.03) (xy 243.84 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4175475b-969f-43bb-b4c9-83944c574e77")
+	)
+	(wire
+		(pts
+			(xy 172.72 91.44) (xy 173.99 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "437751b8-c88b-471d-b12e-ff2463f805a3")
+	)
+	(wire
+		(pts
+			(xy 92.71 93.98) (xy 92.71 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "44650206-d101-4499-b640-b4113e6711e5")
+	)
+	(wire
+		(pts
+			(xy 209.55 140.97) (xy 210.82 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "449e7e93-4831-441d-ac19-e4d05ae6980c")
+	)
+	(wire
+		(pts
+			(xy 96.52 40.64) (xy 96.52 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "455a6db2-2d8c-4b4d-bd06-966e0da50eb9")
+	)
+	(wire
+		(pts
+			(xy 163.83 93.98) (xy 167.64 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4599d23d-fad2-417a-8ce6-f0733567b94e")
+	)
+	(wire
+		(pts
+			(xy 167.64 74.93) (xy 130.81 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "47cb01a5-8393-47a0-9a2a-c3a918c5020a")
+	)
+	(wire
+		(pts
+			(xy 241.3 143.51) (xy 241.3 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4806541e-7fda-4f72-bf0e-73d9f8a6ffad")
+	)
+	(wire
+		(pts
+			(xy 25.4 49.53) (xy 25.4 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "488b3fea-b3dd-4cb5-bd13-deb910660593")
+	)
+	(wire
+		(pts
+			(xy 58.42 143.51) (xy 58.42 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48920d96-b066-4d3d-b2c9-16c589bfced2")
+	)
+	(wire
+		(pts
+			(xy 247.65 146.05) (xy 245.11 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a640205-2881-416b-81e3-a6ea8cacd4df")
+	)
+	(wire
+		(pts
+			(xy 236.22 140.97) (xy 247.65 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ca21f2f-55d0-4a62-95da-10f7f9438057")
+	)
+	(wire
+		(pts
+			(xy 52.07 48.26) (xy 52.07 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4e0d7285-6826-4dbb-9069-4c262a23ceb3")
+	)
+	(wire
+		(pts
+			(xy 26.67 38.1) (xy 21.59 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "502151cd-0a60-4a18-b914-21846af898b5")
+	)
+	(wire
+		(pts
+			(xy 276.86 74.93) (xy 242.57 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50983cf8-bba3-493e-a6b7-aa1172b712c2")
+	)
+	(wire
+		(pts
+			(xy 97.79 49.53) (xy 97.79 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50d5f147-9a12-4b72-9ac0-f003f0540f1f")
+	)
+	(wire
+		(pts
+			(xy 24.13 106.68) (xy 59.69 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50f8c32c-c0c3-45f7-afb2-5617d027e5e0")
+	)
+	(wire
+		(pts
+			(xy 171.45 156.21) (xy 135.89 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "51639486-3c91-41b3-824e-42bec5261772")
+	)
+	(wire
+		(pts
+			(xy 243.84 143.51) (xy 247.65 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "51e965a6-3cff-47c8-8656-7af986c17474")
+	)
+	(wire
+		(pts
+			(xy 130.81 127) (xy 167.64 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "558545d0-e12b-4d12-84ab-6498a03d0dba")
+	)
+	(wire
+		(pts
+			(xy 62.23 49.53) (xy 62.23 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "56afd397-4a13-4706-bdf5-e091f439b4cb")
+	)
+	(wire
+		(pts
+			(xy 246.38 91.44) (xy 247.65 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59531da8-9800-4e3f-a4c5-1c0c53e7457a")
+	)
+	(wire
+		(pts
+			(xy 21.59 26.67) (xy 21.59 25.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "596033ec-96a1-427e-88c9-c3d3a26b348a")
+	)
+	(wire
+		(pts
+			(xy 236.22 143.51) (xy 241.3 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59f2a990-8841-4b64-a5e4-c0c8dfcb4e8f")
+	)
+	(wire
+		(pts
+			(xy 100.33 146.05) (xy 96.52 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5aa14b3f-ee92-4b78-9370-a59465db37d8")
+	)
+	(wire
+		(pts
+			(xy 95.25 143.51) (xy 95.25 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5b57e123-c725-4e98-a112-59504851a2b9")
+	)
+	(wire
+		(pts
+			(xy 55.88 19.05) (xy 55.88 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5bc50a55-0808-421e-8c5f-b09f796bf7b8")
+	)
+	(wire
+		(pts
+			(xy 97.79 35.56) (xy 100.33 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5c3ec1c1-9e12-4641-b6e3-d8be11f3b219")
+	)
+	(wire
+		(pts
+			(xy 60.96 140.97) (xy 63.5 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e5a5e3e-98c9-4770-9ffb-e823c481446d")
+	)
+	(wire
+		(pts
+			(xy 168.91 20.32) (xy 205.74 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e5ab8f5-cf49-4901-83a1-9a55f2504834")
+	)
+	(wire
+		(pts
+			(xy 60.96 106.68) (xy 60.96 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e7e0f0d-7a92-4f51-b61a-6ae71ab999d4")
+	)
+	(wire
+		(pts
+			(xy 242.57 20.32) (xy 276.86 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5f172a03-633e-4e73-aa71-b2c3f79b3cf9")
+	)
+	(wire
+		(pts
+			(xy 88.9 57.15) (xy 95.25 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5f4a3a1a-e988-462b-9ddb-8286817dea3a")
+	)
+	(wire
+		(pts
+			(xy 59.69 146.05) (xy 59.69 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61d0e136-4cce-4eef-ad26-8f91da9fc9c4")
+	)
+	(wire
+		(pts
+			(xy 24.13 20.32) (xy 20.32 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "63b23377-1ce4-453a-bd1b-bdca052a9e26")
+	)
+	(wire
+		(pts
+			(xy 273.05 162.56) (xy 243.84 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "64c872b2-af84-4af8-a8fe-302138ce3d84")
+	)
+	(wire
+		(pts
+			(xy 163.83 153.67) (xy 163.83 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65568af7-2182-479d-a04a-2bb0fdf88476")
+	)
+	(wire
+		(pts
+			(xy 52.07 113.03) (xy 58.42 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65cc586d-d0f7-4c73-8652-6f4f619f96cb")
+	)
+	(wire
+		(pts
+			(xy 22.86 146.05) (xy 22.86 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66092a5d-3c0f-4f94-a65e-710ae0128cfa")
+	)
+	(wire
+		(pts
+			(xy 52.07 140.97) (xy 60.96 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66396ed9-c9f8-4850-a001-cd016e669725")
+	)
+	(wire
+		(pts
+			(xy 88.9 162.56) (xy 95.25 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68372882-493c-442f-927a-fec3b510a4f9")
+	)
+	(wire
+		(pts
+			(xy 52.07 38.1) (xy 55.88 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69583362-42ff-4cce-a2c1-09439605553f")
+	)
+	(wire
+		(pts
+			(xy 138.43 146.05) (xy 134.62 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a2088d1-0f5b-405f-8dc4-075905c162d2")
+	)
+	(wire
+		(pts
+			(xy 199.39 162.56) (xy 207.01 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6abf2dce-1c9e-46f4-be17-06d40b7e9600")
+	)
+	(wire
+		(pts
+			(xy 133.35 162.56) (xy 163.83 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6ae759fb-f973-4c1b-9532-6e60db6d144f")
+	)
+	(wire
+		(pts
+			(xy 210.82 38.1) (xy 207.01 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b00e067-7c84-4fcd-adf1-d2bc7ee81dc9")
+	)
+	(wire
+		(pts
+			(xy 125.73 35.56) (xy 135.89 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6bb04ee0-58b2-4e7d-a64f-2d654328bc92")
+	)
+	(wire
+		(pts
+			(xy 59.69 40.64) (xy 63.5 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6bc1f2f3-ff83-4277-8f9a-7d24e22f8c8a")
+	)
+	(wire
+		(pts
+			(xy 21.59 57.15) (xy 52.07 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6de3984b-7727-4e4f-914e-9ef6c7b9fb29")
+	)
+	(wire
+		(pts
+			(xy 236.22 57.15) (xy 243.84 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6eefef62-f3b2-40e8-9dcd-5d803fc64804")
+	)
+	(wire
+		(pts
+			(xy 55.88 20.32) (xy 55.88 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "701af654-96bc-4cdd-98e2-749022de6811")
+	)
+	(wire
+		(pts
+			(xy 170.18 57.15) (xy 199.39 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70240019-c0c5-489a-940d-d8df6b557a84")
+	)
+	(wire
+		(pts
+			(xy 93.98 38.1) (xy 93.98 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74d90322-1895-45cf-88b0-db0fecb21387")
+	)
+	(wire
+		(pts
+			(xy 207.01 143.51) (xy 207.01 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7675705c-0fab-4858-9900-fba304ac1b4d")
+	)
+	(wire
+		(pts
+			(xy 88.9 140.97) (xy 97.79 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7691ff80-e351-4093-9f7d-d8cb6d0d2e5d")
+	)
+	(wire
+		(pts
+			(xy 243.84 57.15) (xy 243.84 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "775e8eee-a3ea-4939-bbcf-5516da643cbb")
+	)
+	(wire
+		(pts
+			(xy 171.45 40.64) (xy 171.45 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "779498f2-bba3-4039-adae-425cfcb32598")
+	)
+	(wire
+		(pts
+			(xy 245.11 40.64) (xy 245.11 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "781e8613-fd3f-401a-bd99-c1f1ca8c86b9")
+	)
+	(wire
+		(pts
+			(xy 58.42 57.15) (xy 88.9 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "792a0695-e77d-4874-b91f-ed1e2bac4f48")
+	)
+	(wire
+		(pts
+			(xy 273.05 104.14) (xy 273.05 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7a094f0e-a6ae-4333-887e-5acdfc8b67ba")
+	)
+	(wire
+		(pts
+			(xy 125.73 104.14) (xy 125.73 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7a2f0eaf-909d-4714-b4cf-216d0f5c1298")
+	)
+	(wire
+		(pts
+			(xy 275.59 59.69) (xy 275.59 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ab4de32-9099-4699-9e97-da88895124af")
+	)
+	(wire
+		(pts
+			(xy 135.89 106.68) (xy 135.89 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ac101be-7356-4def-813f-010d98a4b1f8")
+	)
+	(wire
+		(pts
+			(xy 172.72 35.56) (xy 173.99 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b200446-9d00-49b6-99ee-93fea546c363")
+	)
+	(wire
+		(pts
+			(xy 97.79 156.21) (xy 97.79 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c03609e-cf96-427b-bcca-15a7734bd796")
+	)
+	(wire
+		(pts
+			(xy 97.79 91.44) (xy 100.33 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c0bf1d2-c5a6-4a1c-a39f-452b05c9cc12")
+	)
+	(wire
+		(pts
+			(xy 163.83 140.97) (xy 172.72 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c118b45-2b64-490f-b2a6-51e8fa6b724b")
+	)
+	(wire
+		(pts
+			(xy 199.39 104.14) (xy 199.39 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c9b0ff7-ac81-4809-a242-3ce8f7c90669")
+	)
+	(wire
+		(pts
+			(xy 163.83 57.15) (xy 170.18 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e8ee45b-364d-49b2-aefb-0e07dde396a1")
+	)
+	(wire
+		(pts
+			(xy 100.33 38.1) (xy 95.25 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ec9d8b1-6bae-4613-8917-b7af49f43a66")
+	)
+	(wire
+		(pts
+			(xy 20.32 22.86) (xy 25.4 22.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f1c9c98-1de2-44be-8da2-f14d7e5b423e")
+	)
+	(wire
+		(pts
+			(xy 52.07 143.51) (xy 57.15 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7fd5bfb0-ed66-4eb9-904f-6040253d4ff9")
+	)
+	(wire
+		(pts
+			(xy 163.83 48.26) (xy 163.83 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80426e42-b847-4af6-affd-950bbd38d00d")
+	)
+	(wire
+		(pts
+			(xy 276.86 160.02) (xy 276.86 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "808cdd0a-d124-47e2-8851-e5b63b772f91")
+	)
+	(wire
+		(pts
+			(xy 22.86 96.52) (xy 22.86 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80b75eab-fcf2-407b-b10d-8de96df489b1")
+	)
+	(wire
+		(pts
+			(xy 26.67 146.05) (xy 22.86 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8106e642-b26e-4177-88eb-6da0edc4dea1")
+	)
+	(wire
+		(pts
+			(xy 199.39 91.44) (xy 209.55 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "82313f9a-1b84-41be-a4ff-af374c70c43e")
+	)
+	(wire
+		(pts
+			(xy 21.59 162.56) (xy 21.59 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "833e35c0-214f-43b8-8f7b-84e2fd665f0e")
+	)
+	(wire
+		(pts
+			(xy 52.07 57.15) (xy 58.42 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "852380e6-55cb-4b83-930f-0109032f373d")
+	)
+	(wire
+		(pts
+			(xy 247.65 40.64) (xy 245.11 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8563e43e-0074-465c-a02f-5c96ca84d4f6")
+	)
+	(wire
+		(pts
+			(xy 95.25 113.03) (xy 125.73 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86a34de7-b45c-4ad5-9aac-db0bd1363333")
+	)
+	(wire
+		(pts
+			(xy 135.89 35.56) (xy 138.43 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87339c6d-bcb3-43b3-9841-cdf1b883476b")
+	)
+	(wire
+		(pts
+			(xy 163.83 35.56) (xy 172.72 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "875d20c9-2cfc-45fb-8649-e550ab9cdcfc")
+	)
+	(wire
+		(pts
+			(xy 207.01 38.1) (xy 207.01 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88870953-125a-4705-bc55-4ef4d190dc5f")
+	)
+	(wire
+		(pts
+			(xy 125.73 48.26) (xy 125.73 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88c8d0e7-73c0-45c0-8a3e-5c3dfdb1452a")
+	)
+	(wire
+		(pts
+			(xy 134.62 146.05) (xy 134.62 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "896f3088-53c1-4e18-a95d-22ea9512d800")
+	)
+	(wire
+		(pts
+			(xy 246.38 114.3) (xy 246.38 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8afd984c-0076-4dec-a500-5004bc40a306")
+	)
+	(wire
+		(pts
+			(xy 100.33 143.51) (xy 95.25 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8bc06dc3-28a3-4e4e-a9c0-9ea624945241")
+	)
+	(wire
+		(pts
+			(xy 171.45 96.52) (xy 171.45 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d102377-78d5-4f24-b873-6c54d0cc1242")
+	)
+	(wire
+		(pts
+			(xy 170.18 38.1) (xy 170.18 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d20a35b-83d9-4d4a-895f-b5d6fc7a72da")
+	)
+	(wire
+		(pts
+			(xy 274.32 140.97) (xy 274.32 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8da93199-8dc4-4876-8105-acc3998c93b1")
+	)
+	(wire
+		(pts
+			(xy 52.07 91.44) (xy 60.96 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8faf367f-ff3f-4b53-84db-a1222a7086ab")
+	)
+	(wire
+		(pts
+			(xy 247.65 96.52) (xy 245.11 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8fd2ef60-df6b-4ff5-a65d-5b385c03f8fc")
+	)
+	(wire
+		(pts
+			(xy 59.69 49.53) (xy 25.4 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "90931724-01d3-4da2-a917-c52c0a09611f")
+	)
+	(wire
+		(pts
+			(xy 21.59 25.4) (xy 20.32 25.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9096047f-0828-481b-a6bd-9bdf32f4c17d")
+	)
+	(wire
+		(pts
+			(xy 133.35 93.98) (xy 133.35 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91560267-c816-4ff8-932b-a6b1d37b0410")
+	)
+	(wire
+		(pts
+			(xy 52.07 93.98) (xy 57.15 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91d59e03-6c8b-471e-b826-98c63e745bc4")
+	)
+	(wire
+		(pts
+			(xy 24.13 140.97) (xy 26.67 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "922cfd04-9571-44cc-b61b-3196929e1327")
+	)
+	(wire
+		(pts
+			(xy 52.07 35.56) (xy 62.23 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92a135fe-d3e8-41ef-8242-3a32c80e913f")
+	)
+	(wire
+		(pts
+			(xy 208.28 106.68) (xy 172.72 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92e2a26d-745e-442e-8102-ddc7db5f92af")
+	)
+	(wire
+		(pts
+			(xy 24.13 91.44) (xy 26.67 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9461ea7f-4b77-4074-a49e-ea31d2f5295f")
+	)
+	(wire
+		(pts
+			(xy 130.81 74.93) (xy 92.71 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "95e7b426-a4e1-4f5f-9c15-724a4914a41a")
+	)
+	(wire
+		(pts
+			(xy 242.57 38.1) (xy 242.57 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "966b0df2-e6f2-4a96-a36d-0e52314bc507")
+	)
+	(wire
+		(pts
+			(xy 134.62 156.21) (xy 97.79 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9990a252-d1fa-4e55-abf5-fa935a5b3507")
+	)
+	(wire
+		(pts
+			(xy 163.83 104.14) (xy 163.83 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a204d71-3830-47e7-bf4e-a8579d269b26")
+	)
+	(wire
+		(pts
+			(xy 172.72 140.97) (xy 173.99 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b83461b-2ebe-4bb5-9b3c-de12d78e827e")
+	)
+	(wire
+		(pts
+			(xy 24.13 91.44) (xy 24.13 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9cbf2336-cba7-4fdc-9c77-f3f266c54cca")
+	)
+	(wire
+		(pts
+			(xy 276.86 149.86) (xy 276.86 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9ce7e95f-4767-40ee-8058-0e563aedfb31")
+	)
+	(wire
+		(pts
+			(xy 242.57 74.93) (xy 204.47 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9e19d513-1614-4ff0-b1d1-4bf3b2f561a3")
+	)
+	(wire
+		(pts
+			(xy 62.23 35.56) (xy 63.5 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9f593879-51b4-4200-ba8f-356baa776c2d")
+	)
+	(wire
+		(pts
+			(xy 163.83 38.1) (xy 168.91 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9faa04f3-2c5c-49d2-984a-83a1e09772ca")
+	)
+	(wire
+		(pts
+			(xy 21.59 38.1) (xy 21.59 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0536648-13ee-4e3a-b04a-eef0e5579bb9")
+	)
+	(wire
+		(pts
+			(xy 173.99 146.05) (xy 171.45 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0c93256-bcb3-498e-88b6-303304fa93f9")
+	)
+	(wire
+		(pts
+			(xy 100.33 96.52) (xy 96.52 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0d80343-df66-4edc-8e0a-700271cc90bd")
+	)
+	(wire
+		(pts
+			(xy 138.43 40.64) (xy 134.62 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a1709dc1-2a2e-4b92-86a3-4187db606e70")
+	)
+	(wire
+		(pts
+			(xy 199.39 93.98) (xy 204.47 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a1a16364-df9b-479c-a492-df04a80d1e1b")
+	)
+	(wire
+		(pts
+			(xy 125.73 140.97) (xy 135.89 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2eec185-0e09-4f8d-8c4b-92b2ab4a043c")
+	)
+	(wire
+		(pts
+			(xy 208.28 49.53) (xy 172.72 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a4e07554-01a1-437c-919c-7b5cde48533b")
+	)
+	(wire
+		(pts
+			(xy 208.28 96.52) (xy 208.28 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5c45b00-adba-4f08-9d66-fe9c99f6a373")
+	)
+	(wire
+		(pts
+			(xy 273.05 57.15) (xy 243.84 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5cd836f-71e2-40c8-b273-2c354438c4e5")
+	)
+	(wire
+		(pts
+			(xy 199.39 48.26) (xy 199.39 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5d3621e-ce12-4154-b06e-431956da168d")
+	)
+	(wire
+		(pts
+			(xy 96.52 106.68) (xy 60.96 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a604f51a-48c2-420d-852e-9f6c3e2ed453")
+	)
+	(wire
+		(pts
+			(xy 58.42 113.03) (xy 88.9 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a69aa39a-4ed4-4d6e-9e2a-121ebfff2149")
+	)
+	(wire
+		(pts
+			(xy 95.25 162.56) (xy 125.73 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a84b5d39-f272-403e-99d5-0afd46b69a8c")
+	)
+	(wire
+		(pts
+			(xy 125.73 91.44) (xy 135.89 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a9abcd83-5db2-48ad-adfb-705c8e003f1c")
+	)
+	(wire
+		(pts
+			(xy 199.39 113.03) (xy 207.01 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a9d27df1-8049-4dd6-8b54-8b42ffe7ce80")
+	)
+	(wire
+		(pts
+			(xy 96.52 49.53) (xy 62.23 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a9e3707f-a4f6-427c-8eaf-0f8553f321a6")
+	)
+	(wire
+		(pts
+			(xy 93.98 20.32) (xy 132.08 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac08f653-de7c-4522-9446-6006e48e1618")
+	)
+	(wire
+		(pts
+			(xy 236.22 38.1) (xy 242.57 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ad5f85ed-ec22-4b31-8e57-048bddc5a497")
+	)
+	(wire
+		(pts
+			(xy 167.64 93.98) (xy 167.64 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aeedb85e-a43d-42be-b30a-86d3c07ab370")
+	)
+	(wire
+		(pts
+			(xy 278.13 160.02) (xy 276.86 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b0f657fe-1995-4031-84fc-2f9addecf9e2")
+	)
+	(wire
+		(pts
+			(xy 52.07 153.67) (xy 52.07 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b111e817-1c05-4941-9d14-c698e3103cb9")
+	)
+	(wire
+		(pts
+			(xy 205.74 38.1) (xy 205.74 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b27925d0-9020-4b81-a361-e226fc0f223a")
+	)
+	(wire
+		(pts
+			(xy 236.22 113.03) (xy 243.84 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b387f9a0-817e-426d-bdd4-df58574b8204")
+	)
+	(wire
+		(pts
+			(xy 138.43 38.1) (xy 133.35 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b3a70632-8952-4e5e-8e13-76f1b927f9a9")
+	)
+	(wire
+		(pts
+			(xy 125.73 162.56) (xy 133.35 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6b89305-7e27-4be1-bafe-b952f4ece425")
+	)
+	(wire
+		(pts
+			(xy 21.59 113.03) (xy 52.07 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba2d0678-6dd4-4524-be15-9b3714de9882")
+	)
+	(wire
+		(pts
+			(xy 163.83 113.03) (xy 170.18 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba65c846-0acb-402f-9ddd-d51c862e340a")
+	)
+	(wire
+		(pts
+			(xy 276.86 20.32) (xy 276.86 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "baa7954b-eb3b-4352-a66b-5746d1d013e4")
+	)
+	(wire
+		(pts
+			(xy 236.22 104.14) (xy 236.22 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb2950f7-76c5-4e37-9622-e473d0c544e7")
+	)
+	(wire
+		(pts
+			(xy 273.05 93.98) (xy 276.86 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb397c4e-5a72-4eb4-833b-bb2fb49b63a6")
+	)
+	(wire
+		(pts
+			(xy 52.07 104.14) (xy 52.07 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc91c00e-815c-45b7-883f-d63e83d5b6dc")
+	)
+	(wire
+		(pts
+			(xy 210.82 143.51) (xy 207.01 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bdffacc7-5e2d-4915-a416-b0f00a4010ae")
+	)
+	(wire
+		(pts
+			(xy 209.55 106.68) (xy 209.55 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf6d3c8a-5780-402e-8c20-0676504ac60a")
+	)
+	(wire
+		(pts
+			(xy 125.73 38.1) (xy 132.08 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf6e0b65-3d40-4f8f-b52f-6394b67a2c49")
+	)
+	(wire
+		(pts
+			(xy 135.89 49.53) (xy 135.89 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0446c49-92bd-45a8-a3ba-243ac866dbb2")
+	)
+	(wire
+		(pts
+			(xy 168.91 38.1) (xy 168.91 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c09272a9-516d-4043-bb1a-4a1ef2fd3a10")
+	)
+	(wire
+		(pts
+			(xy 243.84 38.1) (xy 247.65 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1542a80-f542-4c47-aea6-f112617b93c2")
+	)
+	(wire
+		(pts
+			(xy 199.39 143.51) (xy 204.47 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c164c344-078a-429a-b3bf-12fcd6977ce4")
+	)
+	(wire
+		(pts
+			(xy 275.59 115.57) (xy 275.59 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2330012-9717-4970-9c4c-2af74a37b0cf")
+	)
+	(wire
+		(pts
+			(xy 57.15 127) (xy 93.98 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c242ee1e-2f9a-4431-9c04-ada87399593e")
+	)
+	(wire
+		(pts
+			(xy 88.9 143.51) (xy 93.98 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2bc1bd7-06cf-4452-84c0-e85146fab8ec")
+	)
+	(wire
+		(pts
+			(xy 60.96 91.44) (xy 63.5 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c439fdfb-0d55-4436-9b8c-1c347d08dfe8")
+	)
+	(wire
+		(pts
+			(xy 95.25 38.1) (xy 95.25 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c48d612b-53d9-459c-a8a2-6f22f1e97ac2")
+	)
+	(wire
+		(pts
+			(xy 199.39 35.56) (xy 209.55 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c52cd6f5-8c11-4b37-aca8-696c9b9f8490")
+	)
+	(wire
+		(pts
+			(xy 204.47 127) (xy 241.3 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c5544e13-c167-47eb-bcfa-b455a100878f")
+	)
+	(wire
+		(pts
+			(xy 172.72 156.21) (xy 172.72 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6c2daa9-8413-4056-807b-6f909323327b")
+	)
+	(wire
+		(pts
+			(xy 170.18 162.56) (xy 199.39 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6d81a2d-e3cd-4d39-b804-fe08103a9b04")
+	)
+	(wire
+		(pts
+			(xy 26.67 96.52) (xy 22.86 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c73f4067-8dc2-4af5-9df6-188d4c79c834")
+	)
+	(wire
+		(pts
+			(xy 204.47 74.93) (xy 167.64 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8863d27-2688-4ff2-92f5-14f50641567a")
+	)
+	(wire
+		(pts
+			(xy 133.35 57.15) (xy 163.83 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c9214547-3136-4231-86c0-1f5922b90427")
+	)
+	(wire
+		(pts
+			(xy 246.38 35.56) (xy 247.65 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c92f83a4-ca30-48ff-87cf-abbbcfe5dab2")
+	)
+	(wire
+		(pts
+			(xy 52.07 162.56) (xy 58.42 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc770551-71c4-458a-950a-dea49fdbf22d")
+	)
+	(wire
+		(pts
+			(xy 208.28 40.64) (xy 208.28 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce2198b7-3b04-4a06-9a31-aab5cd24ecf0")
+	)
+	(wire
+		(pts
+			(xy 173.99 38.1) (xy 170.18 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce9d46bd-85ad-4ee0-bf67-ed5e98b1ef29")
+	)
+	(wire
+		(pts
+			(xy 273.05 153.67) (xy 273.05 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cea47f0b-1e8e-47ed-9873-83cbfea294a5")
+	)
+	(wire
+		(pts
+			(xy 125.73 143.51) (xy 130.81 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ceb05830-fd47-4ced-b1d6-a6bd8fb33c64")
+	)
+	(wire
+		(pts
+			(xy 125.73 113.03) (xy 133.35 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cee07260-29bb-4943-8eed-968304c34cd6")
+	)
+	(wire
+		(pts
+			(xy 243.84 162.56) (xy 243.84 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d5f5e0a6-61a2-4303-b6f1-986f9e227744")
+	)
+	(wire
+		(pts
+			(xy 172.72 49.53) (xy 172.72 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d746a764-331b-4e5a-84d9-bab0a50aba2b")
+	)
+	(wire
+		(pts
+			(xy 199.39 153.67) (xy 199.39 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d74bb2f4-eab8-472c-8d19-799dc49e9318")
+	)
+	(wire
+		(pts
+			(xy 199.39 57.15) (xy 207.01 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d7d5efd9-c9e8-48d3-a5e7-1d7a9339ca1d")
+	)
+	(wire
+		(pts
+			(xy 88.9 113.03) (xy 95.25 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8d773a6-5613-47de-9f89-0c0dd9f7646f")
+	)
+	(wire
+		(pts
+			(xy 60.96 156.21) (xy 60.96 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d93d3a41-1ff5-4b60-80eb-1fd5ace7257e")
+	)
+	(wire
+		(pts
+			(xy 276.86 93.98) (xy 276.86 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d9b8eb08-7fa9-437d-8a60-a8d77ba13c5b")
+	)
+	(wire
+		(pts
+			(xy 133.35 113.03) (xy 163.83 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d9e32a0e-1f68-4599-b39f-3109535edf72")
+	)
+	(wire
+		(pts
+			(xy 276.86 127) (xy 276.86 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dac777ae-570c-483b-adce-e73c4e380b77")
+	)
+	(wire
+		(pts
+			(xy 173.99 40.64) (xy 171.45 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dbd7fb4e-12fb-4ecb-baa9-abe63c950c62")
+	)
+	(wire
+		(pts
+			(xy 170.18 93.98) (xy 170.18 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dbfb6dfd-a4ab-4636-bf48-5b031312a3bc")
+	)
+	(wire
+		(pts
+			(xy 133.35 38.1) (xy 133.35 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ddc1cd80-e3de-4a02-a583-45568e1a4dd4")
+	)
+	(wire
+		(pts
+			(xy 125.73 153.67) (xy 125.73 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "deb5e1a0-ca55-4c11-9ef5-95f7880cd121")
+	)
+	(wire
+		(pts
+			(xy 22.86 114.3) (xy 246.38 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dee4a42f-0751-45a1-93ec-7e76d473a04e")
+	)
+	(wire
+		(pts
+			(xy 21.59 57.15) (xy 21.59 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e15863b1-2009-4160-b71c-1064f9fee289")
+	)
+	(wire
+		(pts
+			(xy 24.13 19.05) (xy 24.13 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1c7553e-ced2-476a-b1b0-90ab001eb862")
+	)
+	(wire
+		(pts
+			(xy 125.73 93.98) (xy 130.81 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1dfac3f-42fc-4756-8a18-081d9415effd")
+	)
+	(wire
+		(pts
+			(xy 273.05 140.97) (xy 274.32 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e27a1e76-998f-4a42-b87f-53ea92a6e529")
+	)
+	(wire
+		(pts
+			(xy 133.35 143.51) (xy 133.35 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e33b3f21-2759-4ae4-92fc-df523abc82c8")
+	)
+	(wire
+		(pts
+			(xy 245.11 49.53) (xy 209.55 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e33caa60-fa86-43f6-abbb-d13fd886b970")
+	)
+	(wire
+		(pts
+			(xy 132.08 38.1) (xy 132.08 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3779069-6136-46ad-ba92-3490e0a1b9ad")
+	)
+	(wire
+		(pts
+			(xy 276.86 143.51) (xy 276.86 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e40399bb-035b-4007-b125-8449ee6c63dc")
+	)
+	(wire
+		(pts
+			(xy 130.81 93.98) (xy 130.81 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5404a05-fbbf-45e9-a63f-3cb690bebf5b")
+	)
+	(wire
+		(pts
+			(xy 93.98 143.51) (xy 93.98 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7c0079a-bd8d-4b7b-8027-09f07e2de017")
+	)
+	(wire
+		(pts
+			(xy 273.05 38.1) (xy 276.86 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e91ded6e-870c-4e5c-9a12-52cc273e6ef0")
+	)
+	(wire
+		(pts
+			(xy 207.01 57.15) (xy 236.22 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e9dcddaa-f8b8-4309-b81a-b617cb0004ca")
+	)
+	(wire
+		(pts
+			(xy 210.82 146.05) (xy 208.28 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ed55e1b2-65c0-4c5c-9049-394e00dd103e")
+	)
+	(wire
+		(pts
+			(xy 170.18 113.03) (xy 199.39 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "edd52672-d0f2-4f13-b7a1-ab89ff6f6952")
+	)
+	(wire
+		(pts
+			(xy 236.22 162.56) (xy 243.84 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee102fc7-535e-4747-bce2-07b1854f35ac")
+	)
+	(wire
+		(pts
+			(xy 134.62 106.68) (xy 97.79 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee8fb91e-d4aa-4b06-8109-66e31def07df")
+	)
+	(wire
+		(pts
+			(xy 163.83 91.44) (xy 172.72 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eeec0e1d-5463-435c-b24c-2786bd9f3e2d")
+	)
+	(wire
+		(pts
+			(xy 21.59 40.64) (xy 21.59 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f0ff5d61-e592-4d5b-bbe5-eeaa9ca75e15")
+	)
+	(wire
+		(pts
+			(xy 204.47 93.98) (xy 204.47 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f16f606e-4e7b-4e21-b659-2a6a2e4abe9a")
+	)
+	(wire
+		(pts
+			(xy 138.43 143.51) (xy 133.35 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f1b839af-1d4b-418e-b2a3-b755f5256aa6")
+	)
+	(wire
+		(pts
+			(xy 130.81 143.51) (xy 130.81 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f2eb5d97-8faa-4f3f-a64b-f195a42486bc")
+	)
+	(wire
+		(pts
+			(xy 93.98 127) (xy 130.81 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f31f3055-5937-4fa6-ace9-c87e7b660b01")
+	)
+	(wire
+		(pts
+			(xy 135.89 156.21) (xy 135.89 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f34f3b46-ab8f-47c1-8d4c-97af4d93b16d")
+	)
+	(wire
+		(pts
+			(xy 207.01 93.98) (xy 207.01 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f41db10f-6274-49d1-b7a9-5c537c360593")
+	)
+	(wire
+		(pts
+			(xy 58.42 162.56) (xy 88.9 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6634383-b62b-4b3d-86b9-bd84cdb488b4")
+	)
+	(wire
+		(pts
+			(xy 97.79 140.97) (xy 100.33 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f70466e9-2339-42fc-886d-0c645ecfa41d")
+	)
+	(wire
+		(pts
+			(xy 97.79 106.68) (xy 97.79 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f7e6cb2a-54cb-48f1-82f0-7f4722de2cb8")
+	)
+	(wire
+		(pts
+			(xy 63.5 143.51) (xy 58.42 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f9621166-f73e-46c0-9b4f-a31dbf290a26")
+	)
+	(wire
+		(pts
+			(xy 163.83 143.51) (xy 167.64 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fadd50ff-1c9c-4473-b072-a197cb757dae")
+	)
+	(wire
+		(pts
+			(xy 163.83 162.56) (xy 170.18 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb0ddafa-5211-493d-971d-5730ee03e164")
+	)
+	(wire
+		(pts
+			(xy 57.15 74.93) (xy 57.15 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fbcafe7d-d5b1-4740-aabd-419f058147e9")
+	)
+	(wire
+		(pts
+			(xy 242.57 93.98) (xy 242.57 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fcdaadbe-575e-4490-9010-8fcd99ce838c")
+	)
+	(wire
+		(pts
+			(xy 275.59 91.44) (xy 273.05 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fd285ed0-a7e1-4d49-a506-277b3879ae21")
+	)
+	(wire
+		(pts
+			(xy 59.69 156.21) (xy 24.13 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fdc00f67-39cd-448a-9bc8-d39172711daa")
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 151.13 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "016a55c6-ff7b-42c7-b17b-67f1f7cdb486")
+		(property "Reference" "U18"
+			(at 151.13 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 151.13 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 151.13 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "c94d6b59-6f28-4e8d-802b-abb24ad609ca")
+		)
+		(pin "4"
+			(uuid "d377d6b0-2ec4-431f-8149-82db3c7e7b20")
+		)
+		(pin "2"
+			(uuid "c8d32ee5-a610-430a-8b20-1af66b9edc7c")
+		)
+		(pin "6"
+			(uuid "3d48a523-a567-4c70-8c3f-373706f0be68")
+		)
+		(pin "3"
+			(uuid "b1b77286-4b12-4d13-8aa7-7b55e3913cde")
+		)
+		(pin "1"
+			(uuid "1fcc908f-b6a8-43de-8532-814a60dc286a")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 113.03 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "04962efd-916d-4b32-b358-9e5db32e0b28")
+		(property "Reference" "U3"
+			(at 113.03 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 113.03 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 113.03 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "2a77ec39-24c9-47ff-8dc8-f6f015a938e9")
+		)
+		(pin "4"
+			(uuid "d429b8dd-517b-49f5-b480-dc28b4ebcb9b")
+		)
+		(pin "2"
+			(uuid "90b35257-d5c0-4b17-ad1b-fcf0af357326")
+		)
+		(pin "6"
+			(uuid "e13458ef-248e-4043-92e5-7b2ef249c04a")
+		)
+		(pin "3"
+			(uuid "d2cefde5-bebf-48a8-9b5c-a73b440db2b1")
+		)
+		(pin "1"
+			(uuid "0a9cc7ec-72d5-466e-b148-e661dd0b805e")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 186.69 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "06997843-c725-4333-b665-d1fe933aee23")
+		(property "Reference" "U19"
+			(at 186.69 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 186.69 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 186.69 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "972cc6df-1354-4c2e-90ea-3247cd222b88")
+		)
+		(pin "4"
+			(uuid "09c10244-e57d-4ec9-b2ca-2cd5f091606b")
+		)
+		(pin "2"
+			(uuid "e45faa59-2ddd-4909-8841-624c16060cd9")
+		)
+		(pin "6"
+			(uuid "b1886155-3d70-4c57-adf9-f22234bfbdf9")
+		)
+		(pin "3"
+			(uuid "0e2abd44-c9ad-4761-95ad-6438a2e8b7b5")
+		)
+		(pin "1"
+			(uuid "691fa1ed-be0a-4c15-8b5e-0472ce51794f")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 199.39 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0ea45306-d15d-479e-9600-2275e08aa35b")
+		(property "Reference" "C19"
+			(at 203.2 148.5899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 203.2 151.1299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 200.3552 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 199.39 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 199.39 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "62b5cdb4-559a-42f3-8b8a-ae3157139483")
+		)
+		(pin "2"
+			(uuid "f689df36-4478-4b02-a8b2-24443ea87328")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 273.05 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1cddbfd6-d61d-43cc-bff3-e1037a0bb1ca")
+		(property "Reference" "C7"
+			(at 276.86 43.1799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 276.86 45.7199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 274.0152 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 273.05 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 273.05 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d515681d-0824-43ef-bc11-0435ea76e166")
+		)
+		(pin "2"
+			(uuid "ace6a936-7494-4c32-816b-8529c7204b8c")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 125.73 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2099f63b-7bf2-4398-8e81-f62f52e6a72e")
+		(property "Reference" "C3"
+			(at 129.54 43.1799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 129.54 45.7199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 126.6952 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 125.73 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 125.73 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7c3a1a3c-c8ac-4f7d-a365-d9edb39ada47")
+		)
+		(pin "2"
+			(uuid "1aeea4a2-1c33-4da7-a6cc-6b68470e57a3")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 223.52 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "24bc144f-4752-45b4-bd0c-dd76d337efba")
+		(property "Reference" "U6"
+			(at 223.52 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 223.52 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 223.52 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "a27f03c2-4710-44bd-9d1d-b6483ecf8d41")
+		)
+		(pin "4"
+			(uuid "eb520a90-44b3-431a-8f56-4e952244e29f")
+		)
+		(pin "2"
+			(uuid "7e7912b7-775d-4dbf-b11b-29603a54712f")
+		)
+		(pin "6"
+			(uuid "97cc57c1-636d-4edd-a931-373e88c57fb5")
+		)
+		(pin "3"
+			(uuid "6cb8896f-309f-4f64-a4fb-b2160eb932f0")
+		)
+		(pin "1"
+			(uuid "3b9fa996-393b-4302-b490-b470d658db8a")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 88.9 100.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2769f9ff-e184-46e8-a60c-a74d2c477923")
+		(property "Reference" "C9"
+			(at 92.71 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 92.71 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 89.8652 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 88.9 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 88.9 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "474d1083-e6c0-4120-a746-86fbc43309be")
+		)
+		(pin "2"
+			(uuid "b3d7d65b-ac2d-4030-9b11-ae8297cc2cc6")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 55.88 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "380a2121-c61a-4eda-8c8c-4a56a1da15a4")
+		(property "Reference" "#PWR03"
+			(at 55.88 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+12V"
+			(at 55.88 13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 55.88 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 55.88 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 55.88 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fd46d576-ca7f-416a-b952-173227df9e86")
+		)
+		(instances
+			(project ""
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "#PWR03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 39.37 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "38706d50-55de-43e0-ae99-da433468001e")
+		(property "Reference" "U8"
+			(at 39.37 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 39.37 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 39.37 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "a52e33df-aa6e-4fb2-879d-e737987b91f1")
+		)
+		(pin "4"
+			(uuid "416aeb22-4aaf-424a-8715-579b31af6043")
+		)
+		(pin "2"
+			(uuid "f9d29407-d203-49ea-9b74-bb82c8a795bd")
+		)
+		(pin "6"
+			(uuid "a14e58b0-744d-4f98-a79d-bc14dc4f07c0")
+		)
+		(pin "3"
+			(uuid "3398a016-70cc-461e-8d76-b1cd3b013f8a")
+		)
+		(pin "1"
+			(uuid "48ae7646-d4f6-4632-8aee-9dee1732d2a6")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 223.52 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3e5233a8-d631-4736-a241-d43f688cbb28")
+		(property "Reference" "U20"
+			(at 223.52 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 223.52 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 223.52 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "c3094f64-e025-4719-a364-529317d620c5")
+		)
+		(pin "4"
+			(uuid "8e8972e8-bb38-46f9-b2aa-2e537ad6d67a")
+		)
+		(pin "2"
+			(uuid "55bd90cc-db2d-496a-8dea-8c270e11db7e")
+		)
+		(pin "6"
+			(uuid "74e45d14-30dc-4c04-bbe6-c4cec5298b2d")
+		)
+		(pin "3"
+			(uuid "01e8d56e-d9ba-4c5b-a835-4b779352259e")
+		)
+		(pin "1"
+			(uuid "0f1b745b-9291-46bb-bc8c-d64c24164bec")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 113.03 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "40d43fa9-6db1-46a6-be18-c110bfb08820")
+		(property "Reference" "U17"
+			(at 113.03 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 113.03 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 113.03 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "5e7e49bd-f61b-4d85-b2af-5f0dcd386f1c")
+		)
+		(pin "4"
+			(uuid "3f860d44-ac2f-40c7-bc01-6df8f3b0a752")
+		)
+		(pin "2"
+			(uuid "9fac7a0f-e76f-41e7-b6e5-a8fec613b243")
+		)
+		(pin "6"
+			(uuid "f88149bb-d799-43af-a580-7dadcfa858b5")
+		)
+		(pin "3"
+			(uuid "c40e430d-9501-46e8-a75f-25f27f19f7ca")
+		)
+		(pin "1"
+			(uuid "b2651bfb-6fa2-4762-ae83-36648cf310d1")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 76.2 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "412c4009-5651-4e4d-8538-fcc0f473fff2")
+		(property "Reference" "U9"
+			(at 76.2 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 76.2 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 76.2 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "9be6e06d-6520-4b8c-9d34-9b3ea9c57231")
+		)
+		(pin "4"
+			(uuid "a8e9a35a-b8b6-42c2-a625-a5659436d62d")
+		)
+		(pin "2"
+			(uuid "0de2a9a7-9ce7-4e55-aa92-3cba28af6abc")
+		)
+		(pin "6"
+			(uuid "694a13f4-e8f1-44c5-9153-0ad696883e8b")
+		)
+		(pin "3"
+			(uuid "6a4a1ba1-3c89-4b48-a254-503e0c0ef327")
+		)
+		(pin "1"
+			(uuid "a952714a-ffb5-4d70-bbaa-26508f8b0c08")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 163.83 100.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "45016c2b-2ed6-481e-a51b-ef9cab062e8c")
+		(property "Reference" "C11"
+			(at 167.64 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 167.64 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 164.7952 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 163.83 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 163.83 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "81ece254-82b5-480a-8790-d7a7806c1868")
+		)
+		(pin "2"
+			(uuid "07ebb96b-bbf8-4378-a620-a5802a137a14")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 88.9 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4508ad96-027b-4a7b-bd1d-64986b6c51fb")
+		(property "Reference" "C16"
+			(at 92.71 148.5899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 92.71 151.1299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 89.8652 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 88.9 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 88.9 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d541d0ca-0369-4ccc-a579-44c14c588418")
+		)
+		(pin "2"
+			(uuid "f10f2370-d89e-4d92-9a32-07a9471a5aeb")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 88.9 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "493f6ac0-466f-4ae6-80a2-9812cdca765a")
+		(property "Reference" "C2"
+			(at 92.71 43.1799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 92.71 45.7199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 89.8652 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 88.9 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 88.9 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dfbb1d05-85a9-44ec-99e9-b8b2d50250bf")
+		)
+		(pin "2"
+			(uuid "ff53ebd5-e9af-497b-9ebc-df4f8d5c5739")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 186.69 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4bd35c6b-843d-455d-8e5f-98a3468b06e1")
+		(property "Reference" "U5"
+			(at 186.69 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 186.69 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 186.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "645db3b9-1f6e-4de6-bc84-ae95ef576677")
+		)
+		(pin "4"
+			(uuid "c3e08bee-eda7-4a28-8605-178c76a3d648")
+		)
+		(pin "2"
+			(uuid "2a27758c-35e6-4e84-97ad-34f135e16d5c")
+		)
+		(pin "6"
+			(uuid "7fbe760f-a350-472d-8be1-2c70fe36214b")
+		)
+		(pin "3"
+			(uuid "9af6f946-1a5e-4728-9b6c-5ad33723b118")
+		)
+		(pin "1"
+			(uuid "6d961448-2731-49dd-b65f-d5f9071ab48d")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 236.22 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4c2fbf47-9db3-4fa8-8f0b-99563209b0bf")
+		(property "Reference" "C20"
+			(at 231.902 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 240.03 151.1299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 237.1852 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 236.22 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 236.22 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "935088c7-66fb-4da9-b8c7-88a9132e53cb")
+		)
+		(pin "2"
+			(uuid "ebc8e7ea-741e-46c4-acdf-e041894549eb")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 21.59 167.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "55ab37e9-dc08-4dfa-b39c-086bbc8657b6")
+		(property "Reference" "#PWR04"
+			(at 21.59 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 21.59 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 21.59 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 21.59 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 21.59 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f3fb3f53-140f-403f-92cf-7e5bc1a3078c")
+		)
+		(instances
+			(project ""
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "#PWR04")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 186.69 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "55eacabc-7477-4242-8c6a-d8559905e75f")
+		(property "Reference" "U12"
+			(at 186.69 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 186.69 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 186.69 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "a33b4161-d31a-4260-b652-6056b4f722df")
+		)
+		(pin "4"
+			(uuid "66bb1ac1-e416-48be-baa5-d1caefa1860d")
+		)
+		(pin "2"
+			(uuid "a3384c46-a270-4751-8611-89cb8eda9576")
+		)
+		(pin "6"
+			(uuid "0857a751-9e3b-448f-aca4-3b819fed5019")
+		)
+		(pin "3"
+			(uuid "efff0f7c-e5ca-4dd7-b9b6-bbcad4646500")
+		)
+		(pin "1"
+			(uuid "42653e77-01ae-48a8-80e1-e692e44091a1")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 163.83 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "62efa40b-9cdd-45a1-80c8-ebe0311507ad")
+		(property "Reference" "C4"
+			(at 167.64 43.1799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 167.64 45.7199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 164.7952 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 163.83 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 163.83 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b007cf38-dabd-4d3c-8b1c-499fec8657be")
+		)
+		(pin "2"
+			(uuid "59390f9c-8492-4b1d-b180-a7b7711240bb")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 39.37 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "65c0cc06-42b4-424c-9d89-95733fc88984")
+		(property "Reference" "U15"
+			(at 39.37 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 39.37 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 39.37 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "f27525ce-ad66-4c9a-ae81-7831b6fe504e")
+		)
+		(pin "4"
+			(uuid "4130d158-2d5d-4f46-8055-51f4337846a0")
+		)
+		(pin "2"
+			(uuid "31a4c793-bc71-4886-8720-f4a95eaee66e")
+		)
+		(pin "6"
+			(uuid "6e18663a-d210-4f06-9c3d-9d4d47ffc2f7")
+		)
+		(pin "3"
+			(uuid "0c5d2d02-8d66-4463-9ed0-d0cd11a26972")
+		)
+		(pin "1"
+			(uuid "b631b6eb-03d9-4a62-9b21-5a807a3a0ebb")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 223.52 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "680e1cc9-469b-48a9-9515-d120512fff73")
+		(property "Reference" "U13"
+			(at 223.52 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 223.52 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 223.52 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "475b7802-f1d0-4290-b453-5ad6b5cef2b6")
+		)
+		(pin "4"
+			(uuid "92ab6ea7-a443-4ed2-bf3a-ffa122d18e3b")
+		)
+		(pin "2"
+			(uuid "246ff14f-f4f2-453e-9ce5-5a661874f3fc")
+		)
+		(pin "6"
+			(uuid "18777b79-3da3-482e-bfa3-a1dd1c7801f0")
+		)
+		(pin "3"
+			(uuid "1c0955e9-b573-4530-956c-779653c0d15a")
+		)
+		(pin "1"
+			(uuid "5642e622-3d9d-4131-b6e1-52ddc101213a")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 21.59 26.67 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6a5fef57-2d00-4a05-9b7b-90be2f96bbae")
+		(property "Reference" "#PWR05"
+			(at 21.59 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 21.59 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 21.59 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 21.59 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 21.59 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b350036f-f7d5-4c38-8151-0964eb8b47db")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "#PWR05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 276.86 162.56 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6bbedac4-9f8c-4b2d-9a40-49ea9a4be900")
+		(property "Reference" "#PWR06"
+			(at 276.86 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 276.86 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 276.86 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 276.86 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 276.86 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2bf36fbb-6e56-43af-830e-dafa32e60694")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "#PWR06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 125.73 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6e8a2b59-fb72-4ec6-9192-8a3a0c7db298")
+		(property "Reference" "C17"
+			(at 129.54 148.5899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 129.54 151.1299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 126.6952 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 125.73 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 125.73 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "550ca7ac-fbcc-4f4f-9ebe-4dba156cc82a")
+		)
+		(pin "2"
+			(uuid "555b70aa-3a9a-4473-acb7-0435e9862b1e")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 236.22 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6f5911e8-7b46-4a43-9243-7b30963a111f")
+		(property "Reference" "C6"
+			(at 240.03 43.1799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 240.03 45.7199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 237.1852 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 236.22 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 236.22 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e20f35cd-3652-456e-821d-a1e630fabc55")
+		)
+		(pin "2"
+			(uuid "01f3ce95-f52e-4bbd-b986-34c465431484")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 52.07 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "72583a75-73c4-4987-b235-886e45bb5e7b")
+		(property "Reference" "C15"
+			(at 55.88 148.5899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 55.88 151.1299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 53.0352 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 52.07 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 52.07 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7c98e17d-4f79-4246-bf1a-ea39f82e73d6")
+		)
+		(pin "2"
+			(uuid "adf1fd8a-c202-40ec-af69-12b8a7dd518b")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 273.05 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "77d9354f-be53-4761-906c-bc8aedb4be33")
+		(property "Reference" "C21"
+			(at 268.732 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 276.86 151.1299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 274.0152 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 273.05 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 273.05 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f56a7569-8266-463a-aa5a-b09d13eecbd9")
+		)
+		(pin "2"
+			(uuid "0afdf09d-a0a8-44b7-9815-fdee35078c68")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 52.07 100.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7a63a2cb-7f6a-4526-ae97-d523c7abefb2")
+		(property "Reference" "C8"
+			(at 55.88 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 55.88 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 53.0352 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 52.07 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 52.07 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "65d06d3c-cdb6-412a-b019-97cd006ccd03")
+		)
+		(pin "2"
+			(uuid "d42e356b-2e2c-4616-9185-11416074932b")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 199.39 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7ebe7772-ed92-4918-8b4f-45a16adb39cc")
+		(property "Reference" "C5"
+			(at 203.2 43.1799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 203.2 45.7199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 200.3552 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 199.39 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 199.39 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dfda39d8-3e40-4b83-9466-5e0497b8f885")
+		)
+		(pin "2"
+			(uuid "54f892e0-7557-4939-8194-5d15c72ea006")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 39.37 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8052529b-f692-4cbd-997c-b19840dc15d2")
+		(property "Reference" "U1"
+			(at 39.37 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 39.37 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 39.37 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "a2c58637-9bd3-4749-88ff-70c7ccedb834")
+		)
+		(pin "4"
+			(uuid "6fcb7733-1bf9-4a0c-80e9-44fce0994aa4")
+		)
+		(pin "2"
+			(uuid "a0b5f790-9ac5-48f5-bc21-e26c87b36c92")
+		)
+		(pin "6"
+			(uuid "78b7b324-1145-45b2-9c86-ac9a24b93367")
+		)
+		(pin "3"
+			(uuid "3f7d5273-18fa-42b5-ba00-08b608f01b38")
+		)
+		(pin "1"
+			(uuid "2dd6d1e2-2cc4-4419-9286-c90e9b966c88")
+		)
+		(instances
+			(project ""
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 273.05 100.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8ea7a95f-6213-4aed-8ddc-b91f2437ec94")
+		(property "Reference" "C14"
+			(at 276.86 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 276.86 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 274.0152 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 273.05 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 273.05 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3dccf8ad-9fae-431e-b8c9-63fe505dda9b")
+		)
+		(pin "2"
+			(uuid "c28da9dc-3f72-407a-aa8d-3c7962bf4c40")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 260.35 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "941dfd16-57f5-4269-950a-eccf998c3a75")
+		(property "Reference" "U7"
+			(at 260.35 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 260.35 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 260.35 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "6e520457-e909-4750-854b-cd8b577c34b7")
+		)
+		(pin "4"
+			(uuid "de8fab96-30e7-4558-ac0f-303389179bd4")
+		)
+		(pin "2"
+			(uuid "c982ea4a-0788-4d5a-bf0b-4a8566f7595e")
+		)
+		(pin "6"
+			(uuid "e2c6f2a1-c9b2-4fbd-b1bc-d2ce81115580")
+		)
+		(pin "3"
+			(uuid "a34ab6f0-86ca-4526-99c7-302088e3550e")
+		)
+		(pin "1"
+			(uuid "342902c1-b13b-4dc8-90ed-c6647d93aa26")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 113.03 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "947166e2-8e29-40d9-a3e2-cd90a88e94b0")
+		(property "Reference" "U10"
+			(at 113.03 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 113.03 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 113.03 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "b9e36270-2590-4313-999d-9cbf5a49ae97")
+		)
+		(pin "4"
+			(uuid "7d523f8c-9643-48af-8a4b-635b5c1d31f8")
+		)
+		(pin "2"
+			(uuid "f7950e3d-9f84-4e63-b55a-35fa35faedc4")
+		)
+		(pin "6"
+			(uuid "40fbc5f2-e213-45b3-a2c2-05efd99762c1")
+		)
+		(pin "3"
+			(uuid "105e0efa-2f6c-447b-90d7-5c420babdd5e")
+		)
+		(pin "1"
+			(uuid "cfa331ba-3449-434c-ad3b-2a742e41c098")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 76.2 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "94d8d222-0aaa-46d4-b696-d08fb830e50a")
+		(property "Reference" "U2"
+			(at 76.2 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 76.2 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 76.2 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "ca9d906b-c703-4739-a4ab-a8f51ea30791")
+		)
+		(pin "4"
+			(uuid "0b9b9512-28b9-44b8-b115-bf290c404a8c")
+		)
+		(pin "2"
+			(uuid "e5f609b8-9275-4bcc-a156-141a54457bb4")
+		)
+		(pin "6"
+			(uuid "63b4d895-f681-408c-abbb-9b00307df139")
+		)
+		(pin "3"
+			(uuid "89b4f2db-5e38-4b34-8fdd-4797b8a70a24")
+		)
+		(pin "1"
+			(uuid "81c01396-72d1-4399-b1c3-7ed290bbf441")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 276.86 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9a4d9a81-4c10-4092-95da-94b1ee4686aa")
+		(property "Reference" "#PWR02"
+			(at 276.86 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+12V"
+			(at 276.86 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 276.86 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 276.86 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 276.86 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "da3017a1-3fcf-49c3-9320-6318777a07ef")
+		)
+		(instances
+			(project ""
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "#PWR02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 260.35 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9f9483c0-2fec-4117-b743-433850c77232")
+		(property "Reference" "U21"
+			(at 260.35 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 260.35 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 260.35 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "1a5af548-7672-4bda-aa1f-20d43e846514")
+		)
+		(pin "4"
+			(uuid "6fef7d01-fb64-41a8-a7fa-26b2efcef25d")
+		)
+		(pin "2"
+			(uuid "ca1cd18e-8bfe-4015-9271-421294d28720")
+		)
+		(pin "6"
+			(uuid "61f989d8-d989-47ec-81cd-07ee77fbf5c6")
+		)
+		(pin "3"
+			(uuid "7a155617-bab2-45ce-9402-a53faa1720b8")
+		)
+		(pin "1"
+			(uuid "f1761847-dc4d-45e9-a404-4527d4e48557")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 199.39 100.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a7e1a54f-0b98-441a-a87a-3b40e7f02170")
+		(property "Reference" "C12"
+			(at 203.2 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 203.2 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 200.3552 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 199.39 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 199.39 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "14c05688-3027-47f1-8fed-1582238c780a")
+		)
+		(pin "2"
+			(uuid "828edb17-5eca-4e35-aa09-6cb249dbce62")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 76.2 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ab790121-bdd5-4ffe-bd21-4ce34056d7f8")
+		(property "Reference" "U16"
+			(at 76.2 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 76.2 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 76.2 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "9006e973-a02d-4726-8c14-6a968518e7b7")
+		)
+		(pin "4"
+			(uuid "e31db1c6-0d39-42cf-804b-272e95bff228")
+		)
+		(pin "2"
+			(uuid "842853e2-e2f3-4f72-8364-3af5045b2d25")
+		)
+		(pin "6"
+			(uuid "46cfd2e8-85f2-4dae-a194-d9a619029599")
+		)
+		(pin "3"
+			(uuid "45537033-a8e7-4867-8b00-333528d2cfd0")
+		)
+		(pin "1"
+			(uuid "45464c6d-c8a1-46f9-b258-e6605aa48364")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 151.13 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ac9b1d58-f86d-4b74-994a-52ff860e66f5")
+		(property "Reference" "U11"
+			(at 151.13 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 151.13 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 151.13 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "f30f481b-a82e-4460-bed1-81e0f154ab63")
+		)
+		(pin "4"
+			(uuid "94e98744-8b4e-4b3a-9657-8f743aa20dd3")
+		)
+		(pin "2"
+			(uuid "0549ff4c-6f61-4157-a84e-4ead279afb5a")
+		)
+		(pin "6"
+			(uuid "b391efa5-ec99-4362-8fc3-5ce2a6ddb532")
+		)
+		(pin "3"
+			(uuid "41f2e3ee-3c9a-4ed7-9758-8a9fe76cdb12")
+		)
+		(pin "1"
+			(uuid "35412bfc-32b9-4b7b-8a0f-282f9eb25029")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 163.83 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b486a718-fe22-44a3-9787-1db841d01d0c")
+		(property "Reference" "C18"
+			(at 167.64 148.5899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 167.64 151.1299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 164.7952 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 163.83 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 163.83 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b8203392-1f40-4ec9-8038-460f2ba8f023")
+		)
+		(pin "2"
+			(uuid "f5db6d47-7396-42c8-9cf4-3d38d7d200c2")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 52.07 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bd39a7be-5be3-4f68-88f3-cf4c1d14e7bd")
+		(property "Reference" "C1"
+			(at 55.88 43.1799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 55.88 45.7199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 53.0352 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 52.07 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 52.07 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c4d1de66-df2e-4a28-9d06-e5e905a99d57")
+		)
+		(pin "2"
+			(uuid "262ebda8-07e4-44aa-9576-1b4f0ffe838c")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x03_Pin")
+		(at 283.21 157.48 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cbee1ac5-f6dd-474d-a51e-514e42d44944")
+		(property "Reference" "JST_OUT1"
+			(at 299.466 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x03_Pin"
+			(at 298.704 161.036 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical"
+			(at 283.21 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 283.21 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 283.21 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "8fbe849c-38cc-4ba2-b9d6-0725fb9525ae")
+		)
+		(pin "2"
+			(uuid "265ea12f-229b-405a-b565-635157d498ce")
+		)
+		(pin "1"
+			(uuid "96357c7d-9dd2-4b41-a51c-0f7bf88caf87")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "JST_OUT1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 125.73 100.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d8a6ac4f-c1e9-4585-9f4b-ed2600e25599")
+		(property "Reference" "C10"
+			(at 129.54 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 129.54 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 126.6952 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 125.73 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 125.73 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e93872e7-81f2-483d-8044-d935e62b6f4c")
+		)
+		(pin "2"
+			(uuid "6d5f0e29-3979-4190-b61a-51569aa8d388")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 260.35 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e9853716-ba3b-4276-9917-edcc03538965")
+		(property "Reference" "U14"
+			(at 260.35 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 260.35 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 260.35 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "21b93eb7-382a-4739-8ff7-5003cf1e6415")
+		)
+		(pin "4"
+			(uuid "159677ac-e0f0-475a-a702-28d3a745181e")
+		)
+		(pin "2"
+			(uuid "cb83b3c9-1609-4fdb-95dc-a2aef03b6d21")
+		)
+		(pin "6"
+			(uuid "3a39cefb-7d4c-4e0e-b5f9-58a46ad11083")
+		)
+		(pin "3"
+			(uuid "701eda2b-ca3b-4d79-908e-c6d38cd83f71")
+		)
+		(pin "1"
+			(uuid "d86c6f44-a677-4beb-9ce8-069df2179482")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x03_Pin")
+		(at 15.24 22.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f5bc69e6-00a4-447d-81b0-8d1596637fca")
+		(property "Reference" "JST_IN1"
+			(at 15.875 15.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x03_Pin"
+			(at 15.875 17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical"
+			(at 15.24 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 15.24 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 15.24 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "85bf4c3f-4b72-4cc8-ac5b-210a55133220")
+		)
+		(pin "2"
+			(uuid "2985bd10-37db-476b-b034-4f1242ece052")
+		)
+		(pin "1"
+			(uuid "71c3dfa1-8939-4ec9-b9ad-f31f404491bb")
+		)
+		(instances
+			(project ""
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "JST_IN1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 24.13 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f91cb58d-0b13-4770-92a1-098d4f0a3067")
+		(property "Reference" "#PWR01"
+			(at 24.13 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+12V"
+			(at 24.13 13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 24.13 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 24.13 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 24.13 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3cba64bf-e390-40e8-889d-a7436167d41a")
+		)
+		(instances
+			(project ""
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LEDS:WS2815")
+		(at 151.13 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f9d2fb2b-2273-4906-b163-a2144d129db2")
+		(property "Reference" "U4"
+			(at 151.13 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WS2815"
+			(at 151.13 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LEDS:LED-TRICOLOR-5050"
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Normand"
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Intelligent control LED integrated light source"
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=snap"
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "WS2815"
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "Not in stock"
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/WS2815/Normand/view-part/?ref=eda"
+			(at 151.13 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "cf50e5ad-5cbc-4b3d-9dc1-4f5faaf138de")
+		)
+		(pin "4"
+			(uuid "8b11922a-e04f-403c-b637-26145d7b8537")
+		)
+		(pin "2"
+			(uuid "7c2da836-26a5-49ec-993b-a6280d6aaf84")
+		)
+		(pin "6"
+			(uuid "a2873c1c-9ade-4606-bec1-9b98f8dedbf0")
+		)
+		(pin "3"
+			(uuid "b8117de2-eddb-4b71-bf12-03325ef45c00")
+		)
+		(pin "1"
+			(uuid "b6222f5f-4037-4aa5-bd38-ac5246dbb44a")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "U4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 236.22 100.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fd4bf5f5-6291-4c3f-9c8c-ed752651b730")
+		(property "Reference" "C13"
+			(at 240.03 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 240.03 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 237.1852 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 236.22 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 236.22 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "aded2789-ff53-4700-bb1e-65537a047b34")
+		)
+		(pin "2"
+			(uuid "41848c20-eb5d-40ef-a332-8a49e161621a")
+		)
+		(instances
+			(project "7_segment_display"
+				(path "/da2752f5-cfe5-4d6e-806a-fde82ded8bb6"
+					(reference "C13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

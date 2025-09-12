@@ -90,6 +90,53 @@ bool HumanInterface::getWiFiSwitchState()
     return false;
 }
 
+bool HumanInterface::getEncoderButtonState()
+{
+    int state = digitalRead(ENC_SW);
+    
+    unsigned long now = millis();
+    if(state != lastEncButtonState){
+        lastDebounceTime = now;
+    }
+    
+    if(now - lastEncButtonDebounceTime >= debounceDelayMilliseconds){
+        if(state != debouncedEncButtonState){
+            debouncedEncButtonState = state;
+
+            return !state;
+        }
+    }
+}
+
+EncoderState HumanInterface::getEncoderState()
+{
+    int currentCLK = digitalRead(ENC_CLK);
+    int currentDT = digitalRead(ENC_DT);
+
+    unsigned long now = millis();
+
+    if (now - lastEncTime < debounceEncMilliseconds) {
+        return EncoderState::IDLE;
+    }
+
+    EncoderState returnState = EncoderState::IDLE;
+
+    if(lastCLK == HIGH && currentCLK == LOW){
+        if(currentDT == HIGH){
+            returnState = EncoderState::UP;
+            lastEncTime = now;
+        }
+        else{
+            returnState = EncoderState::DOWN;
+            lastEncTime = now;
+        }
+    }
+    lastCLK = currentCLK;
+
+
+    return returnState;
+}
+
 void HumanInterface::controlOnboardLED(OnboardLED led, bool choice)
 {
     if(choice){

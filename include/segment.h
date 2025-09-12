@@ -18,10 +18,8 @@ class Segment : public LedElement
 {
 private:
     int channel;
-    int timeBetweenAnimationFramesMilliseconds = 50;
-    
+
     int currentFrame = 0;
-    unsigned long lastUpdate = 0;
 
 public:
     Segment();

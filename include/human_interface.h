@@ -10,14 +10,29 @@ enum OnboardLED {
     BOTTOM
 };
 
+enum EncoderState {
+    IDLE = -1,
+    UP = 1,
+    DOWN = 2,
+};
+
+
 class HumanInterface
 {
 private:
     uint16_t lastButtonState = 0;
     uint16_t debouncedState = 0;
     unsigned long lastDebounceTime = 0;
-    const unsigned long debounceDelayMilliseconds = 20;
+    const unsigned int debounceDelayMilliseconds = 20;
 
+    int lastEncButtonState = 0;
+    int debouncedEncButtonState = 0;
+    unsigned long lastEncButtonDebounceTime = 0;
+
+    const unsigned int debounceEncMilliseconds = 15;
+    unsigned long lastEncTime;
+    int lastCLK = 0;
+    
     const std::map<int, char*> buttons = {
         { 0,  "ODE" },
         { 1,  "WES" },
@@ -52,6 +67,10 @@ public:
     char* getPressedButton();
 
     bool getWiFiSwitchState();
+
+    bool getEncoderButtonState();
+
+    EncoderState getEncoderState();
 
     void controlOnboardLED(OnboardLED led, bool choice);
     

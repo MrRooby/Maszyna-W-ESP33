@@ -71,38 +71,21 @@ void Segment::loadingAnimation(){
     };
     
     RgbColor off(0, 0, 0);
-    unsigned long now = millis();
 
-    // Use instance variables instead of static
-    if (now - this->lastUpdate >= this->timeBetweenAnimationFramesMilliseconds) {
-        // Clear all segments first
-        for (int n = 0; n < 7; n++) {
-            if (this->channel == 0) {
-                this->strip0->SetPixelColor(this->startIndex + n, off);
-            } else if (this->channel == 1) {
-                this->strip1->SetPixelColor(this->startIndex + n, off);
-            }
+    for (int n = 0; n < 7; n++){
+        if (this->channel == 0)
+            this->strip0->SetPixelColor(this->startIndex + n, off);
+        else if (this->channel == 1)
+            this->strip1->SetPixelColor(this->startIndex + n, off);}
+
+    for (int n = 0; n < 7; n++){
+        if (loadingMap[this->currentFrame][n]){
+            if (this->channel == 0)
+                this->strip0->SetPixelColor(this->startIndex + n, this->color);
+            else if (this->channel == 1)
+                this->strip1->SetPixelColor(this->startIndex + n, this->color);
         }
-
-        // Light up current frame segments
-        for (int n = 0; n < 7; n++) {
-            if (loadingMap[this->currentFrame][n]) {
-                if (this->channel == 0) {
-                    this->strip0->SetPixelColor(this->startIndex + n, this->color);
-                } else if (this->channel == 1) {
-                    this->strip1->SetPixelColor(this->startIndex + n, this->color);
-                }
-            }
-        }
-
-        // Show the changes
-        if (this->channel == 0) {
-            this->strip0->Show();
-        } else if (this->channel == 1) {
-            this->strip1->Show();
-        }
-
-        this->currentFrame = (this->currentFrame + 1) % 6;
-        this->lastUpdate = now;
     }
+
+    this->currentFrame = (this->currentFrame + 1) % 6;
 }

@@ -101,14 +101,22 @@ void DisplayManager::initStripL() {
 }
 
 void DisplayManager::loadingAnimation(){
-    if (this->a) this->a->loadingAnimation();
-    if (this->s) this->s->loadingAnimation();
-    if (this->c) this->c->loadingAnimation();
-    if (this->i) this->i->loadingAnimation();
-    if (this->acc) this->acc->loadingAnimation();
+    unsigned long now = millis();
 
-    for (int i = 0; i < 4; ++i) {
-        if (this->pao[i]) this->pao[i]->loadingAnimation();
+    if(now - this->lastUpdate >= this->timeBetweenAnimationFramesMilliseconds){
+        if (this->a) this->a->loadingAnimation();
+        if (this->s) this->s->loadingAnimation();
+        if (this->c) this->c->loadingAnimation();
+        if (this->i) this->i->loadingAnimation();
+        if (this->acc) this->acc->loadingAnimation();
+    
+        for (int i = 0; i < 4; ++i) {
+            if (this->pao[i]) this->pao[i]->loadingAnimation();
+        }
+    
+        this->stripL->Show();
+        this->stripR->Show();
+        this->lastUpdate = now; 
     }
 }
 

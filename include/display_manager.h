@@ -27,6 +27,10 @@ private:
     int numLedsR;          ///< Number of LEDs in right strip
     int numLedsL;          ///< Number of LEDs in left strip
     int brightness = 60;   ///< LED brightness level (0-255)
+    
+    int timeBetweenAnimationFramesMilliseconds = 200;
+    unsigned long lastUpdate = 0;
+    
 
     /**
      * @brief Initialize the right LED strip
