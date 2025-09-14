@@ -5,27 +5,20 @@
 #include <unordered_map>
 #include <vector>
 
-enum Display{
-    NONE,
-    L,
-    I,
-    AK,
-    A,
-    S
-};
-
 class W_Local
 {
     private:
         DisplayManager *dispMan = nullptr;
         HumanInterface *humInter = nullptr;
 
-        uint16_t L = 0;
-        uint16_t I = 0;
-        uint16_t AK = 0;
-        uint16_t A = 0;
-        uint16_t S = 0;
-        uint16_t JAML = 0;
+        std::map<std::string, uint16_t> values = {
+            {"L", 0},
+            {"I", 0},
+            {"AK", 0},
+            {"A", 0},
+            {"S", 0},
+            {"JAML", 0},
+        };
 
         std::pair<uint16_t, uint16_t> PaO[4] = {
             {0, 0},
@@ -34,24 +27,23 @@ class W_Local
             {0, 0}};
 
         std::unordered_map<std::string, bool> signal = {
-            {"il",    false},
-            {"wel",   false},
-            {"wyl",   false},
-            {"wyad",  false},
-            {"wei",   false},
-            {"weak",  false},
-            {"dod",   false},
-            {"ode",   false},
-            {"przep", false},
-            {"wyak",  false},
-            {"weja",  false},
-            {"wea",   false},
-            {"czyt",  false},
-            {"pisz",  false},
-            {"wes",   false},
-            {"wys",   false}};
-
-        
+            {"IL",    false},
+            {"WEL",   false},
+            {"WYL",   false},
+            {"WYAD",  false},
+            {"WEI",   false},
+            {"WEAK",  false},
+            {"DOD",   false},
+            {"ODE",   false},
+            {"PRZEP", false},
+            {"WYAK",  false},
+            {"WEJA",  false},
+            {"WEA",   false},
+            {"CZYT",  false},
+            {"PISZ",  false},
+            {"WES",   false},
+            {"WYS",   false}};
+ 
         std::unordered_map<std::string, uint16_t> bus = {
             {"A", 0},
             {"S", 0}};
@@ -62,7 +54,10 @@ class W_Local
     
         static const std::unordered_map<std::string, CommandFunction> signalMap;
     
-        Display selectedDisplay = NONE;
+        bool insertModeEnabled = true;
+        std::string selectedValue = "L";
+
+        char* lastPressedButton = nullptr;
 
         /// @brief Inserts value from one element to another
         ///        capping its value to 999
@@ -104,15 +99,17 @@ class W_Local
 
         void takt();
         
-        void display();
+        void refreshDisplay();
 
         void readButtonInputs();
+
+        void insertMode(uint16_t &value);
 
     public:
         W_Local(DisplayManager *dispMan, HumanInterface *humInter);
        
         ~W_Local();
-        
+
         void runLocal();
 };
 

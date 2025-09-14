@@ -1,17 +1,19 @@
 #include <Arduino.h>
+
 #include "w_server.h"
 #include "display_manager.h"
 #include "human_interface.h"
 #include "w_local.h"
 
-// TODO:  zmiana trybów działa aczkolwiek resetuje się przy zmiane trybu na lokalny
-DisplayManager *dispMan = nullptr;
-HumanInterface *humInter = nullptr;
-W_Server *webMachine = nullptr;
-W_Local *localMachine = nullptr;
 
-bool lastWiFiState = false;
+DisplayManager *dispMan      = nullptr;
+HumanInterface *humInter     = nullptr;
+W_Server       *webMachine   = nullptr;
+W_Local        *localMachine = nullptr;
+
+bool lastWiFiState   = false;
 bool modeInitialized = false;
+
 
 void initializeMode() {
     bool currentWiFiState = humInter->WiFiEnabled();
@@ -45,12 +47,12 @@ void initializeMode() {
     // Initialize new mode if needed
     if (currentWiFiState && webMachine == nullptr) {
         Serial.println("Starting WiFi Server mode...");
-        dispMan->changeDisplayColor("0000FF", "0000FF", "0000FF");
+        dispMan->changeDisplayColor("110000", "000011", "000011");
         webMachine = new W_Server(dispMan, humInter);
     }
     else if (!currentWiFiState && localMachine == nullptr) {
         Serial.println("Starting Local mode...");
-        dispMan->changeDisplayColor("", "", "");
+        dispMan->changeDisplayColor("000900", "090000", "010101");
         localMachine = new W_Local(dispMan, humInter);
     }
     
@@ -58,12 +60,12 @@ void initializeMode() {
     modeInitialized = true;
 }
 
+
 void setup(){
     delay(2000);
     Serial.begin(115200);
-    Serial.println("Serial initialized");
     
-    dispMan = new DisplayManager("sex", "BUS", "00FF00");
+    dispMan = new DisplayManager();
     humInter = new HumanInterface();
 
     humInter->controlBacklightLED(30);

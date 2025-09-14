@@ -11,7 +11,7 @@
  * @author Bartosz Faruga / MrRooby
  * @date 2025
  */
-class SignalLine : protected LedElement {
+class SignalLine : public LedElement {
     private:
         int length = 0;     ///< Number of LEDs in the signal line
         int channel;

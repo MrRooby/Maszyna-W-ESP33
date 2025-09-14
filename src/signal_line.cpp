@@ -25,14 +25,10 @@ void SignalLine::turnOnLine(bool choice) {
         for (int i = 0; i < this->length; i++){
             this->strip0->SetPixelColor(this->startIndex + i, choice ? this->color : off);
         }
-
-        this->strip0->Show();
     }
     else if(this->channel == 1){
         for (int i = 0; i < this->length; i++){
             this->strip1->SetPixelColor(this->startIndex + i, choice ? this->color : off);
         }
-
-        this->strip1->Show();
     }
 }

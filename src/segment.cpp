@@ -52,13 +52,11 @@ void Segment::displayNumber(int number)
         for (int i = 0; i < 7; ++i){
             this->strip0->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
         }
-        this->strip0->Show();
     }
     else if (this->channel == 1){
         for (int i = 0; i < 7; ++i){
             this->strip1->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
         }
-        this->strip1->Show();
     }
 }
 

@@ -165,8 +165,6 @@ void DisplayManager::loadingAnimation(){
             if (this->pao[i]) this->pao[i]->loadingAnimation();
         }
     
-        this->stripL->Show();
-        this->stripR->Show();
         this->lastUpdate = now; 
     }
 }
@@ -178,6 +176,11 @@ void DisplayManager::clearDisplay() {
     for (int i = 0; i < LED_COUNT_R; i++) {
         this->stripR->SetPixelColor(i, RgbColor(0, 0, 0));
     }
+    
+    // this->refreshDisplay();
+}
+
+void DisplayManager::refreshDisplay(){
     this->stripL->Show();
     this->stripR->Show();
 }
@@ -197,29 +200,29 @@ void DisplayManager::changeDisplayColor(std::string signalLineColorHEX, std::str
         if (this->pao[i]) this->pao[i]->setColor(this->displayColor);
     }
     
-    // // Update signal line colors
-    // if (this->il) this->il->setColor(this->signalLineColor);
-    // if (this->wel) this->wel->setColor(this->signalLineColor);
-    // if (this->wyl) this->wyl->setColor(this->signalLineColor);
-    // if (this->wyad1) this->wyad1->setColor(this->signalLineColor);
-    // if (this->wyad2) this->wyad2->setColor(this->signalLineColor);
-    // if (this->wei) this->wei->setColor(this->signalLineColor);
-    // if (this->weja) this->weja->setColor(this->signalLineColor);
-    // if (this->przep1) this->przep1->setColor(this->signalLineColor);
-    // if (this->przep2) this->przep2->setColor(this->signalLineColor);
-    // if (this->ode1) this->ode1->setColor(this->signalLineColor);
-    // if (this->ode2) this->ode2->setColor(this->signalLineColor);
-    // if (this->dod1) this->dod1->setColor(this->signalLineColor);
-    // if (this->dod2) this->dod2->setColor(this->signalLineColor);
-    // if (this->weak) this->weak->setColor(this->signalLineColor);
-    // if (this->wyak) this->wyak->setColor(this->signalLineColor);
-    // if (this->wea) this->wea->setColor(this->displayColor);  // wea is display color, not signal
-    // if (this->czyt1) this->czyt1->setColor(this->signalLineColor);
-    // if (this->czyt2) this->czyt2->setColor(this->signalLineColor);
-    // if (this->pisz) this->pisz->setColor(this->signalLineColor);
-    // if (this->wes) this->wes->setColor(this->signalLineColor);
-    // if (this->wys) this->wys->setColor(this->signalLineColor);
-    // if (this->stop) this->stop->setColor(this->signalLineColor);
+    // Update signal line colors
+    if (this->il) this->il->setColor(this->signalLineColor);
+    if (this->wel) this->wel->setColor(this->signalLineColor);
+    if (this->wyl) this->wyl->setColor(this->signalLineColor);
+    if (this->wyad1) this->wyad1->setColor(this->signalLineColor);
+    if (this->wyad2) this->wyad2->setColor(this->signalLineColor);
+    if (this->wei) this->wei->setColor(this->signalLineColor);
+    if (this->weja) this->weja->setColor(this->signalLineColor);
+    if (this->przep1) this->przep1->setColor(this->signalLineColor);
+    if (this->przep2) this->przep2->setColor(this->signalLineColor);
+    if (this->ode1) this->ode1->setColor(this->signalLineColor);
+    if (this->ode2) this->ode2->setColor(this->signalLineColor);
+    if (this->dod1) this->dod1->setColor(this->signalLineColor);
+    if (this->dod2) this->dod2->setColor(this->signalLineColor);
+    if (this->weak) this->weak->setColor(this->signalLineColor);
+    if (this->wyak) this->wyak->setColor(this->signalLineColor);
+    if (this->wea) this->wea->setColor(this->signalLineColor); 
+    if (this->czyt1) this->czyt1->setColor(this->signalLineColor);
+    if (this->czyt2) this->czyt2->setColor(this->signalLineColor);
+    if (this->pisz) this->pisz->setColor(this->signalLineColor);
+    if (this->wes) this->wes->setColor(this->signalLineColor);
+    if (this->wys) this->wys->setColor(this->signalLineColor);
+    if (this->stop) this->stop->setColor(this->signalLineColor);
     
     // Update bus colors
     if (this->busA) this->busA->setColor(this->busColor);

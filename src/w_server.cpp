@@ -2,6 +2,7 @@
 
 AsyncWebServer *W_Server::server = nullptr;
 
+
 W_Server::W_Server(DisplayManager *dispMan, HumanInterface *humInter) : 
     ws(new AsyncWebSocket("/ws")),
     dnsServer(new DNSServer()),
@@ -21,7 +22,10 @@ W_Server::W_Server(DisplayManager *dispMan, HumanInterface *humInter) :
     }
 
     this->initServer();
+
+    this->dispMan->clearDisplay();
 }
+
 
 W_Server::~W_Server()
 {
@@ -54,6 +58,7 @@ W_Server::~W_Server()
     this->humInter->controlOnboardLED(TOP, LOW);
     Serial.println("Destructor: Done.");
 }
+
 
 void W_Server::initServer()
 {
@@ -366,7 +371,6 @@ void W_Server::sendSignalValue()
 
 void W_Server::handleLoadingAnimation()
 {
-    static int lastClientCount = 0;
     int currentClientCount = WiFi.softAPgetStationNum();
     
     if (currentClientCount > 0) {
@@ -374,7 +378,8 @@ void W_Server::handleLoadingAnimation()
             this->dispMan->clearDisplay();
             this->loading = false;
         }
-    } else {
+    } 
+    else {
         if (!this->loading && lastClientCount > 0) {
             this->loading = true;
         }
@@ -447,4 +452,6 @@ void W_Server::runServer()
         this->sendSignalValue();
 
     this->runningServerLED();
+
+    this->dispMan->refreshDisplay();
 }

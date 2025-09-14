@@ -43,6 +43,8 @@ class W_Server {
 
     bool loading = true;
 
+    int lastClientCount = 0;
+
     /**
      * @brief Initialize server components
      *

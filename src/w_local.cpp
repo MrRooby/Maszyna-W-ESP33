@@ -1,22 +1,22 @@
 #include "w_local.h"
 
 const std::unordered_map<std::string, W_Local::CommandFunction> W_Local::signalMap = {
-    {"il",   &W_Local::il},
-    {"wel",  &W_Local::wel},
-    {"wyl",  &W_Local::wyl},
-    {"wyad", &W_Local::wyad},
-    {"wei",  &W_Local::wei},
-    {"weak", &W_Local::weak},
-    {"dod",  &W_Local::dod},
-    {"ode",  &W_Local::ode},
-    {"przep",&W_Local::przep},
-    {"wyak", &W_Local::wyak},
-    {"weja", &W_Local::weja},
-    {"wea",  &W_Local::wea},
-    {"czyt", &W_Local::czyt},
-    {"pisz", &W_Local::pisz},
-    {"wes",  &W_Local::wes},
-    {"wys",  &W_Local::wys}};
+    {"IL",   &W_Local::il},
+    {"WEL",  &W_Local::wel},
+    {"WYL",  &W_Local::wyl},
+    {"WYAD", &W_Local::wyad},
+    {"WEI",  &W_Local::wei},
+    {"WEAK", &W_Local::weak},
+    {"DOD",  &W_Local::dod},
+    {"ODE",  &W_Local::ode},
+    {"PRZEP",&W_Local::przep},
+    {"WYAK", &W_Local::wyak},
+    {"WEJA", &W_Local::weja},
+    {"WEA",  &W_Local::wea},
+    {"CZYT", &W_Local::czyt},
+    {"PISZ", &W_Local::pisz},
+    {"WES",  &W_Local::wes},
+    {"WYS",  &W_Local::wys}};
 
 W_Local::W_Local(DisplayManager *dispMan, HumanInterface *humInter)
 {
@@ -25,13 +25,6 @@ W_Local::W_Local(DisplayManager *dispMan, HumanInterface *humInter)
 }
 
 W_Local::~W_Local(){}
-
-void W_Local::runLocal()
-{
-    this->readButtonInputs();
-
-    this->display();
-}
 
 void W_Local::baseSignal(uint16_t from, uint16_t &to)
 {
@@ -43,61 +36,61 @@ void W_Local::baseSignal(uint16_t from, uint16_t &to)
 
 void W_Local::il()
 {
-    if(this->L < 999){
-        this->L++;
+    if(this->values.at("L") < 999){
+        this->values.at("L")++;
     }
 }
 
 void W_Local::wel()
 {
-    this->baseSignal(this->bus.at("A"), this->L);
+    this->baseSignal(this->bus.at("A"), this->values.at("L"));
 }
 
 void W_Local::wyl()
 {
-    this->baseSignal(this->L, this->bus.at("A"));
+    this->baseSignal(this->values.at("L"), this->bus.at("A"));
 }
 
 void W_Local::wyad()
 {
-    this->baseSignal(this->I, this->bus.at("A"));
+    this->baseSignal(this->values.at("I"), this->bus.at("A"));
 }
 
 void W_Local::wei()
 {
-    this->baseSignal(this->bus.at("S"), this->I);
+    this->baseSignal(this->bus.at("S"), this->values.at("I"));
 }
 
 void W_Local::weak()
 {
-    this->baseSignal(this->JAML, this->AK);
+    this->baseSignal(this->values.at("JAML"), this->values.at("AK"));
 }
 
 void W_Local::dod()
 {
-    uint16_t outcome = this->JAML + this->AK;
-    this->baseSignal(outcome, this->JAML);
+    uint16_t outcome = this->values.at("JAML") + this->values.at("AK");
+    this->baseSignal(outcome, this->values.at("JAML"));
 }
 
 void W_Local::ode()
 {
-    uint16_t outcome = this->JAML - this->AK;
-    this->baseSignal(outcome, this->JAML);
+    uint16_t outcome = this->values.at("JAML") - this->values.at("AK");
+    this->baseSignal(outcome, this->values.at("JAML"));
 }
 
 void W_Local::przep()
 {
-    this->baseSignal(this->JAML, this->AK);
+    this->baseSignal(this->values.at("JAML"), this->values.at("AK"));
 }
 
 void W_Local::wyak()
 {
-    this->baseSignal(this->AK, this->bus.at("S"));
+    this->baseSignal(this->values.at("AK"), this->values.at("S"));
 }
 
 void W_Local::weja()
 {
-    this->baseSignal(this->bus.at("S"), this->JAML);
+    this->baseSignal(this->bus.at("S"), this->values.at("JAML"));
 }
 
 void W_Local::wea()
@@ -107,27 +100,27 @@ void W_Local::wea()
     if(value >= 4)
         value = 3;
 
-    this->A = this->bus.at("A");
+    this->values.at("A") = this->bus.at("A");
 }
 
 void W_Local::czyt()
 {
-    this->baseSignal(this->PaO[this->A].first, this->S);
+    this->baseSignal(this->PaO[this->values.at("A")].first, this->values.at("S"));
 }
 
 void W_Local::pisz()
 {
-    this->baseSignal(this->S, this->PaO[this->A].first);
+    this->baseSignal(this->values.at("S"), this->PaO[this->values.at("A")].first);
 }
 
 void W_Local::wes()
 {
-    this->baseSignal(this->S, this->bus.at("S"));
+    this->baseSignal(this->values.at("S"), this->bus.at("S"));
 }
 
 void W_Local::wys()
 {
-    this->baseSignal(this->S, this->bus.at("S"));
+    this->baseSignal(this->values.at("S"), this->bus.at("S"));
 }
 
 void W_Local::takt()
@@ -150,22 +143,48 @@ void W_Local::takt()
     }
 }
 
-void W_Local::display()
+void W_Local::refreshDisplay()
 {
     if(this->dispMan){
         // Three digit displays
-        if(this->dispMan->a)    this->dispMan->a->displayValue(this->A);
-        if(this->dispMan->acc)  this->dispMan->acc->displayValue(this->AK);
-        if(this->dispMan->c)    this->dispMan->c->displayValue(this->L);
-        if(this->dispMan->i)    this->dispMan->i->displayValue(this->I);
-        if(this->dispMan->s)    this->dispMan->s->displayValue(this->S);
+        if(this->dispMan->a)    this->dispMan->a->displayValue(this->values.at("A"));
+        if(this->dispMan->acc)  this->dispMan->acc->displayValue(this->values.at("AK"));
+        if(this->dispMan->c)    this->dispMan->c->displayValue(this->values.at("L"));
+        if(this->dispMan->i)    this->dispMan->i->displayValue(this->values.at("I"));
+        if(this->dispMan->s)    this->dispMan->s->displayValue(this->values.at("S"));
         
         //Signal lines
-        for(const auto& signal : this->signal){
-            if(signal.second){
-                this->dispMan->setSignalLineState(signal.first, signal.second);
-            }
+        for (const auto& sig : this->signal) {
+            if (sig.first == "IL"     && this->dispMan->il)     this->dispMan->il->turnOnLine(sig.second);
+            if (sig.first == "WEL"    && this->dispMan->wel)    this->dispMan->wel->turnOnLine(sig.second);
+            if (sig.first == "WYL"    && this->dispMan->wyl)    this->dispMan->wyl->turnOnLine(sig.second);
+            if (sig.first == "WYAD"   && this->dispMan->wyad1  && this->dispMan->wyad1){
+                                                                this->dispMan->wyad1->turnOnLine(sig.second); 
+                                                                this->dispMan->wyad2->turnOnLine(sig.second);}
+            if (sig.first == "WEI"    && this->dispMan->wei)    this->dispMan->wei->turnOnLine(sig.second);
+            if (sig.first == "WEJA"   && this->dispMan->weja)   this->dispMan->weja->turnOnLine(sig.second);
+            if (sig.first == "PRZEP"  && this->dispMan->przep1 && this->dispMan->przep2){
+                                                                this->dispMan->przep1->turnOnLine(sig.second); 
+                                                                this->dispMan->przep2->turnOnLine(sig.second);}
+            if (sig.first == "ODE"    && this->dispMan->ode1   && this->dispMan->ode2){
+                                                                this->dispMan->ode1->turnOnLine(sig.second);
+                                                                this->dispMan->ode2->turnOnLine(sig.second);} 
+            if (sig.first == "DOD"    && this->dispMan->dod1   && this->dispMan->dod1){   
+                                                                this->dispMan->dod1->turnOnLine(sig.second);  
+                                                                this->dispMan->dod2->turnOnLine(sig.second);}
+            if (sig.first == "WEAK"   && this->dispMan->weak)   this->dispMan->weak->turnOnLine(sig.second);
+            if (sig.first == "WYAK"   && this->dispMan->wyak)   this->dispMan->wyak->turnOnLine(sig.second);
+            if (sig.first == "WEA"    && this->dispMan->wea)    this->dispMan->wea->turnOnLine(sig.second);
+            if (sig.first == "CZYT"   && this->dispMan->czyt1  && this->dispMan->czyt1){  
+                                                                this->dispMan->czyt1->turnOnLine(sig.second); 
+                                                                this->dispMan->czyt2->turnOnLine(sig.second);}
+            if (sig.first == "PISZ"   && this->dispMan->pisz)   this->dispMan->pisz->turnOnLine(sig.second);
+            if (sig.first == "WES"    && this->dispMan->wes)    this->dispMan->wes->turnOnLine(sig.second);
+            if (sig.first == "WYS"    && this->dispMan->wys)    this->dispMan->wys->turnOnLine(sig.second);
         }
+
+        // TODO trzeba zrobić warunek włączenia się ledów stopu
+        if(this->dispMan->stop)   this->dispMan->stop->turnOnLine(false);
 
         //PaO
         for(int i = 0; i < 4; i++){
@@ -178,28 +197,73 @@ void W_Local::display()
         if(this->dispMan->busA) this->dispMan->busA->turnOnLine(this->bus.at("A"));
         if(this->dispMan->busS) this->dispMan->busS->turnOnLine(this->bus.at("S"));
     }
+
+    this->dispMan->refreshDisplay();
 }
 
 void W_Local::readButtonInputs()
 {
     char* button = this->humInter->getPressedButton();
 
-    if(button == nullptr) return;
-
-    Serial.println(button);
+    if(button == nullptr) {
+        this->lastPressedButton = "";
+        return;
+    }
 
     std::string buttonStr(button);
 
-    if(buttonStr == "TAKT"){
-        this->takt();
+    if(this->lastPressedButton != button){
+        if(buttonStr == "TAKT"){
+            this->takt();
+        }
+        else{
+            this->nextLineSignals.push_back(buttonStr);
+            
+            auto it = this->signal.find(buttonStr);
+            if(it != this->signal.end()) {
+                it->second = !it->second;
+            }
+        }
+        this->lastPressedButton = button;
     }
-    else{
-        this->nextLineSignals.push_back(buttonStr);
-        
-        // Check if signal exists in map before setting value
-        auto it = this->signal.find(buttonStr);
-        if(it != this->signal.end()) {
-            it->second = true;
+}
+
+void W_Local::insertMode(uint16_t &value)
+{
+    EncoderState enc = this->humInter->getEncoderState();
+
+    if(enc == UP){
+        Serial.println("UP");
+        if(value < 999) {
+            value++;
+        }
+        else {
+            value = 0;
         }
     }
+    else if(enc == DOWN){
+        Serial.println("DOWN");
+        if(value > 0) {
+            value--;
+        }
+        else{
+            value = 999;
+        } 
+    }
+}
+
+void W_Local::runLocal()
+{
+    if(insertModeEnabled) {this->insertMode(values.at(selectedValue));}
+
+    this->readButtonInputs();
+
+    this->refreshDisplay();
+
+    for(const auto& signal : this->signal) {
+        Serial.print(signal.first.c_str());
+        Serial.print(": ");
+        Serial.println(signal.second ? "ON" : "OFF");
+    }
+
 }

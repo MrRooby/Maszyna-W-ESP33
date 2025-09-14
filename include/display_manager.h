@@ -127,6 +127,8 @@ public:
      */
     void clearDisplay();
 
+    void refreshDisplay();
+
     void changeDisplayColor(std::string signalLineColorHEX = "", 
                             std::string displayColorHEX = "", 
                             std::string busColorHEX = "");
