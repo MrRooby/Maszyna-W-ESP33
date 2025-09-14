@@ -8,12 +8,14 @@ SignalLine::SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* st
     : LedElement(strip0, startIndex, color) {
     this->length = length;
     this->channel = 0;
+    this->pixelCount = length;
 }
 
 SignalLine::SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, int length, RgbColor color)
     : LedElement(strip1, startIndex, color) {
     this->length = length;
     this->channel = 1;
+    this->pixelCount = length;
 }
 
 void SignalLine::turnOnLine(bool choice) {

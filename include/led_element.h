@@ -14,6 +14,7 @@ class LedElement {
         NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1 = nullptr;
 
         int startIndex;
+        int pixelCount = 0;
         RgbColor color;
 
     public:
@@ -41,9 +42,9 @@ class LedElement {
         LedElement(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color);
         
         /**
-         * @brief Change the color of the LED element
+         * @brief Set the color of the LED element
          * 
          * @param color New color to set
          */
-        virtual void changeColor(RgbColor color);
+        virtual void setColor(RgbColor color);
 };

@@ -48,6 +48,7 @@ class TwoDigitDisplay : protected LedElement {
          */
         void displayValue(int value);
 
+        
         void loadingAnimation();
 
         /**
@@ -55,5 +56,5 @@ class TwoDigitDisplay : protected LedElement {
          * 
          * @param color New color to set
          */
-        virtual void changeColor(RgbColor color) override;
+        void setColor(RgbColor color) override;
 };

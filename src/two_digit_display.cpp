@@ -36,10 +36,10 @@ void TwoDigitDisplay::loadingAnimation()
     this->display[1].loadingAnimation();
 }
 
-void TwoDigitDisplay::changeColor(RgbColor color)
+void TwoDigitDisplay::setColor(RgbColor color)
 {
     this->color = color;
     
-    this->display[0].changeColor(color);
-    this->display[1].changeColor(color);
+    this->display[0].setColor(color);
+    this->display[1].setColor(color);
 }

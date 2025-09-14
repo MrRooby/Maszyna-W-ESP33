@@ -32,6 +32,8 @@ private:
     const unsigned int debounceEncMilliseconds = 15;
     unsigned long lastEncTime;
     int lastCLK = 0;
+
+    const int onboardLEDBrightness = 64;
     
     const std::map<int, char*> buttons = {
         { 0,  "ODE" },
@@ -62,11 +64,9 @@ private:
 public:
     HumanInterface();
 
-    ~HumanInterface();
-
     char* getPressedButton();
 
-    bool getWiFiSwitchState();
+    bool WiFiEnabled();
 
     bool getEncoderButtonState();
 
@@ -74,5 +74,5 @@ public:
 
     void controlOnboardLED(OnboardLED led, bool choice);
     
-    void controlBacklightLED(bool choice);
+    void controlBacklightLED(int power);
 };

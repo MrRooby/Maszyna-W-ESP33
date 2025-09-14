@@ -57,5 +57,5 @@ class ThreeDigitDisplay : protected LedElement {
          * 
          * @param color New color to set
          */
-        virtual void changeColor(RgbColor color) override;
+        virtual void setColor(RgbColor color) override;
 };

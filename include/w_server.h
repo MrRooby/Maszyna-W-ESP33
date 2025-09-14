@@ -28,9 +28,9 @@ class W_Server {
     const char* ssid = WIFI_SSID;      ///< WiFi SSID from credentials.h
     const char* password = WIFI_PASS;  ///< WiFi password from credentials.h
     
-    AsyncWebServer server;             ///< Main web server instance
-    AsyncWebSocket ws;                 ///< WebSocket server instance
-    DNSServer dnsServer;               ///< DNS server for captive portal
+    static AsyncWebServer *server;             ///< Main web server instance
+    AsyncWebSocket *ws = nullptr;              ///< WebSocket server instance
+    DNSServer *dnsServer = nullptr;            ///< DNS server for captive portal
     
     IPAddress local_IP;                ///< Local IP address for AP
     IPAddress gateway;                 ///< Gateway IP address
@@ -146,6 +146,8 @@ class W_Server {
      * clients about button press events or signal changes.
      */
     void sendSignalValue();
+    
+    void handleLoadingAnimation();
 
 public:
     /**
@@ -153,6 +155,8 @@ public:
      */
     W_Server(DisplayManager *dispMan, HumanInterface *humInter);
 
+    ~W_Server();
+    
     /**
      * @brief Run server main loop
      *

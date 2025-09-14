@@ -55,6 +55,5 @@ public:
      */
     void displayNumber(int number);
 
-    
     void loadingAnimation();
 };

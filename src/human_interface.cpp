@@ -41,6 +41,10 @@ HumanInterface::HumanInterface()
     this->setupSwitches();
     this->setupOnboardLEDs();
     this->setupBacklightLEDs();
+
+    this->controlBacklightLED(0);
+    this->controlOnboardLED(TOP, LOW);
+    this->controlOnboardLED(BOTTOM, LOW);
 }
 
 char* HumanInterface::getPressedButton()
@@ -81,7 +85,7 @@ char* HumanInterface::getPressedButton()
     return nullptr;
 }
 
-bool HumanInterface::getWiFiSwitchState()
+bool HumanInterface::WiFiEnabled()
 {
     if(digitalRead(WIFI_SWITCH) == LOW){
         return true;
@@ -141,30 +145,24 @@ void HumanInterface::controlOnboardLED(OnboardLED led, bool choice)
 {
     if(choice){
         if(led == TOP){
-            digitalWrite(ONBOARD_LED_TOP, HIGH);
+            analogWrite(ONBOARD_LED_TOP, this->onboardLEDBrightness);
         }
         else if(led == BOTTOM){
-            digitalWrite(ONBOARD_LED_BOTTOM, HIGH);
+            analogWrite(ONBOARD_LED_BOTTOM, this->onboardLEDBrightness);
         }
     }
     else{
         if(led == TOP){
-            digitalWrite(ONBOARD_LED_TOP, LOW);
+            analogWrite(ONBOARD_LED_TOP, 0);
         }
         else if(led == BOTTOM){
-            digitalWrite(ONBOARD_LED_BOTTOM, LOW);
+            analogWrite(ONBOARD_LED_BOTTOM, 0);
         }
     }
 }
 
-void HumanInterface::controlBacklightLED(bool choice)
+void HumanInterface::controlBacklightLED(int power)
 {
-    if(choice){
-        digitalWrite(LED_BACKLIGHT_1, HIGH);
-        digitalWrite(LED_BACKLIGHT_2, HIGH);
-    }
-    else{
-        digitalWrite(LED_BACKLIGHT_1, LOW);
-        digitalWrite(LED_BACKLIGHT_2, LOW);
-    }
+    analogWrite(LED_BACKLIGHT_1, power);
+    analogWrite(LED_BACKLIGHT_2, power);
 }

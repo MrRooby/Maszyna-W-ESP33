@@ -1,30 +1,70 @@
 #include "w_server.h"
 
+AsyncWebServer *W_Server::server = nullptr;
+
 W_Server::W_Server(DisplayManager *dispMan, HumanInterface *humInter) : 
-    server(80), 
-    ws("/ws"),
+    ws(new AsyncWebSocket("/ws")),
+    dnsServer(new DNSServer()),
     local_IP(192, 168, 4, 1),
     gateway(192, 168, 4, 1),
-    subnet(255, 255, 255, 0) 
+    subnet(255, 255, 255, 0),
+    lastSignal(nullptr),
+    loading(true)
 {
     this->dispMan = dispMan;
     this->humInter = humInter; 
 
+    // Workaround because deleting pointer to server causes crashing, therefore changed
+    // to static member
+    if(server == nullptr){
+        server = new AsyncWebServer(80);
+    }
+
     this->initServer();
-    this->loading = true;
 }
 
+W_Server::~W_Server()
+{
+    Serial.println("Destructor: Cleaning up WebSocket clients...");
+    ws->cleanupClients();
+
+    Serial.println("Destructor: Stopping DNS server...");
+    dnsServer->stop();
+    
+    Serial.println("Destructor: Ending HTTP server...");
+    server->end();
+
+    Serial.println("Destructor: Disconnecting WiFi AP...");
+    WiFi.softAPdisconnect(true);
+    
+    delete ws;
+    Serial.println("WebSocket deleted");
+    
+    delete dnsServer;
+    Serial.println("DNS deleted");
+    
+    dispMan = nullptr;
+    humInter = nullptr;
+    lastSignal = nullptr;
+    
+    server = nullptr;
+    ws = nullptr;
+    dnsServer = nullptr;
+    
+    this->humInter->controlOnboardLED(TOP, LOW);
+    Serial.println("Destructor: Done.");
+}
 
 void W_Server::initServer()
 {
-    this->humInter->controlOnboardLED(TOP, true);
+    this->humInter->controlOnboardLED(TOP, HIGH);
     
     this->mountWebFiles();
     this->createAccessPoint();
     
-    this->server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+    this->server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
     this->createDNSServer();
-    this->server.begin();
+    this->server->begin();
     this->createWebSocketServer();
 }
 
@@ -91,7 +131,10 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
         boolValue = (intValue != 0);
     }
 
-    // Display values
+    /////////////////////////////////////// Color hex values ///////////////////////////////////////
+    // TODO
+
+    //////////////////////////////////////// Display values ////////////////////////////////////////
     if (field == "acc" && this->dispMan->acc){
         Serial.printf("Partial update: acc = %d\n", intValue);
         this->dispMan->acc->displayValue(intValue);
@@ -113,7 +156,7 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
         this->dispMan->i->displayValue(intValue);
     }
 
-    // PaO values
+    ////////////////////////////////////////// PaO values //////////////////////////////////////////
     else if (field == "addrs" && doc["addrs"].is<JsonArray>() && doc["args"].is<JsonArray>() && doc["vals"].is<JsonArray>() && this->dispMan->pao) {
         JsonArray addrsArray = doc["addrs"].as<JsonArray>();
         JsonArray argsArray = doc["args"].as<JsonArray>();
@@ -127,7 +170,7 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
         }
     }
 
-    // Signal values
+    //////////////////////////////////////// Signal values /////////////////////////////////////////
     else if (field == "il" && this->dispMan->il){
         Serial.printf("Partial update: il = %d\n", boolValue);
         this->dispMan->il->turnOnLine(boolValue);
@@ -214,7 +257,7 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
 
 void W_Server::processFullWebSocketData(StaticJsonDocument<512> doc)
 {
-    // Full data update
+    //////////////////////////////////////// Full data update ////////////////////////////////////////
     JsonObject dataObj = doc["data"];
 
     if (dataObj.containsKey("acc") && this->dispMan->acc){
@@ -271,7 +314,7 @@ void W_Server::sendDataToClient(char *buttonNum){
     char jsonBuffer[256];
     size_t len = serializeJson(doc, jsonBuffer);
 
-    this->ws.textAll(jsonBuffer, len);
+    this->ws->textAll(jsonBuffer, len);
 }
 
 
@@ -283,7 +326,7 @@ void W_Server::mountWebFiles()
     }
     Serial.println("Web Files Mounted Succesfully");
 
-    server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+    server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 }
 
 
@@ -321,10 +364,33 @@ void W_Server::sendSignalValue()
 }
 
 
+void W_Server::handleLoadingAnimation()
+{
+    static int lastClientCount = 0;
+    int currentClientCount = WiFi.softAPgetStationNum();
+    
+    if (currentClientCount > 0) {
+        if (this->loading) {
+            this->dispMan->clearDisplay();
+            this->loading = false;
+        }
+    } else {
+        if (!this->loading && lastClientCount > 0) {
+            this->loading = true;
+        }
+        
+        if (this->loading) {
+            this->dispMan->loadingAnimation();
+        }
+    }
+    
+    lastClientCount = currentClientCount;
+}
+
+
 void W_Server::connectToWifi(){
     WiFi.begin(this->ssid, this->password);
     while (WiFi.status() != WL_CONNECTED){
-        delay(500);
         Serial.println("Connection down!");
     }
 
@@ -356,16 +422,16 @@ void W_Server::createAccessPoint()
 
 void W_Server::createDNSServer()
 {
-    dnsServer.start(53, "*", local_IP);
+    dnsServer->start(53, "*", local_IP);
 }
 
 
 void W_Server::createWebSocketServer()
 {
-    this->ws.onEvent([this](AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len)
+    this->ws->onEvent([this](AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len)
                      { this->onEvent(server, client, type, arg, data, len); });
 
-    this->server.addHandler(&ws);
+    this->server->addHandler(ws);
 
     Serial.println("Web Socket Server Started");
 }
@@ -373,29 +439,12 @@ void W_Server::createWebSocketServer()
 
 void W_Server::runServer()
 {
-    dnsServer.processNextRequest();
+    dnsServer->processNextRequest();
 
-    static int lastClientCount = 0;
-    int currentClientCount = WiFi.softAPgetStationNum();
-    
-    if (currentClientCount > 0) {
-        if (this->loading) {
-            this->dispMan->clearDisplay();
-            this->loading = false;
-        }
-        
+    this->handleLoadingAnimation();
+
+    if(WiFi.softAPgetStationNum() > 0)
         this->sendSignalValue();
-    } else {
-        if (!this->loading && lastClientCount > 0) {
-            this->loading = true;
-        }
-        
-        if (this->loading) {
-            this->dispMan->loadingAnimation();
-        }
-    }
-    
-    lastClientCount = currentClientCount;
 
     this->runningServerLED();
 }

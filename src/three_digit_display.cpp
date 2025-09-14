@@ -36,10 +36,10 @@ void ThreeDigitDisplay::loadingAnimation(){
     this->display[2].loadingAnimation();
 }
 
-void ThreeDigitDisplay::changeColor(RgbColor color){
+void ThreeDigitDisplay::setColor(RgbColor color){
     this->color = color;
 
-    this->display[0].changeColor(color);
-    this->display[1].changeColor(color);
-    this->display[2].changeColor(color);
+    this->display[0].setColor(color);
+    this->display[1].setColor(color);
+    this->display[2].setColor(color);
 }

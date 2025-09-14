@@ -7,11 +7,13 @@ Segment::Segment()
 Segment::Segment(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod> *strip0, int startIndex, RgbColor color)
     : LedElement(strip0, startIndex, color) {
         this->channel = 0;
+        this->pixelCount = 7;
     }
 
 Segment::Segment(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod> *strip1, int startIndex, RgbColor color)
     : LedElement(strip1, startIndex, color) {
         this->channel = 1;
+        this->pixelCount = 7;
     }
 
 void Segment::displayNumber(int number)

@@ -56,5 +56,5 @@ class PaODisplayLine: protected LedElement {
          * 
          * @param color New color to set
          */
-        void changeColor(RgbColor color);
+        void setColor(RgbColor color);
 };

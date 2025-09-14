@@ -29,10 +29,10 @@ void PaODisplayLine::loadingAnimation(){
 }
 
 
-void PaODisplayLine::changeColor(RgbColor color)
+void PaODisplayLine::setColor(RgbColor color)
 {
     this->color = color;
-    this->addr->changeColor(color);
-    this->val->changeColor(color);
-    this->arg->changeColor(color);
+    this->addr->setColor(color);
+    this->val->setColor(color);
+    this->arg->setColor(color);
 }
