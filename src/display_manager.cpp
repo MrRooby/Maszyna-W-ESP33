@@ -263,6 +263,9 @@ RgbColor DisplayManager::getElementColor(const DisplayElement element)
 
 void DisplayManager::blinkingAnimation(LedElement *display, const DisplayElement type)
 {
+    if(display == nullptr)
+        return;
+        
     unsigned long currentTime = millis();
     if (currentTime - lastBlinkTime >= BLINK_INTERVAL){
         blinkState = !blinkState;

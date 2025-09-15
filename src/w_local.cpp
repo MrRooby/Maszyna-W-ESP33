@@ -238,7 +238,6 @@ void W_Local::insertMode(uint16_t &value)
     EncoderState enc = this->humInter->getEncoderState();
 
     if(enc == UP){
-        Serial.println("UP");
         if(value < 999) {
             value++;
         }
@@ -247,11 +246,10 @@ void W_Local::insertMode(uint16_t &value)
         }
     }
     else if(enc == DOWN){
-        Serial.println("DOWN");
         if(value > 0) {
             value--;
         }
-        else{
+        else {
             value = 999;
         } 
     }
@@ -278,8 +276,6 @@ void W_Local::handleInsertMode()
     if (humInter->getEncoderButtonLongPress() && !insertModeChanged) {
         insertModeEnabled = !insertModeEnabled;
         insertModeChanged = true;
-        Serial.println("Long press detected");
-        Serial.println(insertModeEnabled);
         
         if (!insertModeEnabled) {
             // Reset display color when exiting insert mode
@@ -292,6 +288,33 @@ void W_Local::handleInsertMode()
     }
     
     if (insertModeEnabled) { 
+        if (!buttonPressedLastFrame && humInter->getEncoderButtonState() && !humInter->getEncoderButtonLongPress()) {
+            // Get iterator to current selection
+            auto it = values.find(selectedValue);
+
+            // Move to next item, or wrap to beginning
+            ++it;
+            if (it == values.end()) {
+                it = values.begin();
+            }
+            selectedValue = it->first;
+            buttonPressedLastFrame = true;
+            
+            // Change back color of the previously selected display
+            display->setColor(dispMan->getElementColor(DisplayElement::DIGIT_DISPLAY));
+
+            // Update display pointer for new selection
+            display = getSelectedDisplay();
+            
+            // !!! JAML is the last one in the map and when it is selected it should loop around !!!
+            if(display == nullptr){ 
+                selectedValue = "L"; 
+            }
+        }
+        else if(!humInter->getEncoderButtonState()){
+            buttonPressedLastFrame = false;
+        }
+
         dispMan->blinkingAnimation(display, DisplayElement::DIGIT_DISPLAY);        
         insertMode(values.at(selectedValue)); 
     }
@@ -305,18 +328,40 @@ void W_Local::runLocal()
 
     refreshDisplay();
 
-    /*
-    // Debug information for nex line signals vector
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////// DEBUG PRINTS //////////////////////////////////////////
     static unsigned long lastPrintTime = 0;
     unsigned long currentTime = millis();
-    if (currentTime - lastPrintTime >= 1000) {
-        Serial.print("nextLineSignals: ");
+    uint16_t interval = 50;
+
+    if (currentTime - lastPrintTime >= interval) {
+        // Lista rozkazów
+        Serial.println();
+        Serial.println();
+        Serial.println();
+        Serial.println();
+        Serial.println();
+        Serial.print("Lista rozkazow: ");
         for (const auto& sig : nextLineSignals) {
             Serial.print(sig.c_str());
             Serial.print(" ");
         }
         Serial.println();
+
+        // Wartości z wyświetlaczy
+        Serial.print("Wartosci: ");
+        for (const auto& val : values) {
+            Serial.print(val.first.c_str());
+            Serial.print("=");
+            Serial.print(val.second);
+            Serial.print(" ");
+        }
+        Serial.println();
+
+
         lastPrintTime = currentTime;
     }
-    */
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
 }
