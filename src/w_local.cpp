@@ -217,7 +217,12 @@ void W_Local::readButtonInputs()
             this->takt();
         }
         else{
-            this->nextLineSignals.push_back(buttonStr);
+            auto itSignal = std::find(this->nextLineSignals.begin(), this->nextLineSignals.end(), buttonStr);
+            if(itSignal != this->nextLineSignals.end()) {
+                this->nextLineSignals.erase(itSignal);
+            } else {
+                this->nextLineSignals.push_back(buttonStr);
+            }
             
             auto it = this->signal.find(buttonStr);
             if(it != this->signal.end()) {
@@ -252,18 +257,66 @@ void W_Local::insertMode(uint16_t &value)
     }
 }
 
-void W_Local::runLocal()
+ThreeDigitDisplay *W_Local::getSelectedDisplay()
 {
-    if(insertModeEnabled) {this->insertMode(values.at(selectedValue));}
+    if (!dispMan) return nullptr;
+    
+    if (selectedValue == "A") return dispMan->a;
+    if (selectedValue == "AK") return dispMan->acc;
+    if (selectedValue == "L") return dispMan->c;
+    if (selectedValue == "I") return dispMan->i;
+    if (selectedValue == "S") return dispMan->s;
+    
+    return nullptr;
+}
 
-    this->readButtonInputs();
+void W_Local::handleInsertMode()
+{
+    ThreeDigitDisplay *display = getSelectedDisplay();
+    if (!display) return;
 
-    this->refreshDisplay();
-
-    for(const auto& signal : this->signal) {
-        Serial.print(signal.first.c_str());
-        Serial.print(": ");
-        Serial.println(signal.second ? "ON" : "OFF");
+    if (humInter->getEncoderButtonLongPress() && !insertModeChanged) {
+        insertModeEnabled = !insertModeEnabled;
+        insertModeChanged = true;
+        Serial.println("Long press detected");
+        Serial.println(insertModeEnabled);
+        
+        if (!insertModeEnabled) {
+            // Reset display color when exiting insert mode
+            display->setColor(dispMan->getElementColor(DisplayElement::DIGIT_DISPLAY));
+        }
     }
 
+    if (humInter->getEncoderButtonState() == LOW) {
+        insertModeChanged = false;
+    }
+    
+    if (insertModeEnabled) { 
+        dispMan->blinkingAnimation(display, DisplayElement::DIGIT_DISPLAY);        
+        insertMode(values.at(selectedValue)); 
+    }
+}
+
+void W_Local::runLocal()
+{
+    handleInsertMode();
+
+    readButtonInputs();
+
+    refreshDisplay();
+
+    /*
+    // Debug information for nex line signals vector
+    static unsigned long lastPrintTime = 0;
+    unsigned long currentTime = millis();
+    if (currentTime - lastPrintTime >= 1000) {
+        Serial.print("nextLineSignals: ");
+        for (const auto& sig : nextLineSignals) {
+            Serial.print(sig.c_str());
+            Serial.print(" ");
+        }
+        Serial.println();
+        lastPrintTime = currentTime;
+    }
+    */
 }

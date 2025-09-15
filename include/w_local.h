@@ -54,8 +54,9 @@ class W_Local
     
         static const std::unordered_map<std::string, CommandFunction> signalMap;
     
-        bool insertModeEnabled = true;
+        bool insertModeEnabled = false;
         std::string selectedValue = "L";
+        bool insertModeChanged = false;
 
         char* lastPressedButton = nullptr;
 
@@ -104,6 +105,10 @@ class W_Local
         void readButtonInputs();
 
         void insertMode(uint16_t &value);
+
+        ThreeDigitDisplay *getSelectedDisplay();
+
+        void handleInsertMode();
 
     public:
         W_Local(DisplayManager *dispMan, HumanInterface *humInter);

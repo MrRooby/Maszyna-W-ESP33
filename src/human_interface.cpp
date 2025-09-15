@@ -72,7 +72,7 @@ char* HumanInterface::getPressedButton()
         lastButtonState = currentState;
     }
 
-    if ((millis() - lastDebounceTime) > debounceDelayMilliseconds) {
+    if ((millis() - lastDebounceTime) > DEBOUNCE_BUTTON_MILLIS) {
         debouncedState = currentState;
     }
 
@@ -103,13 +103,33 @@ bool HumanInterface::getEncoderButtonState()
         lastDebounceTime = now;
     }
     
-    if(now - lastEncButtonDebounceTime >= debounceDelayMilliseconds){
+    if(now - lastEncButtonDebounceTime >= DEBOUNCE_BUTTON_MILLIS){
         if(state != debouncedEncButtonState){
             debouncedEncButtonState = state;
 
             return !state;
         }
     }
+}
+
+bool HumanInterface::getEncoderButtonLongPress()
+{
+    bool currentState = getEncoderButtonState();
+    unsigned long now = millis();
+
+    if(currentState){
+        if( pressStartTime == 0){
+            pressStartTime = now;
+        }
+        else if(now - pressStartTime >= LONG_PRESS_TIME) {
+            return true;
+        }
+    }
+    else {
+        pressStartTime = 0;
+    }
+
+    return false;
 }
 
 EncoderState HumanInterface::getEncoderState()
@@ -119,7 +139,7 @@ EncoderState HumanInterface::getEncoderState()
 
     unsigned long now = millis();
 
-    if (now - lastEncTime < debounceEncMilliseconds) {
+    if (now - lastEncTime < DEBOUNCE_ENC_MILLIS) {
         return EncoderState::IDLE;
     }
 
@@ -145,10 +165,10 @@ void HumanInterface::controlOnboardLED(OnboardLED led, bool choice)
 {
     if(choice){
         if(led == TOP){
-            analogWrite(ONBOARD_LED_TOP, this->onboardLEDBrightness);
+            analogWrite(ONBOARD_LED_TOP, ONBOARD_LED_BRIGHTNESS);
         }
         else if(led == BOTTOM){
-            analogWrite(ONBOARD_LED_BOTTOM, this->onboardLEDBrightness);
+            analogWrite(ONBOARD_LED_BOTTOM, ONBOARD_LED_BRIGHTNESS);
         }
     }
     else{

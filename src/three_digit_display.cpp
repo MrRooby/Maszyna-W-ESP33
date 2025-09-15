@@ -43,3 +43,4 @@ void ThreeDigitDisplay::setColor(RgbColor color){
     this->display[1].setColor(color);
     this->display[2].setColor(color);
 }
+

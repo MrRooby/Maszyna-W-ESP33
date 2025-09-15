@@ -47,12 +47,12 @@ void initializeMode() {
     // Initialize new mode if needed
     if (currentWiFiState && webMachine == nullptr) {
         Serial.println("Starting WiFi Server mode...");
-        dispMan->changeDisplayColor("110000", "000011", "000011");
+        dispMan->changeDisplayColor("FF0000", "000011", "000011");
         webMachine = new W_Server(dispMan, humInter);
     }
     else if (!currentWiFiState && localMachine == nullptr) {
         Serial.println("Starting Local mode...");
-        dispMan->changeDisplayColor("000900", "090000", "010101");
+        dispMan->changeDisplayColor("000900", "010101", "010101");
         localMachine = new W_Local(dispMan, humInter);
     }
     

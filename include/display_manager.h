@@ -10,6 +10,12 @@
 #define LED_COUNT_R 341
 #define LED_COUNT_L 249
 
+enum DisplayElement {
+    DIGIT_DISPLAY,
+    SIGNAL_LINE,
+    BUS_LINE
+};
+
 /**
  * @brief Manages multiple LED displays and signal lines
  * 
@@ -30,8 +36,12 @@ private:
 
     RgbColor signalLineColor = RgbColor(0, 0, 32);
     RgbColor displayColor = RgbColor(32, 0, 0);
-    RgbColor busColor = RgbColor(0, 32, 0); 
-    
+    RgbColor busColor = RgbColor(0, 32, 0);
+
+    const unsigned long BLINK_INTERVAL = 500;
+    unsigned long lastBlinkTime = 0;
+    bool blinkState = false;
+
     std::unordered_map<std::string, SignalLine*> signalLineMap;
 
     /**
@@ -146,4 +156,8 @@ public:
      * @param state True to turn on, false to turn off
      */
     void setSignalLineState(const std::string& signalName, bool state);
+
+    RgbColor getElementColor(const DisplayElement element);
+
+    void blinkingAnimation(LedElement *display, const DisplayElement type);
 };

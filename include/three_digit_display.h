@@ -12,7 +12,7 @@
  * @author Bartosz Faruga / MrRooby
  * @date 2025
  */
-class ThreeDigitDisplay : protected LedElement {
+class ThreeDigitDisplay : public LedElement {
     private:
         Segment display[3];    ///< Array of three seven-segment displays
 
@@ -58,4 +58,5 @@ class ThreeDigitDisplay : protected LedElement {
          * @param color New color to set
          */
         virtual void setColor(RgbColor color) override;
+
 };

@@ -240,3 +240,39 @@ void DisplayManager::setSignalLineState(const std::string& signalName, bool stat
         signalLine->turnOnLine(state);
     }
 }
+
+RgbColor DisplayManager::getElementColor(const DisplayElement element)
+{
+    switch (element){
+        case DisplayElement::BUS_LINE:
+            return this->busColor;
+            break;
+        
+        case DisplayElement::DIGIT_DISPLAY:
+            return this->displayColor;
+            break;
+        
+        case DisplayElement::SIGNAL_LINE:
+            return this->signalLineColor;
+            break;
+
+        default:
+            break;
+    }
+}
+
+void DisplayManager::blinkingAnimation(LedElement *display, const DisplayElement type)
+{
+    unsigned long currentTime = millis();
+    if (currentTime - lastBlinkTime >= BLINK_INTERVAL){
+        blinkState = !blinkState;
+        lastBlinkTime = currentTime;
+
+        if (blinkState)        {
+            display->setColor(getElementColor(type));
+        }
+        else{
+            display->setColor(RgbColor(0, 0, 0));
+        }
+    }
+}

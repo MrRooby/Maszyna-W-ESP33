@@ -23,17 +23,19 @@ private:
     uint16_t lastButtonState = 0;
     uint16_t debouncedState = 0;
     unsigned long lastDebounceTime = 0;
-    const unsigned int debounceDelayMilliseconds = 20;
+    const uint16_t DEBOUNCE_BUTTON_MILLIS = 20;
 
-    int lastEncButtonState = 0;
-    int debouncedEncButtonState = 0;
+    bool lastEncButtonState = LOW;
+    bool debouncedEncButtonState = LOW;
     unsigned long lastEncButtonDebounceTime = 0;
 
-    const unsigned int debounceEncMilliseconds = 15;
+    const unsigned int DEBOUNCE_ENC_MILLIS = 15;
     unsigned long lastEncTime;
     int lastCLK = 0;
+    const uint16_t LONG_PRESS_TIME = 500;
+    unsigned long pressStartTime = 0;
 
-    const int onboardLEDBrightness = 64;
+    const int ONBOARD_LED_BRIGHTNESS = 64;
     
     const std::map<int, char*> buttons = {
         { 0,  "ODE" },
@@ -69,6 +71,8 @@ public:
     bool WiFiEnabled();
 
     bool getEncoderButtonState();
+
+    bool getEncoderButtonLongPress();
 
     EncoderState getEncoderState();
 
