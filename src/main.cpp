@@ -14,7 +14,8 @@ W_Local        *localMachine = nullptr;
 bool lastWiFiState   = false;
 bool modeInitialized = false;
 
-bool TestMode = false;
+bool TestMode = true;
+bool prevTestMode = false;
 
 
 void initializeMode() {
@@ -89,8 +90,21 @@ void loop() {
             localMachine->runLocal();
         }
     }
-    else{
-        dispMan->ledTest(100);
+    else {
+        if(humInter->WiFiEnabled()){
+            if(!prevTestMode){
+                dispMan->controlAllLEDs(0, 0, 0);
+                prevTestMode = humInter->WiFiEnabled();
+                dispMan->ledTestAnimation(100, false, true);
+            }
+            
+            dispMan->ledTestAnimation(100);
+        }
+        else {
+            prevTestMode = humInter->WiFiEnabled();
+            dispMan->controlAllLEDs(55, 0 , 0);
+        }
+
         dispMan->refreshDisplay();
         humInter->testButtons();
     }

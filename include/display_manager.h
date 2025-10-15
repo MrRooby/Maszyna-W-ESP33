@@ -163,5 +163,7 @@ public:
 
     void blinkingAnimation(LedElement *display, const DisplayElement type);
 
-    void ledTest(int updateSpeedMillis, bool printInSerial = false);
+    void ledTestAnimation(int updateSpeedMillis, bool printInSerial = false, bool reset = false);
+    
+    void controlAllLEDs(int red = 50, int green = 0, int blue = 0);
 };

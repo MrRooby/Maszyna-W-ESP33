@@ -280,12 +280,17 @@ void DisplayManager::blinkingAnimation(LedElement *display, const DisplayElement
     }
 }
 
-void DisplayManager::ledTest(int updateSpeedMillis, bool printInSerial)
+void DisplayManager::ledTestAnimation(int updateSpeedMillis, bool printInSerial, bool reset)
 {
     long now = millis();
     
     static int iL = 0;
     static int iR = 0;
+
+    if(reset){
+        iL = 0;
+        iR = 0;
+    }
 
     if(now - this->lastRefreshTime >= updateSpeedMillis){
         if(this->stripL){
@@ -306,5 +311,21 @@ void DisplayManager::ledTest(int updateSpeedMillis, bool printInSerial)
         else if(iR >= LED_COUNT_R) {iR = 0;}
 
         lastRefreshTime = now;
+    }
+}
+
+void DisplayManager::controlAllLEDs(int red, int green, int blue)
+{
+    RgbColor testColor(red, green, blue);
+
+    if(this->stripL){
+        for(int i = 0; i < LED_COUNT_L; i++){
+            this->stripL->SetPixelColor(i, testColor);
+        }
+    }
+    if(this->stripR){
+        for(int i = 0; i < LED_COUNT_R; i++){
+            this->stripR->SetPixelColor(i, testColor);
+        }
     }
 }
