@@ -79,4 +79,8 @@ public:
     void controlOnboardLED(OnboardLED led, bool choice);
     
     void controlBacklightLED(int power);
+
+    void testButtons();
+
+    void testEncoder();
 };

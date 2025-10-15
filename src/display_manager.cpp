@@ -279,3 +279,32 @@ void DisplayManager::blinkingAnimation(LedElement *display, const DisplayElement
         }
     }
 }
+
+void DisplayManager::ledTest(int updateSpeedMillis, bool printInSerial)
+{
+    long now = millis();
+    
+    static int iL = 0;
+    static int iR = 0;
+
+    if(now - this->lastRefreshTime >= updateSpeedMillis){
+        if(this->stripL){
+            this->stripL->SetPixelColor(iL, RgbColor(255, 0, 0));
+            this->stripL->SetPixelColor(iL - 1, RgbColor(0, 0, 0));
+            if(printInSerial) Serial.printf("LEFT [%i]\n", iL);
+        }
+        if(this->stripR){
+            this->stripR->SetPixelColor(iR, RgbColor(255, 0, 0));
+            this->stripR->SetPixelColor(iR - 1, RgbColor(0, 0, 0));
+            if(printInSerial) Serial.printf("RIGHT [%i]\n", iR);
+        }
+
+        if(iL < LED_COUNT_L){iL++;}
+        else if(iL >= LED_COUNT_L) {iL = 0;}
+        
+        if(iR < LED_COUNT_R){iR++;}
+        else if(iR >= LED_COUNT_R) {iR = 0;}
+
+        lastRefreshTime = now;
+    }
+}

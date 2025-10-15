@@ -42,6 +42,8 @@ private:
     unsigned long lastBlinkTime = 0;
     bool blinkState = false;
 
+    long lastRefreshTime = 0;
+
     std::unordered_map<std::string, SignalLine*> signalLineMap;
 
     /**
@@ -160,4 +162,6 @@ public:
     RgbColor getElementColor(const DisplayElement element);
 
     void blinkingAnimation(LedElement *display, const DisplayElement type);
+
+    void ledTest(int updateSpeedMillis, bool printInSerial = false);
 };

@@ -52,6 +52,8 @@ class W_Server {
      */
     void initServer();
 
+    void setupCaptivePortal();
+
     /**
      * @brief Connect to existing WiFi network
      */

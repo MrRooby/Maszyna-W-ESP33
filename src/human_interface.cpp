@@ -186,3 +186,15 @@ void HumanInterface::controlBacklightLED(int power)
     analogWrite(LED_BACKLIGHT_1, power);
     analogWrite(LED_BACKLIGHT_2, power);
 }
+
+void HumanInterface::testButtons()
+{
+    char* button = this->getPressedButton();
+    static char* prevButton = nullptr;
+
+    if(button != nullptr && prevButton != button) {
+        Serial.printf("%s pressed\n", this->getPressedButton());
+    }
+
+    prevButton = button;
+}

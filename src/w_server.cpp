@@ -67,10 +67,42 @@ void W_Server::initServer()
     this->mountWebFiles();
     this->createAccessPoint();
     
-    this->server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+    // this->server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
     this->createDNSServer();
+    this->setupCaptivePortal();
     this->server->begin();
     this->createWebSocketServer();
+}
+
+void W_Server::setupCaptivePortal()
+{
+    // Handle root requests
+    server->on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+        request->send(LittleFS, "/index.html", "text/html");
+        Serial.println("Client accessed main page");
+    });
+
+    // Handle common captive portal detection URLs
+    server->on("/generate_204", HTTP_GET, [](AsyncWebServerRequest *request){
+        request->send(LittleFS, "/index.html", "text/html");
+    });
+    
+    server->on("/hotspot-detect.html", HTTP_GET, [](AsyncWebServerRequest *request){
+        request->send(LittleFS, "/index.html", "text/html");
+    });
+    
+    server->on("/connecttest.txt", HTTP_GET, [](AsyncWebServerRequest *request){
+        request->send(LittleFS, "/index.html", "text/html");
+    });
+
+    // Catch-all handler for any other requests
+    server->onNotFound([](AsyncWebServerRequest *request){
+        Serial.printf("Captive portal redirect: %s\n", request->url().c_str());
+        request->send(LittleFS, "/index.html", "text/html");
+    });
+    
+    // Serve static files (CSS, JS, images, etc.)
+    server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 }
 
 
@@ -331,7 +363,7 @@ void W_Server::mountWebFiles()
     }
     Serial.println("Web Files Mounted Succesfully");
 
-    server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+    // server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 }
 
 
@@ -405,7 +437,6 @@ void W_Server::connectToWifi(){
     Serial.println(WiFi.localIP());
 }
 
-
 void W_Server::createAccessPoint()
 {
     Serial.print("Setting up Access Point");
@@ -420,14 +451,18 @@ void W_Server::createAccessPoint()
 
     Serial.print("AP IP address: ");
     Serial.println(WiFi.softAPIP());
-
     Serial.println("Acess Point created");
 }
 
 
 void W_Server::createDNSServer()
 {
-    dnsServer->start(53, "*", local_IP);
+    if( dnsServer->start(53, "*", local_IP) ) {
+        Serial.println("DNS Server started successfully");
+    }
+    else {
+        Serial.println("[ERROR]: DNS Server failed to start");
+    }
 }
 
 
@@ -444,7 +479,10 @@ void W_Server::createWebSocketServer()
 
 void W_Server::runServer()
 {
-    dnsServer->processNextRequest();
+    for(int i = 0; i < 10; i++){
+        dnsServer->processNextRequest();
+        delay(1);
+    }
 
     this->handleLoadingAnimation();
 

@@ -14,6 +14,8 @@ W_Local        *localMachine = nullptr;
 bool lastWiFiState   = false;
 bool modeInitialized = false;
 
+bool TestMode = false;
+
 
 void initializeMode() {
     bool currentWiFiState = humInter->WiFiEnabled();
@@ -70,17 +72,26 @@ void setup(){
 
     humInter->controlBacklightLED(30);
 
-    initializeMode();    
+    if(!TestMode){
+        initializeMode();    
+    }
 }
 
 
 void loop() {
-    initializeMode();
-
-    if(humInter->WiFiEnabled() && webMachine != nullptr){
-        webMachine->runServer();
+    if(!TestMode){
+        initializeMode();
+    
+        if(humInter->WiFiEnabled() && webMachine != nullptr){
+            webMachine->runServer();
+        }
+        else if(!humInter->WiFiEnabled() && localMachine != nullptr){
+            localMachine->runLocal();
+        }
     }
-    else if(!humInter->WiFiEnabled() && localMachine != nullptr){
-        localMachine->runLocal();
+    else{
+        dispMan->ledTest(100);
+        dispMan->refreshDisplay();
+        humInter->testButtons();
     }
 }
