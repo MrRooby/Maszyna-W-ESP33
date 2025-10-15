@@ -6,10 +6,14 @@
 #include <LittleFS.h>
 #include <ArduinoJson.h>
 #include <DNSServer.h>
+#include <esp_wifi.h>
 
 #include "credentials.h"
 #include "display_manager.h"
 #include "human_interface.h"
+
+#define MAX_CLIENTS 4	// ESP32 supports up to 10 but I have not tested it yet
+#define WIFI_CHANNEL 6	// 2.4ghz channel 6 https://en.wikipedia.org/wiki/List_of_WLAN_channels#2.4_GHz_(802.11b/g/n/ax)
 
 /**
  * @brief Web server class managing WiFi, DNS and WebSocket connections, main logic controller
@@ -32,7 +36,7 @@ class W_Server {
     AsyncWebSocket *ws = nullptr;              ///< WebSocket server instance
     DNSServer *dnsServer = nullptr;            ///< DNS server for captive portal
     
-    IPAddress local_IP;                ///< Local IP address for AP
+    IPAddress localIP;                ///< Local IP address for AP
     IPAddress gateway;                 ///< Gateway IP address
     IPAddress subnet;                  ///< Subnet mask
     
@@ -52,7 +56,7 @@ class W_Server {
      */
     void initServer();
 
-    void setupCaptivePortal();
+    void createWebServer();
 
     /**
      * @brief Connect to existing WiFi network

@@ -6,7 +6,7 @@ AsyncWebServer *W_Server::server = nullptr;
 W_Server::W_Server(DisplayManager *dispMan, HumanInterface *humInter) : 
     ws(new AsyncWebSocket("/ws")),
     dnsServer(new DNSServer()),
-    local_IP(192, 168, 4, 1),
+    localIP(192, 168, 4, 1),
     gateway(192, 168, 4, 1),
     subnet(255, 255, 255, 0),
     lastSignal(nullptr),
@@ -64,45 +64,52 @@ void W_Server::initServer()
 {
     this->humInter->controlOnboardLED(TOP, HIGH);
     
-    this->mountWebFiles();
     this->createAccessPoint();
-    
-    // this->server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
     this->createDNSServer();
-    this->setupCaptivePortal();
+    
+    this->mountWebFiles();
+    this->createWebServer();
+    
     this->server->begin();
+    
     this->createWebSocketServer();
 }
 
-void W_Server::setupCaptivePortal()
+
+void W_Server::createWebServer()
 {
-    // Handle root requests
-    server->on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-        request->send(LittleFS, "/index.html", "text/html");
-        Serial.println("Client accessed main page");
-    });
+    const String localIPURL = "http://" + this->localIP.toString();
 
-    // Handle common captive portal detection URLs
-    server->on("/generate_204", HTTP_GET, [](AsyncWebServerRequest *request){
-        request->send(LittleFS, "/index.html", "text/html");
-    });
-    
-    server->on("/hotspot-detect.html", HTTP_GET, [](AsyncWebServerRequest *request){
-        request->send(LittleFS, "/index.html", "text/html");
-    });
-    
-    server->on("/connecttest.txt", HTTP_GET, [](AsyncWebServerRequest *request){
-        request->send(LittleFS, "/index.html", "text/html");
-    });
+	// Required
+	server->on("/connecttest.txt", [](AsyncWebServerRequest *request) { request->redirect("http://logout.net"); });	    // windows 11 captive portal workaround
+    server->on("/wpad.dat", [](AsyncWebServerRequest *request) { request->send(404); });							
 
-    // Catch-all handler for any other requests
-    server->onNotFound([](AsyncWebServerRequest *request){
-        Serial.printf("Captive portal redirect: %s\n", request->url().c_str());
-        request->send(LittleFS, "/index.html", "text/html");
+    // Background responses: Probably not all are Required, but some are. Others might speed things up?
+    server->on("/generate_204", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });		  // android captive portal redirect
+    server->on("/redirect", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });			  // microsoft redirect
+    server->on("/hotspot-detect.html", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });  // apple call home
+    server->on("/canonical.html", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); }); 	  // firefox captive portal call home
+    server->on("/success.txt", [](AsyncWebServerRequest *request) { request->send(200); });					              // firefox captive portal call home
+    server->on("/ncsi.txt", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });	    	  // windows call home
+
+    // return 404 to webpage icon
+    server->on("/favicon.ico", [](AsyncWebServerRequest *request) { request->send(404); });	// webpage icon
+
+    // Serve Basic HTML Page
+	server->on("/", HTTP_ANY, [](AsyncWebServerRequest *request) {
+		request->send(LittleFS, "/index.html", "text/html");
+		Serial.println("Served Basic HTML Page");
+	});
+
+
+    // the catch all
+    server->onNotFound([](AsyncWebServerRequest *request) {
+        request->redirect("http://192.168.4.1");
+        Serial.print("onnotfound ");
+        Serial.print(request->host());	// This gives some insight into whatever was being requested on the serial monitor
+        Serial.print(" ");
+        Serial.print(request->url());
     });
-    
-    // Serve static files (CSS, JS, images, etc.)
-    server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 }
 
 
@@ -363,7 +370,7 @@ void W_Server::mountWebFiles()
     }
     Serial.println("Web Files Mounted Succesfully");
 
-    // server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+    server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 }
 
 
@@ -437,17 +444,22 @@ void W_Server::connectToWifi(){
     Serial.println(WiFi.localIP());
 }
 
+
 void W_Server::createAccessPoint()
 {
     Serial.print("Setting up Access Point");
-    WiFi.softAP(ssid, password);
+    WiFi.mode(WIFI_MODE_AP);
+    WiFi.softAPConfig(localIP, gateway, subnet);
+    WiFi.softAP(ssid, password, WIFI_CHANNEL, 0, MAX_CLIENTS);
 
-    // Configure the IP address if needed
-    if (!WiFi.softAPConfig(local_IP, gateway, subnet)) {
-        Serial.println("AP Config Failed");
-    } else {
-        Serial.println("AP Config Success");
-    }
+    // Disable AMPDU RX on the ESP32 WiFi to fix a bug on Android
+	esp_wifi_stop();
+	esp_wifi_deinit();
+	wifi_init_config_t my_config = WIFI_INIT_CONFIG_DEFAULT();
+	my_config.ampdu_rx_enable = false;
+	esp_wifi_init(&my_config);
+	esp_wifi_start();
+	vTaskDelay(100 / portTICK_PERIOD_MS);  // Add a small delay
 
     Serial.print("AP IP address: ");
     Serial.println(WiFi.softAPIP());
@@ -457,12 +469,9 @@ void W_Server::createAccessPoint()
 
 void W_Server::createDNSServer()
 {
-    if( dnsServer->start(53, "*", local_IP) ) {
-        Serial.println("DNS Server started successfully");
-    }
-    else {
-        Serial.println("[ERROR]: DNS Server failed to start");
-    }
+	// Set the TTL for DNS response and start the DNS server
+	dnsServer->setTTL(3600);
+	dnsServer->start(53, "*", localIP);
 }
 
 
@@ -479,10 +488,8 @@ void W_Server::createWebSocketServer()
 
 void W_Server::runServer()
 {
-    for(int i = 0; i < 10; i++){
-        dnsServer->processNextRequest();
-        delay(1);
-    }
+    dnsServer->processNextRequest();
+    delay(30);
 
     this->handleLoadingAnimation();
 
