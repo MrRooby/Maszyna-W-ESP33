@@ -56,8 +56,6 @@ class W_Local
     
         bool insertModeEnabled = false;
         std::string selectedValue = "L";
-        bool insertModeChanged = false;
-        bool buttonPressedLastFrame = false;
 
         char* lastPressedButton = nullptr;
 

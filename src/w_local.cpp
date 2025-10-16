@@ -273,22 +273,26 @@ void W_Local::handleInsertMode()
     ThreeDigitDisplay *display = getSelectedDisplay();
     if (!display) return;
 
-    if (humInter->getEncoderButtonLongPress() && !insertModeChanged) {
-        insertModeEnabled = !insertModeEnabled;
-        insertModeChanged = true;
-        
-        if (!insertModeEnabled) {
-            // Reset display color when exiting insert mode
-            display->setColor(dispMan->getElementColor(DisplayElement::DIGIT_DISPLAY));
+    bool currentState = humInter->getEncoderButtonState();
+    unsigned long now = millis();
+    static unsigned long pressStartTime = 0;
+    const unsigned int LONG_PRESS_TIME = 500;
+    static bool buttonPressedLastFrame = false;
+
+    if (currentState) {
+        if( pressStartTime == 0) {
+            pressStartTime = now;
+        }  
+        else if(now - pressStartTime >= LONG_PRESS_TIME){
+            insertModeEnabled = !insertModeEnabled;
         }
     }
-
-    if (humInter->getEncoderButtonState() == LOW) {
-        insertModeChanged = false;
+    else {
+        pressStartTime = 0;
     }
     
     if (insertModeEnabled) { 
-        if (!buttonPressedLastFrame && humInter->getEncoderButtonState() && !humInter->getEncoderButtonLongPress()) {
+        if (buttonPressedLastFrame && !currentState) {
             // Get iterator to current selection
             auto it = values.find(selectedValue);
 
@@ -298,7 +302,7 @@ void W_Local::handleInsertMode()
                 it = values.begin();
             }
             selectedValue = it->first;
-            buttonPressedLastFrame = true;
+            buttonPressedLastFrame = false;
             
             // Change back color of the previously selected display
             display->setColor(dispMan->getElementColor(DisplayElement::DIGIT_DISPLAY));
@@ -311,8 +315,8 @@ void W_Local::handleInsertMode()
                 selectedValue = "L"; 
             }
         }
-        else if(!humInter->getEncoderButtonState()){
-            buttonPressedLastFrame = false;
+        else if(currentState){
+            buttonPressedLastFrame = true;
         }
 
         dispMan->blinkingAnimation(display, DisplayElement::DIGIT_DISPLAY);        
@@ -363,5 +367,4 @@ void W_Local::runLocal()
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////
-
 }
