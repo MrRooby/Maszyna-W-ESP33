@@ -14,7 +14,7 @@ W_Local        *localMachine = nullptr;
 bool lastWiFiState   = false;
 bool modeInitialized = false;
 
-bool TestMode = true;
+bool TestMode = false;
 bool prevTestMode = false;
 
 

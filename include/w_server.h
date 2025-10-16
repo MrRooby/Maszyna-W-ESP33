@@ -12,7 +12,7 @@
 #include "display_manager.h"
 #include "human_interface.h"
 
-#define MAX_CLIENTS 4	// ESP32 supports up to 10 but I have not tested it yet
+#define MAX_CLIENTS 1	// ESP32 supports up to 10 but I have not tested it yet
 #define WIFI_CHANNEL 6	// 2.4ghz channel 6 https://en.wikipedia.org/wiki/List_of_WLAN_channels#2.4_GHz_(802.11b/g/n/ax)
 
 /**
