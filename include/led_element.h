@@ -16,6 +16,7 @@ class LedElement {
         int startIndex;
         int pixelCount = 0;
         RgbColor color;
+        bool swappedRG = false;
 
     public:
         /**
@@ -47,4 +48,6 @@ class LedElement {
          * @param color New color to set
          */
         virtual void setColor(RgbColor color);
+
+        RgbColor swapRG(const RgbColor &color);
 };

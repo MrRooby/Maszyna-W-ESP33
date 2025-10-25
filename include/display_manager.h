@@ -7,8 +7,8 @@
 #include "pins.h"
 #include <unordered_map>
 
-#define LED_COUNT_R 341
-#define LED_COUNT_L 249
+#define LED_COUNT_R 1000//341
+#define LED_COUNT_L 1000//249
 
 enum DisplayElement {
     DIGIT_DISPLAY,
@@ -31,12 +31,12 @@ private:
     NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod> *stripR; ///< NeoPixelBus for left strip
     NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod> *stripL; ///< NeoPixelBus for left strip
     
-    int timeBetweenAnimationFramesMilliseconds = 200;
+    const int timeBetweenAnimationFramesMilliseconds = 200;
     unsigned long lastUpdate = 0;
 
-    RgbColor signalLineColor = RgbColor(0, 0, 32);
-    RgbColor displayColor = RgbColor(32, 0, 0);
-    RgbColor busColor = RgbColor(0, 32, 0);
+    RgbColor signalLineColor = RgbColor(0, 100, 0);                 ///< Default color value 
+    RgbColor displayColor    = RgbColor(100, 0, 0);                 ///< Default color value 
+    RgbColor busColor        = RgbColor(0, 0, 100);                 ///< Default color value 
 
     const unsigned long BLINK_INTERVAL = 500;
     unsigned long lastBlinkTime = 0;
@@ -62,9 +62,9 @@ private:
     
     RgbColor hexToRgbColor(std::string colorHEX);
     
-    void setDisplayColor(std::string signalLineColorHEX = "", 
-                         std::string displayColorHEX = "", 
-                         std::string busColorHEX = "");
+    void setDisplayColor(const char *signalLineColorHEX = nullptr, 
+                         const char *displayColorHEX    = nullptr, 
+                         const char *busColorHEX        = nullptr);
 
 public:
     
@@ -112,20 +112,9 @@ public:
     PaODisplayLine *pao[4];
 
 
-
-    /**
-     * @brief Constructs a DisplayManager object to control two LED strips.
-     *
-     * Initializes the right and left LED strips with the specified number of LEDs and brightness.
-     * Also sets up all display elements and signal lines for both strips.
-     *
-     * @param numLedsR Number of LEDs on the right LED strip.
-     * @param numLedsL Number of LEDs on the left LED strip.
-     * @param brightness Brightness level for the LED strips.
-     */
-    DisplayManager(std::string signalLineColorHEX = "", 
-                   std::string displayColorHEX = "", 
-                   std::string busColorHEX = "");
+    DisplayManager(const char *signalLineColorHEX = nullptr, 
+                   const char *displayColorHEX    = nullptr, 
+                   const char *busColorHEX        = nullptr);
 
 
     ~DisplayManager();
@@ -141,9 +130,9 @@ public:
 
     void refreshDisplay();
 
-    void changeDisplayColor(std::string signalLineColorHEX = "", 
-                            std::string displayColorHEX = "", 
-                            std::string busColorHEX = "");
+    void changeDisplayColor(const char *signalLineColorHEX = nullptr, 
+                            const char *displayColorHEX    = nullptr, 
+                            const char *busColorHEX        = nullptr);
 
     /**
      * @brief Get signal line by name for controlling

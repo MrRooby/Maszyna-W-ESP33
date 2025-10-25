@@ -5,7 +5,7 @@ BusLine::BusLine()
 
 
 BusLine::BusLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, int length, RgbColor color)
-    : LedElement(strip0, startIndex, color) {
+    : LedElement(strip0, startIndex, swapRG(color)) {
     this->length = length;
     this->channel = 0;
     this->pixelCount = length;

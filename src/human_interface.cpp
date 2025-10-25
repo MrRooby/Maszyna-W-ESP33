@@ -193,7 +193,7 @@ void HumanInterface::testButtons()
     static char* prevButton = nullptr;
 
     if(button != nullptr && prevButton != button) {
-        Serial.printf("%s pressed\n", this->getPressedButton());
+        Serial.printf("[HumanInterface]: %s pressed\n", this->getPressedButton());
     }
 
     prevButton = button;

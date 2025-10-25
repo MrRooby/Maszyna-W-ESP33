@@ -3,17 +3,14 @@
 AsyncWebServer *W_Server::server = nullptr;
 
 
-W_Server::W_Server(DisplayManager *dispMan, HumanInterface *humInter) : 
+W_Server::W_Server(DisplayManager *dispMan, HumanInterface *humInter, FileSystem *fileSystem) : 
     ws(new AsyncWebSocket("/ws")),
     dnsServer(new DNSServer()),
-    localIP(192, 168, 4, 1),
-    gateway(192, 168, 4, 1),
-    subnet(255, 255, 255, 0),
-    lastSignal(nullptr),
-    loading(true)
+    dispMan(dispMan),
+    humInter(humInter),
+    fileSystem(fileSystem)
 {
-    this->dispMan = dispMan;
-    this->humInter = humInter; 
+    this->localURL  = "http://" + LOCAL_IP.toString();
 
     // Workaround because deleting pointer to server causes crashing, therefore changed
     // to static member
@@ -29,34 +26,37 @@ W_Server::W_Server(DisplayManager *dispMan, HumanInterface *humInter) :
 
 W_Server::~W_Server()
 {
-    Serial.println("Destructor: Cleaning up WebSocket clients...");
+    Serial.println("[W_SERVER]: Destructor: Cleaning up WebSocket clients...");
     ws->cleanupClients();
 
-    Serial.println("Destructor: Stopping DNS server...");
+    Serial.println("[W_SERVER]: Destructor: Stopping DNS server...");
     dnsServer->stop();
     
-    Serial.println("Destructor: Ending HTTP server...");
+    Serial.println("[W_SERVER]: Destructor: Ending HTTP server...");
     server->end();
 
-    Serial.println("Destructor: Disconnecting WiFi AP...");
+    Serial.println("[W_SERVER]: Destructor: Disconnecting WiFi AP...");
     WiFi.softAPdisconnect(true);
     
+    Serial.println("[W_SERVER]: Destructor: WebSocket deleted");
     delete ws;
-    Serial.println("WebSocket deleted");
     
+    Serial.println("[W_SERVER]: Destructor: DNS deleted");
     delete dnsServer;
-    Serial.println("DNS deleted");
     
-    dispMan = nullptr;
-    humInter = nullptr;
+    dispMan    = nullptr;
+    humInter   = nullptr;
+    fileSystem = nullptr;
+    
     lastSignal = nullptr;
     
-    server = nullptr;
-    ws = nullptr;
-    dnsServer = nullptr;
+    server     = nullptr;
+    ws         = nullptr;
+    dnsServer  = nullptr;
     
     this->humInter->controlOnboardLED(TOP, LOW);
-    Serial.println("Destructor: Done.");
+
+    Serial.println("[W_SERVER]: Destructor: DONE");
 }
 
 
@@ -78,55 +78,67 @@ void W_Server::initServer()
 
 void W_Server::createWebServer()
 {
-    const String localIPURL = "http://" + this->localIP.toString();
-
-	// Required
-	server->on("/connecttest.txt", [](AsyncWebServerRequest *request) { request->redirect("http://logout.net"); });	    // windows 11 captive portal workaround
-    server->on("/wpad.dat", [](AsyncWebServerRequest *request) { request->send(404); });							
+    // !!! TODO jeśli coś nie działa z captive portalem to pewnie tutaj jest błąd
+    // Required
+    server->on("/connecttest.txt",     [](AsyncWebServerRequest *request) { request->redirect("http://logout.net"); });	    // windows 11 captive portal workaround
+    server->on("/wpad.dat",            [](AsyncWebServerRequest *request) { request->send(404); });							
 
     // Background responses: Probably not all are Required, but some are. Others might speed things up?
-    server->on("/generate_204", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });		  // android captive portal redirect
-    server->on("/redirect", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });			  // microsoft redirect
+    server->on("/generate_204",        [](AsyncWebServerRequest *request) { request->send(204); });	// android captive portal redirect
+    server->on("/redirect",            [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });	// microsoft redirect
     server->on("/hotspot-detect.html", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });  // apple call home
-    server->on("/canonical.html", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); }); 	  // firefox captive portal call home
-    server->on("/success.txt", [](AsyncWebServerRequest *request) { request->send(200); });					              // firefox captive portal call home
-    server->on("/ncsi.txt", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });	    	  // windows call home
+    server->on("/canonical.html",      [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); }); 	// firefox captive portal call home
+    server->on("/success.txt",         [](AsyncWebServerRequest *request) { request->send(200, "text/plain", "success"); });					// firefox captive portal call home
+    server->on("/ncsi.txt",            [](AsyncWebServerRequest *request) { request->send(200, "text/plain", "Microsoft NCSI"); });	// windows call home
 
     // return 404 to webpage icon
-    server->on("/favicon.ico", [](AsyncWebServerRequest *request) { request->send(404); });	// webpage icon
+    server->on("/favicon.ico",         [](AsyncWebServerRequest *request) { request->send(404); });	// webpage icon
 
+    server->on("/static/hotspot.txt", [](AsyncWebServerRequest *request) { 
+        request->send(200, "text/plain", ""); 
+    });
+    
     // Serve Basic HTML Page
-	server->on("/", HTTP_ANY, [](AsyncWebServerRequest *request) {
-		request->send(LittleFS, "/index.html", "text/html");
-		Serial.println("Served Basic HTML Page");
-	});
+    server->on("/", HTTP_ANY, [](AsyncWebServerRequest *request) {
+        request->send(LittleFS, "/index.html", "text/html");
+        Serial.println("[W_SERVER]: Served Basic HTML Page");
+    });
 
+    server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 
     // the catch all
     server->onNotFound([](AsyncWebServerRequest *request) {
         request->redirect("http://192.168.4.1");
-        Serial.print("onnotfound ");
-        Serial.print(request->host());	// This gives some insight into whatever was being requested on the serial monitor
+        Serial.print("[W_SERVER]: onnotfound ");
+        Serial.print(request->host());
         Serial.print(" ");
-        Serial.print(request->url());
+        Serial.println(request->url());
     });
 }
 
 
 void W_Server::onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len) {
     switch (type) {
-      case WS_EVT_CONNECT:
-        Serial.printf("WebSocket client #%u connected from %s\n", client->id(), client->remoteIP().toString().c_str());
-        break;
-      case WS_EVT_DISCONNECT:
-        Serial.printf("WebSocket client #%u disconnected\n", client->id());
-        break;
-      case WS_EVT_DATA:
-        this->handleWebSocketMessage(arg, data, len);
-        break;
-      case WS_EVT_PONG:
-      case WS_EVT_ERROR:
-        break;
+        case WS_EVT_CONNECT:
+            Serial.print("[W_SERVER]: ");
+            Serial.printf("WebSocket client #%u connected from %s\n", client->id(), client->remoteIP().toString().c_str());
+            break;
+
+        case WS_EVT_DISCONNECT:
+            Serial.print("[W_SERVER]: ");
+            Serial.printf("WebSocket client #%u disconnected\n", client->id());
+            break;
+
+        case WS_EVT_DATA:
+            this->handleWebSocketMessage(arg, data, len);
+            break;
+
+        case WS_EVT_PONG:
+            // TODO: Websocket event case "PONG"
+
+        case WS_EVT_ERROR:
+            // TODO: Websocket event case "ERROR"
+            break;
     }
 }
 
@@ -140,21 +152,28 @@ void W_Server::handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
         DeserializationError error = deserializeJson(doc, (char*)data);
 
         if(error){
-            Serial.println("Failed to deserialize JSON!");
+            Serial.println("[W_SERVER][ERROR]: Failed to deserialize JSON!");
             return;
         }
         
         // Check for message type
         String type = doc["type"] | "";
 
-        if (type == "reg-update"){
+        if (type == "reg-update") {
             this->processPartialWebSocketData(doc);
         }
-        else if (type == "mem-update"){
+        else if (type == "mem-update") {
             this->processFullWebSocketData(doc);
         }
+        else if (type == "color-update") {
+            Serial.println("[W_SERVER]: Color Update Received");
+            this->updateColors(doc);
+        }
+        else if (type == "ping"){
+            Serial.println("[W_SERVER]: WebSocket Connection Active");
+        }
         else {
-            Serial.println("Invalid message type");
+            Serial.printf("[W_SERVER][ERROR]: Invalid message type: {%s}\n", type);
         }
     }
 }
@@ -175,27 +194,30 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
         boolValue = (intValue != 0);
     }
 
-    /////////////////////////////////////// Color hex values ///////////////////////////////////////
-    // TODO
 
     //////////////////////////////////////// Display values ////////////////////////////////////////
     if (field == "acc" && this->dispMan->acc){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: acc = %d\n", intValue);
         this->dispMan->acc->displayValue(intValue);
     }
     else if (field == "a" && this->dispMan->a){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: a = %d\n", intValue);
         this->dispMan->a->displayValue(intValue);
     }
     else if (field == "s" && this->dispMan->s){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: s = %d\n", intValue);
         this->dispMan->s->displayValue(intValue);
     }
     else if (field == "c" && this->dispMan->c){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: c = %d\n", intValue);
         this->dispMan->c->displayValue(intValue);
     }
     else if (field == "i" && this->dispMan->i){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: i = %d\n", intValue);
         this->dispMan->i->displayValue(intValue);
     }
@@ -209,6 +231,7 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
             int addr = addrsArray[i];
             int arg = argsArray[i];
             int val = valsArray[i];
+            Serial.print("[W_SERVER]: ");
             Serial.printf("Partial update: pao[%d] addr: %d, arg: %d, val: %d\n", (int)i, addr, arg, val);
             this->dispMan->pao[i]->displayLine(addr, val, arg);
         }
@@ -216,83 +239,102 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
 
     //////////////////////////////////////// Signal values /////////////////////////////////////////
     else if (field == "il" && this->dispMan->il){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: il = %d\n", boolValue);
         this->dispMan->il->turnOnLine(boolValue);
     }
     else if (field == "wel" && this->dispMan->wel){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: wel = %d\n", boolValue);
         this->dispMan->wel->turnOnLine(boolValue);
     }
     else if (field == "wyl" && this->dispMan->wyl){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: wyl = %d\n", boolValue);
         this->dispMan->wyl->turnOnLine(boolValue);
     }
     else if (field == "wyad" && this->dispMan->wyad1 && this->dispMan->wyad2){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: wyad = %d\n", boolValue);
         this->dispMan->wyad1->turnOnLine(boolValue);
         this->dispMan->wyad2->turnOnLine(boolValue);
     }
     else if (field == "wei" && this->dispMan->wei){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: wei = %d\n", boolValue);
         this->dispMan->wei->turnOnLine(boolValue);
     }
     else if (field == "weak" && this->dispMan->weak){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: weak = %d\n", boolValue);
         this->dispMan->weak->turnOnLine(boolValue);
     }
     else if (field == "dod" && this->dispMan->dod1 && this->dispMan->dod2){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: dod = %d\n", boolValue);
         this->dispMan->dod1->turnOnLine(boolValue);
         this->dispMan->dod2->turnOnLine(boolValue);
     }
     else if (field == "ode" && this->dispMan->ode1 && this->dispMan->ode2){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: ode = %d\n", boolValue);
         this->dispMan->ode1->turnOnLine(boolValue);
         this->dispMan->ode2->turnOnLine(boolValue);
     }
     else if (field == "przep" && this->dispMan->przep1 && this->dispMan->przep2){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: przep = %d\n", boolValue);
         this->dispMan->przep1->turnOnLine(boolValue);
         this->dispMan->przep2->turnOnLine(boolValue);
     }
     else if (field == "weja" && this->dispMan->weja){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: weja = %d\n", boolValue);
         this->dispMan->weja->turnOnLine(boolValue);
     }
     else if (field == "wyak" && this->dispMan->wyak){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: wyak = %d\n", boolValue);
         this->dispMan->wyak->turnOnLine(boolValue);
     }
     else if (field == "wea" && this->dispMan->wea){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: wea = %d\n", boolValue);
         this->dispMan->wea->turnOnLine(boolValue);
     }
     else if (field == "czyt" && this->dispMan->czyt1 && this->dispMan->czyt2){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: czyt = %d\n", boolValue);
         this->dispMan->czyt1->turnOnLine(boolValue);
         this->dispMan->czyt2->turnOnLine(boolValue);
     }
     else if (field == "pisz" && this->dispMan->pisz){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: pisz = %d\n", boolValue);
         this->dispMan->pisz->turnOnLine(boolValue);
     }
     else if (field == "wes" && this->dispMan->wes){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: wes = %d\n", boolValue);
         this->dispMan->wes->turnOnLine(boolValue);
     }
     else if (field == "wys" && this->dispMan->wys){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: wys = %d\n", boolValue);
         this->dispMan->wys->turnOnLine(boolValue);
     }
     else if (field == "busA" && this->dispMan->busA){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: busA= %d\n", boolValue);
         this->dispMan->busA->turnOnLine(boolValue);
     }
     else if (field == "busS" && this->dispMan->busS){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: busS= %d\n", boolValue);
         this->dispMan->busS->turnOnLine(boolValue);
     }
     else if (field == "stop" && this->dispMan->stop){
+        Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: stop= %d\n", boolValue);
         this->dispMan->stop->turnOnLine(boolValue);
     }
@@ -306,31 +348,31 @@ void W_Server::processFullWebSocketData(StaticJsonDocument<512> doc)
 
     if (dataObj.containsKey("acc") && this->dispMan->acc){
         int accValue = dataObj["acc"];
-        Serial.print("Received ACC value: ");
+        Serial.print("[W_SERVER]: Received ACC value: ");
         Serial.println(accValue);
         this->dispMan->acc->displayValue(accValue);
     }
     if (dataObj.containsKey("a") && this->dispMan->a){
         int aValue = dataObj["a"];
-        Serial.print("Received A value: ");
+        Serial.print("[W_SERVER]: Received A value: ");
         Serial.println(aValue);
         this->dispMan->a->displayValue(aValue);
     }
     if (dataObj.containsKey("s") && this->dispMan->s){
         int sValue = dataObj["s"];
-        Serial.print("Received S value: ");
+        Serial.print("[W_SERVER]: Received S value: ");
         Serial.println(sValue);
         this->dispMan->s->displayValue(sValue);
     }
     if (dataObj.containsKey("c") && this->dispMan->c){
         int cValue = dataObj["c"];
-        Serial.print("Received C value: ");
+        Serial.print("[W_SERVER]: Received C value: ");
         Serial.println(cValue);
         this->dispMan->c->displayValue(cValue);
     }
     if (dataObj.containsKey("i") && this->dispMan->i){
         int iValue = dataObj["i"];
-        Serial.print("Received I value: ");
+        Serial.print("[W_SERVER]: Received I value: ");
         Serial.println(iValue);
         this->dispMan->i->displayValue(iValue);
     }
@@ -342,6 +384,7 @@ void W_Server::processFullWebSocketData(StaticJsonDocument<512> doc)
             int addr = addrsArray[i];
             int arg = argsArray[i];
             int val = valsArray[i];
+            Serial.print("[W_SERVER]: ");
             Serial.printf("addr: %d, arg: %d, val: %d\n", addr, arg, val);
 
             this->dispMan->pao[i]->displayLine(addr, val, arg);
@@ -364,13 +407,13 @@ void W_Server::sendDataToClient(char *buttonNum){
 
 void W_Server::mountWebFiles()
 {
-    if(!LittleFS.begin(true)){
-        Serial.println("Web Files Mount Failed");
+    if(!fileSystem->begin()){
+        Serial.println("[W_SERVER][ERROR]: Web Files Mount Failed");
         return;
     }
-    Serial.println("Web Files Mounted Succesfully");
+    Serial.println("[W_SERVER]: Web Files Mounted Succesfully");
 
-    server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+    // server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 }
 
 
@@ -387,7 +430,7 @@ void W_Server::runningServerLED(){
         }
     }
     else{
-        // Optionally, turn off LED if no stations are connected
+        // Turn off LED if no stations are connected
         humInter->controlOnboardLED(BOTTOM, false);
         ledState = false;
     }
@@ -400,8 +443,8 @@ void W_Server::sendSignalValue()
     if(this->lastSignal != signal){
         if(signal != nullptr){
             this->sendDataToClient(signal);
-            Serial.printf("Signal value sent: %s", String(signal).c_str());
-            Serial.println();
+            Serial.print("[W_SERVER]: Signal value sent: ");
+            Serial.println(String(signal).c_str());
         }
         this->lastSignal = signal;
     }
@@ -432,24 +475,74 @@ void W_Server::handleLoadingAnimation()
 }
 
 
+void W_Server::updateColors(StaticJsonDocument<512> doc)
+{
+    JsonObject data = doc["data"];
+
+    if(dispMan){
+        if (data.isNull()) {
+            Serial.println("[W_SERVER]: updateColors: data is NULL");
+        } else {
+            char buf[512];
+            size_t n = serializeJson(data, buf, sizeof(buf));
+            Serial.print("[W_SERVER]: data JSON: ");
+            if (n > 0) Serial.println(buf); else Serial.println("(<empty>)");
+
+            Serial.println("[W_SERVER]: data contains keys:");
+            for (JsonPair kv : data) {
+                // Serialize value to string for safe printing
+                char vbuf[256];
+                size_t vn = serializeJson(kv.value(), vbuf, sizeof(vbuf));
+
+                Serial.print("  ");
+                Serial.print(kv.key().c_str());
+                Serial.print(" : ");
+                if (vn > 0) Serial.println(vbuf); else Serial.println("(<empty>)");
+            }
+        }
+        if(data["colorType"] == "signal_line_hex"){
+            const char *colorHEX = data["hex"];
+            dispMan->changeDisplayColor(colorHEX, "", "");
+            fileSystem->saveColorConfig(DisplayElement::SIGNAL_LINE, colorHEX);
+            Serial.printf("[W_SERVER] Signal Line Color: {%s}\n", colorHEX);
+        }
+        if(data["colorType"] == "display_hex"){
+            const char *colorHEX = data["hex"];
+            dispMan->changeDisplayColor("", colorHEX, "");
+            fileSystem->saveColorConfig(DisplayElement::DIGIT_DISPLAY, colorHEX);
+            Serial.printf("[W_SERVER] Display Color: {%s}\n", colorHEX);
+        }
+        if(data["colorType"] == "bus_hex"){
+            const char *colorHEX = data["hex"];
+            dispMan->changeDisplayColor("", "", colorHEX);
+            fileSystem->saveColorConfig(DisplayElement::BUS_LINE, colorHEX);
+            Serial.printf("[W_SERVER] Bus Color: {%s}\n", colorHEX);
+        }
+    }
+    else {
+        Serial.println("[W_SERVER][ERROR]: Couldn't update colors. DisplayManager is NULL");
+    }
+}
+
+
 void W_Server::connectToWifi(){
     WiFi.begin(this->ssid, this->password);
     while (WiFi.status() != WL_CONNECTED){
-        Serial.println("Connection down!");
+    Serial.println("[W_SERVER]: Connection down!");
     }
 
-    Serial.println("");
-    Serial.println("WiFi Connectd!");
-    Serial.print("IP Address: ");
+    Serial.println("[W_SERVER]: ");
+    Serial.println("[W_SERVER]: WiFi Connected!");
+    Serial.print("[W_SERVER]: IP Address: ");
     Serial.println(WiFi.localIP());
 }
 
 
 void W_Server::createAccessPoint()
 {
-    Serial.print("Setting up Access Point");
+    Serial.print("[W_SERVER]: Setting up Access Point");
     WiFi.mode(WIFI_MODE_AP);
-    WiFi.softAPConfig(localIP, gateway, subnet);
+    WiFi.softAPConfig(LOCAL_IP, GATEWAY, SUBNET_MASK);
     WiFi.softAP(ssid, password, WIFI_CHANNEL, 0, MAX_CLIENTS);
 
     // Disable AMPDU RX on the ESP32 WiFi to fix a bug on Android
@@ -461,9 +554,9 @@ void W_Server::createAccessPoint()
 	esp_wifi_start();
 	vTaskDelay(100 / portTICK_PERIOD_MS);  // Add a small delay
 
-    Serial.print("AP IP address: ");
+    Serial.print("[W_SERVER]: AP IP address: ");
     Serial.println(WiFi.softAPIP());
-    Serial.println("Acess Point created");
+    Serial.println("[W_SERVER]: Acess Point created");
 }
 
 
@@ -471,7 +564,8 @@ void W_Server::createDNSServer()
 {
 	// Set the TTL for DNS response and start the DNS server
 	dnsServer->setTTL(3600);
-	dnsServer->start(53, "*", localIP);
+	dnsServer->start(53, "*", LOCAL_IP);
+    Serial.println("[W_SERVER]: DNS Server started on port 53");
 }
 
 
@@ -482,19 +576,29 @@ void W_Server::createWebSocketServer()
 
     this->server->addHandler(ws);
 
-    Serial.println("Web Socket Server Started");
+    Serial.println("[W_SERVER]: Web Socket Server Started");
 }
 
 
 void W_Server::runServer()
 {
     dnsServer->processNextRequest();
-    delay(30);
+    dnsServer->processNextRequest();
+    dnsServer->processNextRequest();
+    delay(5);
+
+    int stationCount = WiFi.softAPgetStationNum();
+    static int lastCount = -1;
+    if (stationCount != lastCount) {
+        Serial.printf("[W_SERVER]: Connected stations: %d\n", stationCount);
+        lastCount = stationCount;
+    }
 
     this->handleLoadingAnimation();
 
-    if(WiFi.softAPgetStationNum() > 0)
+    if(WiFi.softAPgetStationNum() > 0){
         this->sendSignalValue();
+    }
 
     this->runningServerLED();
 

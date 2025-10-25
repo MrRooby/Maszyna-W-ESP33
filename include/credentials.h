@@ -24,6 +24,6 @@ static const char* WIFI_SSID = "Maszyna W(eb)";
  * @brief WiFi password
  * 
  * The password required to connect to the ESP32's
- * WiFi Access Point. Must be at least 8 characters long.
+ * WiFi Access Point.
  */
 static const char* WIFI_PASS = "";

@@ -1,9 +1,9 @@
 #include "display_manager.h"
 
 
-DisplayManager::DisplayManager(std::string signalLineColorHEX, 
-                               std::string displayColorHEX, 
-                               std::string busColorHEX) 
+DisplayManager::DisplayManager(const char *signalLineColorHEX, 
+                               const char *displayColorHEX, 
+                               const char *busColorHEX) 
 {
     this->setDisplayColor(signalLineColorHEX, displayColorHEX, busColorHEX);
 
@@ -87,6 +87,22 @@ DisplayManager::~DisplayManager()
 
 void DisplayManager::initStripR() {
     // Initialize strips displays and signal lines
+    /*
+    weak 32
+    AK
+    a 3
+    A
+    pao0
+    pao1
+    czyt 3
+    pisz 3
+    pao2
+    pao3
+    S
+    wes 9
+    
+
+    */
     this->a      = new ThreeDigitDisplay(this->stripR, 0,       this->displayColor);
     this->wea    = new SignalLine(       this->stripR, 21, 3,   this->displayColor);
     this->pao[0] = new PaODisplayLine(   this->stripR, 24,      this->displayColor);
@@ -130,12 +146,14 @@ void DisplayManager::initStripL() {
 
 RgbColor DisplayManager::hexToRgbColor(std::string colorHEX)
 {
-    if(colorHEX.size() != 6)
-        return hexToRgbColor("880011"); // if confused then pink
+    Serial.printf("[DisplayManager]: HEX:{%s}\n", colorHEX);
     
-    std::string redHEX = colorHEX.substr(0, 2);
-    std::string greenHEX = colorHEX.substr(2, 2);
-    std::string blueHEX = colorHEX.substr(4, 2);
+    if(colorHEX.size() != 7)
+        return hexToRgbColor("#880011"); // if confused then pink
+    
+    std::string redHEX = colorHEX.substr(1, 2);
+    std::string greenHEX = colorHEX.substr(3, 2);
+    std::string blueHEX = colorHEX.substr(5, 2);
 
     int red = std::stoi(redHEX, nullptr, 16);
     int green = std::stoi(greenHEX, nullptr, 16);
@@ -144,11 +162,11 @@ RgbColor DisplayManager::hexToRgbColor(std::string colorHEX)
     return RgbColor(red, green, blue);
 }
 
-void DisplayManager::setDisplayColor(std::string signalLineColorHEX, std::string displayColorHEX, std::string busColorHEX)
+void DisplayManager::setDisplayColor(const char *signalLineColorHEX, const char *displayColorHEX, const char *busColorHEX)
 {
-    this->signalLineColor = hexToRgbColor(signalLineColorHEX);
-    this->displayColor = hexToRgbColor(displayColorHEX);
-    this->busColor = hexToRgbColor(busColorHEX);
+    if(signalLineColorHEX) { this->signalLineColor = hexToRgbColor(signalLineColorHEX); }
+    if(displayColorHEX)    { this->displayColor = hexToRgbColor(displayColorHEX); }
+    if(busColorHEX)        { this->busColor = hexToRgbColor(busColorHEX); }
 }
 
 void DisplayManager::loadingAnimation(){
@@ -176,8 +194,6 @@ void DisplayManager::clearDisplay() {
     for (int i = 0; i < LED_COUNT_R; i++) {
         this->stripR->SetPixelColor(i, RgbColor(0, 0, 0));
     }
-    
-    // this->refreshDisplay();
 }
 
 void DisplayManager::refreshDisplay(){
@@ -185,8 +201,9 @@ void DisplayManager::refreshDisplay(){
     this->stripR->Show();
 }
 
-void DisplayManager::changeDisplayColor(std::string signalLineColorHEX, std::string displayColorHEX, std::string busColorHEX)
+void DisplayManager::changeDisplayColor(const char *signalLineColorHEX, const char *displayColorHEX, const char *busColorHEX)
 {
+    Serial.printf("[DisplayManager]: New Colors\n Signal Line = {%s}\n Display = {%s}\n Bus = {%s}\n", signalLineColorHEX, displayColorHEX, busColorHEX);   
     this->setDisplayColor(signalLineColorHEX, displayColorHEX, busColorHEX);
     
     // Update all display colors
@@ -201,29 +218,29 @@ void DisplayManager::changeDisplayColor(std::string signalLineColorHEX, std::str
     }
     
     // Update signal line colors
-    if (this->il) this->il->setColor(this->signalLineColor);
-    if (this->wel) this->wel->setColor(this->signalLineColor);
-    if (this->wyl) this->wyl->setColor(this->signalLineColor);
-    if (this->wyad1) this->wyad1->setColor(this->signalLineColor);
-    if (this->wyad2) this->wyad2->setColor(this->signalLineColor);
-    if (this->wei) this->wei->setColor(this->signalLineColor);
-    if (this->weja) this->weja->setColor(this->signalLineColor);
+    if (this->il)     this->il->setColor(this->signalLineColor);
+    if (this->wel)    this->wel->setColor(this->signalLineColor);
+    if (this->wyl)    this->wyl->setColor(this->signalLineColor);
+    if (this->wyad1)  this->wyad1->setColor(this->signalLineColor);
+    if (this->wyad2)  this->wyad2->setColor(this->signalLineColor);
+    if (this->wei)    this->wei->setColor(this->signalLineColor);
+    if (this->weja)   this->weja->setColor(this->signalLineColor);
     if (this->przep1) this->przep1->setColor(this->signalLineColor);
     if (this->przep2) this->przep2->setColor(this->signalLineColor);
-    if (this->ode1) this->ode1->setColor(this->signalLineColor);
-    if (this->ode2) this->ode2->setColor(this->signalLineColor);
-    if (this->dod1) this->dod1->setColor(this->signalLineColor);
-    if (this->dod2) this->dod2->setColor(this->signalLineColor);
-    if (this->weak) this->weak->setColor(this->signalLineColor);
-    if (this->wyak) this->wyak->setColor(this->signalLineColor);
-    if (this->wea) this->wea->setColor(this->signalLineColor); 
-    if (this->czyt1) this->czyt1->setColor(this->signalLineColor);
-    if (this->czyt2) this->czyt2->setColor(this->signalLineColor);
-    if (this->pisz) this->pisz->setColor(this->signalLineColor);
-    if (this->wes) this->wes->setColor(this->signalLineColor);
-    if (this->wys) this->wys->setColor(this->signalLineColor);
-    if (this->stop) this->stop->setColor(this->signalLineColor);
-    
+    if (this->ode1)   this->ode1->setColor(this->signalLineColor);
+    if (this->ode2)   this->ode2->setColor(this->signalLineColor);
+    if (this->dod1)   this->dod1->setColor(this->signalLineColor);
+    if (this->dod2)   this->dod2->setColor(this->signalLineColor);
+    if (this->weak)   this->weak->setColor(this->signalLineColor);
+    if (this->wyak)   this->wyak->setColor(this->signalLineColor);
+    if (this->wea)    this->wea->setColor(this->signalLineColor); 
+    if (this->czyt1)  this->czyt1->setColor(this->signalLineColor);
+    if (this->czyt2)  this->czyt2->setColor(this->signalLineColor);
+    if (this->pisz)   this->pisz->setColor(this->signalLineColor);
+    if (this->wes)    this->wes->setColor(this->signalLineColor);
+    if (this->wys)    this->wys->setColor(this->signalLineColor);
+    if (this->stop)   this->stop->setColor(this->signalLineColor);
+     
     // Update bus colors
     if (this->busA) this->busA->setColor(this->busColor);
     if (this->busS) this->busS->setColor(this->busColor);
@@ -296,12 +313,12 @@ void DisplayManager::ledTestAnimation(int updateSpeedMillis, bool printInSerial,
         if(this->stripL){
             this->stripL->SetPixelColor(iL, RgbColor(255, 0, 0));
             this->stripL->SetPixelColor(iL - 1, RgbColor(0, 0, 0));
-            if(printInSerial) Serial.printf("LEFT [%i]\n", iL);
+            if(printInSerial) Serial.printf("[DisplayManager]: LEFT [%i]\n", iL);
         }
         if(this->stripR){
             this->stripR->SetPixelColor(iR, RgbColor(255, 0, 0));
             this->stripR->SetPixelColor(iR - 1, RgbColor(0, 0, 0));
-            if(printInSerial) Serial.printf("RIGHT [%i]\n", iR);
+            if(printInSerial) Serial.printf("[DisplayManager]: RIGHT [%i]\n", iR);
         }
 
         if(iL < LED_COUNT_L){iL++;}

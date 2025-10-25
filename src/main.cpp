@@ -4,12 +4,15 @@
 #include "display_manager.h"
 #include "human_interface.h"
 #include "w_local.h"
+#include "file_system.h"
+
 
 
 DisplayManager *dispMan      = nullptr;
 HumanInterface *humInter     = nullptr;
 W_Server       *webMachine   = nullptr;
 W_Local        *localMachine = nullptr;
+FileSystem     *fileSystem   = nullptr;
 
 bool lastWiFiState   = false;
 bool modeInitialized = false;
@@ -23,39 +26,37 @@ void initializeMode() {
     
     // Clean up previous mode if switching
     if (modeInitialized && (currentWiFiState != lastWiFiState)) {
-        Serial.println("Mode switch detected - cleaning up...");
+        Serial.println("[MAIN]: Mode switch detected - cleaning up...");
         
         // Add safety check
-        if (dispMan != nullptr) {
-            Serial.println("Clearing display...");
+        if (dispMan) {
+            Serial.println("[MAIN]: Clearing display...");
             dispMan->clearDisplay();
-            Serial.println("Display cleared successfully");
+            Serial.println("[MAIN]: Display cleared successfully");
         }
         
-        if (webMachine != nullptr) {
-            Serial.println("Deleting web machine...");
+        if (webMachine) {
+            Serial.println("[MAIN]: Deleting web machine...");
             delete webMachine;
             webMachine = nullptr;
-            Serial.println("Web server stopped");
+            Serial.println("[MAIN]: Web server stopped");
         }
         
-        if (localMachine != nullptr) {
-            Serial.println("Deleting local machine...");
+        if (localMachine) {
+            Serial.println("[MAIN]: Deleting local machine...");
             delete localMachine;
             localMachine = nullptr;
-            Serial.println("Local machine stopped");
+            Serial.println("[MAIN]: Local machine stopped");
         }
     }
     
     // Initialize new mode if needed
-    if (currentWiFiState && webMachine == nullptr) {
-        Serial.println("Starting WiFi Server mode...");
-        dispMan->changeDisplayColor("FF0000", "000011", "000011");
-        webMachine = new W_Server(dispMan, humInter);
+    if (currentWiFiState && !webMachine) {
+        Serial.println("[MAIN]: Starting WiFi Server mode...");
+        webMachine = new W_Server(dispMan, humInter, fileSystem);
     }
-    else if (!currentWiFiState && localMachine == nullptr) {
-        Serial.println("Starting Local mode...");
-        dispMan->changeDisplayColor("000900", "010101", "010101");
+    else if (!currentWiFiState && !localMachine) {
+        Serial.println("[MAIN]: Starting Local mode...");
         localMachine = new W_Local(dispMan, humInter);
     }
     
@@ -68,8 +69,13 @@ void setup(){
     delay(2000);
     Serial.begin(115200);
     
-    dispMan = new DisplayManager();
-    humInter = new HumanInterface();
+    fileSystem = new FileSystem();
+    fileSystem->begin();
+
+    dispMan    = new DisplayManager(fileSystem->loadColorConfig(DisplayElement::SIGNAL_LINE), 
+                                    fileSystem->loadColorConfig(DisplayElement::DIGIT_DISPLAY),
+                                    fileSystem->loadColorConfig(DisplayElement::BUS_LINE));
+    humInter   = new HumanInterface();
 
     humInter->controlBacklightLED(30);
 
@@ -83,10 +89,10 @@ void loop() {
     if(!TestMode){
         initializeMode();
     
-        if(humInter->WiFiEnabled() && webMachine != nullptr){
+        if(humInter->WiFiEnabled() && webMachine){
             webMachine->runServer();
         }
-        else if(!humInter->WiFiEnabled() && localMachine != nullptr){
+        else if(!humInter->WiFiEnabled() && localMachine){
             localMachine->runLocal();
         }
     }
@@ -102,7 +108,7 @@ void loop() {
         }
         else {
             prevTestMode = humInter->WiFiEnabled();
-            dispMan->controlAllLEDs(55, 0 , 0);
+            dispMan->controlAllLEDs(100, 0, 0);
         }
 
         dispMan->refreshDisplay();
