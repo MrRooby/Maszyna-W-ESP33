@@ -16,11 +16,30 @@ const std::unordered_map<std::string, W_Local::CommandFunction> W_Local::signalM
     {"CZYT", &W_Local::czyt},
     {"PISZ", &W_Local::pisz},
     {"WES",  &W_Local::wes},
-    {"WYS",  &W_Local::wys}};
+    {"WYS",  &W_Local::wys}
+};
+
+const std::unordered_map<std::string, std::vector<std::string>> W_Local::signalConflicts = {
+    {"CZYT",  {"PISZ"}},
+    {"PISZ",  {"CZYT"}},
+
+    {"WYAK",  {"WYS"}},
+    {"WYS",   {"WYAK"}},
+    
+    {"IL",    {"WEL"}},
+    {"WEL",   {"IL"}},
+    
+    {"DOD",   {"ODE", "PRZEP"}},
+    {"ODE",   {"DOD", "PRZEP"}},
+    {"PRZEP", {"DOD", "ODE"}},
+    
+    {"WYL",   {"WYAD"}},
+    {"WYAD",  {"WYL"}}
+};
 
 W_Local::W_Local(DisplayManager *dispMan, HumanInterface *humInter)
 {
-    this->dispMan = dispMan;
+    this->dispMan  = dispMan;
     this->humInter = humInter;
 }
 
@@ -30,8 +49,12 @@ void W_Local::baseSignal(uint16_t from, uint16_t &to)
 {
     if(from > 999){
         from = 999;
-        to = from;
     } 
+    if(from < 0){
+        from = 0;
+    }
+
+    to = from;
 }
 
 void W_Local::il()
@@ -97,8 +120,12 @@ void W_Local::wea()
 {
     int value = this->bus.at("A");
 
-    if(value >= 4)
-        value = 3;
+    if(value >= 63){
+        value = 63;
+    }
+    if(value <= 0){
+        value = 0;
+    }
 
     this->values.at("A") = this->bus.at("A");
 }
@@ -163,21 +190,13 @@ void W_Local::refreshDisplay()
                                                                 this->dispMan->wyad2->turnOnLine(sig.second);}
             if (sig.first == "WEI"    && this->dispMan->wei)    this->dispMan->wei->turnOnLine(sig.second);
             if (sig.first == "WEJA"   && this->dispMan->weja)   this->dispMan->weja->turnOnLine(sig.second);
-            if (sig.first == "PRZEP"  && this->dispMan->przep1 && this->dispMan->przep2){
-                                                                this->dispMan->przep1->turnOnLine(sig.second); 
-                                                                this->dispMan->przep2->turnOnLine(sig.second);}
-            if (sig.first == "ODE"    && this->dispMan->ode1   && this->dispMan->ode2){
-                                                                this->dispMan->ode1->turnOnLine(sig.second);
-                                                                this->dispMan->ode2->turnOnLine(sig.second);} 
-            if (sig.first == "DOD"    && this->dispMan->dod1   && this->dispMan->dod1){   
-                                                                this->dispMan->dod1->turnOnLine(sig.second);  
-                                                                this->dispMan->dod2->turnOnLine(sig.second);}
+            if (sig.first == "PRZEP"  && this->dispMan->przep)  this->dispMan->przep->turnOnLine(sig.second); 
+            if (sig.first == "ODE"    && this->dispMan->ode)    this->dispMan->ode->turnOnLine(sig.second);
+            if (sig.first == "DOD"    && this->dispMan->dod)    this->dispMan->dod->turnOnLine(sig.second);  
             if (sig.first == "WEAK"   && this->dispMan->weak)   this->dispMan->weak->turnOnLine(sig.second);
             if (sig.first == "WYAK"   && this->dispMan->wyak)   this->dispMan->wyak->turnOnLine(sig.second);
             if (sig.first == "WEA"    && this->dispMan->wea)    this->dispMan->wea->turnOnLine(sig.second);
-            if (sig.first == "CZYT"   && this->dispMan->czyt1  && this->dispMan->czyt1){  
-                                                                this->dispMan->czyt1->turnOnLine(sig.second); 
-                                                                this->dispMan->czyt2->turnOnLine(sig.second);}
+            if (sig.first == "CZYT"   && this->dispMan->czyt)   this->dispMan->czyt->turnOnLine(sig.second); 
             if (sig.first == "PISZ"   && this->dispMan->pisz)   this->dispMan->pisz->turnOnLine(sig.second);
             if (sig.first == "WES"    && this->dispMan->wes)    this->dispMan->wes->turnOnLine(sig.second);
             if (sig.first == "WYS"    && this->dispMan->wys)    this->dispMan->wys->turnOnLine(sig.second);
@@ -221,7 +240,9 @@ void W_Local::readButtonInputs()
             if(itSignal != this->nextLineSignals.end()) {
                 this->nextLineSignals.erase(itSignal);
             } else {
-                this->nextLineSignals.push_back(buttonStr);
+                if(isSignalValid(buttonStr)) {
+                    this->nextLineSignals.push_back(buttonStr);
+                }
             }
             
             auto it = this->signal.find(buttonStr);
@@ -259,11 +280,11 @@ ThreeDigitDisplay *W_Local::getSelectedDisplay()
 {
     if (!dispMan) return nullptr;
     
-    if (selectedValue == "A") return dispMan->a;
+    if (selectedValue == "A")  return dispMan->a;
     if (selectedValue == "AK") return dispMan->acc;
-    if (selectedValue == "L") return dispMan->c;
-    if (selectedValue == "I") return dispMan->i;
-    if (selectedValue == "S") return dispMan->s;
+    if (selectedValue == "L")  return dispMan->c;
+    if (selectedValue == "I")  return dispMan->i;
+    if (selectedValue == "S")  return dispMan->s;
     
     return nullptr;
 }
@@ -324,33 +345,65 @@ void W_Local::handleInsertMode()
     }
 }
 
-void W_Local::runLocal()
+void W_Local::handleSerialDebug()
 {
-    handleInsertMode();
+    if (Serial.available() > 0) {
+        String input = Serial.readStringUntil('\n');
+        input.trim();
+        input.toUpperCase();
 
-    readButtonInputs();
+        // Handle TAKT separately since it's not in signalMap
+        if (input == "TAKT") {
+            Serial.printf("[W_LOCAL][DEBUG]: Executing TAKT\n");
+            this->takt();
+            return;
+        }
 
-    refreshDisplay();
+        // Check if it's a valid signal
+        auto it = signalMap.find(input.c_str());
+        if (it != signalMap.end()) {
+            std::string buttonStr(input.c_str());
+            
+            auto itSignal = std::find(this->nextLineSignals.begin(), this->nextLineSignals.end(), buttonStr);
+            if (itSignal != this->nextLineSignals.end()) {
+                this->nextLineSignals.erase(itSignal);
+            } else {
+                if(isSignalValid(buttonStr)) {
+                    this->nextLineSignals.push_back(buttonStr);
+                }
+            }
+            
+            auto itSig = this->signal.find(buttonStr);
+            if (itSig != this->signal.end()) {
+                itSig->second = !itSig->second;
+            }
+        } else {
+            Serial.printf("[W_LOCAL][DEBUG]: Unknown command: %s\n", input.c_str());
+            Serial.println("[W_LOCAL][DEBUG]: Valid commands: IL, WEL, WYL, WYAD, WEI, WEAK, DOD, ODE, PRZEP, WYAK, WEJA, WEA, CZYT, PISZ, WES, WYS, TAKT");
+        }
+    }
+}
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////// DEBUG PRINTS //////////////////////////////////////////
+void W_Local::printValuesToSerial()
+{
     static unsigned long lastPrintTime = 0;
     unsigned long currentTime = millis();
-    uint16_t interval = 50;
+    uint16_t interval = 500;  // Changed from 50ms to 500ms for better readability
 
     if (currentTime - lastPrintTime >= interval) {
+        Serial.println("\n========== STAN MASZYNY ==========");
+        
         // Lista rozkazów
-        Serial.println();
-        Serial.println();
-        Serial.println();
-        Serial.println();
-        Serial.println();
         Serial.print("Lista rozkazow: ");
-        for (const auto& sig : nextLineSignals) {
-            Serial.print(sig.c_str());
-            Serial.print(" ");
+        if (nextLineSignals.empty()) {
+            Serial.println("[pusta]");
+        } else {
+            for (const auto& sig : nextLineSignals) {
+                Serial.print(sig.c_str());
+                Serial.print(" ");
+            }
+            Serial.println();
         }
-        Serial.println();
 
         // Wartości z wyświetlaczy
         Serial.print("Wartosci: ");
@@ -362,9 +415,53 @@ void W_Local::runLocal()
         }
         Serial.println();
 
+        // Pamięć PAO
+        Serial.println("Pamiec PAO:");
+        for(int i = 0; i < 4; i++){
+            Serial.print("  [");
+            Serial.print(i);
+            Serial.print("]: ");
+            Serial.print(this->PaO[i].first);
+            Serial.print(" | ");
+            Serial.println(this->PaO[i].second);
+        }
 
+        Serial.println("==================================\n");
         lastPrintTime = currentTime;
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////
+}
+
+bool W_Local::isSignalValid(const std::string &newSignal)
+{
+    auto conflictIt = signalConflicts.find(newSignal);
+    if (conflictIt == signalConflicts.end()) {
+        return true;
+    }
+
+    const auto& conflicts = conflictIt->second;
+    
+    for (const auto& existingSignal : this->nextLineSignals) {
+        for (const auto& conflictSignal : conflicts) {
+            if (existingSignal == conflictSignal) {
+                Serial.printf("[W_LOCAL][DEBUG]: Signal '%s' conflicts with '%s'\n", 
+                            newSignal.c_str(), conflictSignal.c_str());
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+void W_Local::runLocal()
+{
+    handleSerialDebug();
+
+    handleInsertMode();
+
+    readButtonInputs();
+
+    refreshDisplay();
+
+    printValuesToSerial();
 }

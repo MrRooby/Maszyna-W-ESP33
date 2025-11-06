@@ -4,10 +4,15 @@
 #include "led_element.h"
 
 /**
- * @brief Class for controlling a two-digit seven-segment display
+ * @file two_digit_display.h
+ * @brief Two-digit seven-segment LED display controller
  * 
- * This class manages two seven-segment displays to show two-digit numbers.
- * Each digit is controlled independently using the Segment class.
+ * Controls a composite display consisting of two independent seven-segment displays
+ * to show two-digit numbers (0-99). Each digit is controlled independently using
+ * the Segment class, allowing for flexible digit manipulation and animations.
+ * 
+ * All two segments are controlled by the same LED strip and can be synchronized
+ * for color changes and animations.
  * 
  * @author Bartosz Faruga / MrRooby
  * @date 2025
@@ -18,43 +23,106 @@ class TwoDigitDisplay : protected LedElement {
 
     public:
         /**
-         * @brief Constructs a TwoDigitDisplay object using the specified NeoPixelBus strip, start index, and color.
-         *
-         * This constructor initializes a two-digit 7-segment display using the provided NeoPixelBus strip,
-         * starting at the given index, and sets the initial color for the display segments.
-         *
-         * @param strip0 Pointer to the NeoPixelBus object controlling the LED strip (using RMT0 method).
-         * @param startIndex The starting index on the LED strip where the two-digit display begins.
-         * @param color The initial color to set for the display segments.
+         * @brief Construct a TwoDigitDisplay for Channel 0 (RMT0)
+         * 
+         * Initializes a two-digit seven-segment display that controls 14 LEDs (2 segments × 7 LEDs each)
+         * using the NeoEsp32Rmt0Ws2812xMethod (RMT channel 0) of the ESP32.
+         * 
+         * **LED Layout:**
+         * ```
+         * [Segment 0: 7 LEDs] [Segment 1: 7 LEDs]
+         * (Tens digit)        (Ones digit)
+         * ```
+         * 
+         * @param strip0 Pointer to the NeoPixelBus object configured for RMT channel 0.
+         *               Must not be nullptr.
+         * @param startIndex The starting index of the first LED in the display on the strip.
+         *                   Should be >= 0 and account for all 14 LEDs needed (startIndex + 14 ≤ total LEDs).
+         * @param color The RgbColor to display for both digits.
+         *              Can be changed later with setColor().
+         * 
+         * @note The two internal Segment objects are automatically initialized starting at
+         *       startIndex and startIndex+7 respectively.
+         * @see displayValue()
+         * @see setColor()
          */
         TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, RgbColor color);    
 
         /**
-         * @brief Constructs a TwoDigitDisplay object using the specified NeoPixelBus strip, start index, and color.
-         *
-         * This constructor initializes a two-digit 7-segment display using the provided NeoPixelBus strip,
-         * starting at the given index, and sets the initial color for the display segments.
-         *
-         * @param strip1 Pointer to the NeoPixelBus object controlling the LED strip (using RMT1 method).
-         * @param startIndex The starting index on the LED strip where the two-digit display begins.
-         * @param color The initial color to set for the display segments.
+         * @brief Construct a TwoDigitDisplay for Channel 1 (RMT1)
+         * 
+         * Initializes a two-digit seven-segment display that controls 14 LEDs (2 segments × 7 LEDs each)
+         * using the NeoEsp32Rmt1Ws2812xMethod (RMT channel 1) of the ESP32.
+         * 
+         * **LED Layout:**
+         * ```
+         * [Segment 0: 7 LEDs] [Segment 1: 7 LEDs]
+         * (Tens digit)        (Ones digit)
+         * ```
+         * 
+         * @param strip1 Pointer to the NeoPixelBus object configured for RMT channel 1.
+         *               Must not be nullptr.
+         * @param startIndex The starting index of the first LED in the display on the strip.
+         *                   Should be >= 0 and account for all 14 LEDs needed (startIndex + 14 ≤ total LEDs).
+         * @param color The RgbColor to display for both digits.
+         *              Can be changed later with setColor().
+         * 
+         * @note The two internal Segment objects are automatically initialized starting at
+         *       startIndex and startIndex+7 respectively.
+         * @see displayValue()
+         * @see setColor()
          */
         TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color);    
 
         /**
-         * @brief Display a two-digit number
+         * @brief Display a two-digit number on both segments
          * 
-         * @param value Number to display (0-99)
+         * Updates both seven-segment displays to show the provided value. The number
+         * is broken down into individual digits and displayed:
+         * @li Tens digit → Segment 0
+         * @li Ones digit → Segment 1
+         * 
+         * **Display examples:**
+         * @li displayValue(0) → displays "00"
+         * @li displayValue(5) → displays "05"
+         * @li displayValue(42) → displays "42"
+         * @li displayValue(99) → displays "99"
+         * 
+         * @param value Number to display (valid range: 0-99).
+         *              Values > 99 may wrap or be clamped by the underlying display.
+         * 
+         * @note This method updates both segments and sends data to the LED strip immediately.
+         * @see loadingAnimation()
          */
         void displayValue(int value);
 
-        
+        /**
+         * @brief Display a loading animation on both digits
+         * 
+         * Runs an animated sequence across both seven-segment displays to indicate
+         * system loading or processing state. The animation typically cycles through
+         * segments in a visually appealing pattern synchronized across both digits.
+         * 
+         * @note This is typically called in a loop with delays to create smooth animation.
+         *       Consider calling at regular intervals (e.g., every 50-100ms).
+         * @see displayValue()
+         */ 
         void loadingAnimation();
 
         /**
-         * @brief Change color of both digits
+         * @brief Change the color of both digits simultaneously
          * 
-         * @param color New color to set
+         * Updates the display color for both seven-segment displays at once.
+         * Useful for visual feedback (e.g., error indication, state highlighting).
+         * 
+         * Inherits color swapping behavior from LedElement if swappedRG flag is set.
+         * 
+         * @param color New RgbColor to apply to both digits.
+         *              Example: RgbColor(255, 0, 0) for red.
+         * 
+         * @note This overrides the base LedElement::setColor() method.
+         * @note Changes are applied to both segment displays immediately.
+         * @see LedElement::setColor()
          */
         void setColor(RgbColor color) override;
 };

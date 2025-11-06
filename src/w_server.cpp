@@ -68,7 +68,7 @@ void W_Server::initServer()
     this->createDNSServer();
     
     this->mountWebFiles();
-    this->createWebServer();
+    // this->createWebServer();
     
     this->server->begin();
     
@@ -80,39 +80,70 @@ void W_Server::createWebServer()
 {
     // !!! TODO jeśli coś nie działa z captive portalem to pewnie tutaj jest błąd
     // Required
-    server->on("/connecttest.txt",     [](AsyncWebServerRequest *request) { request->redirect("http://logout.net"); });	    // windows 11 captive portal workaround
-    server->on("/wpad.dat",            [](AsyncWebServerRequest *request) { request->send(404); });							
+    server->on("/connecttest.txt",     [](AsyncWebServerRequest *request) { 
+        Serial.println("[W_SERVER]: connecttest.txt accessed");
+        request->redirect("http://logout.net"); 
+    });	            
+    server->on("/wpad.dat",            [](AsyncWebServerRequest *request) { 
+        Serial.println("[W_SERVER]: wpad.dat accessed");
+        request->send(404); 
+    });
 
-    // Background responses: Probably not all are Required, but some are. Others might speed things up?
-    server->on("/generate_204",        [](AsyncWebServerRequest *request) { request->send(204); });	// android captive portal redirect
-    server->on("/redirect",            [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });	// microsoft redirect
-    server->on("/hotspot-detect.html", [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); });  // apple call home
-    server->on("/canonical.html",      [](AsyncWebServerRequest *request) { request->redirect("http://192.168.4.1"); }); 	// firefox captive portal call home
-    server->on("/success.txt",         [](AsyncWebServerRequest *request) { request->send(200, "text/plain", "success"); });					// firefox captive portal call home
-    server->on("/ncsi.txt",            [](AsyncWebServerRequest *request) { request->send(200, "text/plain", "Microsoft NCSI"); });	// windows call home
+    // Background responses
+    server->on("/generate_204",        [](AsyncWebServerRequest *request) { 
+        Serial.println("[W_SERVER]: generate_204 accessed");
+        request->send(204); 
+    });	                                
+    server->on("/redirect",            [](AsyncWebServerRequest *request) { 
+        Serial.println("[W_SERVER]: redirect accessed");
+        request->redirect("http://192.168.4.1"); 
+    });	        
+    server->on("/hotspot-detect.html", [](AsyncWebServerRequest *request) { 
+        Serial.println("[W_SERVER]: hotspot-detect.html accessed");
+        request->redirect("http://192.168.4.1"); 
+    });            
+    server->on("/canonical.html",      [](AsyncWebServerRequest *request) { 
+        Serial.println("[W_SERVER]: canonical.html accessed");
+        request->redirect("http://192.168.4.1"); 
+    }); 	        
+    server->on("/success.txt",         [](AsyncWebServerRequest *request) { 
+        Serial.println("[W_SERVER]: success.txt accessed");
+        request->send(200, "text/plain", "success"); 
+    });		
+    server->on("/ncsi.txt",            [](AsyncWebServerRequest *request) { 
+        Serial.println("[W_SERVER]: ncsi.txt accessed");
+        request->send(200, "text/plain", "Microsoft NCSI"); 
+    });	
 
     // return 404 to webpage icon
-    server->on("/favicon.ico",         [](AsyncWebServerRequest *request) { request->send(404); });	// webpage icon
+    server->on("/favicon.ico",         [](AsyncWebServerRequest *request) { 
+        request->send(404); 
+    });	
 
     server->on("/static/hotspot.txt", [](AsyncWebServerRequest *request) { 
+        Serial.println("[W_SERVER]: static/hotspot.txt accessed");
         request->send(200, "text/plain", ""); 
     });
     
-    // Serve Basic HTML Page
-    server->on("/", HTTP_ANY, [](AsyncWebServerRequest *request) {
-        request->send(LittleFS, "/index.html", "text/html");
-        Serial.println("[W_SERVER]: Served Basic HTML Page");
+    // Serve Basic HTML Page - DEBUG VERSION
+    server->on("/", HTTP_ANY, [this](AsyncWebServerRequest *request) {
+        Serial.println("[W_SERVER]: / (root) accessed");
+        if(LittleFS.exists("/index.html")) {
+            Serial.println("[W_SERVER]: index.html EXISTS - sending it");
+            request->send(LittleFS, "/index.html", "text/html");
+        } else {
+            Serial.println("[W_SERVER][ERROR]: index.html NOT FOUND!");
+            request->send(200, "text/html", "<h1>No index.html found!</h1>");
+        }
     });
 
     server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 
     // the catch all
     server->onNotFound([](AsyncWebServerRequest *request) {
-        request->redirect("http://192.168.4.1");
-        Serial.print("[W_SERVER]: onnotfound ");
-        Serial.print(request->host());
-        Serial.print(" ");
+        Serial.print("[W_SERVER]: onnotfound - URL: ");
         Serial.println(request->url());
+        request->redirect("http://192.168.4.1");
     });
 }
 
@@ -269,23 +300,20 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
         Serial.printf("Partial update: weak = %d\n", boolValue);
         this->dispMan->weak->turnOnLine(boolValue);
     }
-    else if (field == "dod" && this->dispMan->dod1 && this->dispMan->dod2){
+    else if (field == "dod" && this->dispMan->dod){
         Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: dod = %d\n", boolValue);
-        this->dispMan->dod1->turnOnLine(boolValue);
-        this->dispMan->dod2->turnOnLine(boolValue);
+        this->dispMan->dod->turnOnLine(boolValue);
     }
-    else if (field == "ode" && this->dispMan->ode1 && this->dispMan->ode2){
+    else if (field == "ode" && this->dispMan->ode){
         Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: ode = %d\n", boolValue);
-        this->dispMan->ode1->turnOnLine(boolValue);
-        this->dispMan->ode2->turnOnLine(boolValue);
+        this->dispMan->ode->turnOnLine(boolValue);
     }
-    else if (field == "przep" && this->dispMan->przep1 && this->dispMan->przep2){
+    else if (field == "przep" && this->dispMan->przep){
         Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: przep = %d\n", boolValue);
-        this->dispMan->przep1->turnOnLine(boolValue);
-        this->dispMan->przep2->turnOnLine(boolValue);
+        this->dispMan->przep->turnOnLine(boolValue);
     }
     else if (field == "weja" && this->dispMan->weja){
         Serial.print("[W_SERVER]: ");
@@ -302,11 +330,10 @@ void W_Server::processPartialWebSocketData(StaticJsonDocument<512> doc) {
         Serial.printf("Partial update: wea = %d\n", boolValue);
         this->dispMan->wea->turnOnLine(boolValue);
     }
-    else if (field == "czyt" && this->dispMan->czyt1 && this->dispMan->czyt2){
+    else if (field == "czyt" && this->dispMan->czyt){
         Serial.print("[W_SERVER]: ");
         Serial.printf("Partial update: czyt = %d\n", boolValue);
-        this->dispMan->czyt1->turnOnLine(boolValue);
-        this->dispMan->czyt2->turnOnLine(boolValue);
+        this->dispMan->czyt->turnOnLine(boolValue);
     }
     else if (field == "pisz" && this->dispMan->pisz){
         Serial.print("[W_SERVER]: ");
@@ -413,7 +440,7 @@ void W_Server::mountWebFiles()
     }
     Serial.println("[W_SERVER]: Web Files Mounted Succesfully");
 
-    // server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+    server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 }
 
 
@@ -459,6 +486,8 @@ void W_Server::handleLoadingAnimation()
         if (this->loading) {
             this->dispMan->clearDisplay();
             this->loading = false;
+
+            this->dispMan->showIP(this->LOCAL_IP);
         }
     } 
     else {
@@ -485,8 +514,8 @@ void W_Server::updateColors(StaticJsonDocument<512> doc)
         } else {
             char buf[512];
             size_t n = serializeJson(data, buf, sizeof(buf));
-            Serial.print("[W_SERVER]: data JSON: ");
-            if (n > 0) Serial.println(buf); else Serial.println("(<empty>)");
+            // Serial.print("[W_SERVER]: data JSON: ");
+            // if (n > 0) Serial.println(buf); else Serial.println("(<empty>)");
 
             Serial.println("[W_SERVER]: data contains keys:");
             for (JsonPair kv : data) {

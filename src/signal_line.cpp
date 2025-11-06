@@ -9,6 +9,7 @@ SignalLine::SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* st
     this->length = length;
     this->channel = 0;
     this->pixelCount = length;
+    this->swappedRG = true;
 }
 
 SignalLine::SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, int length, RgbColor color)
@@ -16,6 +17,7 @@ SignalLine::SignalLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* st
     this->length = length;
     this->channel = 1;
     this->pixelCount = length;
+    this->swappedRG = true;
 }
 
 void SignalLine::turnOnLine(bool choice) {
