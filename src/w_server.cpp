@@ -68,7 +68,7 @@ void W_Server::initServer()
     this->createDNSServer();
     
     this->mountWebFiles();
-    // this->createWebServer();
+    this->createWebServer();
     
     this->server->begin();
     
@@ -92,58 +92,58 @@ void W_Server::createWebServer()
     // Background responses
     server->on("/generate_204",        [](AsyncWebServerRequest *request) { 
         Serial.println("[W_SERVER]: generate_204 accessed");
-        request->send(204); 
+        request->redirect("http://2.1.3.7"); 
     });	                                
     server->on("/redirect",            [](AsyncWebServerRequest *request) { 
         Serial.println("[W_SERVER]: redirect accessed");
-        request->redirect("http://192.168.4.1"); 
+        request->redirect("http://2.1.3.7"); 
     });	        
     server->on("/hotspot-detect.html", [](AsyncWebServerRequest *request) { 
         Serial.println("[W_SERVER]: hotspot-detect.html accessed");
-        request->redirect("http://192.168.4.1"); 
+        request->redirect("http://2.1.3.7"); 
     });            
     server->on("/canonical.html",      [](AsyncWebServerRequest *request) { 
         Serial.println("[W_SERVER]: canonical.html accessed");
-        request->redirect("http://192.168.4.1"); 
+        request->redirect("http://2.1.3.7"); 
     }); 	        
     server->on("/success.txt",         [](AsyncWebServerRequest *request) { 
         Serial.println("[W_SERVER]: success.txt accessed");
-        request->send(200, "text/plain", "success"); 
+        request->send(200); 
     });		
     server->on("/ncsi.txt",            [](AsyncWebServerRequest *request) { 
         Serial.println("[W_SERVER]: ncsi.txt accessed");
-        request->send(200, "text/plain", "Microsoft NCSI"); 
+        request->redirect("http://2.1.3.7"); 
     });	
 
     // return 404 to webpage icon
-    server->on("/favicon.ico",         [](AsyncWebServerRequest *request) { 
-        request->send(404); 
-    });	
+    // server->on("/favicon.ico",         [](AsyncWebServerRequest *request) { 
+    //     request->send(404); 
+    // });	
 
-    server->on("/static/hotspot.txt", [](AsyncWebServerRequest *request) { 
-        Serial.println("[W_SERVER]: static/hotspot.txt accessed");
-        request->send(200, "text/plain", ""); 
-    });
+    // server->on("/static/hotspot.txt", [](AsyncWebServerRequest *request) { 
+    //     Serial.println("[W_SERVER]: static/hotspot.txt accessed");
+    //     request->send(200, "text/plain", ""); 
+    // });
     
     // Serve Basic HTML Page - DEBUG VERSION
-    server->on("/", HTTP_ANY, [this](AsyncWebServerRequest *request) {
-        Serial.println("[W_SERVER]: / (root) accessed");
-        if(LittleFS.exists("/index.html")) {
-            Serial.println("[W_SERVER]: index.html EXISTS - sending it");
-            request->send(LittleFS, "/index.html", "text/html");
-        } else {
-            Serial.println("[W_SERVER][ERROR]: index.html NOT FOUND!");
-            request->send(200, "text/html", "<h1>No index.html found!</h1>");
-        }
-    });
+    // server->on("/", HTTP_ANY, [this](AsyncWebServerRequest *request) {
+    //     Serial.println("[W_SERVER]: / (root) accessed");
+    //     if(LittleFS.exists("/index.html")) {
+    //         Serial.println("[W_SERVER]: index.html EXISTS - sending it");
+    //         request->send(LittleFS, "/index.html", "text/html");
+    //     } else {
+    //         Serial.println("[W_SERVER][ERROR]: index.html NOT FOUND!");
+    //         request->send(200, "text/html", "<h1>No index.html found!</h1>");
+    //     }
+    // });
 
-    server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+    // server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 
     // the catch all
     server->onNotFound([](AsyncWebServerRequest *request) {
         Serial.print("[W_SERVER]: onnotfound - URL: ");
         Serial.println(request->url());
-        request->redirect("http://192.168.4.1");
+        request->redirect("http://2.1.3.7");
     });
 }
 
@@ -440,7 +440,8 @@ void W_Server::mountWebFiles()
     }
     Serial.println("[W_SERVER]: Web Files Mounted Succesfully");
 
-    server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+    server->serveStatic("/", LittleFS, "/")
+           .setDefaultFile("index.html");
 }
 
 
