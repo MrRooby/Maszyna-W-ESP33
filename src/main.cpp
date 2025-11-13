@@ -15,6 +15,9 @@
 #include "w_local.h"
 #include "file_system.h"
 
+// TODO
+// Odświeżanie wyświetlaczy po wykryciu zmiany koloru
+// Wyświetlacze chyba będą zmuszone do pamiętania swojego stanu kurwa mać
 
 DisplayManager *dispMan      = nullptr;
 HumanInterface *humInter     = nullptr;

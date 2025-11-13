@@ -71,8 +71,8 @@ private:
     
     String localURL = "";                  ///< Formatted URL string for the server
 
-    const IPAddress LOCAL_IP    = IPAddress(2, 1, 3, 7); ///< Access Point IP address
-    const IPAddress GATEWAY     = IPAddress(2, 1, 3, 7); ///< Gateway IP address
+    const IPAddress LOCAL_IP    = IPAddress(2, 1, 3, 7);       ///< Access Point IP address
+    const IPAddress GATEWAY     = IPAddress(2, 1, 3, 7);       ///< Gateway IP address
     const IPAddress SUBNET_MASK = IPAddress(255, 255, 255, 0); ///< Subnet mask for AP network
     
     DisplayManager *dispMan    = nullptr;  ///< Pointer to display manager for hardware control

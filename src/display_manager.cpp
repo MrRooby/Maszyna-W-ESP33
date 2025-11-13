@@ -79,20 +79,20 @@ DisplayManager::~DisplayManager()
 
 void DisplayManager::initStripR() {
     // Initialize strips displays and signal lines
-    this->wyak   = new SignalLine(       this->stripR, 0, 32,  this->signalLineColor);
-    this->acc    = new ThreeDigitDisplay(this->stripR, 32,     this->displayColor);
-    this->wea    = new SignalLine(       this->stripR, 53, 3,  this->displayColor);
-    this->a      = new ThreeDigitDisplay(this->stripR, 56,     this->displayColor);
-    this->pao[0] = new PaODisplayLine(   this->stripR, 77,     this->displayColor);
-    this->pao[1] = new PaODisplayLine(   this->stripR, 126,    this->displayColor);
-    this->czyt   = new SignalLine(       this->stripR, 175, 3, this->signalLineColor);
-    this->pisz   = new SignalLine(       this->stripR, 178, 3, this->signalLineColor);
-    this->pao[2] = new PaODisplayLine(   this->stripR, 181,    this->displayColor);
-    this->pao[3] = new PaODisplayLine(   this->stripR, 230,    this->displayColor);
-    this->s      = new ThreeDigitDisplay(this->stripR, 279,    this->displayColor);
-    this->wys    = new SignalLine(       this->stripR, 300, 9, this->signalLineColor);
-    this->wes    = new SignalLine(       this->stripR, 309, 9, this->signalLineColor);
-    this->busS   = new BusLine(          this->stripR, 318, /*TODO liczba ledów magistrali*/78, this->busColor);
+    this->wyak   = new SignalLine(       this->stripR, 0, 34,  this->signalLineColor);
+    this->acc    = new ThreeDigitDisplay(this->stripR, 34,     this->displayColor);
+    this->wea    = new SignalLine(       this->stripR, 55, 3,  this->displayColor);
+    this->a      = new ThreeDigitDisplay(this->stripR, 58,     this->displayColor);
+    this->pao[0] = new PaODisplayLine(   this->stripR, 79,     this->displayColor);
+    this->pao[1] = new PaODisplayLine(   this->stripR, 128,    this->displayColor);
+    this->pisz   = new SignalLine(       this->stripR, 177, 3, this->signalLineColor);
+    this->czyt   = new SignalLine(       this->stripR, 180, 3, this->signalLineColor);
+    this->pao[2] = new PaODisplayLine(   this->stripR, 184,    this->displayColor);
+    this->pao[3] = new PaODisplayLine(   this->stripR, 233,    this->displayColor);
+    this->s      = new ThreeDigitDisplay(this->stripR, 282,    this->displayColor);
+    this->wys    = new SignalLine(       this->stripR, 303, 9, this->signalLineColor);
+    this->wes    = new SignalLine(       this->stripR, 312, 9, this->signalLineColor);
+    this->busS   = new BusLine(          this->stripR, 321, /*TODO liczba ledów magistrali*/78, this->busColor);
 }
 
 void DisplayManager::initStripL() {
@@ -101,17 +101,17 @@ void DisplayManager::initStripL() {
     this->wei    = new SignalLine(       this->stripL, 4, 4,   this->signalLineColor);
     this->i      = new ThreeDigitDisplay(this->stripL, 8,      this->displayColor);
     this->przep  = new SignalLine(       this->stripL, 29, 3,  this->signalLineColor);
-    this->ode    = new SignalLine(       this->stripL, 32, 3,  this->signalLineColor);
-    this->dod    = new SignalLine(       this->stripL, 35, 3,  this->signalLineColor);
-    this->weak   = new SignalLine(       this->stripL, 38, 3,  this->signalLineColor);
-    this->wyad1  = new SignalLine(       this->stripL, 41, 8,  this->signalLineColor);
-    this->stop   = new SignalLine(       this->stripL, 49, 16, this->signalLineColor);
-    this->wyad2  = new SignalLine(       this->stripL, 65, 35, this->signalLineColor);
-    this->wyl    = new SignalLine(       this->stripL, 100, 3, this->signalLineColor);
-    this->wel    = new SignalLine(       this->stripL, 103, 3, this->signalLineColor);
-    this->il     = new SignalLine(       this->stripL, 106, 3, this->signalLineColor);
-    this->c      = new ThreeDigitDisplay(this->stripL, 109,    this->displayColor);
-    this->busA   = new BusLine(          this->stripL, 130, /*TODO liczba ledów magistrali*/78, this->busColor);
+    this->ode    = new SignalLine(       this->stripL, 33, 3,  this->signalLineColor);
+    this->dod    = new SignalLine(       this->stripL, 36, 3,  this->signalLineColor);
+    this->weak   = new SignalLine(       this->stripL, 39, 3,  this->signalLineColor);
+    this->wyad1  = new SignalLine(       this->stripL, 42, 8,  this->signalLineColor);
+    this->stop   = new SignalLine(       this->stripL, 50, 16, this->signalLineColor);
+    this->wyad2  = new SignalLine(       this->stripL, 65, 36, this->signalLineColor);
+    this->wyl    = new SignalLine(       this->stripL, 101, 3, this->signalLineColor);
+    this->wel    = new SignalLine(       this->stripL, 104, 3, this->signalLineColor);
+    this->il     = new SignalLine(       this->stripL, 107, 3, this->signalLineColor);
+    this->c      = new ThreeDigitDisplay(this->stripL, 110,    this->displayColor);
+    this->busA   = new BusLine(          this->stripL, 131, /*TODO liczba ledów magistrali*/78, this->busColor);
 }
 
 RgbColor DisplayManager::hexToRgbColor(std::string colorHEX)
@@ -313,7 +313,7 @@ void DisplayManager::controlAllLEDs(int red, int green, int blue)
 
 void DisplayManager::showIP(const IPAddress ip)
 {
-    for(int i = 0; i < 3; i++){
+    for(int i = 0; i < 4; i++){
         this->pao[i]->val->displayValue(ip[i]);
     }
 }
