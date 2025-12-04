@@ -95,7 +95,9 @@ class ThreeDigitDisplay : public LedElement {
          * @note This method updates all three segments and sends data to the LED strip immediately.
          * @see loadingAnimation()
          */
-        void displayValue(int value);
+        void displayValue(int value, bool enableLeadingZero = true);
+        
+        void displayLetters(const char firstLetter, const char secondLetter, const char thirdLetter);
 
         /**
          * @brief Display a loading animation on all three digits

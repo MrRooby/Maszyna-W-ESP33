@@ -30,7 +30,7 @@ void Segment::displayNumber(int number)
     --6--
     */
 
-    static const bool segmentMap[10][7] = {
+    static const bool segmentMap[11][7] = {
         {false, true,  true,  true,  true,  true,  true},  // 0
         {false, true,  false, false, false, false, true},  // 1
         {true,  true,  true,  false, true,  true,  false}, // 2
@@ -40,11 +40,15 @@ void Segment::displayNumber(int number)
         {true,  false, true,  true,  true,  true,  true},  // 6
         {false, true,  true,  false, false, false, true},  // 7
         {true,  true,  true,  true,  true,  true,  true},  // 8
-        {true,  true,  true,  true,  false, true,  true}   // 9
+        {true,  true,  true,  true,  false, true,  true},  // 9
+        {false,  false,  false,  false,  false, false,  false}   // OFF
     };
 
-    if (number < 0 || number > 9)
+    if (number > 9)
         return;
+
+    if (number < 0)
+        number = 11;
 
     RgbColor off(0, 0, 0);
 
@@ -56,6 +60,72 @@ void Segment::displayNumber(int number)
     else if (this->channel == 1){
         for (int i = 0; i < 7; ++i){
             this->strip1->SetPixelColor(this->startIndex + i, segmentMap[number][i] ? this->color : off);
+        }
+    }
+}
+
+void Segment::displayLetter(const char letter)
+{
+    static const std::map<char, std::array<bool, 7>> characterMap = {
+        {'A', {true,  true,  true,  true,  true,  false, true}},   // A
+        {'B', {true,  true,  true,  true,  true,  true,  true}},   // B (same as 8)
+        {'C', {false, false, true,  true,  true,  true,  false}},  // C
+        {'D', {false, true,  true,  true,  true,  true,  true}},   // D (same as 0)
+        {'E', {true,  false, true,  true,  true,  true,  false}},  // E
+        {'F', {true,  false, true,  true,  true,  false, false}},  // F
+        {'G', {true,  true,  true,  true,  false, true,  true}},   // G (same as 9)
+        {'H', {true,  true,  false, true,  true,  false, true}},   // H
+        {'I', {false, true,  false, false, false, false, true}},   // I (same as 1)
+        {'J', {false, true,  false, false, true,  true,  true}},   // J
+        {'L', {false, false, false, true,  true,  true,  false}},  // L
+        {'N', {true,  false, false, false, true,  false, true}},   // N (lowercase n)
+        {'O', {false, true,  true,  true,  true,  true,  true}},   // O (same as 0)
+        {'P', {true,  true,  true,  true,  true,  false, false}},  // P
+        {'Q', {true,  true,  true,  true,  false, true,  true}},   // Q (same as 9)
+        {'R', {true,  false, false, false, true,  false, false}},  // R (lowercase r)
+        {'S', {true,  false, true,  true,  false, true,  true}},   // S (same as 5)
+        {'T', {true,  false, false, true,  true,  true,  false}},  // T (lowercase t)
+        {'U', {false, true,  false, true,  true,  true,  true}},   // U
+        {'Y', {true,  true,  true,  true,  false, false, true}},   // Y
+        {'Z', {true,  true,  true,  false, true,  true,  false}}   // Z (same as 2)
+    };
+
+    // Convert to uppercase
+    char upperLetter = letter;
+    if (letter >= 'a' && letter <= 'z') {
+        upperLetter = letter - 32;
+    }
+
+    // Check if character exists in map
+    auto it = characterMap.find(upperLetter);
+    if (it == characterMap.end()) {
+        // Invalid character - turn off all segments
+        RgbColor off(0, 0, 0);
+        if (this->channel == 0) {
+            for (int i = 0; i < 7; ++i) {
+                this->strip0->SetPixelColor(this->startIndex + i, off);
+            }
+        } else if (this->channel == 1) {
+            for (int i = 0; i < 7; ++i) {
+                this->strip1->SetPixelColor(this->startIndex + i, off);
+            }
+        }
+        return;
+    }
+
+    RgbColor off(0, 0, 0);
+    const std::array<bool, 7> segments = it->second;
+
+    // Display the character
+    if (this->channel == 0) {
+        for (int i = 0; i < 7; ++i) {
+            this->strip0->SetPixelColor(this->startIndex + i, 
+                                       segments[i] ? this->color : off);
+        }
+    } else if (this->channel == 1) {
+        for (int i = 0; i < 7; ++i) {
+            this->strip1->SetPixelColor(this->startIndex + i, 
+                                       segments[i] ? this->color : off);
         }
     }
 }

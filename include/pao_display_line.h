@@ -91,6 +91,12 @@ class PaODisplayLine: protected LedElement {
          */
         void displayLine(int addr, int val, int arg);
 
+        void displayLettersOnAddrField(const char firstLetter, const char secondLetter);
+        
+        void displayLettersOnValField(const char firstLetter, const char secondLetter, const char thirdLetter);
+
+        void displayLettersOnArgField(const char firstLetter, const char secondLetter);
+
         /**
          * @brief Display a loading animation on the PAO display
          * 

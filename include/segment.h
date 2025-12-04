@@ -1,6 +1,8 @@
 #pragma once
 
 #include <NeoPixelBus.h>
+#include <map>
+#include <array>
 #include "led_element.h"
 
 /**
@@ -92,6 +94,8 @@ public:
      * @note The display updates the LED strip immediately with the new segments.
      */
     void displayNumber(int number);
+
+    void displayLetter(const char letter);
 
     /**
      * @brief Display a loading animation on the segment

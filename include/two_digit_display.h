@@ -94,7 +94,9 @@ class TwoDigitDisplay : protected LedElement {
          * @note This method updates both segments and sends data to the LED strip immediately.
          * @see loadingAnimation()
          */
-        void displayValue(int value);
+        void displayValue(int value, bool enableLeadingZero = true);
+
+        void displayLetters(const char firstLetter, const char secondLetter);
 
         /**
          * @brief Display a loading animation on both digits

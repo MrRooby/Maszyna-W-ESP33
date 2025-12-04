@@ -16,9 +16,9 @@
 #include "file_system.h"
 
 // TODO
-// Odświeżanie wyświetlaczy po wykryciu zmiany koloru
-// Wyświetlacze chyba będą zmuszone do pamiętania swojego stanu kurwa mać
-
+// - Odświeżanie wyświetlaczy po wykryciu zmiany koloru
+//      Wyświetlacze chyba będą zmuszone do pamiętania swojego stanu kurwa mać
+// - Różne kolory kolumn PaO bo inaczej jest nieczytelne
 DisplayManager *dispMan      = nullptr;
 HumanInterface *humInter     = nullptr;
 W_Server       *webMachine   = nullptr;
@@ -122,7 +122,7 @@ void setup(){
                                     fileSystem->loadColorConfig(DisplayElement::BUS_LINE));
     humInter   = new HumanInterface();
 
-    humInter->controlBacklightLED(30);
+    humInter->controlBacklightLED(255);
 
     if(!TestMode){
         initializeMode();    

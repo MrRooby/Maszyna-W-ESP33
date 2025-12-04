@@ -81,7 +81,7 @@ void DisplayManager::initStripR() {
     // Initialize strips displays and signal lines
     this->wyak   = new SignalLine(       this->stripR, 0, 34,  this->signalLineColor);
     this->acc    = new ThreeDigitDisplay(this->stripR, 34,     this->displayColor);
-    this->wea    = new SignalLine(       this->stripR, 55, 3,  this->displayColor);
+    this->wea    = new SignalLine(       this->stripR, 55, 3,  this->signalLineColor);
     this->a      = new ThreeDigitDisplay(this->stripR, 58,     this->displayColor);
     this->pao[0] = new PaODisplayLine(   this->stripR, 79,     this->displayColor);
     this->pao[1] = new PaODisplayLine(   this->stripR, 128,    this->displayColor);
@@ -313,7 +313,9 @@ void DisplayManager::controlAllLEDs(int red, int green, int blue)
 
 void DisplayManager::showIP(const IPAddress ip)
 {
+    this->pao[0]->addr->displayLetters('I', 'P');
+
     for(int i = 0; i < 4; i++){
-        this->pao[i]->val->displayValue(ip[i]);
+        this->pao[i]->val->displayValue(ip[i], false);
     }
 }

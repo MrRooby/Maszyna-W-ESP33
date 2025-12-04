@@ -3,18 +3,22 @@
 TwoDigitDisplay::TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, int startIndex, RgbColor color)
     : LedElement(strip0, startIndex, color)
 {
-    this->display[0] = Segment(this->strip0, this->startIndex, this->color);
-    this->display[1] = Segment(this->strip0, this->startIndex + 7, this->color);
+    this->pixelCount = 14;
+
+    this->display[0] = Segment(strip0, startIndex, color);
+    this->display[1] = Segment(strip0, startIndex + 7, color);
 }
 
 TwoDigitDisplay::TwoDigitDisplay(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, RgbColor color)
     : LedElement(strip1, startIndex, color)
 {
-    this->display[0] = Segment(this->strip1, this->startIndex, this->color);
-    this->display[1] = Segment(this->strip1, this->startIndex + 7, this->color);
+    this->pixelCount = 14;
+
+    this->display[0] = Segment(strip1, startIndex, color);
+    this->display[1] = Segment(strip1, startIndex + 7, color);
 }
 
-void TwoDigitDisplay::displayValue(int value)
+void TwoDigitDisplay::displayValue(int value, bool enableLeadingZero)
 {
     if(value < 0){
         value = 0;
@@ -26,8 +30,14 @@ void TwoDigitDisplay::displayValue(int value)
     int tens = (value / 10) % 10;
     int ones = value % 10;
 
-    this->display[0].displayNumber(tens);
+    this->display[0].displayNumber(enableLeadingZero ? tens : 11);
     this->display[1].displayNumber(ones);
+}
+
+void TwoDigitDisplay::displayLetters(const char firstLetter, const char secondLetter)
+{
+    this->display[0].displayLetter(firstLetter);
+    this->display[1].displayLetter(secondLetter);
 }
 
 void TwoDigitDisplay::loadingAnimation()

@@ -22,6 +22,21 @@ void PaODisplayLine::displayLine(int addr, int val, int arg)
     this->arg->displayValue(arg);
 }
 
+void PaODisplayLine::displayLettersOnAddrField(const char firstLetter, const char secondLetter)
+{
+    this->addr->displayLetters(firstLetter, secondLetter);
+}
+
+void PaODisplayLine::displayLettersOnValField(const char firstLetter, const char secondLetter, const char thirdLetter)
+{
+    this->val->displayLetters(firstLetter, secondLetter, thirdLetter);    
+}
+
+void PaODisplayLine::displayLettersOnArgField(const char firstLetter, const char secondLetter)
+{
+    this->arg->displayLetters(firstLetter, secondLetter);
+}
+
 void PaODisplayLine::loadingAnimation(){
     this->addr->loadingAnimation();
     this->val->loadingAnimation();
