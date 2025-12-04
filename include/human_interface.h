@@ -69,26 +69,30 @@ private:
     /// @brief Button name mapping from multiplexer channel to signal names
     /// Maps channels 0-15 (multiplexer) and 16 (WYS special button) to signal command names
     const std::map<int, char*> buttons = {
-        { 0,  "ODE" },
-        { 1,  "WES" },
-        { 2,  "TAKT" },
-        { 3,  "WEJA" },
-        { 4,  "WYAK" },
-        { 5,  "PISZ" },
-        { 6,  "CZYT" },
-        { 7,  "WEA" },
-        { 8,  "PRZEP" },
-        { 9,  "IL" },
-        { 10, "WEL" },
-        { 11, "WYL" },
-        { 12, "WYAD" },
-        { 13, "WEI" },
-        { 14, "WEAK" },
-        { 15, "DOD" },
-        { 16, "WYS" }
+        { 1,  "PRZEP" },
+        { 2,  "ODE" },
+        { 3,  "WYAD" },
+        { 4,  "DOD" },
+        { 5,  "WEL" },
+        { 6,  "WYL" },
+        { 7,  "WEAK" },
+        { 8,  "WEA" },
+        { 10, "PISZ" },
+        { 11, "CZYT" },
+        { 12, "WYS" },
+        { 13, "IL" },
+        { 14, "WYAK" },
+        { 15, "WES" },
+        
+        
+        
+        { 16, "WEI" },
+        { 0,  "WEJA" },
+        { 9,  "TAKT" },
+        
     };
 
-    /**
+    /*
      * @brief Initialize the multiplexer (4-to-16 decoder) GPIO pins
      * 
      * Sets up MUX_COM as INPUT_PULLUP and MUX_S0-S3 as OUTPUT pins

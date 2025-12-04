@@ -9,7 +9,6 @@ BusLine::BusLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt0Ws2812xMethod>* strip0, 
     this->length = length;
     this->channel = 0;
     this->pixelCount = length;
-    this->swappedRG = true;
 }
 
 BusLine::BusLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, int startIndex, int length, RgbColor color)
@@ -17,7 +16,6 @@ BusLine::BusLine(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod>* strip1, 
     this->length = length;
     this->channel = 1;
     this->pixelCount = length;
-    this->swappedRG = true;
 }
 
 void BusLine::turnOnLine(bool choice) {

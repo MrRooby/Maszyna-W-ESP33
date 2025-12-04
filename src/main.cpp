@@ -19,6 +19,7 @@
 // - Odświeżanie wyświetlaczy po wykryciu zmiany koloru
 //      Wyświetlacze chyba będą zmuszone do pamiętania swojego stanu kurwa mać
 // - Różne kolory kolumn PaO bo inaczej jest nieczytelne
+
 DisplayManager *dispMan      = nullptr;
 HumanInterface *humInter     = nullptr;
 W_Server       *webMachine   = nullptr;

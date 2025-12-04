@@ -29,7 +29,11 @@ void ThreeDigitDisplay::displayValue(int value, bool enableLeadingZero){
     int ones = value % 10;
 
     this->display[0].displayNumber(enableLeadingZero ? huns : 11); // 11 is out of range for displayNumber, which turns off the segment
-    this->display[1].displayNumber(enableLeadingZero && huns > 0 ? tens : 11);
+    if(!enableLeadingZero){
+        if(huns == 0)
+            tens == 11;
+    }
+    this->display[1].displayNumber(tens);
     this->display[2].displayNumber(ones);
 }
 

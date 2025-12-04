@@ -21,7 +21,6 @@ class LedElement {
         int startIndex;
         int pixelCount = 0;
         RgbColor color;
-        bool swappedRG = false;
 
     public:
         /**
@@ -107,4 +106,16 @@ class LedElement {
          *       Use setColor() to apply a swapped color to the element.
          */
         RgbColor swapRG(const RgbColor &color);
+        
+        /**
+         * @brief Swaps the Red and Blue channels of an RGB color
+         * 
+         * @param color The original RgbColor to swap channels for
+         * 
+         * @return A new RgbColor with R and B channels swapped, G channel unchanged
+         * 
+         * @note This is a utility function and does not modify the element's internal color.
+         *       Use setColor() to apply a swapped color to the element.
+         */
+        RgbColor swapRB(const RgbColor &color);
 };

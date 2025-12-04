@@ -180,14 +180,14 @@ void W_Local::refreshDisplay()
         if(this->dispMan->i)    this->dispMan->i->displayValue(this->values.at("I"));
         if(this->dispMan->s)    this->dispMan->s->displayValue(this->values.at("S"));
         
-        //Signal lines
+        // Turn off all signal lines that are NOT in nextLineSignals
         for (const auto& sig : this->signal) {
             if (sig.first == "IL"     && this->dispMan->il)     this->dispMan->il->turnOnLine(sig.second);
             if (sig.first == "WEL"    && this->dispMan->wel)    this->dispMan->wel->turnOnLine(sig.second);
             if (sig.first == "WYL"    && this->dispMan->wyl)    this->dispMan->wyl->turnOnLine(sig.second);
-            if (sig.first == "WYAD"   && this->dispMan->wyad1  && this->dispMan->wyad1){
-                                                                this->dispMan->wyad1->turnOnLine(sig.second); 
-                                                                this->dispMan->wyad2->turnOnLine(sig.second);}
+            if (sig.first == "WYAD"   && this->dispMan->wyad1  && this->dispMan->wyad2){
+                                                                    this->dispMan->wyad1->turnOnLine(sig.second); 
+                                                                    this->dispMan->wyad2->turnOnLine(sig.second);}
             if (sig.first == "WEI"    && this->dispMan->wei)    this->dispMan->wei->turnOnLine(sig.second);
             if (sig.first == "WEJA"   && this->dispMan->weja)   this->dispMan->weja->turnOnLine(sig.second);
             if (sig.first == "PRZEP"  && this->dispMan->przep)  this->dispMan->przep->turnOnLine(sig.second); 
@@ -201,6 +201,7 @@ void W_Local::refreshDisplay()
             if (sig.first == "WES"    && this->dispMan->wes)    this->dispMan->wes->turnOnLine(sig.second);
             if (sig.first == "WYS"    && this->dispMan->wys)    this->dispMan->wys->turnOnLine(sig.second);
         }
+    
 
         // TODO trzeba zrobić warunek włączenia się ledów stopu
         if(this->dispMan->stop)   this->dispMan->stop->turnOnLine(false);
@@ -215,41 +216,48 @@ void W_Local::refreshDisplay()
         //Bus lines
         if(this->dispMan->busA) this->dispMan->busA->turnOnLine(this->bus.at("A"));
         if(this->dispMan->busS) this->dispMan->busS->turnOnLine(this->bus.at("S"));
+        
+        this->dispMan->refreshDisplay();
     }
-
-    this->dispMan->refreshDisplay();
 }
 
 void W_Local::readButtonInputs()
 {
     char* button = this->humInter->getPressedButton();
 
-    if(button == nullptr) {
-        this->lastPressedButton = "";
-        return;
-    }
+    if(button != this->lastPressedButton) {
+        if(button != nullptr){
+            std::string buttonStr(button);
 
-    std::string buttonStr(button);
+            Serial.println(button);
 
-    if(this->lastPressedButton != button){
-        if(buttonStr == "TAKT"){
-            this->takt();
-        }
-        else{
-            auto itSignal = std::find(this->nextLineSignals.begin(), this->nextLineSignals.end(), buttonStr);
-            if(itSignal != this->nextLineSignals.end()) {
-                this->nextLineSignals.erase(itSignal);
-            } else {
-                if(isSignalValid(buttonStr)) {
-                    this->nextLineSignals.push_back(buttonStr);
+            if(buttonStr == "TAKT"){
+                this->takt();
+            }
+            else {
+                auto itSignal = std::find(this->nextLineSignals.begin(), this->nextLineSignals.end(), buttonStr);
+                
+                if(itSignal != this->nextLineSignals.end()){
+                    this->nextLineSignals.erase(itSignal);
+                    
+                    auto it = this->signal.find(buttonStr);
+                    if(it != this->signal.end()){
+                        it->second = false;
+                    }
+                }
+                else{
+                    if(isSignalValid(buttonStr)) {
+                        this->nextLineSignals.push_back(buttonStr);
+                    }
+
+                    auto it = this->signal.find(buttonStr);
+                    if(it != this->signal.end()){
+                        it->second = true;
+                    }
                 }
             }
-            
-            auto it = this->signal.find(buttonStr);
-            if(it != this->signal.end()) {
-                it->second = !it->second;
-            }
         }
+
         this->lastPressedButton = button;
     }
 }
@@ -455,13 +463,12 @@ bool W_Local::isSignalValid(const std::string &newSignal)
 
 void W_Local::runLocal()
 {
-    handleSerialDebug();
-
-    handleInsertMode();
-
+    // handleSerialDebug();
     readButtonInputs();
 
+    handleInsertMode();
+    
     refreshDisplay();
-
-    printValuesToSerial();
+    
+    // printValuesToSerial();
 }

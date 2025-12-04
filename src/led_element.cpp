@@ -13,14 +13,15 @@ LedElement::LedElement(NeoPixelBus<NeoGrbFeature, NeoEsp32Rmt1Ws2812xMethod> *st
 }
 
 void LedElement::setColor(RgbColor color) {
-    if(swappedRG){
-        color = swapRG(color);
-    }
-    
     this->color = color;
 }
 
 RgbColor LedElement::swapRG(const RgbColor &color)
 {
     return RgbColor(color.G, color.R, color.B);
+}
+
+RgbColor LedElement::swapRB(const RgbColor &color)
+{
+    return RgbColor(color.B, color.G, color.R);
 }
