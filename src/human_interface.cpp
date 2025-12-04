@@ -96,19 +96,23 @@ bool HumanInterface::WiFiEnabled()
 
 bool HumanInterface::getEncoderButtonState()
 {
-    int state = digitalRead(ENC_SW);
-    
+    static long lastStateChangeTime = 0;
+    static bool prev = HIGH;
+    bool current = digitalRead(ENC_SW); 
+
     unsigned long now = millis();
-    if(state != lastEncButtonState){
-        lastDebounceTime = now;
+
+    if(prev != current){
+        
+        lastStateChangeTime = now;
     }
     
-    if(now - lastEncButtonDebounceTime >= DEBOUNCE_BUTTON_MILLIS){
-        if(state != debouncedEncButtonState){
-            debouncedEncButtonState = state;
-
-            return !state;
-        }
+    if(now - lastStateChangeTime >= DEBOUNCE_BUTTON_MILLIS)
+    {
+        if(prev == HIGH && current == LOW)
+            return current;
+        
+        prev = current;
     }
 }
 
@@ -146,17 +150,14 @@ EncoderState HumanInterface::getEncoderState()
     EncoderState returnState = EncoderState::IDLE;
 
     if(lastCLK == HIGH && currentCLK == LOW){
-        if(currentDT == HIGH){
+        if(currentDT == HIGH)
             returnState = EncoderState::UP;
-            lastEncTime = now;
-        }
-        else{
+        else
             returnState = EncoderState::DOWN;
-            lastEncTime = now;
-        }
+        lastEncTime = now;
     }
-    lastCLK = currentCLK;
 
+    lastCLK = currentCLK;
 
     return returnState;
 }

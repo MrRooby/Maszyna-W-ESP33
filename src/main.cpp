@@ -15,10 +15,14 @@
 #include "w_local.h"
 #include "file_system.h"
 
-// TODO
-// - Odświeżanie wyświetlaczy po wykryciu zmiany koloru
-//      Wyświetlacze chyba będą zmuszone do pamiętania swojego stanu kurwa mać
-// - Różne kolory kolumn PaO bo inaczej jest nieczytelne
+/*
+====================================== TODO ========================================
+- Odświeżanie wyświetlaczy po wykryciu zmiany koloru
+    Wyświetlacze chyba będą zmuszone do pamiętania swojego stanu kurwa mać
+- Korekta działania enkodera
+- korekta działania maszyny lokalne (jak działają wykluczające się sygnały)
+====================================================================================
+*/
 
 DisplayManager *dispMan      = nullptr;
 HumanInterface *humInter     = nullptr;

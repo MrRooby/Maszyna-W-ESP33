@@ -47,6 +47,9 @@ W_Local::~W_Local(){}
 
 void W_Local::baseSignal(uint16_t from, uint16_t &to)
 {
+    Serial.println(from);
+    Serial.println(to);
+
     if(from > 999){
         from = 999;
     } 
@@ -66,22 +69,26 @@ void W_Local::il()
 
 void W_Local::wel()
 {
-    this->baseSignal(this->bus.at("A"), this->values.at("L"));
+    this->baseSignal(this->values.at("L"), this->bus.at("A"));
+    this->busLED.at("A") = true;
 }
 
 void W_Local::wyl()
 {
-    this->baseSignal(this->values.at("L"), this->bus.at("A"));
+    this->baseSignal(this->bus.at("A"), this->values.at("L"));
+    this->busLED.at("A") = true;
 }
 
 void W_Local::wyad()
 {
     this->baseSignal(this->values.at("I"), this->bus.at("A"));
+    this->busLED.at("A") = true;
 }
 
 void W_Local::wei()
 {
     this->baseSignal(this->bus.at("S"), this->values.at("I"));
+    this->busLED.at("S") = true;
 }
 
 void W_Local::weak()
@@ -114,11 +121,14 @@ void W_Local::wyak()
 void W_Local::weja()
 {
     this->baseSignal(this->bus.at("S"), this->values.at("JAML"));
+    this->busLED.at("S") = true;
 }
 
 void W_Local::wea()
 {
     int value = this->bus.at("A");
+
+    Serial.println(value);
 
     if(value >= 63){
         value = 63;
@@ -128,6 +138,7 @@ void W_Local::wea()
     }
 
     this->values.at("A") = this->bus.at("A");
+    this->busLED.at("A") = true;
 }
 
 void W_Local::czyt()
@@ -143,11 +154,13 @@ void W_Local::pisz()
 void W_Local::wes()
 {
     this->baseSignal(this->values.at("S"), this->bus.at("S"));
+    this->busLED.at("S") = true;
 }
 
 void W_Local::wys()
 {
     this->baseSignal(this->values.at("S"), this->bus.at("S"));
+    this->busLED.at("S") = true;
 }
 
 void W_Local::takt()
@@ -214,10 +227,37 @@ void W_Local::refreshDisplay()
         }
 
         //Bus lines
-        if(this->dispMan->busA) this->dispMan->busA->turnOnLine(this->bus.at("A"));
-        if(this->dispMan->busS) this->dispMan->busS->turnOnLine(this->bus.at("S"));
+        this->refreshBUSLines();
         
         this->dispMan->refreshDisplay();
+    }
+}
+
+void W_Local::refreshBUSLines()
+{
+    unsigned long now = millis();
+    static unsigned long busATurnOnTime = 0;
+    static unsigned long busSTurnOnTime = 0;
+    
+    if(this->busLED.at("A")){
+        if(this->dispMan->busA) this->dispMan->busA->turnOnLine(true);
+        busATurnOnTime = now; 
+    }
+    if(this->busLED.at("S")){
+        if(this->dispMan->busS) this->dispMan->busS->turnOnLine(true);
+        busSTurnOnTime = now;
+    }
+
+    if(now - busATurnOnTime >= BUS_LIGHT_UP_MILLIS)
+    {
+        if(this->dispMan->busA) this->dispMan->busA->turnOnLine(false);
+        this->busLED.at("A") = false;
+    }
+    
+    if(now - busSTurnOnTime >= BUS_LIGHT_UP_MILLIS)
+    {
+        if(this->dispMan->busS) this->dispMan->busS->turnOnLine(false);
+        this->busLED.at("S") = false;
     }
 }
 
@@ -306,10 +346,10 @@ void W_Local::handleInsertMode()
     unsigned long now = millis();
     static unsigned long pressStartTime = 0;
     const unsigned int LONG_PRESS_TIME = 500;
-    static bool buttonPressedLastFrame = false;
+    static bool buttonStateLastFrame = HIGH;
 
-    if (currentState) {
-        if( pressStartTime == 0) {
+    if (currentState == LOW) {
+        if(pressStartTime == 0) {
             pressStartTime = now;
         }  
         else if(now - pressStartTime >= LONG_PRESS_TIME){
@@ -321,7 +361,7 @@ void W_Local::handleInsertMode()
     }
     
     if (insertModeEnabled) { 
-        if (buttonPressedLastFrame && !currentState) {
+        if (buttonStateLastFrame == LOW && currentState == HIGH) {
             // Get iterator to current selection
             auto it = values.find(selectedValue);
 
@@ -331,11 +371,10 @@ void W_Local::handleInsertMode()
                 it = values.begin();
             }
             selectedValue = it->first;
-            buttonPressedLastFrame = false;
             
             // Change back color of the previously selected display
             display->setColor(dispMan->getElementColor(DisplayElement::DIGIT_DISPLAY));
-
+            
             // Update display pointer for new selection
             display = getSelectedDisplay();
             
@@ -344,51 +383,11 @@ void W_Local::handleInsertMode()
                 selectedValue = "L"; 
             }
         }
-        else if(currentState){
-            buttonPressedLastFrame = true;
-        }
+        
+        buttonStateLastFrame = currentState;
 
         dispMan->blinkingAnimation(display, DisplayElement::DIGIT_DISPLAY);        
         insertMode(values.at(selectedValue)); 
-    }
-}
-
-void W_Local::handleSerialDebug()
-{
-    if (Serial.available() > 0) {
-        String input = Serial.readStringUntil('\n');
-        input.trim();
-        input.toUpperCase();
-
-        // Handle TAKT separately since it's not in signalMap
-        if (input == "TAKT") {
-            Serial.printf("[W_LOCAL][DEBUG]: Executing TAKT\n");
-            this->takt();
-            return;
-        }
-
-        // Check if it's a valid signal
-        auto it = signalMap.find(input.c_str());
-        if (it != signalMap.end()) {
-            std::string buttonStr(input.c_str());
-            
-            auto itSignal = std::find(this->nextLineSignals.begin(), this->nextLineSignals.end(), buttonStr);
-            if (itSignal != this->nextLineSignals.end()) {
-                this->nextLineSignals.erase(itSignal);
-            } else {
-                if(isSignalValid(buttonStr)) {
-                    this->nextLineSignals.push_back(buttonStr);
-                }
-            }
-            
-            auto itSig = this->signal.find(buttonStr);
-            if (itSig != this->signal.end()) {
-                itSig->second = !itSig->second;
-            }
-        } else {
-            Serial.printf("[W_LOCAL][DEBUG]: Unknown command: %s\n", input.c_str());
-            Serial.println("[W_LOCAL][DEBUG]: Valid commands: IL, WEL, WYL, WYAD, WEI, WEAK, DOD, ODE, PRZEP, WYAK, WEJA, WEA, CZYT, PISZ, WES, WYS, TAKT");
-        }
     }
 }
 

@@ -56,9 +56,9 @@ private:
 
     bool lastEncButtonState = LOW;                          ///< Last read encoder button state
     bool debouncedEncButtonState = LOW;                     ///< Debounced encoder button state
-    unsigned long lastEncButtonDebounceTime = 0;            ///< Timestamp of last encoder button debounce update
+    // unsigned long lastEncButtonDebounceTime = 0;            ///< Timestamp of last encoder button debounce update
 
-    const unsigned int DEBOUNCE_ENC_MILLIS = 15;            ///< Encoder input debounce delay in milliseconds
+    const unsigned int DEBOUNCE_ENC_MILLIS = 5;             ///< Encoder input debounce delay in milliseconds
     unsigned long lastEncTime;                              ///< Timestamp of last encoder state change
     int lastCLK = 0;                                        ///< Last CLK pin state (used for edge detection)
     const uint16_t LONG_PRESS_TIME = 500;                   ///< Time threshold for long press detection in milliseconds

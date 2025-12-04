@@ -87,6 +87,13 @@ private:
         {"S", 0}            ///< Stack bus value
     };
 
+    std::unordered_map<std::string, bool> busLED = {
+        {"A", false},
+        {"S", false},
+    };
+
+    const uint16_t BUS_LIGHT_UP_MILLIS = 1500;
+
     /// Queue of signals to execute on next TAKT
     /// Stores selected signals before execution
     std::vector<std::string> nextLineSignals;
@@ -194,6 +201,8 @@ private:
      */
     void refreshDisplay();
 
+    void refreshBUSLines();
+
     /**
      * @brief Read and process button/encoder input from hardware
      * 
@@ -245,21 +254,6 @@ private:
      * @note Called every loop iteration when not in WiFi mode
      */
     void handleInsertMode();
-
-    /**
-     * @brief Process serial debug commands from UART
-     * 
-     * Reads commands from serial console and executes them as if they were button presses.
-     * Supports all signal names and "TAKT" command.
-     * 
-     * **Example commands:**
-     * @li "IL" → Add/toggle IL signal
-     * @li "TAKT" → Execute queued signals
-     * @li Unknown commands print list of valid commands to serial
-     * 
-     * @note Useful for testing without physical hardware
-     */
-    void handleSerialDebug();
 
     /**
      * @brief Print current machine state to serial console
