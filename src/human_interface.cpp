@@ -97,43 +97,21 @@ bool HumanInterface::WiFiEnabled()
 bool HumanInterface::getEncoderButtonState()
 {
     static long lastStateChangeTime = 0;
-    static bool prev = HIGH;
+    static bool debounced = HIGH;
     bool current = digitalRead(ENC_SW); 
 
     unsigned long now = millis();
 
-    if(prev != current){
-        
+    if(debounced != current){
         lastStateChangeTime = now;
     }
     
     if(now - lastStateChangeTime >= DEBOUNCE_BUTTON_MILLIS)
     {
-        if(prev == HIGH && current == LOW)
-            return current;
-        
-        prev = current;
-    }
-}
-
-bool HumanInterface::getEncoderButtonLongPress()
-{
-    bool currentState = getEncoderButtonState();
-    unsigned long now = millis();
-
-    if(currentState){
-        if( pressStartTime == 0){
-            pressStartTime = now;
-        }
-        else if(now - pressStartTime >= LONG_PRESS_TIME) {
-            return true;
-        }
-    }
-    else {
-        pressStartTime = 0;
+        debounced = current;
     }
 
-    return false;
+    return debounced;
 }
 
 EncoderState HumanInterface::getEncoderState()

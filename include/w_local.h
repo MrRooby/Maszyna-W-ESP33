@@ -92,7 +92,7 @@ private:
         {"S", false},
     };
 
-    const uint16_t BUS_LIGHT_UP_MILLIS = 1500;
+    const uint16_t BUS_LIGHT_UP_MILLIS = 690;
 
     /// Queue of signals to execute on next TAKT
     /// Stores selected signals before execution

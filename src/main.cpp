@@ -21,6 +21,7 @@
     Wyświetlacze chyba będą zmuszone do pamiętania swojego stanu kurwa mać
 - Korekta działania enkodera
 - korekta działania maszyny lokalne (jak działają wykluczające się sygnały)
+- miganie na czerwono w przypadku niedozwolonych sygnałów
 ====================================================================================
 */
 

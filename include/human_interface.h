@@ -196,19 +196,6 @@ public:
     bool getEncoderButtonState();
 
     /**
-     * @brief Detect long press on the encoder button
-     * 
-     * Returns true if the encoder button has been held down for at least
-     * LONG_PRESS_TIME milliseconds (500ms by default).
-     * 
-     * @return true if long press is detected and maintained,
-     *         false when button is released or LONG_PRESS_TIME not yet reached
-     * 
-     * @note Resets the press timer when button is released
-     */
-    bool getEncoderButtonLongPress();
-
-    /**
      * @brief Get the current rotary encoder rotation direction
      * 
      * Detects encoder rotation by monitoring the CLK and DT pins.

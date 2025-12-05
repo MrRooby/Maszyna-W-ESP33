@@ -115,30 +115,6 @@ void W_Server::createWebServer()
         request->redirect("http://2.1.3.7"); 
     });	
 
-    // return 404 to webpage icon
-    // server->on("/favicon.ico",         [](AsyncWebServerRequest *request) { 
-    //     request->send(404); 
-    // });	
-
-    // server->on("/static/hotspot.txt", [](AsyncWebServerRequest *request) { 
-    //     Serial.println("[W_SERVER]: static/hotspot.txt accessed");
-    //     request->send(200, "text/plain", ""); 
-    // });
-    
-    // Serve Basic HTML Page - DEBUG VERSION
-    // server->on("/", HTTP_ANY, [this](AsyncWebServerRequest *request) {
-    //     Serial.println("[W_SERVER]: / (root) accessed");
-    //     if(LittleFS.exists("/index.html")) {
-    //         Serial.println("[W_SERVER]: index.html EXISTS - sending it");
-    //         request->send(LittleFS, "/index.html", "text/html");
-    //     } else {
-    //         Serial.println("[W_SERVER][ERROR]: index.html NOT FOUND!");
-    //         request->send(200, "text/html", "<h1>No index.html found!</h1>");
-    //     }
-    // });
-
-    // server->serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
-
     // the catch all
     server->onNotFound([](AsyncWebServerRequest *request) {
         Serial.print("[W_SERVER]: onnotfound - URL: ");

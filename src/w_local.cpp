@@ -242,22 +242,22 @@ void W_Local::refreshBUSLines()
     if(this->busLED.at("A")){
         if(this->dispMan->busA) this->dispMan->busA->turnOnLine(true);
         busATurnOnTime = now; 
+        this->busLED.at("A") = false;
     }
     if(this->busLED.at("S")){
         if(this->dispMan->busS) this->dispMan->busS->turnOnLine(true);
         busSTurnOnTime = now;
+        this->busLED.at("S") = false;
     }
 
     if(now - busATurnOnTime >= BUS_LIGHT_UP_MILLIS)
     {
         if(this->dispMan->busA) this->dispMan->busA->turnOnLine(false);
-        this->busLED.at("A") = false;
     }
     
     if(now - busSTurnOnTime >= BUS_LIGHT_UP_MILLIS)
     {
         if(this->dispMan->busS) this->dispMan->busS->turnOnLine(false);
-        this->busLED.at("S") = false;
     }
 }
 
@@ -343,6 +343,8 @@ void W_Local::handleInsertMode()
     if (!display) return;
 
     bool currentState = humInter->getEncoderButtonState();
+    Serial.println(currentState);
+
     unsigned long now = millis();
     static unsigned long pressStartTime = 0;
     const unsigned int LONG_PRESS_TIME = 500;
