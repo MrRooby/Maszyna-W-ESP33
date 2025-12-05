@@ -52,7 +52,7 @@ private:
     uint16_t lastButtonState = 0;                           ///< Current raw button state from multiplexer (16-bit bitmask)
     uint16_t debouncedState = 0;                            ///< Debounced button state after DEBOUNCE_BUTTON_MILLIS delay
     unsigned long lastDebounceTime = 0;                     ///< Timestamp of last button state change
-    const uint16_t DEBOUNCE_BUTTON_MILLIS = 20;             ///< Button debounce delay in milliseconds
+    const uint16_t DEBOUNCE_BUTTON_MILLIS = 30;             ///< Button debounce delay in milliseconds
 
     bool lastEncButtonState = LOW;                          ///< Last read encoder button state
     bool debouncedEncButtonState = LOW;                     ///< Debounced encoder button state

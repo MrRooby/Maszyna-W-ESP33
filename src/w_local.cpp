@@ -344,7 +344,6 @@ void W_Local::handleInsertMode()
 
     bool currentState = humInter->getEncoderButtonState();
     Serial.println(currentState);
-
     unsigned long now = millis();
     static unsigned long pressStartTime = 0;
     const unsigned int LONG_PRESS_TIME = 500;
@@ -464,7 +463,6 @@ bool W_Local::isSignalValid(const std::string &newSignal)
 
 void W_Local::runLocal()
 {
-    // handleSerialDebug();
     readButtonInputs();
 
     handleInsertMode();
