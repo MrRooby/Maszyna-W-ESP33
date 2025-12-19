@@ -44,6 +44,8 @@ W_Local::W_Local(DisplayManager *dispMan, HumanInterface *humInter)
 {
     this->dispMan  = dispMan;
     this->humInter = humInter;
+
+    initRegisters();
 }
 
 W_Local::~W_Local(){}
@@ -51,7 +53,7 @@ W_Local::~W_Local(){}
 template<size_t N>
 uint8_t W_Local::binaryTo_uint8_t(std::bitset<N> number)
 {
-    uint8_t result = 8;
+    uint8_t result = 0;
 
     if(!number.none()){
         for(int i = 0; i < N; i++){
@@ -64,15 +66,27 @@ uint8_t W_Local::binaryTo_uint8_t(std::bitset<N> number)
 
 uint8_t W_Local::getPaOAddr()
 {
-    
     return binaryTo_uint8_t(A);
+}
+
+void W_Local::initRegisters()
+{
+    this->A = _5Bit("00000");
+    this->busA = _5Bit("00000");
+    this->S = _8Bit("00000000");
+    this->I = _8Bit("00000000");
+    this->L = _5Bit("00000000");
+    this->AK = _8Bit("00000000");
 }
 
 void W_Local::il()
 {
-    static const _5Bit one("00001");
-
-    L |= one;
+    _5Bit one("00001");
+    while(one != 0){
+        _5Bit carry = L & one;
+        L ^= one;
+        one = carry << 1;
+    }
 }
 
 void W_Local::wel()
@@ -218,14 +232,14 @@ void W_Local::refreshDisplay()
         if(this->dispMan->stop)   this->dispMan->stop->turnOnLine(false);
 
         //PaO
-        for(int i = PaORangeLow; i < PaORangeHigh; i++){
+        for(int i = PaORangeLow; i <= PaORangeHigh; i++){
             if(this->dispMan->pao[i]){
                 _3Bit arg;
                 for(int n = 5; n < 8; n++){
                     arg[n] = PaO[i][n];   
                 }
                 
-                static RgbColor tempColor(255, 0, 0);
+                static RgbColor tempColor(0, 255, 0);
                 
                 if(binaryTo_uint8_t(A) == i){
                     this->dispMan->pao[i]->setTemporaryColor(tempColor);
@@ -387,26 +401,43 @@ void W_Local::handleEncoderMode()
     if (!display) return;
 
     bool currentState = humInter->getEncoderButtonState();
-    // Serial.println(currentState);
     unsigned long now = millis();
     static unsigned long pressStartTime = 0;
     const unsigned int LONG_PRESS_TIME = 500;
     static bool buttonStateLastFrame = HIGH;
+    static bool insertModeToggled = false;
+    static bool suppressNextReleaseClick = false;
 
     if (currentState == LOW) {
         if(pressStartTime == 0) {
             pressStartTime = now;
         }  
-        else if(now - pressStartTime >= LONG_PRESS_TIME){
+        else if((now - pressStartTime >= LONG_PRESS_TIME) && !insertModeToggled){
             insertModeEnabled = !insertModeEnabled;
+            insertModeToggled = true;
+
+            suppressNextReleaseClick = true;
+            
+            Serial.printf("[W_LOCAL][DEBUG] Insert mode toggled: {%d}\n", insertModeEnabled);
         }
     }
     else {
         pressStartTime = 0;
+        if(insertModeToggled && !insertModeEnabled){
+            display->setColor(dispMan->getElementColor(DisplayElement::DIGIT_DISPLAY));
+        }
+        insertModeToggled = false;
     }
-    
-    if (insertModeEnabled) { 
-        if (buttonStateLastFrame == LOW && currentState == HIGH) {
+     
+    // warunek jest pomijany w takcie zmiany trybu, aby uniknąć zmiany wyświetlacza zaraz po puszczeniu przycisku
+    if (insertModeEnabled) {
+        if (suppressNextReleaseClick) {
+            if (currentState == HIGH) {
+                suppressNextReleaseClick = false;
+                buttonStateLastFrame = HIGH; // prevents LOW->HIGH edge detection on this release
+            }
+        }
+        else if (buttonStateLastFrame == LOW && currentState == HIGH) {
             if(selectedValue < 4)
                 selectedValue++;
             else
@@ -417,6 +448,7 @@ void W_Local::handleEncoderMode()
             
             // Update display pointer for new selection
             display = getSelectedDisplay(static_cast<Register>(selectedValue));
+            Serial.println("[W_LOCAL][DEBUG] Display changed");
         }
         
         buttonStateLastFrame = currentState;

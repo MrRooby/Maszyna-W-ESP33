@@ -90,8 +90,8 @@ void DisplayManager::initStripR() {
     this->pao[2] = new PaODisplayLine(   this->stripR, 184,    this->displayColor);
     this->pao[3] = new PaODisplayLine(   this->stripR, 233,    this->displayColor);
     this->s      = new ThreeDigitDisplay(this->stripR, 282,    this->displayColor);
-    this->wys    = new SignalLine(       this->stripR, 303, 9, this->signalLineColor);
-    this->wes    = new SignalLine(       this->stripR, 312, 9, this->signalLineColor);
+    this->wes    = new SignalLine(       this->stripR, 303, 9, this->signalLineColor);
+    this->wys    = new SignalLine(       this->stripR, 312, 9, this->signalLineColor);
     this->busS   = new BusLine(          this->stripR, 321, /*TODO liczba ledów magistrali*/78, this->busColor);
 }
 
@@ -107,8 +107,8 @@ void DisplayManager::initStripL() {
     this->wyad1  = new SignalLine(       this->stripL, 42, 8,  this->signalLineColor);
     this->stop   = new SignalLine(       this->stripL, 50, 16, this->signalLineColor);
     this->wyad2  = new SignalLine(       this->stripL, 65, 36, this->signalLineColor);
-    this->wyl    = new SignalLine(       this->stripL, 101, 3, this->signalLineColor);
-    this->wel    = new SignalLine(       this->stripL, 104, 3, this->signalLineColor);
+    this->wel    = new SignalLine(       this->stripL, 101, 3, this->signalLineColor);
+    this->wyl    = new SignalLine(       this->stripL, 104, 3, this->signalLineColor);
     this->il     = new SignalLine(       this->stripL, 107, 3, this->signalLineColor);
     this->c      = new ThreeDigitDisplay(this->stripL, 110,    this->displayColor);
     this->busA   = new BusLine(          this->stripL, 131, /*TODO liczba ledów magistrali*/78, this->busColor);

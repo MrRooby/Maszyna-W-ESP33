@@ -132,19 +132,8 @@ private:
     
     uint8_t getPaOAddr();
 
-    /**
-     * @brief Clamp and transfer a value between two variables
-     * 
-     * Transfers a value from source to destination, clamping it to the valid range (0-999).
-     * Used as a common utility for signal operations that move data between registers and buses.
-     * 
-     * @param from Source value to transfer
-     * @param to Destination reference to receive the clamped value
-     * 
-     * @note Value is clamped: values > 999 become 999, values < 0 become 0
-     */
-    void baseSignal(uint16_t from, uint16_t &to);
-
+    void initRegisters();
+    
     /// @name Signal Command Methods
     /// These methods implement the actual machine operations when signals are executed
     /// @{
