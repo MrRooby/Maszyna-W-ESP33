@@ -1,5 +1,21 @@
 #include "human_interface.h"
 
+// --- ISR Variables & Function (Global/Static scope for interrupt access) ---
+static volatile long isrEncCounter = 0;
+static volatile uint8_t isrLastState = 0;
+static const int8_t isrEncoderTable[16] = {0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 0, -1, 0, -1, 1, 0};
+
+void IRAM_ATTR handleEncoderInterrupt() {
+    uint8_t currState = (digitalRead(ENC_CLK) << 1) | digitalRead(ENC_DT);
+    uint8_t index = (isrLastState << 2) | currState;
+    int8_t val = isrEncoderTable[index];
+    
+    if (val != 0) {
+        isrEncCounter += val;
+    }
+    isrLastState = currState;
+}
+
 void HumanInterface::setupMux()
 {
     pinMode(MUX_COM, INPUT_PULLUP);
@@ -14,6 +30,13 @@ void HumanInterface::setupEncoder()
     pinMode(ENC_CLK, INPUT_PULLUP);
     pinMode(ENC_DT, INPUT_PULLUP);
     pinMode(ENC_SW, INPUT_PULLUP);
+
+    // Inicjalizacja stanu początkowego dla ISR
+    isrLastState = (digitalRead(ENC_CLK) << 1) | digitalRead(ENC_DT);
+    
+    // Uruchomienie przerwań na obu pinach (CHANGE - zbocze narastające i opadające)
+    attachInterrupt(digitalPinToInterrupt(ENC_CLK), handleEncoderInterrupt, CHANGE);
+    attachInterrupt(digitalPinToInterrupt(ENC_DT), handleEncoderInterrupt, CHANGE);
 }
 
 void HumanInterface::setupSwitches()
@@ -114,33 +137,32 @@ bool HumanInterface::getEncoderButtonState()
     }
     
     lastReading = currentReading;
+
     return stableState;
 }
 
 EncoderState HumanInterface::getEncoderState()
 {
-    int currentCLK = digitalRead(ENC_CLK);
-    int currentDT = digitalRead(ENC_DT);
+    long currentCounter;
 
-    unsigned long now = millis();
+    // Pobierz wartość licznika z ISR w sekcji krytycznej (atomowo)
+    noInterrupts();
+    currentCounter = isrEncCounter;
+    interrupts();
 
-    if (now - lastEncTime < DEBOUNCE_ENC_MILLIS) {
-        return EncoderState::IDLE;
+    // Sprawdź czy licznik zmienił się o pełny krok (zazwyczaj 4 impulsy na 1 klik)
+    // Używamy this->encLastCounter do śledzenia, co już obsłużyliśmy w pętli głównej
+    if (currentCounter / 4 != this->encLastCounter / 4) {
+        long diff = (currentCounter / 4) - (this->encLastCounter / 4);
+        
+        // Aktualizujemy nasz lokalny licznik do aktualnego stanu
+        this->encLastCounter = currentCounter;
+        
+        if (diff > 0) return EncoderState::UP;
+        else          return EncoderState::DOWN;
     }
 
-    EncoderState returnState = EncoderState::IDLE;
-
-    if(lastCLK == HIGH && currentCLK == LOW){
-        if(currentDT == HIGH)
-            returnState = EncoderState::UP;
-        else
-            returnState = EncoderState::DOWN;
-        lastEncTime = now;
-    }
-
-    lastCLK = currentCLK;
-
-    return returnState;
+    return EncoderState::IDLE;
 }
 
 void HumanInterface::controlOnboardLED(OnboardLED led, bool choice)

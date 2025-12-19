@@ -21,8 +21,10 @@
  * @date 2025
  */
 class PaODisplayLine: protected LedElement {
+    private:
+        RgbColor baseColor;
+
     public:
-        
         TwoDigitDisplay *addr = nullptr;    ///< Address display (2 digits)
         ThreeDigitDisplay *val = nullptr;   ///< Value display (3 digits)
         TwoDigitDisplay *arg = nullptr;     ///< Argument display (2 digits)
@@ -69,7 +71,7 @@ class PaODisplayLine: protected LedElement {
 
         /**
          * @brief Display values on all three displays simultaneously
-         * 
+         *r 
          * Updates the address, value, and argument displays to show the provided values.
          * All three displays are refreshed in the LED strip.
          * 
@@ -124,5 +126,13 @@ class PaODisplayLine: protected LedElement {
          * @note This overrides the base LedElement::setColor() method.
          * @see LedElement::setColor()
          */
-        void setColor(RgbColor color);
+        void setColor(RgbColor color) override;
+        
+        void applyColor(RgbColor color);
+        
+        RgbColor getColor();
+
+        void setTemporaryColor(RgbColor color);
+
+        void restoreColor();
 };

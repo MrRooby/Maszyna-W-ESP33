@@ -51,9 +51,8 @@ private:
     const unsigned long BLINK_INTERVAL = 500;                       ///< Interval for blinking animation in milliseconds
     unsigned long lastBlinkTime = 0;                                ///< Timestamp of the last blink state change
     bool blinkState = false;                                        ///< Current blink state (true = on, false = off)
-
     long lastRefreshTime = 0;                                       ///< Timestamp of the last display refresh 
-
+    
     std::unordered_map<std::string, SignalLine*> signalLineMap;     ///< Map of signal line names to their corresponding SignalLine objects
 
     /**
@@ -66,7 +65,7 @@ private:
      * @see initStripL()
      */
     void initStripR();
-
+    
     /**
      * @brief Initialize the left LED strip (RMT Channel 1)
      * 

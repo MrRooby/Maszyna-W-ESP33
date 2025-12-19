@@ -4,6 +4,8 @@
 #include "human_interface.h"
 #include <unordered_map>
 #include <vector>
+#include <bitset>
+#include <math.h>
 
 /**
  * @file w_local.h
@@ -30,35 +32,35 @@ private:
     DisplayManager *dispMan = nullptr;                       ///< Pointer to display manager for hardware control
     HumanInterface *humInter = nullptr;                      ///< Pointer to human interface for input handling
 
-    /// Machine register values map
-    /// @li L - Counter/Instruction pointer
-    /// @li I - Instruction register
-    /// @li AK - Accumulator
-    /// @li A - Address register
-    /// @li S - Stack pointer
-    /// @li JAML - Working register
-    std::map<std::string, uint16_t> values = {
-        {"L", 0},
-        {"I", 0},
-        {"AK", 0},
-        {"A", 0},
-        {"S", 0},
-        {"JAML", 0},
-    };
+    using _3Bit = std::bitset<3>;
+    using _5Bit = std::bitset<5>;
+    using _8Bit = std::bitset<8>;
+
+    _5Bit busA;
+    _8Bit busS;
+    
+    _8Bit JAML;
+    _8Bit AK;
+    _5Bit A;
+    _8Bit S;
+    _8Bit I;
+    _5Bit L;
+    
+    _8Bit PaO[32];
 
     /// Program-Address-Operand memory (64 entries)
     /// Each entry contains a pair of (address, operand) values
     /// Stores the instruction set for the machine
-    std::pair<uint16_t, uint16_t> PaO[64] = {
-        {1, 1},   {2, 2},   {4, 4},   {8, 8},   {17, 17}, {34, 34}, {36, 36}, {56, 56},
-        {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
-        {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
-        {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
-        {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
-        {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
-        {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
-        {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0}
-    };
+    // std::pair<uint16_t, uint16_t> PaO[64] = {
+    //     {1, 1},   {2, 2},   {4, 4},   {8, 8},   {17, 17}, {34, 34}, {36, 36}, {56, 56},
+    //     {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
+    //     {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
+    //     {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
+    //     {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
+    //     {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
+    //     {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},
+    //     {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0},   {0, 0}
+    // };
 
     /// Signal state map (on/off state for each signal line)
     /// Contains all 16 control signals used by the machine
@@ -82,10 +84,10 @@ private:
     };
 
     /// Data bus values (A and S buses)
-    std::unordered_map<std::string, uint16_t> bus = {
-        {"A", 0},           ///< Address bus value
-        {"S", 0}            ///< Stack bus value
-    };
+    // std::unordered_map<std::string, uint16_t> bus = {
+    //     {"A", 0},           ///< Address bus value
+    //     {"S", 0}            ///< Stack bus value
+    // };
 
     std::unordered_map<std::string, bool> busLED = {
         {"A", false},
@@ -109,23 +111,27 @@ private:
     /// Maps signal name to list of conflicting signals
     static const std::unordered_map<std::string, std::vector<std::string>> signalConflicts;
 
+    enum Register {
+        regL  = 0, 
+        regI  = 1, 
+        regAK = 2,
+        regA  = 3,
+        regS  = 4 
+    };
+
+    template<size_t N>
+    uint8_t binaryTo_uint8_t(std::bitset<N> number);
+    
     bool insertModeEnabled = false;                          ///< Flag indicating if insert/edit mode is active
     std::string selectedValue = "L";                         ///< Currently selected register in insert mode
 
     char* lastPressedButton = nullptr;                       ///< Tracks last button pressed for debouncing
 
-    /**
-     * @brief Clamp and transfer a value between two variables
-     * 
-     * Transfers a value from source to destination, clamping it to the valid range (0-999).
-     * Used as a common utility for signal operations that move data between registers and buses.
-     * 
-     * @param from Source value to transfer
-     * @param to Destination reference to receive the clamped value
-     * 
-     * @note Value is clamped: values > 999 become 999, values < 0 become 0
-     */
-    void baseSignal(uint16_t from, uint16_t &to);
+    uint8_t PaORangeLow  = 0;
+    
+    uint8_t getPaOAddr();
+
+    void initRegisters();
 
     /// @name Signal Command Methods
     /// These methods implement the actual machine operations when signals are executed
@@ -227,7 +233,10 @@ private:
      * @li UP rotation → Increment value (wrap 999→0)
      * @li DOWN rotation → Decrement value (wrap 0→999)
      */
-    void insertMode(uint16_t &value);
+    template<size_t N>
+    void insertMode(std::bitset<N> &selectedRegister);
+
+    void scrollPaO();
 
     /**
      * @brief Get the display pointer for the currently selected register
@@ -240,7 +249,7 @@ private:
      * 
      * @see selectedValue
      */
-    ThreeDigitDisplay* getSelectedDisplay();
+    ThreeDigitDisplay* getSelectedDisplay(const Register selectedRegister);
 
     /**
      * @brief Handle insert/edit mode activation and register selection
@@ -253,7 +262,7 @@ private:
      * 
      * @note Called every loop iteration when not in WiFi mode
      */
-    void handleInsertMode();
+    void handleEncoderMode();
 
     /**
      * @brief Print current machine state to serial console
@@ -311,7 +320,7 @@ public:
      * 
      * Executes the local machine control sequence in order:
      * @li handleSerialDebug() - Process serial commands
-     * @li handleInsertMode() - Handle register editing
+     * @li handleEncoderMode() - Handle register editing
      * @li readButtonInputs() - Read button/encoder input
      * @li refreshDisplay() - Update all displays
      * @li printValuesToSerial() - Output state to serial
