@@ -58,11 +58,16 @@ private:
     bool debouncedEncButtonState = LOW;                     ///< Debounced encoder button state
     // unsigned long lastEncButtonDebounceTime = 0;            ///< Timestamp of last encoder button debounce update
 
-    const unsigned int DEBOUNCE_ENC_MILLIS = 5;             ///< Encoder input debounce delay in milliseconds
-    unsigned long lastEncTime;                              ///< Timestamp of last encoder state change
-    int lastCLK = 0;                                        ///< Last CLK pin state (used for edge detection)
-    const uint16_t LONG_PRESS_TIME = 500;                   ///< Time threshold for long press detection in milliseconds
-    unsigned long pressStartTime = 0;                       ///< Timestamp when encoder button was first pressed
+    // const unsigned int DEBOUNCE_ENC_MILLIS = 5;             ///< Encoder input debounce delay in milliseconds
+    // unsigned long lastEncTime;                              ///< Timestamp of last encoder state change
+    // int lastCLK = 0;                                        ///< Last CLK pin state (used for edge detection)
+    // const uint16_t LONG_PRESS_TIME = 500;                   ///< Time threshold for long press detection in milliseconds
+    // unsigned long pressStartTime = 0;                       ///< Timestamp when encoder button was first pressed
+
+    const int8_t encoder_table[16] = {0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 0, -1, 0, -1, 1, 0};
+    uint8_t encLastState = 0;
+    long encCounter = 0;
+    long encLastCounter = 0;
 
     const int ONBOARD_LED_BRIGHTNESS = 64;                  ///< PWM brightness level for on-board LEDs (0-255)
     

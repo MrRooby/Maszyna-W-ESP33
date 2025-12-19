@@ -252,10 +252,10 @@ void DisplayManager::blinkingAnimation(LedElement *display, const DisplayElement
         blinkState = !blinkState;
         lastBlinkTime = currentTime;
 
-        if (blinkState)        {
+        if (blinkState) {
             display->setColor(getElementColor(type));
         }
-        else{
+        else {
             display->setColor(RgbColor(0, 0, 0));
         }
     }

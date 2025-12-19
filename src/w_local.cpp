@@ -334,7 +334,7 @@ void W_Local::insertMode(std::bitset<N> &selectedRegister)
     uint8_t regVal = binaryTo_uint8_t(selectedRegister);
     uint8_t maxVal = pow(2, N);
 
-    if(enc == UP){
+    if(enc == DOWN){
         if(regVal < maxVal) {
             regVal++;
         }
@@ -342,8 +342,8 @@ void W_Local::insertMode(std::bitset<N> &selectedRegister)
             regVal = 0;
         }
     }
-    else if(enc == DOWN){
-        if(regVal > 0) {
+    else if(enc == UP){
+        if(regVal >= 0) {
             regVal--;
         }
         else {
@@ -375,7 +375,7 @@ void W_Local::scrollPaO()
                 PaORangeLow  = (31 - 3);
             }
         }
-        Serial.printf("[W_LOCAL][DEBUG] PaORange %d<->%d\n", PaORangeLow, (PaORangeLow+3));
+        // Serial.printf("[W_LOCAL][DEBUG] PaORange %d<->%d\n", PaORangeLow, (PaORangeLow+3));
     }
 }
 
