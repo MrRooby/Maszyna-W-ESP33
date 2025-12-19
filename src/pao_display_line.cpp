@@ -52,8 +52,8 @@ void PaODisplayLine::applyColor(RgbColor color)
 {
     this->color = color;
     this->addr->setColor(color);
-    this->val->setColor(color);
-    this->arg->setColor(color);
+    this->val->setColor((color.R == color.B) ? swapRG(color) : swapRB(color));
+    this->arg->setColor((color.R == color.B) ? swapRB(color) : swapRG(color));
 }
 
 void PaODisplayLine::setColor(RgbColor color)

@@ -128,12 +128,11 @@ private:
     char* lastPressedButton = nullptr;                       ///< Tracks last button pressed for debouncing
 
     uint8_t PaORangeLow  = 0;
-    uint8_t PaORangeHigh = 3;
     
     uint8_t getPaOAddr();
 
     void initRegisters();
-    
+
     /// @name Signal Command Methods
     /// These methods implement the actual machine operations when signals are executed
     /// @{

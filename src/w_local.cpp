@@ -232,23 +232,22 @@ void W_Local::refreshDisplay()
         if(this->dispMan->stop)   this->dispMan->stop->turnOnLine(false);
 
         //PaO
-        for(int i = PaORangeLow; i <= PaORangeHigh; i++){
+        for(int i = 0; i <= 3; i++){
             if(this->dispMan->pao[i]){
-                _3Bit arg;
-                for(int n = 5; n < 8; n++){
-                    arg[n] = PaO[i][n];   
-                }
-                
                 static RgbColor tempColor(0, 255, 0);
                 
-                if(binaryTo_uint8_t(A) == i){
+                if(binaryTo_uint8_t(A) == i + PaORangeLow){
                     this->dispMan->pao[i]->setTemporaryColor(tempColor);
                 }
                 else{
                     this->dispMan->pao[i]->restoreColor();
                 }
-
-                this->dispMan->pao[i]->displayLine(i, binaryTo_uint8_t(PaO[i]), binaryTo_uint8_t(arg));
+                
+                _3Bit arg;
+                for(int n = 5; n < 8; n++){
+                    arg[n] = PaO[i+PaORangeLow][n];   
+                }
+                this->dispMan->pao[i]->displayLine(i+PaORangeLow, binaryTo_uint8_t(PaO[i+PaORangeLow]), binaryTo_uint8_t(arg));
             }
         }
 
@@ -359,25 +358,24 @@ void W_Local::scrollPaO()
 {
     EncoderState enc = this->humInter->getEncoderState();
 
-    if(enc == UP){
-        if(PaORangeHigh < 31) {
-            PaORangeHigh++;
-            PaORangeLow++;
+    if(enc != IDLE){
+        if(enc == UP){
+            if(PaORangeLow < (31 - 3)) {
+                PaORangeLow++;
+            }
+            else {
+                PaORangeLow  = 0;
+            }
         }
-        else {
-            PaORangeHigh = 0; // if end of PaO reached, jump to top
-            PaORangeLow  = 3;
+        else if(enc == DOWN){
+            if(PaORangeLow > 0) {
+                PaORangeLow--;
+            }
+            else {
+                PaORangeLow  = (31 - 3);
+            }
         }
-    }
-    else if(enc == DOWN){
-        if(PaORangeLow > 0) {
-            PaORangeHigh--;
-            PaORangeLow--;
-        }
-        else {
-            PaORangeHigh = 28; // if top of PaO reached, jump to end
-            PaORangeLow  = 31;
-        }
+        Serial.printf("[W_LOCAL][DEBUG] PaORange %d<->%d\n", PaORangeLow, (PaORangeLow+3));
     }
 }
 
