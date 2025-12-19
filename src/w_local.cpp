@@ -218,12 +218,22 @@ void W_Local::refreshDisplay()
         if(this->dispMan->stop)   this->dispMan->stop->turnOnLine(false);
 
         //PaO
-        for(int i = 0; i < 32; i++){
+        for(int i = PaORangeLow; i < PaORangeHigh; i++){
             if(this->dispMan->pao[i]){
                 _3Bit arg;
                 for(int n = 5; n < 8; n++){
                     arg[n] = PaO[i][n];   
                 }
+                
+                static RgbColor tempColor(255, 0, 0);
+                
+                if(binaryTo_uint8_t(A) == i){
+                    this->dispMan->pao[i]->setTemporaryColor(tempColor);
+                }
+                else{
+                    this->dispMan->pao[i]->restoreColor();
+                }
+
                 this->dispMan->pao[i]->displayLine(i, binaryTo_uint8_t(PaO[i]), binaryTo_uint8_t(arg));
             }
         }
