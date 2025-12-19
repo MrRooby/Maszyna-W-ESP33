@@ -1,5 +1,7 @@
 #include "w_local.h"
 
+
+
 const std::unordered_map<std::string, W_Local::CommandFunction> W_Local::signalMap = {
     {"IL",   &W_Local::il},
     {"WEL",  &W_Local::wel},
@@ -18,6 +20,7 @@ const std::unordered_map<std::string, W_Local::CommandFunction> W_Local::signalM
     {"WES",  &W_Local::wes},
     {"WYS",  &W_Local::wys}
 };
+
 
 const std::unordered_map<std::string, std::vector<std::string>> W_Local::signalConflicts = {
     {"CZYT",  {"PISZ"}},
@@ -45,122 +48,117 @@ W_Local::W_Local(DisplayManager *dispMan, HumanInterface *humInter)
 
 W_Local::~W_Local(){}
 
-void W_Local::baseSignal(uint16_t from, uint16_t &to)
+template<size_t N>
+uint8_t W_Local::binaryTo_uint8_t(std::bitset<N> number)
 {
-    Serial.println(from);
-    Serial.println(to);
+    uint8_t result = 8;
 
-    if(from > 999){
-        from = 999;
-    } 
-    if(from < 0){
-        from = 0;
+    if(!number.none()){
+        for(int i = 0; i < N; i++){
+            result += number[i] * std::pow(2, i);
+        }
     }
 
-    to = from;
+    return result;
+}
+
+uint8_t W_Local::getPaOAddr()
+{
+    
+    return binaryTo_uint8_t(A);
 }
 
 void W_Local::il()
 {
-    if(this->values.at("L") < 999){
-        this->values.at("L")++;
-    }
+    static const _5Bit one("00001");
+
+    L |= one;
 }
 
 void W_Local::wel()
 {
-    this->baseSignal(this->values.at("L"), this->bus.at("A"));
-    this->busLED.at("A") = true;
+    L = busA;
 }
 
 void W_Local::wyl()
 {
-    this->baseSignal(this->bus.at("A"), this->values.at("L"));
-    this->busLED.at("A") = true;
+    busA = L;
 }
 
 void W_Local::wyad()
 {
-    this->baseSignal(this->values.at("I"), this->bus.at("A"));
-    this->busLED.at("A") = true;
+    for(int i = 0; i < 5; i++){
+        busA[i] = I[i];
+    }
 }
 
 void W_Local::wei()
 {
-    this->baseSignal(this->bus.at("S"), this->values.at("I"));
-    this->busLED.at("S") = true;
+    I = busS;
 }
 
 void W_Local::weak()
 {
-    this->baseSignal(this->values.at("JAML"), this->values.at("AK"));
+    AK = JAML;
 }
 
 void W_Local::dod()
 {
-    uint16_t outcome = this->values.at("JAML") + this->values.at("AK");
-    this->baseSignal(outcome, this->values.at("JAML"));
+    AK |= JAML;
 }
 
 void W_Local::ode()
 {
-    uint16_t outcome = this->values.at("JAML") - this->values.at("AK");
-    this->baseSignal(outcome, this->values.at("JAML"));
+    _8Bit JAML_COPY = JAML;  
+    while (JAML_COPY.any()){
+        _8Bit borrow = ~AK & JAML_COPY; // NOT A AND B
+        AK  = AK ^ JAML_COPY; // A XOR B
+        JAML_COPY = borrow << 1; // borrow shift right by 1
+    }
 }
 
 void W_Local::przep()
 {
-    this->baseSignal(this->values.at("JAML"), this->values.at("AK"));
+    AK = busS;
 }
 
 void W_Local::wyak()
 {
-    this->baseSignal(this->values.at("AK"), this->values.at("S"));
+    busS = AK;
 }
 
 void W_Local::weja()
 {
-    this->baseSignal(this->bus.at("S"), this->values.at("JAML"));
-    this->busLED.at("S") = true;
+    JAML = busS;
 }
 
 void W_Local::wea()
 {
-    int value = this->bus.at("A");
-
-    Serial.println(value);
-
-    if(value >= 63){
-        value = 63;
-    }
-    if(value <= 0){
-        value = 0;
-    }
-
-    this->values.at("A") = this->bus.at("A");
-    this->busLED.at("A") = true;
+    A = busA;
 }
 
 void W_Local::czyt()
 {
-    this->baseSignal(this->PaO[this->values.at("A")].first, this->values.at("S"));
+    uint8_t adres = binaryTo_uint8_t(A);
+    
+    S = PaO[adres];
 }
 
 void W_Local::pisz()
 {
-    this->baseSignal(this->values.at("S"), this->PaO[this->values.at("A")].first);
+    uint8_t adres = binaryTo_uint8_t(A);
+    
+    PaO[adres] = S; 
 }
 
 void W_Local::wes()
 {
-    this->baseSignal(this->values.at("S"), this->bus.at("S"));
-    this->busLED.at("S") = true;
+    S = busS;
 }
 
 void W_Local::wys()
 {
-    this->baseSignal(this->values.at("S"), this->bus.at("S"));
-    this->busLED.at("S") = true;
+    busS = S;
 }
 
 void W_Local::takt()
@@ -168,8 +166,8 @@ void W_Local::takt()
     if(!this->nextLineSignals.empty()){
         // perform operations selected
         for (const auto& signal : this->nextLineSignals) {
-            auto it = signalMap.find(signal);
-            if (it != signalMap.end()) {
+            auto it = this->signalMap.find(signal);
+            if (it != this->signalMap.end()) {
                 (this->*(it->second))();
             }
         }
@@ -187,11 +185,11 @@ void W_Local::refreshDisplay()
 {
     if(this->dispMan){
         // Three digit displays
-        if(this->dispMan->a)    this->dispMan->a->displayValue(this->values.at("A"));
-        if(this->dispMan->acc)  this->dispMan->acc->displayValue(this->values.at("AK"));
-        if(this->dispMan->c)    this->dispMan->c->displayValue(this->values.at("L"));
-        if(this->dispMan->i)    this->dispMan->i->displayValue(this->values.at("I"));
-        if(this->dispMan->s)    this->dispMan->s->displayValue(this->values.at("S"));
+        if(this->dispMan->a)    this->dispMan->a->displayValue(binaryTo_uint8_t(A));
+        if(this->dispMan->acc)  this->dispMan->acc->displayValue(binaryTo_uint8_t(AK));
+        if(this->dispMan->c)    this->dispMan->c->displayValue(binaryTo_uint8_t(L));
+        if(this->dispMan->i)    this->dispMan->i->displayValue(binaryTo_uint8_t(I));
+        if(this->dispMan->s)    this->dispMan->s->displayValue(binaryTo_uint8_t(S));
         
         // Turn off all signal lines that are NOT in nextLineSignals
         for (const auto& sig : this->signal) {
@@ -220,9 +218,13 @@ void W_Local::refreshDisplay()
         if(this->dispMan->stop)   this->dispMan->stop->turnOnLine(false);
 
         //PaO
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 32; i++){
             if(this->dispMan->pao[i]){
-                this->dispMan->pao[i]->displayLine(i, this->PaO[i].first, this->PaO[i].second);
+                _3Bit arg;
+                for(int n = 5; n < 8; n++){
+                    arg[n] = PaO[i][n];   
+                }
+                this->dispMan->pao[i]->displayLine(i, binaryTo_uint8_t(PaO[i]), binaryTo_uint8_t(arg));
             }
         }
 
@@ -302,48 +304,80 @@ void W_Local::readButtonInputs()
     }
 }
 
-void W_Local::insertMode(uint16_t &value)
+template<size_t N>
+void W_Local::insertMode(std::bitset<N> &selectedRegister)
+{
+    EncoderState enc = this->humInter->getEncoderState();
+    uint8_t regVal = binaryTo_uint8_t(selectedRegister);
+    uint8_t maxVal = pow(2, N);
+
+    if(enc == UP){
+        if(regVal < maxVal) {
+            regVal++;
+        }
+        else {
+            regVal = 0;
+        }
+    }
+    else if(enc == DOWN){
+        if(regVal > 0) {
+            regVal--;
+        }
+        else {
+            regVal = maxVal;
+        } 
+    }
+
+    selectedRegister = std::bitset<N>(regVal);
+}
+
+void W_Local::scrollPaO()
 {
     EncoderState enc = this->humInter->getEncoderState();
 
     if(enc == UP){
-        if(value < 999) {
-            value++;
+        if(PaORangeHigh < 31) {
+            PaORangeHigh++;
+            PaORangeLow++;
         }
         else {
-            value = 0;
+            PaORangeHigh = 0; // if end of PaO reached, jump to top
+            PaORangeLow  = 3;
         }
     }
     else if(enc == DOWN){
-        if(value > 0) {
-            value--;
+        if(PaORangeLow > 0) {
+            PaORangeHigh--;
+            PaORangeLow--;
         }
         else {
-            value = 999;
-        } 
+            PaORangeHigh = 28; // if top of PaO reached, jump to end
+            PaORangeLow  = 31;
+        }
     }
 }
 
-ThreeDigitDisplay *W_Local::getSelectedDisplay()
+ThreeDigitDisplay *W_Local::getSelectedDisplay(const Register selectedRegister)
 {
     if (!dispMan) return nullptr;
     
-    if (selectedValue == "A")  return dispMan->a;
-    if (selectedValue == "AK") return dispMan->acc;
-    if (selectedValue == "L")  return dispMan->c;
-    if (selectedValue == "I")  return dispMan->i;
-    if (selectedValue == "S")  return dispMan->s;
+    if (selectedRegister == regA)  return dispMan->a;
+    if (selectedRegister == regAK) return dispMan->acc;
+    if (selectedRegister == regL)  return dispMan->c;
+    if (selectedRegister == regI)  return dispMan->i;
+    if (selectedRegister == regS)  return dispMan->s;
     
     return nullptr;
 }
 
-void W_Local::handleInsertMode()
+void W_Local::handleEncoderMode()
 {
-    ThreeDigitDisplay *display = getSelectedDisplay();
+    static size_t selectedValue = 0;
+    ThreeDigitDisplay *display = getSelectedDisplay(static_cast<Register>(selectedValue));
     if (!display) return;
 
     bool currentState = humInter->getEncoderButtonState();
-    Serial.println(currentState);
+    // Serial.println(currentState);
     unsigned long now = millis();
     static unsigned long pressStartTime = 0;
     const unsigned int LONG_PRESS_TIME = 500;
@@ -363,80 +397,82 @@ void W_Local::handleInsertMode()
     
     if (insertModeEnabled) { 
         if (buttonStateLastFrame == LOW && currentState == HIGH) {
-            // Get iterator to current selection
-            auto it = values.find(selectedValue);
+            if(selectedValue < 4)
+                selectedValue++;
+            else
+                selectedValue = 0;
 
-            // Move to next item, or wrap to beginning
-            ++it;
-            if (it == values.end()) {
-                it = values.begin();
-            }
-            selectedValue = it->first;
-            
             // Change back color of the previously selected display
             display->setColor(dispMan->getElementColor(DisplayElement::DIGIT_DISPLAY));
             
             // Update display pointer for new selection
-            display = getSelectedDisplay();
-            
-            // !!! JAML is the last one in the map and when it is selected it should loop around !!!
-            if(display == nullptr){ 
-                selectedValue = "L"; 
-            }
+            display = getSelectedDisplay(static_cast<Register>(selectedValue));
         }
         
         buttonStateLastFrame = currentState;
 
         dispMan->blinkingAnimation(display, DisplayElement::DIGIT_DISPLAY);        
-        insertMode(values.at(selectedValue)); 
+        
+        // Dispatch: selecting appropriate std::bitset<N> at compile time
+        switch (static_cast<Register>(selectedValue)) {
+            case Register::regA:  insertMode(A);  break; // bitset<5>
+            case Register::regI:  insertMode(I);  break; // bitset<5>
+            case Register::regL:  insertMode(L);  break; // bitset<5>
+            case Register::regAK: insertMode(AK); break; // bitset<8>
+            case Register::regS:  insertMode(S);  break; // bitset<8>
+            default: break;
+        }
+    }
+    else {
+        scrollPaO();
     }
 }
 
 void W_Local::printValuesToSerial()
 {
-    static unsigned long lastPrintTime = 0;
-    unsigned long currentTime = millis();
-    uint16_t interval = 500;  // Changed from 50ms to 500ms for better readability
+    // static unsigned long lastPrintTime = 0;
+    // unsigned long currentTime = millis();
+    // uint16_t interval = 500;  // Changed from 50ms to 500ms for better readability
 
-    if (currentTime - lastPrintTime >= interval) {
-        Serial.println("\n========== STAN MASZYNY ==========");
+    // if (currentTime - lastPrintTime >= interval) {
+    //     Serial.println("\n========== STAN MASZYNY ==========");
         
-        // Lista rozkazów
-        Serial.print("Lista rozkazow: ");
-        if (nextLineSignals.empty()) {
-            Serial.println("[pusta]");
-        } else {
-            for (const auto& sig : nextLineSignals) {
-                Serial.print(sig.c_str());
-                Serial.print(" ");
-            }
-            Serial.println();
-        }
+    //     // Lista rozkazów
+    //     Serial.print("Lista rozkazow: ");
+    //     if (nextLineSignals.empty()) {
+    //         Serial.println("[pusta]");
+    //     } else {
+    //         for (const auto& sig : nextLineSignals) {
+    //             Serial.print(sig.c_str());
+    //             Serial.print(" ");
+    //         }
+    //         Serial.println();
+    //     }
 
-        // Wartości z wyświetlaczy
-        Serial.print("Wartosci: ");
-        for (const auto& val : values) {
-            Serial.print(val.first.c_str());
-            Serial.print("=");
-            Serial.print(val.second);
-            Serial.print(" ");
-        }
-        Serial.println();
+    //     // Wartości z wyświetlaczy
+    //     Serial.print("Wartosci: ");
+    //     for (const auto& val : values) {
+    //         Serial.print(val.first.c_str());
+    //         Serial.print("=");
+    //         Serial.print(val.second);
+    //         Serial.print(" ");
+    //     }
+    //     Serial.println();
 
-        // Pamięć PAO
-        Serial.println("Pamiec PAO:");
-        for(int i = 0; i < 4; i++){
-            Serial.print("  [");
-            Serial.print(i);
-            Serial.print("]: ");
-            Serial.print(this->PaO[i].first);
-            Serial.print(" | ");
-            Serial.println(this->PaO[i].second);
-        }
+    //     // Pamięć PAO
+    //     Serial.println("Pamiec PAO:");
+    //     for(int i = 0; i < 4; i++){
+    //         Serial.print("  [");
+    //         Serial.print(i);
+    //         Serial.print("]: ");
+    //         Serial.print(this->PaO[i].first);
+    //         Serial.print(" | ");
+    //         Serial.println(this->PaO[i].second);
+    //     }
 
-        Serial.println("==================================\n");
-        lastPrintTime = currentTime;
-    }
+    //     Serial.println("==================================\n");
+    //     lastPrintTime = currentTime;
+    // }
 }
 
 bool W_Local::isSignalValid(const std::string &newSignal)
@@ -465,7 +501,7 @@ void W_Local::runLocal()
 {
     readButtonInputs();
 
-    handleInsertMode();
+    handleEncoderMode();
     
     refreshDisplay();
     

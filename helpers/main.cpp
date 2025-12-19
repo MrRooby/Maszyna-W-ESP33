@@ -39,11 +39,34 @@ std::bitset<N> dod(std::bitset<N> a, std::bitset<N> b)
     return a |= b;
 }
 
+template <size_t N>
+std::bitset<N> uint8_tTo_binary(uint8_t number)
+{
+    std::bitset<N> result;
+    int index = 0;
+    while (number > 0){
+        int bit = number%2;
+        result[index++] = bit;
+        number /= 2;
+    }
+
+    return result;
+}
+
+template <size_t N>
+void printBitset(const std::bitset<N>& bits)
+{
+    for (int i = N - 1; i >= 0; i--) {
+        std::cout << bits[i];
+    }
+}
+
 int main(){
     std::bitset<8> a("11111111");
     std::bitset<8> b("11111111");
 
-    std::cout << "Wynik: " << static_cast<int>(binaryToDecimal(dod(a, b))) << "\n";
+    std::cout << "Wynik: ";
+    printBitset(uint8_tTo_binary<8>(uint8_t(300)));
     // std::cout << "Wynik: " << static_cast<int>(binaryToDecimal(b.flip())) << "\n";
     
     return 0;
